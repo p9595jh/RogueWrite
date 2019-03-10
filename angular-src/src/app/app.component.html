@@ -1,11 +1,63 @@
-<div class="mdl-demo mdl-color--grey-100 mdl-base">
+<div class="mdl-demo mdl-base">
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-tabs">
-    <app-navbar></app-navbar>
+    <!-- <app-navbar></app-navbar> -->
+
+    <!-- header for large display -->
+    <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+            
+      <!-- spacing -->
+      <div class="mdl-layout--large-screen-only mdl-layout__header-row"></div>
+      
+      <!-- title -->
+      <div class="mdl-layout--large-screen-only mdl-layout__header-row">
+        <h3>RogueWrite</h3>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" >
+          <a *ngIf="!authService.loggedIn()" class="mdl-navigation__link" [routerLink]="['/login']">LOGIN</a>
+          <a *ngIf="authService.loggedIn()" class="mdl-navigation__link" (click)="onLogoutClick()" href="#">LOGOUT</a>
+        </nav>
+      </div>
+      
+      <!-- spacing -->
+      <div class="mdl-layout--large-screen-only mdl-layout__header-row"></div>
+
+      <!-- nav bar -->
+      <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
+        <a [routerLink]="['/']" class="mdl-layout__tab">HOME</a>
+        <a href="board.html" class="mdl-layout__tab">BOARD</a>
+        <a href="#features" class="mdl-layout__tab">Details</a>
+        <a href="#features" class="mdl-layout__tab">Technology</a>
+        <a href="#features" class="mdl-layout__tab">FAQ</a>
+      </div>
+    </header>
+
+    <!-- header for mobile -->
+    <header class="mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary">
+      <div class="mdl-layout__header-row">
+        <h3 class="mdl-navigation__link">RogueWrite</h3>
+        <div class="mdl-layout-spacer"></div>
+        <nav class="mdl-navigation">
+          <a class="mdl-navigation__link" href="#">LOGIN</a>
+        </nav>
+      </div>
+    </header>
+    <div class="mdl-layout__drawer mdl-layout--small-screen-only">
+      <span class="mdl-layout__title">RogueWrite</span>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="#">menu1</a>
+        <a class="mdl-navigation__link" href="#">menu2</a>
+        <a class="mdl-navigation__link" href="#">menu3</a>
+        <a class="mdl-navigation__link" href="#">menu4</a>
+        <a class="mdl-navigation__link" href="#">menu5</a>
+      </nav>
+    </div>
+
+
     <main class="mdl-layout__content">
       <div class="mdl-layout__tab-panel is-active" id="overview">
         <ng-flash-message></ng-flash-message>
         <router-outlet></router-outlet>
-        <section></section>
+        <!-- <section></section> -->
       </div>
 
       <!-- footer -->
