@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"mdl-demo mdl-color--grey-100 mdl-base\">\n  <div class=\"mdl-layout mdl-js-layout mdl-layout--fixed-tabs\">\n    <app-navbar></app-navbar>\n    <main class=\"mdl-layout__content\">\n      <div class=\"mdl-layout__tab-panel is-active\" id=\"overview\">\n        <ng-flash-message></ng-flash-message>\n        <router-outlet></router-outlet>\n        <section></section>\n      </div>\n\n      <!-- footer -->\n      <footer class=\"mdl-mega-footer\">\n        <div class=\"mdl-mega-footer--bottom-section\">\n          <div class=\"mdl-logo\">\n            powered by Project Rwriter\n          </div>\n          <ul class=\"mdl-mega-footer--link-list\">\n            <li><a href=\"#\">Google Material</a></li>\n            <li><a href=\"#\">Github</a></li>\n          </ul>\n        </div>\n      </footer>\n      <!-- footer -->\n\n    </main>\n  </div>\n</div>\n"
+module.exports = "<div class=\"mdl-demo mdl-base\">\r\n  <div class=\"mdl-layout mdl-js-layout mdl-layout--fixed-tabs\">\r\n    <!-- <app-navbar></app-navbar> -->\r\n\r\n    <!-- header for large display -->\r\n    <header class=\"mdl-layout__header mdl-layout__header--scroll mdl-color--primary\">\r\n            \r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n      \r\n      <!-- title -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\">\r\n        <h3 [routerLink]=\"['/']\" style=\"cursor: pointer;\">RogueWrite</h3>\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" >\r\n          <a *ngIf=\"!authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/login']\">LOGIN</a>\r\n          <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n        </nav>\r\n      </div>\r\n      \r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n\r\n      <!-- nav bar -->\r\n      <div class=\"mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark\">\r\n        <a [routerLink]=\"['/']\" class=\"mdl-layout__tab is-active\">HOME</a>\r\n        <a href=\"board.html\" class=\"mdl-layout__tab\">BOARD</a>\r\n        <a href=\"#features\" class=\"mdl-layout__tab\">Details</a>\r\n        <a href=\"#features\" class=\"mdl-layout__tab\">Technology</a>\r\n        <a href=\"#features\" class=\"mdl-layout__tab\">FAQ</a>\r\n      </div>\r\n    </header>\r\n\r\n    <!-- header for mobile -->\r\n    <header class=\"mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <h3 class=\"mdl-navigation__link\">RogueWrite</h3>\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\">\r\n          <a class=\"mdl-navigation__link\" href=\"#\">LOGIN</a>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    <div class=\"mdl-layout__drawer mdl-layout--small-screen-only\">\r\n      <span class=\"mdl-layout__title\">RogueWrite</span>\r\n      <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"#\">menu1</a>\r\n        <a class=\"mdl-navigation__link\" href=\"#\">menu2</a>\r\n        <a class=\"mdl-navigation__link\" href=\"#\">menu3</a>\r\n        <a class=\"mdl-navigation__link\" href=\"#\">menu4</a>\r\n        <a class=\"mdl-navigation__link\" href=\"#\">menu5</a>\r\n      </nav>\r\n    </div>\r\n\r\n    <ng-flash-message></ng-flash-message>\r\n    <main class=\"mdl-layout__content\">\r\n      <div class=\"mdl-layout__tab-panel is-active\" id=\"overview\">\r\n        <router-outlet></router-outlet>\r\n        <!-- <section></section> -->\r\n      </div>\r\n\r\n      <!-- footer -->\r\n      <footer class=\"mdl-mega-footer\">\r\n        <div class=\"mdl-mega-footer--bottom-section\">\r\n          <div class=\"mdl-logo\">\r\n            powered by Project RogueWrite\r\n          </div>\r\n          <ul class=\"mdl-mega-footer--link-list\">\r\n            <li><a target=\"_blank\" href=\"https://getmdl.io/index.html\">MDL</a></li>\r\n            <li><a target=\"_blank\" href=\"https://github.com/p9595jh/RogueWrite\">Github</a></li>\r\n          </ul>\r\n        </div>\r\n      </footer>\r\n      <!-- footer -->\r\n\r\n    </main>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -56,23 +56,49 @@ module.exports = "<div class=\"mdl-demo mdl-color--grey-100 mdl-base\">\n  <div 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ng-flash-messages */ "./node_modules/ng-flash-messages/ng-flash-messages.umd.js");
+/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(ng_flash_messages__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent() {
+    function AppComponent(authService, router, flashMessage) {
+        this.authService = authService;
+        this.router = router;
+        this.flashMessage = flashMessage;
         this.title = 'angular-src in MEANAuthApp';
     }
+    AppComponent.prototype.onLogoutClick = function () {
+        this.authService.logout();
+        this.flashMessage.showFlashMessage({
+            messages: ['You are logged out'],
+            type: 'success',
+            timeout: 3000
+        });
+        this.router.navigate(['login']);
+        return false;
+    };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-root',
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.css */ "./src/app/app.component.css")]
-        })
+        }),
+        __metadata("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
+            ng_flash_messages__WEBPACK_IMPORTED_MODULE_2__["NgFlashMessageService"]])
     ], AppComponent);
     return AppComponent;
 }());
@@ -187,7 +213,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h2 class=\"page-header\"> Dashboard </h2>\n<p> Welcome to Your dashboard</p>"
+module.exports = "<h2 class=\"page-header\"> Dashboard </h2>\r\n<p> Welcome to Your dashboard</p>"
 
 /***/ }),
 
@@ -250,7 +276,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\n    <div class=\"mdl-card__supporting-text\">\n      <h4>사이트 개요</h4><hr/>\n      간략한 설명 <br/>\n      이 사이트는 이러이러한 것을 하는 것이다 라던가 <br/>\n      아님 뭐 이미지를 넣던가 그런거 <br/>\n    </div>\n  </div>\n</section>\n\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\n    <div class=\"mdl-card__supporting-text\">\n      <h4>자유게시판</h4><hr/>\n      <ul>\n        <li>게시글1</li>\n        <li>게시글2</li>\n        <li>게시글3</li>\n        <li>게시글4</li>\n        <li>게시글5</li>\n      </ul>\n    </div>\n  </div>\n  <button class=\"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon\" id=\"btn1\">\n    <i class=\"material-icons\">more_vert</i>\n  </button>\n  <ul class=\"mdl-menu mdl-js-menu mdl-menu--bottom-right\" for=\"btn1\">\n    <li class=\"mdl-menu__item\" disabled>자주 가는 게시판으로 설정</li>\n  </ul>\n</section>\n\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\n    <div class=\"mdl-card__supporting-text\">\n      <h4>다른게시판</h4><hr/>\n      <ul>\n        <li>게시글1</li>\n        <li>게시글2</li>\n        <li>게시글3</li>\n        <li>게시글4</li>\n        <li>게시글5</li>\n      </ul>\n    </div>\n  </div>\n  <button class=\"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon\" id=\"btn2\">\n    <i class=\"material-icons\">more_vert</i>\n  </button>\n  <ul class=\"mdl-menu mdl-js-menu mdl-menu--bottom-right\" for=\"btn2\">\n    <li class=\"mdl-menu__item\" disabled>자주 가는 게시판으로 설정</li>\n  </ul>\n</section>\n"
+module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>사이트 개요</h4><hr/>\r\n      간략한 설명 <br/>\r\n      이 사이트는 이러이러한 것을 하는 것이다 라던가 <br/>\r\n      아님 뭐 이미지를 넣던가 그런거 <br/>\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>자유게시판</h4><hr/>\r\n      <ul>\r\n        <li>게시글1</li>\r\n        <li>게시글2</li>\r\n        <li>게시글3</li>\r\n        <li>게시글4</li>\r\n        <li>게시글5</li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n  <button class=\"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon\" id=\"btn1\">\r\n    <i class=\"material-icons\">more_vert</i>\r\n  </button>\r\n  <ul class=\"mdl-menu mdl-js-menu mdl-menu--bottom-right\" for=\"btn1\">\r\n    <li class=\"mdl-menu__item\" disabled>자주 가는 게시판으로 설정</li>\r\n  </ul>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>다른게시판</h4><hr/>\r\n      <ul>\r\n        <li>게시글1</li>\r\n        <li>게시글2</li>\r\n        <li>게시글3</li>\r\n        <li>게시글4</li>\r\n        <li>게시글5</li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n  <button class=\"mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon\" id=\"btn2\">\r\n    <i class=\"material-icons\">more_vert</i>\r\n  </button>\r\n  <ul class=\"mdl-menu mdl-js-menu mdl-menu--bottom-right\" for=\"btn2\">\r\n    <li class=\"mdl-menu__item\" disabled>자주 가는 게시판으로 설정</li>\r\n  </ul>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -313,7 +339,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\n    <div class=\"mdl-card__supporting-text\">\n      <h4>로그인</h4><hr/>\n      \n      <br/><br/>\n      <div style=\"width: 100%; text-align: center;\">\n        <div class=\"mdl-textfield mdl-js-textfield\">\n          <input class=\"mdl-textfield__input\" type=\"text\" id=\"userid\">\n          <label class=\"mdl-textfield__label\" for=\"userid\">아이디</label>\n        </div>\n        <br/><br/>\n        <div class=\"mdl-textfield mdl-js-textfield\">\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\">\n          <label class=\"mdl-textfield__label\" for=\"password\">비밀번호</label>\n        </div>\n        <br/><br/><br/>\n        <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect\">\n          로그인\n        </button>\n        <br/><br/><br/><hr/>\n        <a [routerLink]=\"['./register']\" style=\"color: black; text-decoration: none;\">회원가입</a>\n        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;\n        <a href=\"#\" style=\"color: black; text-decoration: none;\">아이디/비밀번호 찾기</a>\n\n      </div>\n\n    </div>\n  </div>\n</section>\n"
+module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>로그인</h4><hr/>\r\n      \r\n      <br/><br/>\r\n      <form (submit)=\"onLoginSubmit()\">\r\n        <div style=\"width: 100%; text-align: center;\">\r\n          <div class=\"mdl-textfield mdl-js-textfield\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"userid\" name=\"userid\" [(ngModel)]=\"userid\">\r\n            <label class=\"mdl-textfield__label\" for=\"userid\">아이디</label>\r\n          </div>\r\n          <br/><br/>\r\n          <div class=\"mdl-textfield mdl-js-textfield\">\r\n            <input class=\"mdl-textfield__input\" type=\"password\" id=\"pw\" name=\"pw\" [(ngModel)]=\"pw\">\r\n            <label class=\"mdl-textfield__label\" for=\"pw\">비밀번호</label>\r\n          </div>\r\n          <br/><br/><br/>\r\n          <input type=\"submit\" value=\"로그인\" class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect\">\r\n          <br/><br/><br/><hr/>\r\n          <a [routerLink]=\"['../register']\" style=\"color: black; text-decoration: none;\">회원가입</a>\r\n          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;\r\n          <a href=\"#\" style=\"color: black; text-decoration: none;\">아이디/비밀번호 찾기</a>\r\n\r\n        </div>\r\n      </form>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n<br/><br/>\r\n"
 
 /***/ }),
 
@@ -357,8 +383,8 @@ var LoginComponent = /** @class */ (function () {
         var _this = this;
         // console.log(this.username);
         var user = {
-            username: this.username,
-            password: this.password
+            userid: this.userid,
+            pw: this.pw
         };
         this.authService.authenticateUser(user).subscribe(function (data) {
             if (data.success) {
@@ -368,7 +394,7 @@ var LoginComponent = /** @class */ (function () {
                     type: 'success',
                     timeout: 3000
                 });
-                _this.router.navigate(['dashboard']);
+                _this.router.navigate(['/']);
             }
             else {
                 _this.flashMessage.showFlashMessage({
@@ -415,7 +441,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- header for large display -->\n<header class=\"mdl-layout__header mdl-layout__header--scroll mdl-color--primary\">\n        \n  <!-- spacing -->\n  <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\n  \n  <!-- title -->\n  <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\">\n    <h3>Title being here</h3>\n    <div class=\"mdl-layout-spacer\"></div>\n    <nav class=\"mdl-navigation\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" >\n      <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/login']\">LOGIN</a>\n      <a *ngIf=\"!authService.loggedIn()\" class=\"mdl-navigation__link\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\n    </nav>\n  </div>\n  \n  <!-- spacing -->\n  <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\n\n  <!-- nav bar -->\n  <div class=\"mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark\">\n    <a [routerLink]=\"['/']\" class=\"mdl-layout__tab\">HOME</a>\n    <a href=\"board.html\" class=\"mdl-layout__tab\">BOARD</a>\n    <a href=\"#features\" class=\"mdl-layout__tab\">Details</a>\n    <a href=\"#features\" class=\"mdl-layout__tab\">Technology</a>\n    <a href=\"#features\" class=\"mdl-layout__tab\">FAQ</a>\n  </div>\n</header>\n\n<!-- header for mobile -->\n<header class=\"mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary\">\n  <div class=\"mdl-layout__header-row\">\n    <h3 class=\"mdl-navigation__link\">RWriter</h3>\n    <div class=\"mdl-layout-spacer\"></div>\n    <nav class=\"mdl-navigation\">\n      <a class=\"mdl-navigation__link\" href=\"#\">LOGIN</a>\n    </nav>\n  </div>\n</header>\n<div class=\"mdl-layout__drawer mdl-layout--small-screen-only\">\n  <span class=\"mdl-layout__title\">RWriter</span>\n  <nav class=\"mdl-navigation\">\n    <a class=\"mdl-navigation__link\" href=\"#\">menu1</a>\n    <a class=\"mdl-navigation__link\" href=\"#\">menu2</a>\n    <a class=\"mdl-navigation__link\" href=\"#\">menu3</a>\n    <a class=\"mdl-navigation__link\" href=\"#\">menu4</a>\n    <a class=\"mdl-navigation__link\" href=\"#\">menu5</a>\n  </nav>\n</div>\n"
+module.exports = "<!-- header for large display -->\r\n<header class=\"mdl-layout__header mdl-layout__header--scroll mdl-color--primary\">\r\n        \r\n  <!-- spacing -->\r\n  <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n  \r\n  <!-- title -->\r\n  <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\">\r\n    <h3>Title being here</h3>\r\n    <div class=\"mdl-layout-spacer\"></div>\r\n    <nav class=\"mdl-navigation\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" >\r\n      <a *ngIf=\"!authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/login']\">LOGIN</a>\r\n      <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n    </nav>\r\n  </div>\r\n  \r\n  <!-- spacing -->\r\n  <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n\r\n  <!-- nav bar -->\r\n  <div class=\"mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark\">\r\n    <a [routerLink]=\"['/']\" class=\"mdl-layout__tab\">HOME</a>\r\n    <a href=\"board.html\" class=\"mdl-layout__tab\">BOARD</a>\r\n    <a href=\"#features\" class=\"mdl-layout__tab\">Details</a>\r\n    <a href=\"#features\" class=\"mdl-layout__tab\">Technology</a>\r\n    <a href=\"#features\" class=\"mdl-layout__tab\">FAQ</a>\r\n  </div>\r\n</header>\r\n\r\n<!-- header for mobile -->\r\n<header class=\"mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary\">\r\n  <div class=\"mdl-layout__header-row\">\r\n    <h3 class=\"mdl-navigation__link\">RWriter</h3>\r\n    <div class=\"mdl-layout-spacer\"></div>\r\n    <nav class=\"mdl-navigation\">\r\n      <a class=\"mdl-navigation__link\" href=\"#\">LOGIN</a>\r\n    </nav>\r\n  </div>\r\n</header>\r\n<div class=\"mdl-layout__drawer mdl-layout--small-screen-only\">\r\n  <span class=\"mdl-layout__title\">RWriter</span>\r\n  <nav class=\"mdl-navigation\">\r\n    <a class=\"mdl-navigation__link\" href=\"#\">menu1</a>\r\n    <a class=\"mdl-navigation__link\" href=\"#\">menu2</a>\r\n    <a class=\"mdl-navigation__link\" href=\"#\">menu3</a>\r\n    <a class=\"mdl-navigation__link\" href=\"#\">menu4</a>\r\n    <a class=\"mdl-navigation__link\" href=\"#\">menu5</a>\r\n  </nav>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -500,7 +526,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"user\">\n  <h2 class=\"page-header\"> {{user.name}} </h2>\n  <ul class=\"list-group\">\n    <li class=\"list-group-item\">Username: {{user.username}}</li>  \n    <li class=\"list-group-item\">Email: {{user.email}}</li>  \n  </ul>\n</div>"
+module.exports = "<div *ngIf=\"user\">\r\n  <h2 class=\"page-header\"> {{user.name}} </h2>\r\n  <ul class=\"list-group\">\r\n    <li class=\"list-group-item\">Username: {{user.username}}</li>  \r\n    <li class=\"list-group-item\">Email: {{user.email}}</li>  \r\n  </ul>\r\n</div>"
 
 /***/ }),
 
@@ -577,7 +603,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\n    <div class=\"mdl-card__supporting-text\">\n      <h4>회원가입</h4><hr/>\n      \n      <br/><br/>\n      <div style=\"width: 100%; text-align: center;\">\n        <div class=\"mdl-textfield mdl-js-textfield mdl-textfield--floating-label\">\n          <input class=\"mdl-textfield__input\" type=\"text\" id=\"userid\">\n          <label class=\"mdl-textfield__label\" for=\"userid\">아이디</label>\n        </div>\n        <br/><br/>\n        <div class=\"mdl-textfield mdl-js-textfield mdl-textfield--floating-label\">\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"password\">\n          <label class=\"mdl-textfield__label\" for=\"password\">비밀번호</label>\n        </div>\n        <br/><br/>\n        <div class=\"mdl-textfield mdl-js-textfield mdl-textfield--floating-label\">\n          <input class=\"mdl-textfield__input\" type=\"password\" id=\"passwordx\">\n          <label class=\"mdl-textfield__label\" for=\"passwordx\">비밀번호 확인</label>\n        </div>\n        <br/><br/>\n        <div class=\"mdl-textfield mdl-js-textfield mdl-textfield--floating-label\">\n          <input class=\"mdl-textfield__input\" type=\"text\" id=\"nickname\">\n          <label class=\"mdl-textfield__label\" for=\"nickname\">닉네임</label>\n        </div>\n        <br/><br/>\n        <div class=\"mdl-textfield mdl-js-textfield mdl-textfield--floating-label\">\n          <input class=\"mdl-textfield__input\" type=\"text\" pattern=\"^[0-9a-zA-Z_-]+(\\.[0-9a-zA-Z_-]+)*@([0-9a-zA-Z_-]+)(\\.[0-9a-zA-Z_-]+){1,2}$\" id=\"email\">\n          <label class=\"mdl-textfield__label\" for=\"email\">이메일</label>\n          <span class=\"mdl-textfield__error\">이메일을 입력해야 합니다.</span>\n        </div>\n        <br/><br/>\n        <div class=\"mdl-textfield mdl-js-textfield mdl-textfield--floating-label\">\n          <input class=\"mdl-textfield__input\" type=\"text\" id=\"introduction\">\n          <label class=\"mdl-textfield__label\" for=\"introduction\">한 줄 소개</label>\n        </div>\n        <br/><br/>\n        <br/>\n        <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect\">\n          회원가입\n        </button>\n        <br/><br/><br/><hr/>\n        여기에다가 뭔가 알려둘 사항 같은 걸 써두면 됨\n\n      </div>\n\n    </div>\n  </div>\n</section>\n"
+module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>회원가입</h4><hr/>\r\n      \r\n      <br/><br/>\r\n\r\n      <form (submit)=\"onRegisterSubmit()\">\r\n        <div style=\"width: 100%; text-align: center;\">\r\n          <div class=\"mdl-textfield mdl-js-textfield mdl-textfield--floating-label\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"userid\" name=\"userid\" [(ngModel)]=\"userid\">\r\n            <label class=\"mdl-textfield__label\" for=\"userid\">아이디</label>\r\n          </div>\r\n          <br/><br/>\r\n          <div class=\"mdl-textfield mdl-js-textfield mdl-textfield--floating-label\">\r\n            <input class=\"mdl-textfield__input\" type=\"password\" id=\"pw\" name=\"pw\" [(ngModel)]=\"pw\">\r\n            <label class=\"mdl-textfield__label\" for=\"pw\">비밀번호</label>\r\n          </div>\r\n          <br/><br/>\r\n          <div class=\"mdl-textfield mdl-js-textfield mdl-textfield--floating-label\">\r\n            <input class=\"mdl-textfield__input\" type=\"password\" id=\"pwchk\" name=\"pwchk\" [(ngModel)]=\"pwchk\">\r\n            <label class=\"mdl-textfield__label\" for=\"pwchk\">비밀번호 확인</label>\r\n          </div>\r\n          <br/><br/>\r\n          <div class=\"mdl-textfield mdl-js-textfield mdl-textfield--floating-label\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"nickname\" name=\"nickname\" [(ngModel)]=\"nickname\">\r\n            <label class=\"mdl-textfield__label\" for=\"nickname\">닉네임</label>\r\n          </div>\r\n          <br/><br/>\r\n          <div class=\"mdl-textfield mdl-js-textfield mdl-textfield--floating-label\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" pattern=\"^[0-9a-zA-Z_-]+(\\.[0-9a-zA-Z_-]+)*@([0-9a-zA-Z_-]+)(\\.[0-9a-zA-Z_-]+){1,2}$\" id=\"email\" name=\"email\" [(ngModel)]=\"email\">\r\n            <label class=\"mdl-textfield__label\" for=\"email\">이메일</label>\r\n            <span class=\"mdl-textfield__error\">이메일을 입력해야 합니다.</span>\r\n          </div>\r\n          <br/><br/>\r\n          <div class=\"mdl-textfield mdl-js-textfield mdl-textfield--floating-label\">\r\n            <input class=\"mdl-textfield__input\" type=\"text\" id=\"introduction\" name=\"introduction\" [(ngModel)]=\"introduction\">\r\n            <label class=\"mdl-textfield__label\" for=\"introduction\">한 줄 소개</label>\r\n          </div>\r\n          <br/><br/>\r\n          <br/>\r\n          <input type=\"submit\" value=\"회원가입\" class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect\">\r\n          <br/><br/><br/><hr/>\r\n          여기에다가 뭔가 알려둘 사항 같은 걸 써두면 됨\r\n\r\n        </div>\r\n      </form>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -623,19 +649,32 @@ var RegisterComponent = /** @class */ (function () {
     RegisterComponent.prototype.onRegisterSubmit = function () {
         var _this = this;
         var user = {
-            name: this.name,
-            username: this.username,
+            userid: this.userid,
+            pw: this.pw,
+            pwchk: this.pwchk,
+            nickname: this.nickname,
             email: this.email,
-            password: this.password
+            introduction: this.introduction
         };
         // Required Fields
         if (!this.validateService.validateRegister(user)) {
-            this.flashMessage.showFlashMessage({ messages: ['Please fill in all fields'], type: 'danger', timeout: 2000 });
+            this.flashMessage.showFlashMessage({ messages: ['빈 항목이 있습니다'], type: 'danger', timeout: 2000 });
+            return false;
+        }
+        // Password check
+        if (this.pw != this.pwchk) {
+            this.flashMessage.showFlashMessage({ messages: ['비밀번호가 일치하지 않습니다'], type: 'danger', timeout: 2000 });
+            return false;
+        }
+        // Check with conditions
+        var conditions = this.validateService.validateConditions(user);
+        if (!conditions.valid) {
+            this.flashMessage.showFlashMessage({ messages: [conditions.msg], type: 'danger', timeout: 2000 });
             return false;
         }
         // Validate Email
         if (!this.validateService.validateEmail(user.email)) {
-            this.flashMessage.showFlashMessage({ messages: ['Please use a valid email'], type: 'danger', timeout: 2000 });
+            this.flashMessage.showFlashMessage({ messages: ['이메일 형식이 맞지 않습니다'], type: 'danger', timeout: 2000 });
             return false;
         }
         // Register User
@@ -649,7 +688,8 @@ var RegisterComponent = /** @class */ (function () {
                 _this.router.navigate(['/']);
             }
             else {
-                _this.flashMessage.showFlashMessage({ messages: ['Something went wrong'],
+                _this.flashMessage.showFlashMessage({
+                    messages: ['Something went wrong'],
                     type: 'danger',
                     timeout: 3000
                 });
@@ -741,6 +781,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 /* harmony import */ var angular2_jwt__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! angular2-jwt */ "./node_modules/angular2-jwt/angular2-jwt.js");
 /* harmony import */ var angular2_jwt__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(angular2_jwt__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _func_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./func.service */ "./src/app/services/func.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -754,20 +795,22 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AuthService = /** @class */ (function () {
-    function AuthService(http) {
+    function AuthService(http, funcService) {
         this.http = http;
+        this.funcService = funcService;
     }
     AuthService.prototype.registerUser = function (user) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3000/users/register', user, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/users/register', user, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     AuthService.prototype.authenticateUser = function (user) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post('http://localhost:3000/users/authenticate', user, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/users/authenticate', user, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     AuthService.prototype.getProfile = function () {
@@ -775,7 +818,7 @@ var AuthService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.get('http://localhost:3000/users/profile', { headers: headers })
+        return this.http.get(this.funcService.ServerAddress + '/users/profile', { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     AuthService.prototype.storeUserData = function (token, user) {
@@ -800,9 +843,48 @@ var AuthService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_1__["Http"]])
+        __metadata("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_1__["Http"],
+            _func_service__WEBPACK_IMPORTED_MODULE_4__["FuncService"]])
     ], AuthService);
     return AuthService;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/services/func.service.ts":
+/*!******************************************!*\
+  !*** ./src/app/services/func.service.ts ***!
+  \******************************************/
+/*! exports provided: FuncService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FuncService", function() { return FuncService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var FuncService = /** @class */ (function () {
+    function FuncService() {
+        this.ServerAddress = "http://localhost:3000";
+    }
+    FuncService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [])
+    ], FuncService);
+    return FuncService;
 }());
 
 
@@ -834,12 +916,31 @@ var ValidateService = /** @class */ (function () {
     function ValidateService() {
     }
     ValidateService.prototype.validateRegister = function (user) {
-        if (user.name == undefined || user.email == undefined || user.username == undefined || user.password == undefined) {
+        if (user.userid == undefined || user.email == undefined || user.email == undefined || user.pw == undefined || user.pwchk == undefined || user.introduction == undefined) {
             return false;
         }
         else {
             return true;
         }
+    };
+    ValidateService.prototype.validateConditions = function (user) {
+        // let idvalid = /^[a-z]+[a-z0-9]{6,15}$/g;
+        // if ( !idvalid.test(user.userid) ) {
+        //   return {
+        //     valid: false,
+        //     msg: '아이디는 영어, 숫자로 이루어진 6~15 글자여야 합니다'
+        //   };
+        // }
+        // let pwvalid = /^{10,}/;
+        // if ( !pwvalid.test(user.pw) ) {
+        //   return {
+        //     valid: false,
+        //     msg: '비밀번호는 10글자 이상이어야 합니다'
+        //   }
+        // }
+        return {
+            valid: true
+        };
     };
     ValidateService.prototype.validateEmail = function (email) {
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -919,7 +1020,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Hoon\PJH\others\web\jolup\angular-src\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\PJH\1494054\RogueWrite\angular-src\src\main.ts */"./src/main.ts");
 
 
 /***/ })

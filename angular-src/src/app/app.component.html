@@ -10,7 +10,7 @@
       
       <!-- title -->
       <div class="mdl-layout--large-screen-only mdl-layout__header-row">
-        <h3>RogueWrite</h3>
+        <h3 [routerLink]="['/']" style="cursor: pointer;">RogueWrite</h3>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" >
           <a *ngIf="!authService.loggedIn()" class="mdl-navigation__link" [routerLink]="['/login']">LOGIN</a>
@@ -23,7 +23,7 @@
 
       <!-- nav bar -->
       <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--primary-dark">
-        <a [routerLink]="['/']" class="mdl-layout__tab">HOME</a>
+        <a [routerLink]="['/']" class="mdl-layout__tab is-active">HOME</a>
         <a href="board.html" class="mdl-layout__tab">BOARD</a>
         <a href="#features" class="mdl-layout__tab">Details</a>
         <a href="#features" class="mdl-layout__tab">Technology</a>
@@ -52,10 +52,9 @@
       </nav>
     </div>
 
-
+    <ng-flash-message></ng-flash-message>
     <main class="mdl-layout__content">
       <div class="mdl-layout__tab-panel is-active" id="overview">
-        <ng-flash-message></ng-flash-message>
         <router-outlet></router-outlet>
         <!-- <section></section> -->
       </div>
@@ -64,11 +63,11 @@
       <footer class="mdl-mega-footer">
         <div class="mdl-mega-footer--bottom-section">
           <div class="mdl-logo">
-            powered by Project Rwriter
+            powered by Project RogueWrite
           </div>
           <ul class="mdl-mega-footer--link-list">
-            <li><a href="#">Google Material</a></li>
-            <li><a href="#">Github</a></li>
+            <li><a target="_blank" href="https://getmdl.io/index.html">MDL</a></li>
+            <li><a target="_blank" href="https://github.com/p9595jh/RogueWrite">Github</a></li>
           </ul>
         </div>
       </footer>

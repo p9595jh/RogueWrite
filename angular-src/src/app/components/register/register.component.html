@@ -4,46 +4,47 @@
       <h4>회원가입</h4><hr/>
       
       <br/><br/>
-      <div style="width: 100%; text-align: center;">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="text" id="userid">
-          <label class="mdl-textfield__label" for="userid">아이디</label>
-        </div>
-        <br/><br/>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="password" id="password">
-          <label class="mdl-textfield__label" for="password">비밀번호</label>
-        </div>
-        <br/><br/>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="password" id="passwordx">
-          <label class="mdl-textfield__label" for="passwordx">비밀번호 확인</label>
-        </div>
-        <br/><br/>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="text" id="nickname">
-          <label class="mdl-textfield__label" for="nickname">닉네임</label>
-        </div>
-        <br/><br/>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="text" pattern="^[0-9a-zA-Z_-]+(\.[0-9a-zA-Z_-]+)*@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$" id="email">
-          <label class="mdl-textfield__label" for="email">이메일</label>
-          <span class="mdl-textfield__error">이메일을 입력해야 합니다.</span>
-        </div>
-        <br/><br/>
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input class="mdl-textfield__input" type="text" id="introduction">
-          <label class="mdl-textfield__label" for="introduction">한 줄 소개</label>
-        </div>
-        <br/><br/>
-        <br/>
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-          회원가입
-        </button>
-        <br/><br/><br/><hr/>
-        여기에다가 뭔가 알려둘 사항 같은 걸 써두면 됨
 
-      </div>
+      <form (submit)="onRegisterSubmit()">
+        <div style="width: 100%; text-align: center;">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="userid" name="userid" [(ngModel)]="userid">
+            <label class="mdl-textfield__label" for="userid">아이디</label>
+          </div>
+          <br/><br/>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="password" id="pw" name="pw" [(ngModel)]="pw">
+            <label class="mdl-textfield__label" for="pw">비밀번호</label>
+          </div>
+          <br/><br/>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="password" id="pwchk" name="pwchk" [(ngModel)]="pwchk">
+            <label class="mdl-textfield__label" for="pwchk">비밀번호 확인</label>
+          </div>
+          <br/><br/>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="nickname" name="nickname" [(ngModel)]="nickname">
+            <label class="mdl-textfield__label" for="nickname">닉네임</label>
+          </div>
+          <br/><br/>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" pattern="^[0-9a-zA-Z_-]+(\.[0-9a-zA-Z_-]+)*@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$" id="email" name="email" [(ngModel)]="email">
+            <label class="mdl-textfield__label" for="email">이메일</label>
+            <span class="mdl-textfield__error">이메일을 입력해야 합니다.</span>
+          </div>
+          <br/><br/>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="introduction" name="introduction" [(ngModel)]="introduction">
+            <label class="mdl-textfield__label" for="introduction">한 줄 소개</label>
+          </div>
+          <br/><br/>
+          <br/>
+          <input type="submit" value="회원가입" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+          <br/><br/><br/><hr/>
+          여기에다가 뭔가 알려둘 사항 같은 걸 써두면 됨
+
+        </div>
+      </form>
 
     </div>
   </div>

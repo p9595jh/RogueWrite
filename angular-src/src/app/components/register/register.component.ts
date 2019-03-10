@@ -10,10 +10,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  name: String;
-  username: String;
+  userid: String;
+  pw: String;
+  pwchk: String;
+  nickname: String;
   email: String;
-  password: String;
+  introduction: String;
 
   constructor(
     private validateService: ValidateService, 
@@ -27,21 +29,36 @@ export class RegisterComponent implements OnInit {
 
   onRegisterSubmit() {
     const user = {
-      name: this.name,
-      username: this.username,
+      userid: this.userid,
+      pw: this.pw,
+      pwchk: this.pwchk,
+      nickname: this.nickname,
       email: this.email,
-      password: this.password
+      introduction: this.introduction
     }
 
-  // Required Fields
-    if(!this.validateService.validateRegister(user)) {
-      this.flashMessage.showFlashMessage({messages: ['Please fill in all fields'], type: 'danger', timeout:2000});
+    // Required Fields
+    if ( !this.validateService.validateRegister(user) ) {
+      this.flashMessage.showFlashMessage({messages: ['빈 항목이 있습니다'], type: 'danger', timeout: 2000});
+      return false;
+    }
+
+    // Password check
+    if ( this.pw != this.pwchk ) {
+      this.flashMessage.showFlashMessage({messages: ['비밀번호가 일치하지 않습니다'], type: 'danger', timeout: 2000});
+      return false;
+    }
+
+    // Check with conditions
+    let conditions: any = this.validateService.validateConditions(user);
+    if ( !conditions.valid ) {
+      this.flashMessage.showFlashMessage({messages: [conditions.msg], type: 'danger', timeout: 2000});
       return false;
     }
 
     // Validate Email
-    if(!this.validateService.validateEmail(user.email)) {
-      this.flashMessage.showFlashMessage({messages: ['Please use a valid email'], type: 'danger', timeout:2000});
+    if( !this.validateService.validateEmail(user.email) ) {
+      this.flashMessage.showFlashMessage({messages: ['이메일 형식이 맞지 않습니다'], type: 'danger', timeout: 2000});
       return false;
     }
 
@@ -51,14 +68,14 @@ export class RegisterComponent implements OnInit {
         this.flashMessage.showFlashMessage({
           messages: ['You are now registered and can login '], 
           type: 'success', 
-          timeout:2000
+          timeout: 2000
         });
         this.router.navigate(['/']);
       } else {
-        this.flashMessage.showFlashMessage(
-          {messages: ['Something went wrong'], 
+        this.flashMessage.showFlashMessage({
+          messages: ['Something went wrong'], 
           type: 'danger', 
-          timeout:3000
+          timeout: 3000
         });
         this.router.navigate(['/register']);
       }

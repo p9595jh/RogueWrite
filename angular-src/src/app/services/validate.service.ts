@@ -8,10 +8,32 @@ export class ValidateService {
   constructor() { }
 
   validateRegister(user) {
-    if(user.name == undefined || user.email == undefined || user.username == undefined || user.password == undefined) {
+    if ( user.userid == undefined || user.email == undefined || user.pw == undefined || user.pwchk == undefined || user.introduction == undefined ) {
       return false;
     } else {
       return true;
+    }
+  }
+
+  validateConditions(user) {
+    // let idvalid = /^[a-z]+[a-z0-9]{6,15}$/g;
+    // if ( !idvalid.test(user.userid) ) {
+    //   return {
+    //     valid: false,
+    //     msg: '아이디는 영어, 숫자로 이루어진 6~15 글자여야 합니다'
+    //   };
+    // }
+
+    // let pwvalid = /^{10,}/;
+    // if ( !pwvalid.test(user.pw) ) {
+    //   return {
+    //     valid: false,
+    //     msg: '비밀번호는 10글자 이상이어야 합니다'
+    //   }
+    // }
+
+    return {
+      valid: true
     }
   }
 

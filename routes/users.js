@@ -8,10 +8,11 @@ const User = require('../models/user');
 
 router.post('/register', function(req, res, next) {
   const newUser = new User({
-    name: req.body.name,
+    userid: req.body.userid,
+    pw: req.body.pw,
     email: req.body.email,
-    username: req.body.username,
-    password: req.body.password
+    nickname: req.body.nickname,
+    introduction: req.body.introduction
   });
 
   User.addUser(newUser, (err, user) => {
@@ -33,34 +34,33 @@ router.get('/', function(req, res, next) {
 //==================================================<
 
 router.post('/authenticate', function(req, res, next) {
-  const username = req.body.username;
-  const password = req.body.password;
+  const userid = req.body.userid;
+  const pw = req.body.pw;
   
-  User.getUserByUsername(username, (err, user) => {
+  User.getUserByUsername(userid, (err, user) => {
     // if(err) throw err;
-    if(!user) {
-      return res.json({success:false, msg:'User not found'});
+    if ( !user ) {
+      return res.json({success: false, msg: 'User not found'});
     }
     
-    User.comparePassword(password, user.password, (err, isMatch) => {
+    User.comparePassword(pw, user.pw, (err, isMatch) => {
       // if(err) throw err;
-      if(isMatch) {
+      if ( isMatch ) {
         const token = jwt.sign({data: user}, config.secret, {
           expiresIn: 604800  // 1 week in seconds
         });
 
         res.json({
           success: true,
-          token: 'JWT '+token,
+          token: 'JWT ' + token,
           user: {
-            id: user._id,
-            name: user.name,
-            username: user.username,
-            email: user.email
+            userid: user.userid,
+            email: user.email,
+            nickname: user.nickname
           }
         });
       } else {
-        return res.json({success: false, msg:'Wrong password'});
+        return res.json({success: false, msg: 'Wrong password'});
       }
     })
   })

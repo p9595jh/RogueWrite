@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  username: String;
-  password: String;
+  userid: String;
+  pw: String;
 
   constructor(
     private authService: AuthService,
@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
   onLoginSubmit() {
     // console.log(this.username);
     const user = {
-      username: this.username,
-      password: this.password
+      userid: this.userid,
+      pw: this.pw
     }
 
     this.authService.authenticateUser(user).subscribe(data => {
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
           type: 'success', 
           timeout:3000
         });
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['/']);
       } else {
         this.flashMessage.showFlashMessage({
             messages: [data.msg], 
