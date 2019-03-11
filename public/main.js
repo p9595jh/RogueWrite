@@ -181,11 +181,17 @@ var AppModule = /** @class */ (function () {
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_0__["BrowserModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
                 _angular_http__WEBPACK_IMPORTED_MODULE_3__["HttpModule"],
-                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forRoot(appRoutes),
+                _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forRoot(appRoutes, { useHash: true }),
                 ng_flash_messages__WEBPACK_IMPORTED_MODULE_14__["NgFlashMessagesModule"]
             ],
-            providers: [_services_validate_service__WEBPACK_IMPORTED_MODULE_12__["ValidateService"], _services_auth_service__WEBPACK_IMPORTED_MODULE_13__["AuthService"], _guards_auth_guard__WEBPACK_IMPORTED_MODULE_15__["AuthGuard"]],
-            bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]]
+            providers: [
+                _services_validate_service__WEBPACK_IMPORTED_MODULE_12__["ValidateService"],
+                _services_auth_service__WEBPACK_IMPORTED_MODULE_13__["AuthService"],
+                _guards_auth_guard__WEBPACK_IMPORTED_MODULE_15__["AuthGuard"]
+            ],
+            bootstrap: [
+                _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"]
+            ]
         })
     ], AppModule);
     return AppModule;
@@ -389,11 +395,11 @@ var LoginComponent = /** @class */ (function () {
         this.authService.authenticateUser(user).subscribe(function (data) {
             if (data.success) {
                 _this.authService.storeUserData(data.token, data.user);
-                _this.flashMessage.showFlashMessage({
-                    messages: [data.msg],
-                    type: 'success',
-                    timeout: 3000
-                });
+                // this.flashMessage.showFlashMessage({
+                //   messages: [data.msg], 
+                //   type: 'success', 
+                //   timeout:3000
+                // });
                 _this.router.navigate(['/']);
             }
             else {
@@ -681,7 +687,7 @@ var RegisterComponent = /** @class */ (function () {
         this.authService.registerUser(user).subscribe(function (data) {
             if (data.success) {
                 _this.flashMessage.showFlashMessage({
-                    messages: ['You are now registered and can login '],
+                    messages: ['회원가입 완료 - 로그인 해주십시오'],
                     type: 'success',
                     timeout: 2000
                 });
@@ -689,7 +695,7 @@ var RegisterComponent = /** @class */ (function () {
             }
             else {
                 _this.flashMessage.showFlashMessage({
-                    messages: ['Something went wrong'],
+                    messages: ['문제가 발생하였습니다'],
                     type: 'danger',
                     timeout: 3000
                 });
@@ -916,7 +922,7 @@ var ValidateService = /** @class */ (function () {
     function ValidateService() {
     }
     ValidateService.prototype.validateRegister = function (user) {
-        if (user.userid == undefined || user.email == undefined || user.email == undefined || user.pw == undefined || user.pwchk == undefined || user.introduction == undefined) {
+        if (user.userid == undefined || user.email == undefined || user.pw == undefined || user.pwchk == undefined || user.introduction == undefined) {
             return false;
         }
         else {

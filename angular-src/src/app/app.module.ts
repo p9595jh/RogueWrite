@@ -18,11 +18,11 @@ import { NgFlashMessagesModule } from 'ng-flash-messages';
 import { AuthGuard } from './guards/auth.guard';
 
 const appRoutes: Routes = [
-  {path:'', component: HomeComponent},
-  {path:'register', component: RegisterComponent},
-  {path:'login', component: LoginComponent},
-  {path:'dashboard', component: DashboardComponent, canActivate:[AuthGuard]},
-  {path:'profile', component: ProfileComponent, canActivate:[AuthGuard]}
+  { path: '', component: HomeComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] }
 ]
 
 @NgModule({
@@ -39,10 +39,16 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes),
+    RouterModule.forRoot(appRoutes, {useHash: true}),
     NgFlashMessagesModule
   ],
-  providers: [ValidateService, AuthService, AuthGuard],
-  bootstrap: [AppComponent]
+  providers: [
+    ValidateService,
+    AuthService,
+    AuthGuard
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
