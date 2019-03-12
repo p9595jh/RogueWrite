@@ -16,19 +16,6 @@ router.post('/register', function(req, res, next) {
     introduction: req.body.introduction
   });
 
-  // User.addUser(newUser, (err, user) => {
-    // if ( !User.checkIdAvailable(newUser).result ) {
-    //   return res.json({
-    //     success: false,
-    //     msg: '이미 존재하는 아이디입니다'
-    //   });
-    // } else if ( !User.checkEmailAvailable(newUser).result ) {
-    //   return res.json({
-    //     success: false,
-    //     msg: '이미 존재하는 이메일입니다'
-    //   });
-    // }
-
   User.findOne({userid: newUser.userid}, function(err1, output1) {
     if ( output1 != null ) {
       return res.json({
@@ -43,28 +30,25 @@ router.post('/register', function(req, res, next) {
             msg: '이미 존재하는 이메일입니다'
           });
         } else {
-          bcrypt.genSalt(10, (err, salt) => {
-            bcrypt.hash(newUser.pw, salt, (err, hash) => {
-              if ( err ) {
-                res.json({success: false, msg:'Failed to register user', err: err})
+          User.addUser(newUser, (err, user) => {
+            if ( err ) {
+                res.json({
+                  success: false,
+                  msg:'Failed to register user',
+                  err: err
+                });
               } else {
-                newUser.pw = hash;
-                newUser.save((err, user));
-                res.json({success: true, msg:'User registered'})
+                res.json({
+                  success: true,
+                  msg:'User registered'
+                });
               }
-            });
           });
         }
       });
     }
   });
-
-    // if ( err ) {
-    //   res.json({success: false, msg:'Failed to register user', err: err})
-    // } else {
-    //   res.json({success: true, msg:'User registered'})
-    // }
-  // });
+  
 });
 
 //=======================================>
@@ -109,7 +93,7 @@ router.post('/authenticate', function(req, res, next) {
   })
 });
 
-router.get('/profile', passport.authenticate('jwt', {session:false}), (req, res, next) => {
+router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res, next) => {
   res.json({user: req.user});
 });
 

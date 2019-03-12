@@ -1,7 +1,37 @@
-<div *ngIf="user">
-  <h2 class="page-header"> {{user.name}} </h2>
-  <ul class="list-group">
-    <li class="list-group-item">Username: {{user.username}}</li>  
-    <li class="list-group-item">Email: {{user.email}}</li>  
-  </ul>
-</div>
+<section *ngIf="user" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+    <div class="mdl-card__supporting-text">
+      <h4>PROFILE &nbsp;-&nbsp; {{user.userid}}</h4>
+      <hr/><br/>
+      
+      <table class="mdl-data-table mdl-js-data-table" style="margin: auto; width: 80%;">
+        <tbody>
+          <tr>
+            <td class="mdl-data-table__cell--non-numeric">아이디</td>
+            <td class="mdl-data-table__cell--non-numeric">{{user.userid}}</td>
+          </tr>
+          <tr>
+            <td class="mdl-data-table__cell--non-numeric">닉네임</td>
+            <td class="mdl-data-table__cell--non-numeric">{{user.nickname}}</td>
+          </tr>
+          <tr>
+            <td class="mdl-data-table__cell--non-numeric">이메일</td>
+            <td class="mdl-data-table__cell--non-numeric">{{user.email}}</td>
+          </tr>
+          <tr>
+            <td class="mdl-data-table__cell--non-numeric">한 줄 소개</td>
+            <td class="mdl-data-table__cell--non-numeric">{{user.introduction}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <br/><br/>
+
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" style="float: right;" [routerLink]="['./modify']">
+        회원정보 수정
+      </button>
+
+    </div>
+  </div>
+</section>
+
+<section></section>
