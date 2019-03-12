@@ -4,7 +4,7 @@
       <h4>로그인</h4><hr/>
       
       <br/><br/>
-      <form (submit)="onLoginSubmit()">
+      <!-- <form (submit)="onLoginSubmit()">
         <div style="width: 100%; text-align: center;">
           <div class="mdl-textfield mdl-js-textfield">
             <input class="mdl-textfield__input" type="text" id="userid" name="userid" [(ngModel)]="userid">
@@ -17,6 +17,25 @@
           </div>
           <br/><br/><br/>
           <input type="submit" value="로그인" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+          <br/><br/><br/><hr/>
+          <a [routerLink]="['../register']" style="color: black; text-decoration: none;">회원가입</a>
+          &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+          <a href="#" style="color: black; text-decoration: none;">아이디/비밀번호 찾기</a>
+
+        </div>
+      </form> -->
+
+      <form (submit)="onLoginSubmit()">
+        <div style="width: 100%; text-align: center;">
+          <mat-form-field>
+            <input matInput placeholder="아이디" type="text" name="userid" [(ngModel)]="userid">
+          </mat-form-field>
+          <br/><br/>
+          <mat-form-field>
+            <input matInput placeholder="비밀번호" type="password" name="pw" [(ngModel)]="pw">
+          </mat-form-field>
+          <br/><br/><br/>
+          <button mat-raised-button type="submit">로그인</button>
           <br/><br/><br/><hr/>
           <a [routerLink]="['../register']" style="color: black; text-decoration: none;">회원가입</a>
           &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;

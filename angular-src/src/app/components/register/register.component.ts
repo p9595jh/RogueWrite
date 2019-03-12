@@ -3,6 +3,7 @@ import { ValidateService } from '../../services/validate.service';
 import { AuthService } from '../../services/auth.service';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { Router } from '@angular/router';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -16,6 +17,10 @@ export class RegisterComponent implements OnInit {
   nickname: String;
   email: String;
   introduction: String;
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
 
   constructor(
     private validateService: ValidateService, 
@@ -28,6 +33,8 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegisterSubmit() {
+    this.emailFormControl.setValue('email');
+
     const user = {
       userid: this.userid,
       pw: this.pw,
