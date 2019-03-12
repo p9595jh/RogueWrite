@@ -30,7 +30,7 @@ const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
-  { path: 'modify', component: ModifyComponent }
+  { path: 'modify', component: ModifyComponent, canActivate: [AuthGuard] }
 ]
 
 @NgModule({

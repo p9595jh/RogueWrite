@@ -20,27 +20,27 @@ router.post('/register', function(req, res, next) {
     if ( output1 != null ) {
       return res.json({
         success: false,
-        msg: '이미 존재하는 아이디입니다'
+        msg: '이미 존재하는 아이디입니다.'
       });
     } else {
       User.findOne({email: newUser.email}, function(err2, output2) {
         if ( output2 != null ) {
           return res.json({
             success: false,
-            msg: '이미 존재하는 이메일입니다'
+            msg: '이미 존재하는 이메일입니다.'
           });
         } else {
           User.addUser(newUser, (err, user) => {
             if ( err ) {
                 res.json({
                   success: false,
-                  msg:'Failed to register user',
+                  msg:'등록에 실패하였습니다.',
                   err: err
                 });
               } else {
                 res.json({
                   success: true,
-                  msg:'User registered'
+                  msg:'등록 완료'
                 });
               }
           });
@@ -87,7 +87,7 @@ router.post('/authenticate', function(req, res, next) {
           }
         });
       } else {
-        return res.json({success: false, msg: 'Wrong password'});
+        return res.json({success: false, msg: '비밀번호가 잘못됐습니다.'});
       }
     })
   })
