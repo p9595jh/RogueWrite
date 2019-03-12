@@ -695,7 +695,7 @@ var RegisterComponent = /** @class */ (function () {
             }
             else {
                 _this.flashMessage.showFlashMessage({
-                    messages: ['문제가 발생하였습니다'],
+                    messages: [data.msg],
                     type: 'danger',
                     timeout: 3000
                 });

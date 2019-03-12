@@ -36,31 +36,11 @@ module.exports.getUserByUsername = function(userid, callback){
 }
 
 module.exports.addUser = function(newUser, callback) {
-  User.findOne({userid: newUser.userid}, function(err, output) {
-    if ( output != null ) {
-      return {
-        success: false,
-        msg: '이미 존재하는 아이디입니다'
-      };
-    }
-  });
-  User.findOne({email: email}, function(err, output) {
-    if ( output != null ) {
-      return {
-        success: false,
-        msg: '이미 존재하는 이메일입니다'
-      };
-    }
-  });
-
   bcrypt.genSalt(10, (err, salt) => {
     bcrypt.hash(newUser.pw, salt, (err, hash) => {
       //if(err) throw err;
       newUser.pw = hash;
       newUser.save(callback);
-      return {
-        success: true
-      };
     });
   });
 }
