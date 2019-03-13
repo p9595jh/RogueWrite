@@ -1,0 +1,22 @@
+<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+    <div class="mdl-card__supporting-text">
+      <h4>Test</h4><hr/>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit(fileInput.files)">
+        <img *ngIf="imageSrc" [src]="imageSrc" class="avatar">
+        <br/>
+        <input type="file" accept="image/*" (change)="onFileChange(fileInput.files)" #fileInput>
+        <br/>
+        <button mat-raised-button type="submit" [disabled]="form.invalid || loading">Save</button>
+        <br/>
+        <i *ngIf="loading"></i>
+      </form>
+      <pre>{{form.value | json}}</pre>
+      <pre>{{result | json}}</pre>
+
+    </div>
+  </div>
+</section>
+
+<section></section>

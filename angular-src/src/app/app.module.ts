@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatInputModule } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
@@ -27,6 +28,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ModifyComponent } from './components/modify/modify.component';
 import { BoardComponent } from './components/board/board.component';
 import { WriteComponent } from './components/write/write.component';
+import { TestComponent } from './components/test/test.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -35,7 +37,8 @@ const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'modify', component: ModifyComponent, canActivate: [AuthGuard] },
   { path: 'board/:type', component: BoardComponent },
-  { path: 'write', component: WriteComponent/*, canActivate: [AuthGuard]*/ }
+  { path: 'write', component: WriteComponent/*, canActivate: [AuthGuard]*/ },
+  { path: 'test', component: TestComponent }
 ]
 
 @NgModule({
@@ -47,7 +50,8 @@ const appRoutes: Routes = [
     ProfileComponent,
     ModifyComponent,
     BoardComponent,
-    WriteComponent
+    WriteComponent,
+    TestComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -55,6 +59,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     FormsModule,
     HttpModule,
+    HttpClientModule,
     RouterModule.forRoot(appRoutes, {useHash: true}),
     NgFlashMessagesModule,
     MatTableModule,

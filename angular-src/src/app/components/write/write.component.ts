@@ -12,4 +12,8 @@ export class WriteComponent implements OnInit {
   ngOnInit() {
   }
 
+  onWritePost() {
+    // writing a post
+  }
+
 }
