@@ -1,0 +1,127 @@
+<section *ngIf="num" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+    <div class="mdl-card__supporting-text">
+      <h4 style="display: inline;">{{content?.title}}</h4>
+
+      <span style="float: right; text-align: right; font-size: 80%;">
+        {{content?.nickname}}<br/>{{content?.writedate}}
+      </span>
+      <hr/>
+      <pre style="padding: 1%; padding-top: 5%;">{{content?.content}}</pre>
+      <br/><br/>
+      <div style="text-align: center;">
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+          추천 {{content?.recommend}}
+        </button>
+      </div>
+      <br/><hr/>
+
+      <!-- ############### table for comments ############### -->
+      <table style="width: 96%; margin: auto;">
+        <tbody *ngFor="let comment of content?.comment">
+          <tr>
+            <td>
+              <span style="font-size: 80%;">{{comment?.writer}} &nbsp;|&nbsp; {{comment?.writedate}}</span>
+              <pre>{{comment?.comment}}</pre>
+            </td>
+            <!-- <td style="text-align: right; vertical-align: middle;">
+              <button class="mdl-button mdl-js-button mdl-button--icon" style="font-size: 90%;">
+                ♡ 0
+              </button>
+            </td> -->
+          </tr>
+        </tbody>
+      </table><br/>
+      <!-- ############### table for comments ############### -->
+
+      <!-- ############### writing area ############### -->
+      <form *ngIf="authService.loggedIn()" (click)="onWriteComment()">
+        <table style="width: 96%; margin: auto;">
+          <tr style="text-align: center;">
+            <td>
+              <mat-form-field style="width: 98%;">
+                <textarea matInput placeholder="댓글을 작성해주세요." rows="3" cols="80" name="cmtWrite" [(ngModel)]="cmtWrite"></textarea>
+              </mat-form-field>
+            </td>
+            <td>
+              <button mat-raised-button type="submit">작성</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+      <!-- ############### writing area ############### -->
+
+    </div>
+  </div>
+  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="postbtn">
+    <i class="material-icons">more_vert</i>
+  </button>
+  <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="postbtn">
+    <li class="mdl-menu__item">삭제</li>
+    <li class="mdl-menu__item">편집</li>
+  </ul>
+</section>
+
+<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+    <div class="mdl-card__supporting-text">
+      <h4>자유게시판</h4><hr/>
+      
+      <!-- for large display -->
+      <table class="mdl-data-table mdl-js-data-table mdl-layout--large-screen-only" style="margin: auto; width: 98%;">
+        <thead>
+          <tr>
+            <th class="mdl-data-table__cell--non-numeric">번호</th>
+            <th class="mdl-data-table__cell--non-numeric">제목</th>
+            <th>글쓴이</th>
+            <th>조회수</th>
+            <th>추천</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let val of contents">
+          <tr>
+            <td class="mdl-data-table__cell--non-numeric">{{val.num}}</td>
+            <td class="mdl-data-table__cell--non-numeric">
+              <a href="#" style="color: black; text-decoration: none; font-weight: 400;">{{val.title}}</a> 
+              <span style="font-size: 85%; color: grey;">[{{val.comment.length}}]</span>
+            </td>
+            <td>{{val.nickname}}</td>
+            <td>{{val.hit}}</td>
+            <td>{{val.recommend}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- for small display -->
+      <table class="mdl-data-table mdl-js-data-table mdl-layout--small-screen-only" style="margin: auto; width: 98%;">
+        <tbody *ngFor="let val of contents">
+          <tr>
+            <td class="mdl-data-table__cell--non-numeric">
+              <div>
+                <a href="#" style="color: black; text-decoration: none; font-weight: 400;">{{val.title}}</a> 
+              </div><div style="font-size: 85%; margin-top: 1%;">
+                <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;
+                <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;
+                <span>추천 {{val.recommend}}</span>
+              </div>
+            </td>
+            <td style="color: grey;">[{{val.comment.length}}]</td>
+          </tr>
+        </tbody>
+      </table><br/>
+      <div *ngIf="authService.loggedIn()" style="float: right;">
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+          글쓰기
+        </button>
+      </div>
+    </div>
+  </div>
+  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn1">
+    <i class="material-icons">more_vert</i>
+  </button>
+  <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn1">
+    <li class="mdl-menu__item" disabled>자주 가는 게시판으로 설정</li>
+  </ul>
+</section>
+
+<section></section>

@@ -1,5 +1,18 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
+pre {
+  font-family: gothic;
+  font-size: 105%;
+}
+.largeInputEle {
+  width: 45%;
+}
+.smallInputEle {
+  width: 80%;
+}
+
+/* ========================================================================== */
+
 /**
  * Copyright 2015 Google Inc. All Rights Reserved.
  *
