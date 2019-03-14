@@ -2,13 +2,16 @@
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
       <h4>글쓰기</h4><hr/>
-      <form (submit)="onWritePost()">
-        <mat-form-field style="width: 98%;">
-          <input matInput placeholder="제목" type="text" name="title" [(ngModel)]="title">
-        </mat-form-field>
-        <div [froalaEditor] [(ngModel)]="content" name="content"></div><br/>
-        <button mat-raised-button type="submit" style="float: right;">작성</button>
-      </form>
+      <div style="width: 98%; margin: auto;">
+        <form (submit)="onWritePost()">
+          <mat-form-field style="width: 100%;">
+            <input matInput placeholder="제목" type="text" name="title" [(ngModel)]="title">
+          </mat-form-field>
+          <textarea [froalaEditor]="options" [(ngModel)]="content" name="content"></textarea>
+          <br/>
+          <button mat-raised-button type="submit" style="float: right;">작성</button>
+        </form><br/>
+      </div>
     </div>
   </div>
 </section>

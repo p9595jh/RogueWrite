@@ -34,7 +34,7 @@ export class BoardComponent implements OnInit {
     headers.append('Content-Type', 'application/json');
     this.http.get(this.funcService.ServerAddress + '/boards/takeAllPosts?type='+this.type, {headers: headers}).pipe(map((res: Response) => res.json())).subscribe((data: HavingPosts) => {
       this.content = data.posts;
-      if ( this.num ) {
+      if ( this.num != 'list' ) {
         this.http.get(this.funcService.ServerAddress + '/boards/takeOnePost?type='+this.type+'&num='+this.num, {headers: headers}).pipe(map((res: Response) => res.json())).subscribe((result: HavingPost) => {
           this.contents = result.post;
         });

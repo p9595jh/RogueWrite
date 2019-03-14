@@ -1,4 +1,4 @@
-<section *ngIf="num" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<section *ngIf="num != 'list'" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
       <h4 style="display: inline;">{{content?.title}}</h4>
@@ -35,7 +35,7 @@
       <!-- ############### table for comments ############### -->
 
       <!-- ############### writing area ############### -->
-      <form *ngIf="authService.loggedIn()" (click)="onWriteComment()">
+      <form *ngIf="authService.loggedIn()" (submit)="onWriteComment()">
         <table style="width: 96%; margin: auto;">
           <tr style="text-align: center;">
             <td>

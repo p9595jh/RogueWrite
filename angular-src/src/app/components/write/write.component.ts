@@ -14,6 +14,11 @@ import { NgFlashMessageService } from 'ng-flash-messages';
   styleUrls: ['./write.component.css']
 })
 export class WriteComponent implements OnInit {
+  options: Object = {
+    placeholderText: '',
+    height: 300
+  };
+
   type: String = 'free';  // for debugging, set 'type' as just 'free'
   title: String;
   content: String;
