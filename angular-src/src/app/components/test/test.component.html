@@ -3,17 +3,10 @@
     <div class="mdl-card__supporting-text">
       <h4>Test</h4><hr/>
 
-      <form [formGroup]="form" (ngSubmit)="onSubmit(fileInput.files)">
-        <img *ngIf="imageSrc" [src]="imageSrc" class="avatar">
-        <br/>
-        <input type="file" accept="image/*" (change)="onFileChange(fileInput.files)" #fileInput>
-        <br/>
-        <button mat-raised-button type="submit" [disabled]="form.invalid || loading">Save</button>
-        <br/>
-        <i *ngIf="loading"></i>
-      </form>
-      <pre>{{form.value | json}}</pre>
-      <pre>{{result | json}}</pre>
+      <input type="file" name="photo" ng2FileSelect [uploader]="uploader" /><br/>
+      <button mat-raised-button type="button" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+        Upload
+      </button>
 
     </div>
   </div>

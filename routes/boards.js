@@ -27,9 +27,30 @@ router.get('/takeAllPosts', function(req, res, next) {
 })
 
 router.post('/write', function(req, res, next) {
-    const newUser = new User({
+    const newPost = new Board({
         type: req.body.type,
-        // user data will be placed here
+        num: -1,
+        userid: req.body.userid,
+        nickname: req.body.nickname,
+        title: req.body.title,
+        content: req.body.content,
+        hit: 0,
+        recommend: 0,
+        recommendby: [],
+        comment: [],
+        writedate: ''
+    });
+    Board.addPost(newPost, (err, post) => {
+        if ( err ) {
+            res.json({
+                success: false
+            });
+        } else {
+            res.json({
+                success: true,
+                num: post.num
+            });
+        }
     });
 })
 

@@ -14,9 +14,32 @@ const upload = multer({
   })
 });
 
-router.post('/test', upload.single('avatar'), (req, res) => {
+router.post('/test', upload.single('avatar'), function(req, res) {
   console.log('UPLOAD SUCCESS', req.file);
   res.json({ success: true, file: req.file });
+});
+
+// router.post('/test', function(req, res) {
+//   console.log('what???');
+//   res.json({ success: false });
+// });
+
+router.post('/upload', upload.single('photo'), function (req, res) {
+  if (!req.file) {
+    console.log("No file received");
+    return res.json({
+      success: false
+    });
+  } else {
+    console.log('file received');
+    return res.json({
+      success: true
+    });
+  }
+});
+
+router.get('/', function(req, res) {
+  res.send('hello');
 });
 
 module.exports = router;

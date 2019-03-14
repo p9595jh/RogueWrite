@@ -84,7 +84,7 @@ export class RegisterComponent implements OnInit {
           type: 'danger', 
           timeout: 3000
         });
-        this.router.navigate(['/register']);
+        // this.router.navigate(['/register']);
       }
     })
   }

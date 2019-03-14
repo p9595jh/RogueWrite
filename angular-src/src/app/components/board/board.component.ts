@@ -48,7 +48,7 @@ export class BoardComponent implements OnInit {
     let formData = {
       comment: this.cmtWrite
     };
-    this.http.post(this.funcService.ServerAddress + '/boards/write', formData, {headers: headers}).pipe(map((res: Response) => res.json())).subscribe((data: ResponseWriting) => {
+    this.http.post(this.funcService.ServerAddress + '/boards/writeComment', formData, {headers: headers}).pipe(map((res: Response) => res.json())).subscribe((data: ResponseWriting) => {
       if ( data.success ) {
         // code to get back to the board list page, and it has to have 'num' variable to show content itself
         // this.router.navigate['./board', needed parameters];
