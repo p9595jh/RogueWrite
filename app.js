@@ -11,7 +11,7 @@ const cors = require('cors');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const config = require('./config/database');
-const multer = require('multer');
+// const multer = require('multer');
 
 mongoose.Promise = require('bluebird');
 mongoose.connect(config.database, { useNewUrlParser: true });

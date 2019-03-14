@@ -825,6 +825,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -837,13 +840,17 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
+
 var TestComponent = /** @class */ (function () {
-    function TestComponent(fb, http) {
+    function TestComponent(funcService, fb, httpClient, http) {
+        this.funcService = funcService;
         this.fb = fb;
+        this.httpClient = httpClient;
         this.http = http;
-        this.apiUrl = 'http://localhost:3000'; // funcService.ServerAddress
         this.loading = false;
-        this.imageSrc = '/assets/images/john-resig.jpeg';
+        this.imageSrc = '/assets/images/john-resig.jpeg'; // have to set to the 'public' folder
         this.form = this.fb.group({
             avatar: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required]
         });
@@ -868,8 +875,15 @@ var TestComponent = /** @class */ (function () {
         formData.append('avatar', files[0]);
         this.loading = true;
         console.log(formData.get('avatar'));
-        this.http.post(this.apiUrl + "/upload", formData).subscribe(function (res) {
-            _this.result = res;
+        // this.httpClient.post(`${this.funcService.ServerAddress}/upload/test`, formData).subscribe(res => {
+        //   this.result = res;
+        //   this.loading = false;
+        //   this.avatar.setValue(null);
+        // });
+        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_3__["Headers"]();
+        headers.append('Content-Type', 'multipart/form-data');
+        this.http.post(this.funcService.ServerAddress + '/upload/test', formData, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (res) { return res.json(); })).subscribe(function (data) {
+            _this.result = data;
             _this.loading = false;
             _this.avatar.setValue(null);
         });
@@ -887,8 +901,10 @@ var TestComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./test.component.html */ "./src/app/components/test/test.component.html"),
             styles: [__webpack_require__(/*! ./test.component.css */ "./src/app/components/test/test.component.css")]
         }),
-        __metadata("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"],
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+        __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_5__["FuncService"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormBuilder"],
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"],
+            _angular_http__WEBPACK_IMPORTED_MODULE_3__["Http"]])
     ], TestComponent);
     return TestComponent;
 }());

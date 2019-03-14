@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { Http, Headers } from '@angular/http';
+import { map } from 'rxjs/operators';
+import { FuncService } from '../../services/func.service';
 
 @Component({
   selector: 'app-test',
@@ -8,17 +11,17 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
-  apiUrl = 'http://localhost:3000'; // funcService.ServerAddress
-
   form: FormGroup;
   loading: Boolean = false;
-  imageSrc: Object = '/assets/images/john-resig.jpeg';
+  imageSrc: Object = '/assets/images/john-resig.jpeg';  // have to set to the 'public' folder
 
   result: any;
 
   constructor(
+    private funcService: FuncService,
     private fb: FormBuilder,
-    private http: HttpClient
+    private httpClient: HttpClient,
+    private http: Http
   ) {
     this.form = this.fb.group({
       avatar: ['', Validators.required]
@@ -49,11 +52,19 @@ export class TestComponent implements OnInit {
     this.loading = true;
     console.log(formData.get('avatar'));
 
-    this.http.post(`${this.apiUrl}/upload`, formData).subscribe(res => {
+    this.httpClient.post(`${this.funcService.ServerAddress}/upload/test`, formData).subscribe(res => {
       this.result = res;
       this.loading = false;
       this.avatar.setValue(null);
     });
+
+    // let headers = new Headers();
+    // headers.append('Content-Type', 'multipart/form-data');
+    // this.http.post(this.funcService.ServerAddress + '/upload/test', formData, {headers: headers}).pipe(map((res: Response) => res.json())).subscribe(data => {
+    //   this.result = data;
+    //   this.loading = false;
+    //   this.avatar.setValue(null);
+    // });
   }
 
   get avatar() {
