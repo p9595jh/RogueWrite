@@ -283,7 +283,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- section for a post -->\r\n<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">{{content?.title}}</h4>\r\n\r\n      <span style=\"float: right; text-align: right; font-size: 80%;\">\r\n        {{content?.nickname}}<br/>{{content?.writedate}}\r\n      </span>\r\n      <hr/>\r\n      <div class=\"posting\" [innerHtml]=\"content?.content\"></div>\r\n      <br/><br/>\r\n      <div style=\"text-align: center;\">\r\n        <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored\">\r\n          추천 {{content?.recommend}}\r\n        </button>\r\n      </div>\r\n      <br/><hr/>\r\n\r\n      <!-- ############### table for comments ############### -->\r\n      <table style=\"width: 96%; margin: auto;\">\r\n        <tbody *ngFor=\"let comment of content?.comment\">\r\n          <tr>\r\n            <td>\r\n              <span style=\"font-size: 80%;\">{{comment?.writer}} &nbsp;|&nbsp; {{comment?.writedate}}</span>\r\n              <pre>{{comment?.comment}}</pre>\r\n            </td>\r\n            <!-- <td style=\"text-align: right; vertical-align: middle;\">\r\n              <button class=\"mdl-button mdl-js-button mdl-button--icon\" style=\"font-size: 90%;\">\r\n                ♡ 0\r\n              </button>\r\n            </td> -->\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n      <!-- ############### table for comments ############### -->\r\n\r\n      <!-- ############### writing area ############### -->\r\n      <form *ngIf=\"authService.loggedIn()\" (submit)=\"onWriteComment()\">\r\n        <table style=\"width: 96%; margin: auto;\">\r\n          <tr style=\"text-align: center;\">\r\n            <td style=\"width: 80%\">\r\n              <mat-form-field style=\"width: 98%;\">\r\n                <textarea matInput placeholder=\"댓글을 작성해주세요.\" rows=\"3\" cols=\"80\" name=\"cmtWrite\" [(ngModel)]=\"cmtWrite\"></textarea>\r\n              </mat-form-field>\r\n            </td>\r\n            <td>\r\n              <button mat-raised-button type=\"submit\" style=\"width: 90%; height: 90%;\">작성</button>\r\n            </td>\r\n          </tr>\r\n        </table>\r\n      </form>\r\n      <!-- ############### writing area ############### -->\r\n\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"aboutPost\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #aboutPost>\r\n    <button mat-menu-item *ngIf=\"content?.userid == user?.userid || content?.userid == 'admin'\" (click)=\"onRemovePost()\">\r\n      <span>삭제</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<!-- section for a boards -->\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 *ngIf=\"type == 'free'\">자유게시판</h4>\r\n      <h4 *ngIf=\"type != 'free'\">{{type}} 게시판</h4>\r\n      <hr/>\r\n      \r\n      <!-- for large display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--large-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">날짜</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\r\n            <th>글쓴이</th>\r\n            <th>조회수</th>\r\n            <th>추천</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody *ngFor=\"let val of contents\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{extractDate(val.writedate)}}</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/board/'+type+'/'+val?._id]\" style=\"color: black; text-decoration: none; font-weight: 400;\">{{val.title}}</a>&nbsp;\r\n              <span *ngIf=\"val.comment.length > 0\" style=\"font-size: 85%; color: grey;\">[{{val.comment.length}}]</span>\r\n            </td>\r\n            <td>{{val.nickname}}</td>\r\n            <td>{{val.hit}}</td>\r\n            <td>{{val.recommend}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <!-- for small display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--small-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <tbody *ngFor=\"let val of contents\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <div>\r\n                <a [routerLink]=\"['/board/'+type+'/'+val?._id]\" style=\"color: black; text-decoration: none; font-weight: 400;\">{{val.title}}</a> \r\n              </div><div style=\"font-size: 85%; margin-top: 1%;\">\r\n                <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>추천 {{val.recommend}}</span>\r\n              </div>\r\n            </td>\r\n            <td style=\"color: grey;\">[{{val.comment.length}}]</td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n      <div *ngIf=\"authService.loggedIn()\" style=\"float: right;\">\r\n        <a mat-raised-button [routerLink]=\"['/write/'+type]\">글쓰기</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"board\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #board>\r\n    <button mat-menu-item *ngIf=\"authService.loggedIn()\">\r\n      <span>즐겨찾는 게시판 설정</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<!-- section for a post -->\r\n<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\" #postElement>\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">{{content?.title}}</h4>\r\n\r\n      <span style=\"float: right; text-align: right; font-size: 80%;\">\r\n        {{content?.nickname}}<br/>{{content?.writedate}}\r\n      </span>\r\n      <hr/>\r\n      <div class=\"posting\" [innerHtml]=\"content?.content\"></div>\r\n      <br/><br/>\r\n      <div style=\"text-align: center;\">\r\n        <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored\">\r\n          추천 {{content?.recommend?.length}}\r\n        </button>\r\n      </div>\r\n      <br/><hr/>\r\n\r\n      <!-- ############### table for comments ############### -->\r\n      <table style=\"width: 96%; margin: auto;\">\r\n        <tbody *ngFor=\"let comment of content?.comment\">\r\n          <tr>\r\n            <td>\r\n              <span style=\"font-size: 80%;\">{{comment?.writer}} &nbsp;|&nbsp; {{comment?.writedate}}</span>\r\n              <pre>{{comment?.comment}}</pre>\r\n            </td>\r\n            <!-- <td style=\"text-align: right; vertical-align: middle;\">\r\n              <button class=\"mdl-button mdl-js-button mdl-button--icon\" style=\"font-size: 90%;\">\r\n                ♡ 0\r\n              </button>\r\n            </td> -->\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n      <!-- ############### table for comments ############### -->\r\n\r\n      <!-- ############### writing area ############### -->\r\n      <form *ngIf=\"authService.loggedIn()\" (submit)=\"onWriteComment()\">\r\n        <table style=\"width: 96%; margin: auto;\">\r\n          <tr style=\"text-align: center;\">\r\n            <td style=\"width: 80%\">\r\n              <mat-form-field style=\"width: 98%;\">\r\n                <textarea matInput placeholder=\"댓글을 작성해주세요.\" rows=\"3\" cols=\"80\" name=\"cmtWrite\" [(ngModel)]=\"cmtWrite\"></textarea>\r\n              </mat-form-field>\r\n            </td>\r\n            <td>\r\n              <button mat-raised-button type=\"submit\" style=\"width: 90%; height: 90%;\">작성</button>\r\n            </td>\r\n          </tr>\r\n        </table>\r\n      </form>\r\n      <!-- ############### writing area ############### -->\r\n\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"aboutPost\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #aboutPost>\r\n    <button mat-menu-item *ngIf=\"content?.userid == user?.userid || content?.userid == 'admin'\" (click)=\"onRemovePost()\">\r\n      <span>삭제</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<!-- section for a boards -->\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 *ngIf=\"type == 'free'\">자유게시판</h4>\r\n      <h4 *ngIf=\"type != 'free'\">{{type}} 게시판</h4>\r\n      <hr/>\r\n      \r\n      <!-- for large display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--large-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">날짜</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\r\n            <th>글쓴이</th>\r\n            <th>조회수</th>\r\n            <th>추천</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody *ngFor=\"let val of contents\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{extractDate(val.writedate)}}</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/board/'+type+'/'+val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\r\n                (click)=\"scrollToPost(postElement)\">{{val.title}}</a>&nbsp;\r\n              <span *ngIf=\"val.comment.length > 0\" style=\"font-size: 85%; color: grey;\">[{{val.comment.length}}]</span>\r\n            </td>\r\n            <td>{{val.nickname}}</td>\r\n            <td>{{val.hit}}</td>\r\n            <td>{{val.recommend.length}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <!-- for small display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--small-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <tbody *ngFor=\"let val of contents\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <div>\r\n                <a [routerLink]=\"['/board/'+type+'/'+val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\r\n                (click)=\"scrollToPost(postElement)\">{{val.title}}</a> \r\n              </div><div style=\"font-size: 85%; margin-top: 1%;\">\r\n                <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>추천 {{val.recommend.length}}</span>\r\n              </div>\r\n            </td>\r\n            <td style=\"color: grey;\">[{{val.comment.length}}]</td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n      <div *ngIf=\"authService.loggedIn()\" style=\"float: right;\">\r\n        <a mat-raised-button [routerLink]=\"['/write/'+type]\">글쓰기</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"board\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #board>\r\n    <button mat-menu-item *ngIf=\"authService.loggedIn()\">\r\n      <span>즐겨찾는 게시판 설정</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -360,6 +360,9 @@ var BoardComponent = /** @class */ (function () {
                 return (writeDate.getMonth() + 1) + '/' + writeDateDay;
             }
         }
+    };
+    BoardComponent.prototype.scrollToPost = function (el) {
+        el.scrollIntoView();
     };
     BoardComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -456,7 +459,6 @@ module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -467,15 +469,10 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(sanitized) {
-        this.sanitized = sanitized;
+    function HomeComponent() {
         this.testSentence = '<i>Hello</i>';
     }
-    HomeComponent.prototype.transform = function (value) {
-        return this.sanitized.bypassSecurityTrustHtml(value);
-    };
     HomeComponent.prototype.ngOnInit = function () {
     };
     HomeComponent = __decorate([
@@ -484,8 +481,7 @@ var HomeComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./home.component.html */ "./src/app/components/home/home.component.html"),
             styles: [__webpack_require__(/*! ./home.component.css */ "./src/app/components/home/home.component.css")]
         }),
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Pipe"])({ name: 'safeHtml' }),
-        __metadata("design:paramtypes", [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["DomSanitizer"]])
+        __metadata("design:paramtypes", [])
     ], HomeComponent);
     return HomeComponent;
 }());
@@ -624,7 +620,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\r\n  modify works!\r\n</p>\r\n"
+module.exports = "<p>\n  modify works!\n</p>\n"
 
 /***/ }),
 
@@ -687,7 +683,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section *ngIf=\"user\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>PROFILE &nbsp;-&nbsp; {{user.userid}}</h4>\r\n      <hr/><br/>\r\n      \r\n      <table class=\"mdl-data-table mdl-js-data-table\" style=\"margin: auto; width: 80%;\">\r\n        <tbody>\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">아이디</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{user.userid}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">닉네임</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{user.nickname}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">이메일</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{user.email}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">한 줄 소개</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{user.introduction}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <br/><br/>\r\n\r\n      <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect\" style=\"float: right;\" [routerLink]=\"['./modify']\">\r\n        회원정보 수정\r\n      </button>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<section *ngIf=\"user\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\n    <div class=\"mdl-card__supporting-text\">\n      <h4>PROFILE &nbsp;-&nbsp; {{user.userid}}</h4>\n      <hr/><br/>\n      \n      <table class=\"mdl-data-table mdl-js-data-table\" style=\"margin: auto; width: 80%;\">\n        <tbody>\n          <tr>\n            <td class=\"mdl-data-table__cell--non-numeric\">아이디</td>\n            <td class=\"mdl-data-table__cell--non-numeric\">{{user.userid}}</td>\n          </tr>\n          <tr>\n            <td class=\"mdl-data-table__cell--non-numeric\">닉네임</td>\n            <td class=\"mdl-data-table__cell--non-numeric\">{{user.nickname}}</td>\n          </tr>\n          <tr>\n            <td class=\"mdl-data-table__cell--non-numeric\">이메일</td>\n            <td class=\"mdl-data-table__cell--non-numeric\">{{user.email}}</td>\n          </tr>\n          <tr>\n            <td class=\"mdl-data-table__cell--non-numeric\">한 줄 소개</td>\n            <td class=\"mdl-data-table__cell--non-numeric\">{{user.introduction}}</td>\n          </tr>\n        </tbody>\n      </table>\n      <br/><br/>\n\n      <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect\" style=\"float: right;\" [routerLink]=\"['./modify']\">\n        회원정보 수정\n      </button>\n\n    </div>\n  </div>\n</section>\n\n<section></section>\n"
 
 /***/ }),
 
@@ -992,9 +988,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _services_board_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/board.service */ "./src/app/services/board.service.ts");
 /* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ng-flash-messages */ "./node_modules/ng-flash-messages/ng-flash-messages.umd.js");
 /* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(ng_flash_messages__WEBPACK_IMPORTED_MODULE_6__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -1015,13 +1011,14 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var WriteComponent = /** @class */ (function () {
-    function WriteComponent(funcService, route, authService, flashMessage, http, router) {
+    function WriteComponent(funcService, route, authService, flashMessage, http, router, boardService) {
         this.funcService = funcService;
         this.route = route;
         this.authService = authService;
         this.flashMessage = flashMessage;
         this.http = http;
         this.router = router;
+        this.boardService = boardService;
         this.options = {
             placeholderText: '',
             height: 300,
@@ -1033,7 +1030,7 @@ var WriteComponent = /** @class */ (function () {
     };
     WriteComponent.prototype.onWritePost = function () {
         var _this = this;
-        if (this.title == '') {
+        if (this.title == '' || this.title == undefined) {
             this.flashMessage.showFlashMessage({
                 messages: ['제목이 비어있습니다.'],
                 type: 'danger',
@@ -1041,7 +1038,7 @@ var WriteComponent = /** @class */ (function () {
             });
             return false;
         }
-        else if (this.content == '') {
+        else if (this.content == '' || this.content == undefined) {
             this.flashMessage.showFlashMessage({
                 messages: ['내용이 비어있습니다.'],
                 type: 'danger',
@@ -1050,30 +1047,41 @@ var WriteComponent = /** @class */ (function () {
             return false;
         }
         else {
-            this.authService.getProfile().subscribe(function (profile) {
-                var formData = {
-                    type: _this.type,
-                    title: _this.title,
-                    content: _this.content,
-                    userid: profile.user.userid,
-                    nickname: profile.user.nickname
-                };
-                var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_2__["Headers"]();
-                headers.append('Content-Type', 'application/json');
-                _this.http.post(_this.funcService.ServerAddress + '/boards/write', formData, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) { return res.json(); })).subscribe(function (data) {
-                    if (data.success) {
-                        // this.router.navigate(['./boards/'+this.type], {queryParams: {num: data.num}});
-                        _this.router.navigate(['/']);
-                    }
-                    else {
-                        _this.flashMessage.showFlashMessage({
-                            messages: ['글 작성 실패'],
-                            type: 'danger',
-                            timeout: 3000
-                        });
-                    }
-                });
+            this.boardService.writePost(this.type, this.title, this.content).subscribe(function (data) {
+                if (data.success) {
+                    _this.router.navigate(['/board/' + _this.type + '/' + data.num]);
+                }
+                else {
+                    _this.flashMessage.showFlashMessage({
+                        messages: ['글 작성 오류'],
+                        type: 'danger',
+                        timeout: 3000
+                    });
+                }
             });
+            // this.authService.getProfile().subscribe(profile => {
+            //   const formData = {
+            //     type: this.type,
+            //     title: this.title,
+            //     content: this.content,
+            //     userid: profile.user.userid,
+            //     nickname: profile.user.nickname
+            //   };
+            //   let headers = new Headers();
+            //   headers.append('Content-Type', 'application/json');
+            //   this.http.post(this.funcService.ServerAddress + '/boards/write', formData, {headers: headers}).pipe(map((res: Response) => res.json())).subscribe((data: WritingResponse) => {
+            //     if ( data.success ) {
+            //       // this.router.navigate(['./boards/'+this.type], {queryParams: {num: data.num}});
+            //       this.router.navigate(['/']);
+            //     } else {
+            //       this.flashMessage.showFlashMessage({
+            //         messages: ['글 작성 실패'], 
+            //         type: 'danger', 
+            //         timeout: 3000
+            //       });
+            //     }
+            //   });
+            // });
         }
     };
     WriteComponent = __decorate([
@@ -1082,16 +1090,21 @@ var WriteComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./write.component.html */ "./src/app/components/write/write.component.html"),
             styles: [__webpack_require__(/*! ./write.component.css */ "./src/app/components/write/write.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_4__["FuncService"],
+        __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_3__["FuncService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
-            _services_auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"],
+            _services_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"],
             ng_flash_messages__WEBPACK_IMPORTED_MODULE_6__["NgFlashMessageService"],
             _angular_http__WEBPACK_IMPORTED_MODULE_2__["Http"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+            _services_board_service__WEBPACK_IMPORTED_MODULE_5__["BoardService"]])
     ], WriteComponent);
     return WriteComponent;
 }());
 
+// interface WritingResponse {
+//   success: Boolean,
+//   num: Number
+// }
 
 
 /***/ }),
@@ -1247,7 +1260,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _func_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./func.service */ "./src/app/services/func.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _func_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./func.service */ "./src/app/services/func.service.ts");
+/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./auth.service */ "./src/app/services/auth.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1261,10 +1276,14 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var BoardService = /** @class */ (function () {
-    function BoardService(http, funcService) {
+    function BoardService(http, funcService, authService, router) {
         this.http = http;
         this.funcService = funcService;
+        this.authService = authService;
+        this.router = router;
     }
     BoardService.prototype.takeOnePost = function (num) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
@@ -1278,12 +1297,30 @@ var BoardService = /** @class */ (function () {
         return this.http.get(this.funcService.ServerAddress + '/boards/takeAllPosts?type=' + type, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
+    BoardService.prototype.writePost = function (type, title, content) {
+        var _this = this;
+        this.authService.getProfile().subscribe(function (profile) {
+            var formData = {
+                type: type,
+                title: title,
+                content: content,
+                userid: profile.user.userid,
+                nickname: profile.user.nickname
+            };
+            var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
+            headers.append('Content-Type', 'application/json');
+            return _this.http.post(_this.funcService.ServerAddress + '/boards/write', formData, { headers: headers })
+                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
+        });
+    };
     BoardService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
         __metadata("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_1__["Http"],
-            _func_service__WEBPACK_IMPORTED_MODULE_3__["FuncService"]])
+            _func_service__WEBPACK_IMPORTED_MODULE_4__["FuncService"],
+            _auth_service__WEBPACK_IMPORTED_MODULE_5__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
     ], BoardService);
     return BoardService;
 }());
@@ -1462,7 +1499,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\PJH\1494054\RogueWrite\angular-src\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\Hoon\PJH\others\web\rwrite\angular-src\src\main.ts */"./src/main.ts");
 
 
 /***/ })

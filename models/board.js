@@ -4,27 +4,26 @@ const config = require('../config/database');
 
 // Board Schema
 const BoardSchema = mongoose.Schema({
-  // unique value is '_id'
-  type: String,
-  userid: String,
-  nickname: String,
-  title: String,
-  content: String,
-  hit: Number,
-  writedate: String,
-  recommend: Number,
-  recommendby: Array,
-  comment: Array
-  /*
-    comment: {
-        num: Number,
-        writedate: String,
-        userid: String,
-        nickname: String,
-        comment: String
-    }
-  */
-  // image, tag, or others can be here
+    // unique value is '_id'
+    type: String,
+    userid: String,
+    nickname: String,
+    title: String,
+    content: String,
+    hit: Number,
+    writedate: String,
+    recommend: Array,
+    comment: Array
+    /*
+        comment: {
+            num: Number,
+            writedate: String,
+            userid: String,
+            nickname: String,
+            comment: String
+        }
+    */
+    // image, tag, or others can be here
 });
 
 const Board = module.exports = mongoose.model('Board', BoardSchema);

@@ -33,8 +33,7 @@ router.post('/write', function(req, res, next) {
         title: req.body.title,
         content: req.body.content,
         hit: 0,
-        recommend: 0,
-        recommendby: [],
+        recommend: [],
         comment: [],
         writedate: ''
     });
@@ -44,10 +43,12 @@ router.post('/write', function(req, res, next) {
                 success: false
             });
         } else {
-            res.json({
-                success: true
-            });
-            
+            Board.find({userid: userid}).sort({_id: -1}).limit(1).exec(function(err, posts) {
+                res.json({
+                    success: true,
+                    num: posts[0]._id
+                });
+            })
         }
     });
 })

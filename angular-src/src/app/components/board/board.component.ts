@@ -66,6 +66,10 @@ export class BoardComponent implements OnInit, OnDestroy, PipeTransform {
 
   }
 
+  scrollToPost(el: HTMLElement) {
+    el.scrollIntoView();
+  }
+
   ngOnInit() {
     this.type = this.route.snapshot.paramMap.get('type');
     this.num = this.route.snapshot.paramMap.get('num');

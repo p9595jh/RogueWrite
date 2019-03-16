@@ -59,11 +59,10 @@ export class WriteComponent implements OnInit {
 
       this.boardService.writePost(this.type, this.title, this.content).subscribe(data => {
         if ( data.success ) {
-          // this.router.navigate(['./boards/'+this.type], {queryParams: {num: data.num}});
-          this.router.navigate(['/']);
+          this.router.navigate(['/board/' + this.type + '/' + data.num]);
         } else {
           this.flashMessage.showFlashMessage({
-            messages: ['글 작성 실패'], 
+            messages: ['글 작성 오류'], 
             type: 'danger', 
             timeout: 3000
           });
