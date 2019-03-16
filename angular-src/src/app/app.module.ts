@@ -12,6 +12,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 
 import { ValidateService } from './services/validate.service';
@@ -38,7 +41,7 @@ const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'modify', component: ModifyComponent, canActivate: [AuthGuard] },
   { path: 'board/:type/:num', component: BoardComponent },
-  { path: 'write', component: WriteComponent/*, canActivate: [AuthGuard]*/ },
+  { path: 'write/:type', component: WriteComponent/*, canActivate: [AuthGuard]*/ },
   { path: 'test', component: TestComponent }
 ]
 
@@ -62,16 +65,22 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes, {useHash: true}),
+    RouterModule.forRoot(appRoutes, {useHash: true, onSameUrlNavigation: 'reload'}),
     NgFlashMessagesModule,
     MatTableModule,
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
     MatToolbarModule,
+    MatTabsModule,
+    MatMenuModule,
+    MatIconModule,
     CommonModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot()
+  ],
+  exports: [
+    RouterModule
   ],
   providers: [
     ValidateService,

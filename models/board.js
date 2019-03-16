@@ -4,8 +4,8 @@ const config = require('../config/database');
 
 // Board Schema
 const BoardSchema = mongoose.Schema({
+  // unique value is '_id'
   type: String,
-  num: Number,
   userid: String,
   nickname: String,
   title: String,
@@ -29,15 +29,15 @@ const BoardSchema = mongoose.Schema({
 
 const Board = module.exports = mongoose.model('Board', BoardSchema);
 
+function set2LetterFormat(num) {
+    num = num >= 10 ? num : '0' + num;
+    return num;
+}
+
 module.exports.addPost = function(newPost, callback) {
-    Board.find({type: newPost.type}).sort({num: -1}).exec(function(err, posts) {
-        // if ( err ) throw err;
-        if ( posts.length == 0 ) newPost.num = 0;
-        else newPost.num = posts[0].num + 1;
-        let date = new Date();
-        newPost.writedate = date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() + " " + date.getHours() + ":" + date.getMinutes();
-        newPost.save(callback);
-    });
+    let date = new Date();
+    newPost.writedate = date.getFullYear() + "-" + set2LetterFormat(date.getMonth() + 1) + "-" + set2LetterFormat(date.getDate()) + " " + set2LetterFormat(date.getHours()) + ":" + set2LetterFormat(date.getMinutes()) + ":" + set2LetterFormat(date.getSeconds());
+    newPost.save(callback);
 }
 
 module.exports.addComment = function(postInfo, newComment, callback) {

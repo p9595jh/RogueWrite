@@ -9,7 +9,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-src in MEANAuthApp';
+  navLinks = [
+    { label: 'HOME', path: '/' },
+    { label: '자유게시판', path: '/board/free/list' },
+    { label: 'THIRD', path: '/login' },
+    { label: 'FORTH', path: '/register' },
+    { label: 'FIFTH', path: '/write/free' } // these links are just for testing
+  ];
+  activeLink = this.navLinks[0];
 
   constructor(
     private authService: AuthService,

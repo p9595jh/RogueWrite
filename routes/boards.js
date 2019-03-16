@@ -8,20 +8,19 @@ const bcrypt = require('bcryptjs');
 const Board = require('../models/board');
 
 router.get('/takeOnePost', function(req, res, next) {
-    type = req.query.type;
-    num = req.query.num;
-    Board.findOne({type: type, num: num}, function(err, post) {
-        if ( req.user.userid != post.userid ) {
+    var num = req.query.num;
+    Board.findOne({_id: num}, function(err, post) {
+        if ( req.user && req.user.userid != post.userid ) {
             let hit = post.hit + 1;
-            Board.findOne({type: type, num: num}, {hit: hit}, function(err, post) {});
+            Board.findOneAndUpdate({_id: num}, {hit: hit}, function(err, post) {});
         }
         res.json({post: post});
     });
 })
 
 router.get('/takeAllPosts', function(req, res, next) {
-    type = req.query.type;
-    Board.find({type: type}).sort({num:-1}).exec(function(err, posts) {
+    var type = req.query.type;
+    Board.find({type: type}).sort({_id: -1}).exec(function(err, posts) {
         res.json({posts: posts});
     });
 })
@@ -29,7 +28,6 @@ router.get('/takeAllPosts', function(req, res, next) {
 router.post('/write', function(req, res, next) {
     const newPost = new Board({
         type: req.body.type,
-        num: -1,
         userid: req.body.userid,
         nickname: req.body.nickname,
         title: req.body.title,
@@ -47,9 +45,9 @@ router.post('/write', function(req, res, next) {
             });
         } else {
             res.json({
-                success: true,
-                num: post.num
+                success: true
             });
+            
         }
     });
 })

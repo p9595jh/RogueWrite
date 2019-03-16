@@ -5,7 +5,8 @@
       간략한 설명 <br/>
       이 사이트는 이러이러한 것을 하는 것이다 라던가 <br/>
       아님 뭐 이미지를 넣던가 그런거 <br/>
-      <a [routerLink]="['./test']">testing</a>
+      <a [routerLink]="['/test']">testing</a><br/>
+      <div>{{testSentence}}</div>
     </div>
   </div>
 </section>
@@ -23,12 +24,20 @@
       </ul>
     </div>
   </div>
-  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn1">
-    <i class="material-icons">more_vert</i>
+  <button mat-icon-button [matMenuTriggerFor]="freeBoard">
+    <mat-icon>more_vert</mat-icon>
   </button>
-  <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn1">
-    <li class="mdl-menu__item" disabled>자주 가는 게시판으로 설정</li>
-  </ul>
+  <mat-menu #freeBoard>
+    <button mat-menu-item>
+      <span>Redial</span>
+    </button>
+    <button mat-menu-item disabled>
+      <span>Check voicemail</span>
+    </button>
+    <button mat-menu-item>
+      <span>Disable alerts</span>
+    </button>
+  </mat-menu>
 </section>
 
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">

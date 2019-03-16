@@ -1,45 +1,99 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, Pipe, PipeTransform } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Http, Headers } from '@angular/http';
 import { map } from 'rxjs/operators';
+import { Router, NavigationEnd } from '@angular/router';
 
 import { FuncService } from '../../services/func.service';
 import { AuthService } from '../../services/auth.service';
+import { BoardService } from '../../services/board.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css']
 })
-export class BoardComponent implements OnInit {
+@Pipe({ name: 'safeHtml' })
+export class BoardComponent implements OnInit, OnDestroy, PipeTransform {
+  navigationSubscription;
   type: String;
   num: String;
   content: any;
   contents: Object[];
-
   cmtWrite: String;
+  user: any;
 
   constructor(
     private route: ActivatedRoute,
     private funcService: FuncService,
     private authService: AuthService,
-    private http: Http
+    private boardService: BoardService,
+    private http: Http,
+    private router: Router,
+    private sanitized: DomSanitizer
   ) {
-    this.type = this.route.snapshot.paramMap.get('type');
-    this.num = this.route.snapshot.paramMap.get('num');
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      if ( e instanceof NavigationEnd ) {
+        this.initialiseInvites();
+      }
+    });
+    
+  }
+
+  transform(value) {
+    return this.sanitized.bypassSecurityTrustHtml(value);
+  }
+
+  extractDate(date) {
+    let writeDate = new Date(date);
+    let today = new Date();
+
+    let writeDateDay = writeDate.getDate();
+    let todayDate = today.getDate();
+
+    if ( writeDateDay != todayDate ) {
+      return (writeDate.getMonth() + 1) + '/' + writeDateDay;
+    } else {
+      if ( writeDate.getFullYear() == today.getFullYear() && writeDate.getMonth() == today.getMonth() ) {
+        let hour = writeDate.getHours();
+        let min = writeDate.getMinutes();
+        return (hour >= 10 ? hour : '0' + hour) + ':' + (min >= 10 ? min : '0' + min);
+      } else {
+        return (writeDate.getMonth() + 1) + '/' + writeDateDay;
+      }
+    }
+
   }
 
   ngOnInit() {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    this.http.get(this.funcService.ServerAddress + '/boards/takeAllPosts?type='+this.type, {headers: headers}).pipe(map((res: Response) => res.json())).subscribe((data: HavingPosts) => {
-      this.content = data.posts;
+    this.type = this.route.snapshot.paramMap.get('type');
+    this.num = this.route.snapshot.paramMap.get('num');
+
+    this.boardService.takeAllPosts(this.type).subscribe(data => {
+      this.contents = data.posts;
       if ( this.num != 'list' ) {
-        this.http.get(this.funcService.ServerAddress + '/boards/takeOnePost?type='+this.type+'&num='+this.num, {headers: headers}).pipe(map((res: Response) => res.json())).subscribe((result: HavingPost) => {
-          this.contents = result.post;
+        this.boardService.takeOnePost(this.num).subscribe(result => {
+          this.content = result.post;
+          if ( this.authService.loggedIn() ) {
+            this.authService.getProfile().subscribe(profile => {
+              this.user = profile.user;
+            });
+          }
         });
       }
     });
+
+  }
+
+  initialiseInvites() {
+    this.ngOnInit();
+  }
+
+  ngOnDestroy() {
+    if ( this.navigationSubscription ) {
+      this.navigationSubscription.unsubscribe();
+    }
   }
 
   onWriteComment() {
@@ -50,10 +104,13 @@ export class BoardComponent implements OnInit {
     };
     this.http.post(this.funcService.ServerAddress + '/boards/writeComment', formData, {headers: headers}).pipe(map((res: Response) => res.json())).subscribe((data: ResponseWriting) => {
       if ( data.success ) {
-        // code to get back to the board list page, and it has to have 'num' variable to show content itself
-        // this.router.navigate['./board', needed parameters];
+        // i'd like to make this comment part to be working as an async way
       }
     });
+  }
+
+  onRemovePost() {
+
   }
 
 }

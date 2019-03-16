@@ -1,8 +1,15 @@
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+/* more theme:: [https://material.angular.io/guide/theming] */
+/* It has been applied a custom theme via app-theme.scss already, so it's not working now */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 pre {
   font-family: gothic;
   font-size: 105%;
+}
+.posting {
+  padding: 1%;
+  padding-top: 5%;
+  word-wrap: break-word;
 }
 .largeInputEle {
   width: 45%;
@@ -31,6 +38,7 @@ pre {
 
 html, body {
   font-family: 'Roboto', 'Helvetica', sans-serif;
+  height: 100%;
   margin: 0;
   padding: 0;
 }

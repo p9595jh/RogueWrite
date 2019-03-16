@@ -1,3 +1,4 @@
+<!-- section for a post -->
 <section *ngIf="num != 'list'" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
@@ -7,7 +8,7 @@
         {{content?.nickname}}<br/>{{content?.writedate}}
       </span>
       <hr/>
-      <pre style="padding: 1%; padding-top: 5%;">{{content?.content}}</pre>
+      <div class="posting" [innerHtml]="content?.content"></div>
       <br/><br/>
       <div style="text-align: center;">
         <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
@@ -38,13 +39,13 @@
       <form *ngIf="authService.loggedIn()" (submit)="onWriteComment()">
         <table style="width: 96%; margin: auto;">
           <tr style="text-align: center;">
-            <td>
+            <td style="width: 80%">
               <mat-form-field style="width: 98%;">
                 <textarea matInput placeholder="댓글을 작성해주세요." rows="3" cols="80" name="cmtWrite" [(ngModel)]="cmtWrite"></textarea>
               </mat-form-field>
             </td>
             <td>
-              <button mat-raised-button type="submit">작성</button>
+              <button mat-raised-button type="submit" style="width: 90%; height: 90%;">작성</button>
             </td>
           </tr>
         </table>
@@ -53,25 +54,29 @@
 
     </div>
   </div>
-  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="postbtn">
-    <i class="material-icons">more_vert</i>
+  <button mat-icon-button [matMenuTriggerFor]="aboutPost">
+    <mat-icon>more_vert</mat-icon>
   </button>
-  <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="postbtn">
-    <li class="mdl-menu__item">삭제</li>
-    <li class="mdl-menu__item">편집</li>
-  </ul>
+  <mat-menu #aboutPost>
+    <button mat-menu-item *ngIf="content?.userid == user?.userid || content?.userid == 'admin'" (click)="onRemovePost()">
+      <span>삭제</span>
+    </button>
+  </mat-menu>
 </section>
 
+<!-- section for a boards -->
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
-      <h4>{{type}} 게시판</h4><hr/>
+      <h4 *ngIf="type == 'free'">자유게시판</h4>
+      <h4 *ngIf="type != 'free'">{{type}} 게시판</h4>
+      <hr/>
       
       <!-- for large display -->
       <table class="mdl-data-table mdl-js-data-table mdl-layout--large-screen-only" style="margin: auto; width: 98%;">
         <thead>
           <tr>
-            <th class="mdl-data-table__cell--non-numeric">번호</th>
+            <th class="mdl-data-table__cell--non-numeric">날짜</th>
             <th class="mdl-data-table__cell--non-numeric">제목</th>
             <th>글쓴이</th>
             <th>조회수</th>
@@ -80,10 +85,10 @@
         </thead>
         <tbody *ngFor="let val of contents">
           <tr>
-            <td class="mdl-data-table__cell--non-numeric">{{val.num}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{extractDate(val.writedate)}}</td>
             <td class="mdl-data-table__cell--non-numeric">
-              <a href="#" style="color: black; text-decoration: none; font-weight: 400;">{{val.title}}</a> 
-              <span style="font-size: 85%; color: grey;">[{{val.comment.length}}]</span>
+              <a [routerLink]="['/board/'+type+'/'+val?._id]" style="color: black; text-decoration: none; font-weight: 400;">{{val.title}}</a>&nbsp;
+              <span *ngIf="val.comment.length > 0" style="font-size: 85%; color: grey;">[{{val.comment.length}}]</span>
             </td>
             <td>{{val.nickname}}</td>
             <td>{{val.hit}}</td>
@@ -98,7 +103,7 @@
           <tr>
             <td class="mdl-data-table__cell--non-numeric">
               <div>
-                <a href="#" style="color: black; text-decoration: none; font-weight: 400;">{{val.title}}</a> 
+                <a [routerLink]="['/board/'+type+'/'+val?._id]" style="color: black; text-decoration: none; font-weight: 400;">{{val.title}}</a> 
               </div><div style="font-size: 85%; margin-top: 1%;">
                 <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;
                 <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;
@@ -110,18 +115,18 @@
         </tbody>
       </table><br/>
       <div *ngIf="authService.loggedIn()" style="float: right;">
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect">
-          글쓰기
-        </button>
+        <a mat-raised-button [routerLink]="['/write/'+type]">글쓰기</a>
       </div>
     </div>
   </div>
-  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn1">
-    <i class="material-icons">more_vert</i>
+  <button mat-icon-button [matMenuTriggerFor]="board">
+    <mat-icon>more_vert</mat-icon>
   </button>
-  <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn1">
-    <li class="mdl-menu__item" disabled>자주 가는 게시판으로 설정</li>
-  </ul>
+  <mat-menu #board>
+    <button mat-menu-item *ngIf="authService.loggedIn()">
+      <span>즐겨찾는 게시판 설정</span>
+    </button>
+  </mat-menu>
 </section>
 
 <section></section>

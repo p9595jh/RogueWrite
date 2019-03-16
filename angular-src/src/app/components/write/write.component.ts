@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 
 import { FuncService } from '../../services/func.service';
 import { AuthService } from '../../services/auth.service';
+import { BoardService } from '../../services/board.service';
 import { NgFlashMessageService } from 'ng-flash-messages';
 
 @Component({
@@ -16,10 +17,11 @@ import { NgFlashMessageService } from 'ng-flash-messages';
 export class WriteComponent implements OnInit {
   options: Object = {
     placeholderText: '',
-    height: 300
+    height: 300,
+    imageDefaultAlign: 'left'
   };
 
-  type: String = 'free';  // for debugging, set 'type' as just 'free'
+  type: String;
   title: String;
   content: String;
 
@@ -29,42 +31,33 @@ export class WriteComponent implements OnInit {
     private authService: AuthService,
     private flashMessage: NgFlashMessageService,
     private http: Http,
-    private router: Router
+    private router: Router,
+    private boardService: BoardService
   ) {
-    // this.type = this.route.snapshot.queryParamMap.get('type');
+    this.type = this.route.snapshot.paramMap.get('type');
   }
 
   ngOnInit() {
   }
 
   onWritePost() {
-    if ( this.title == '' ) {
+    if ( this.title == '' || this.title == undefined ) {
       this.flashMessage.showFlashMessage({
         messages: ['제목이 비어있습니다.'], 
         type: 'danger', 
         timeout: 3000
       });
       return false;
-    } else if ( this.content == '' ) {
+    } else if ( this.content == '' || this.content == undefined ) {
       this.flashMessage.showFlashMessage({
         messages: ['내용이 비어있습니다.'], 
         type: 'danger', 
         timeout: 3000
       });
       return false;
-    }
+    } else {
 
-    this.authService.getProfile().subscribe(profile => {
-      const formData = {
-        type: this.type,
-        title: this.title,
-        content: this.content,
-        userid: profile.userid,
-        nickname: profile.nickname
-      };
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      this.http.post(this.funcService.ServerAddress + '/boards/write', formData, {headers: headers}).pipe(map((res: Response) => res.json())).subscribe((data: WritingResponse) => {
+      this.boardService.writePost(this.type, this.title, this.content).subscribe(data => {
         if ( data.success ) {
           // this.router.navigate(['./boards/'+this.type], {queryParams: {num: data.num}});
           this.router.navigate(['/']);
@@ -75,13 +68,38 @@ export class WriteComponent implements OnInit {
             timeout: 3000
           });
         }
-      });
-    });
+      })
+
+      // this.authService.getProfile().subscribe(profile => {
+      //   const formData = {
+      //     type: this.type,
+      //     title: this.title,
+      //     content: this.content,
+      //     userid: profile.user.userid,
+      //     nickname: profile.user.nickname
+      //   };
+      //   let headers = new Headers();
+      //   headers.append('Content-Type', 'application/json');
+      //   this.http.post(this.funcService.ServerAddress + '/boards/write', formData, {headers: headers}).pipe(map((res: Response) => res.json())).subscribe((data: WritingResponse) => {
+      //     if ( data.success ) {
+      //       // this.router.navigate(['./boards/'+this.type], {queryParams: {num: data.num}});
+      //       this.router.navigate(['/']);
+      //     } else {
+      //       this.flashMessage.showFlashMessage({
+      //         messages: ['글 작성 실패'], 
+      //         type: 'danger', 
+      //         timeout: 3000
+      //       });
+      //     }
+      //   });
+      // });
+
+    }
   }
 
 }
 
-interface WritingResponse {
-  success: Boolean,
-  num: Number
-}
+// interface WritingResponse {
+//   success: Boolean,
+//   num: Number
+// }
