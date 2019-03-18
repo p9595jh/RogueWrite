@@ -10,7 +10,7 @@
       
       <!-- title -->
       <div class="mdl-layout--large-screen-only mdl-layout__header-row">
-        <h3 [routerLink]="['/']" style="cursor: pointer; font-family: 'Ubuntu', sans-serif;">RogueWrite</h3>
+        <h3 [routerLink]="['/']" style="cursor: pointer; font-family: 'Ubuntu', sans-serif;">{{siteName}}</h3>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" >
           <a *ngIf="!authService.loggedIn()" class="mdl-navigation__link" [routerLink]="['/login']">LOGIN</a>
@@ -39,7 +39,7 @@
     <!-- header for mobile -->
     <header class="mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary">
       <div class="mdl-layout__header-row">
-        <h3 class="mdl-navigation__link" style="font-family: 'Ubuntu', sans-serif;">RogueWrite</h3>
+        <h3 class="mdl-navigation__link" style="font-family: 'Ubuntu', sans-serif;">{{siteName}}</h3>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
           <a *ngIf="!authService.loggedIn()" class="mdl-navigation__link" [routerLink]="['/login']">LOGIN</a>
@@ -49,7 +49,7 @@
       </div>
     </header>
     <div class="mdl-layout__drawer mdl-layout--small-screen-only">
-      <span class="mdl-layout__title" style="font-family: 'Ubuntu', sans-serif;">RogueWrite</span>
+      <span class="mdl-layout__title" style="font-family: 'Ubuntu', sans-serif;">{{siteName}}</span>
       <nav class="mdl-navigation">
         <a class="mdl-navigation__link" href="#">menu1</a>
         <a class="mdl-navigation__link" href="#">menu2</a>

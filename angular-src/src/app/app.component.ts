@@ -9,12 +9,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  siteName = 'RogueWrite';
   navLinks = [
     { label: 'HOME', path: '/' },
     { label: '자유게시판', path: '/board/free/list' },
     { label: 'THIRD', path: '/login' },
     { label: 'FORTH', path: '/register' },
-    { label: 'FIFTH', path: '/write/free' } // these links are just for testing
+    { label: 'FIFTH', path: '/write/free' }
   ];
   activeLink = this.navLinks[0];
 
