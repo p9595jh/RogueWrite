@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { Router } from '@angular/router';
+import { FuncService } from '../../services/func.service';
 
 @Component({
   selector: 'app-login',
@@ -15,10 +16,12 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private flashMessage: NgFlashMessageService
+    private flashMessage: NgFlashMessageService,
+    private funcService: FuncService
     ) { }
 
   ngOnInit() {
+    this.funcService.setTitle('로그인');
   }
 
   onLoginSubmit() {

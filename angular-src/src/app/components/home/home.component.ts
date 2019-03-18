@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FuncService } from '../../services/func.service';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   testSentence = '<i>Hello</i>';
 
-  constructor( ) { }
+  constructor(
+    private funcService: FuncService
+  ) { }
 
   ngOnInit() {
+    this.funcService.setTitle('HOME');
   }
 
 }

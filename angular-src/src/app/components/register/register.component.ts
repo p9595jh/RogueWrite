@@ -4,6 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
+import { FuncService } from 'src/app/services/func.service';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,6 @@ export class RegisterComponent implements OnInit {
   pw: String;
   pwchk: String;
   nickname: String;
-  email: String;
   introduction: String;
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -26,21 +26,22 @@ export class RegisterComponent implements OnInit {
     private validateService: ValidateService, 
     private flashMessage: NgFlashMessageService, 
     private authService: AuthService,
-    private router: Router
-    ) { }
+    private router: Router,
+    private funcService: FuncService
+    ) {
+      this.funcService.setTitle('회원가입');
+    }
 
   ngOnInit() {
   }
 
   onRegisterSubmit() {
-    this.emailFormControl.setValue('email');
-
     const user = {
       userid: this.userid,
       pw: this.pw,
       pwchk: this.pwchk,
       nickname: this.nickname,
-      email: this.email,
+      email: this.emailFormControl.value,
       introduction: this.introduction
     }
 

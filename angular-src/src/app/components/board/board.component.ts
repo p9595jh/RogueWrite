@@ -79,13 +79,14 @@ export class BoardComponent implements OnInit, OnDestroy, PipeTransform {
       if ( this.num != 'list' ) {
         this.boardService.takeOnePost(this.num).subscribe(result => {
           this.content = result.post;
+          this.funcService.setTitle(this.content.title + ' :: ' + (this.type == 'free' ? '자유게시판' : this.type + ' 게시판'));
           if ( this.authService.loggedIn() ) {
             this.authService.getProfile().subscribe(profile => {
               this.user = profile.user;
             });
           }
         });
-      }
+      } else this.funcService.setTitle(this.type == 'free' ? '자유게시판' : this.type + ' 게시판');
     });
 
   }

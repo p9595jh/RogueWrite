@@ -1,15 +1,95 @@
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
-      <h4>Test</h4><hr/>
+      <h4 style="display: inline;">TITLE</h4>
 
-      <input type="file" name="photo" ng2FileSelect [uploader]="uploader" /><br/>
-      <button mat-raised-button type="button" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-        Upload
-      </button>
+      <span style="float: right; text-align: right; font-size: 80%;">
+        NICKNAME<br/>WRITE-DATE
+      </span>
+      <hr/>
+      <div class="posting" [innerHtml]="'hello~~~~'"></div>
+      <br/><br/>
+      <div style="text-align: center;">
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+          추천 0
+        </button>
+      </div>
+      <br/><hr/>
+
+      <!-- ############### table for comments ############### -->
+      <table style="width: 96%; margin: auto;">
+        <tbody>
+          <tr>
+            <td>
+              <span style="font-size: 80%;">COMMENT-NICKNAME &nbsp;|&nbsp; COMMENT-WRITE-DATE</span>
+              <pre>COMMENT-COMMENT</pre>
+            </td>
+            <!-- <td style="text-align: right; vertical-align: middle;">
+              <button class="mdl-button mdl-js-button mdl-button--icon" style="font-size: 90%;">
+                ♡ 0
+              </button>
+            </td> -->
+          </tr>
+          <tr>
+            <td>
+              <span style="font-size: 80%;">COMMENT-NICKNAME &nbsp;|&nbsp; COMMENT-WRITE-DATE</span>
+              <pre>COMMENT-COMMENT</pre>
+            </td>
+            <!-- <td style="text-align: right; vertical-align: middle;">
+              <button class="mdl-button mdl-js-button mdl-button--icon" style="font-size: 90%;">
+                ♡ 0
+              </button>
+            </td> -->
+          </tr>
+        </tbody>
+      </table><br/>
+      <!-- ############### table for comments ############### -->
+
+      <!-- ############### writing area ############### -->
+      <form (submit)="onWriteComment()"><hr/>
+        <table style="width: 96%; margin: auto;">
+          <tr style="text-align: center;">
+
+            <td rowspan="2" style="width: 85%;">
+              <mat-form-field appearance="outline" style="width: 100%; height: 100%;">
+                <mat-label>댓글을 작성해주세요.</mat-label>
+                <textarea matInput placeholder="" rows="3" name="cmtWrite" [(ngModel)]="cmtWrite"></textarea>
+              </mat-form-field>
+            </td>
+
+            <td style="text-align: center; padding-bottom: 3%;">
+              <button mat-raised-button type="submit" style="width: 60%;">작성</button>
+            </td>
+
+          </tr>
+          <!-- <tr>
+
+              <td style="text-align: center;">
+                <mat-form-field style="width: 40%;">
+                  <mat-select placeholder="To." [(ngModel)]="selectedValue" name="food">
+                    <mat-option>[없음]</mat-option>
+                    <mat-option *ngFor="let food of foods" [value]="food.value">
+                      {{food.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+
+          </tr> -->
+        </table>
+      </form>
+      <!-- ############### writing area ############### -->
 
     </div>
   </div>
+  <button mat-icon-button [matMenuTriggerFor]="aboutPost">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #aboutPost>
+    <button mat-menu-item *ngIf="content?.userid == user?.userid || content?.userid == 'admin'" (click)="onRemovePost()">
+      <span>삭제</span>
+    </button>
+  </mat-menu>
 </section>
 
 <section></section>

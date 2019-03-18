@@ -43,12 +43,10 @@ router.post('/write', function(req, res, next) {
                 success: false
             });
         } else {
-            Board.find({userid: userid}).sort({_id: -1}).limit(1).exec(function(err, posts) {
-                res.json({
-                    success: true,
-                    num: posts[0]._id
-                });
-            })
+            res.json({
+                success: true,
+                num: post._id
+            });
         }
     });
 })

@@ -5,6 +5,7 @@ import { Http, Headers } from '@angular/http';
 import { map } from 'rxjs/operators';
 import { FuncService } from '../../services/func.service';
 import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
+// import { ScrollToService } from 'ng2-scroll-to-el';
 
 @Component({
   selector: 'app-test',
@@ -12,18 +13,20 @@ import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-uplo
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
-  uploader: FileUploader = new FileUploader({url: 'http://localhost:3000/api/upload', itemAlias: 'photo'});
+  foods: Object[] = [
+    {value: 'steak-0', viewValue: 'Steak'},
+    {value: 'pizza-1', viewValue: 'Pizza'},
+    {value: 'tacos-2', viewValue: 'Tacos'}
+  ];
 
-  constructor( ) { }
+  constructor(
+    private funcService: FuncService
+  ) {
+    this.funcService.setTitle('TEST!!!!');
+  }
 
   ngOnInit() {
-    this.uploader.onAfterAddingFile = (file) => {
-      file.withCredentials = false;
-    };
-    this.uploader.onCompleteItem = (item, response, status, headers) => {
-      console.log('ImageUpload:uploaded:', item, status, response);
-      alert('File uploaded successfully');
-    };
+    
   }
 
 }

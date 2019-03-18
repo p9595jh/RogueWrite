@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { map } from 'rxjs/operators';
-import { Router } from '@angular/router';
 
 import { FuncService } from './func.service';
 import { AuthService } from './auth.service';
@@ -14,8 +13,7 @@ export class BoardService {
   constructor(
     private http: Http,
     private funcService: FuncService,
-    private authService: AuthService,
-    private router: Router
+    private authService: AuthService
   ) { }
 
     takeOnePost(num) {
@@ -32,20 +30,19 @@ export class BoardService {
         .pipe(map(res => res.json()));
     }
 
-    writePost(type, title, content) : any {
-      this.authService.getProfile().subscribe(profile => {
-        const formData = {
-          type: type,
-          title: title,
-          content: content,
-          userid: profile.user.userid,
-          nickname: profile.user.nickname
-        };
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/boards/write', formData, {headers: headers})
-          .pipe(map((res: Response) => res.json()));
-      });
+    writePost(post: any) {
+      if ( post ) {
+        this.authService.getProfile().subscribe(profile => {
+          post.userid = profile.user.userid;
+          post.nickname = profile.user.nickname;
+
+          let headers = new Headers();
+          headers.append('Content-Type', 'application/json');
+          return this.http.post(this.funcService.ServerAddress + '/boards/write', post, {headers: headers})
+            .pipe(map(res => res.json()));
+        });
+      } else return null;
+
     }
 
 }

@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import { MatInputModule } from '@angular/material';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -15,7 +16,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
-import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
@@ -65,8 +67,15 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
     HttpClientModule,
-    RouterModule.forRoot(appRoutes, {useHash: true, onSameUrlNavigation: 'reload'}),
+    RouterModule.forRoot(appRoutes, {
+      useHash: true,
+      onSameUrlNavigation: 'reload'
+    }),
     NgFlashMessagesModule,
+    CommonModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
+
     MatTableModule,
     MatInputModule,
     MatFormFieldModule,
@@ -75,9 +84,8 @@ const appRoutes: Routes = [
     MatTabsModule,
     MatMenuModule,
     MatIconModule,
-    CommonModule,
-    FroalaEditorModule.forRoot(),
-    FroalaViewModule.forRoot()
+    MatSelectModule,
+    MatBottomSheetModule
   ],
   exports: [
     RouterModule

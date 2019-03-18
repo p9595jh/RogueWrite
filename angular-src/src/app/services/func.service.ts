@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -6,5 +7,12 @@ import { Injectable } from '@angular/core';
 export class FuncService {
   public ServerAddress: String = "http://localhost:3000";
 
-  constructor() { }
+  constructor(
+    private titleService: Title
+  ) { }
+
+  setTitle(title: string) {
+    this.titleService.setTitle(title + ' :: RWrite');
+  }
+
 }

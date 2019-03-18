@@ -29,20 +29,29 @@ router.post('/register', function(req, res, next) {
             msg: '이미 존재하는 이메일입니다.'
           });
         } else {
-          User.addUser(newUser, (err, user) => {
-            if ( err ) {
-                res.json({
-                  success: false,
-                  msg:'등록에 실패하였습니다.',
-                  err: err
-                });
-              } else {
-                res.json({
-                  success: true,
-                  msg:'등록 완료'
-                });
-              }
-          });
+          User.findOne({nickname: newUser.nickname}, function(err3, ouput3) {
+            if ( output3 != null ) {
+              return res.json({
+                success: false,
+                msg: '이미 존재하는 닉네임입니다.'
+              });
+            } else {
+              User.addUser(newUser, (err, user) => {
+                if ( err ) {
+                    res.json({
+                      success: false,
+                      msg:'등록에 실패하였습니다.',
+                      err: err
+                    });
+                  } else {
+                    res.json({
+                      success: true,
+                      msg:'등록 완료'
+                    });
+                  }
+              });
+            }
+          })
         }
       });
     }
