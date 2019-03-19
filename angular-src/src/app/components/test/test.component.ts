@@ -21,13 +21,24 @@ export class TestComponent implements OnInit {
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]>;
 
+  test = { num: 1 };
+
   constructor(
     private funcService: FuncService
   ) {
     this.funcService.setTitle('TEST!!!!');
+    
   }
 
   ngOnInit() {
+    // this.filteredOptions = this.cmtWrite.valueChanges.pipe(
+    //   startWith('TO::'),
+    //   map(value => this._filter(value))
+    // );
+    this.setFilteredOptions();
+  }
+
+  private setFilteredOptions() {
     this.filteredOptions = this.cmtWrite.valueChanges.pipe(
       // startWith('TO::'),
       map(value => this._filter(value))
@@ -51,6 +62,14 @@ export class TestComponent implements OnInit {
     if ( s.toLowerCase() == 'hello' ) {
       alert('HELLO!');
     }
+  }
+
+  asdf() {
+    console.log(this.cmtWrite.value);
+  }
+
+  hello(a) {
+    alert(a);
   }
 
 }

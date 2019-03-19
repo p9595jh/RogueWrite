@@ -57,47 +57,21 @@ export class WriteComponent implements OnInit {
       });
       return false;
     } else {
-
-      // const formData = {
-      //   type: this.type,
-      //   title: this.title,
-      //   content: this.content
-      // };
-      // this.boardService.writePost(formData).subscribe(data => {
-      //   if ( data.success ) {
-      //     // this.router.navigate(['/board/' + this.type + '/' + data.num]);
-      //     this.router.navigate(['/']);
-      //   } else {
-      //     this.flashMessage.showFlashMessage({
-      //       messages: ['글 작성 실패'], 
-      //       type: 'danger', 
-      //       timeout: 3000
-      //     });
-      //   }
-      // });
-
-      this.authService.getProfile().subscribe(profile => {
-        const formData = {
-          type: this.type,
-          title: this.title,
-          content: this.content,
-          userid: profile.user.userid,
-          nickname: profile.user.nickname
-        };
-        let headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        this.http.post(this.funcService.ServerAddress + '/boards/write', formData, {headers: headers})
-          .pipe(map((res: Response) => res.json())).subscribe((data: any) => {
-          if ( data.success ) {
-            this.router.navigate(['/board/' + this.type + '/' + data.num]);
-          } else {
-            this.flashMessage.showFlashMessage({
-              messages: ['글 작성 실패'], 
-              type: 'danger', 
-              timeout: 3000
-            });
-          }
-        });
+      const formData = {
+        type: this.type,
+        title: this.title,
+        content: this.content
+      };
+      this.boardService.writePost(formData).subscribe(data => {
+        if ( data.success ) {
+          this.router.navigate(['/board/' + this.type + '/' + data.num]);
+        } else {
+          this.flashMessage.showFlashMessage({
+            messages: ['글 작성 실패'], 
+            type: 'danger', 
+            timeout: 3000
+          });
+        }
       });
 
     }

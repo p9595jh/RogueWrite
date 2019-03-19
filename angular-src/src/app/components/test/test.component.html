@@ -21,7 +21,18 @@
         <tbody>
           <tr>
             <td>
-              <span style="font-size: 80%;">COMMENT-NICKNAME &nbsp;|&nbsp; COMMENT-WRITE-DATE</span>
+              <span style="font-size: 80%;">
+                COMMENT-NICKNAME &nbsp;|&nbsp; 
+                COMMENT-WRITE-DATE &nbsp;|&nbsp; 
+                <a href="javascript:;" [attr.id]="test.num" (click)="hello(test.num)">삭제</a>
+              </span>
+              <!-- <button class="mdl-button mdl-js-button mdl-button--icon" style="font-size: 80%;" [attr.id]="test.num">
+                관리
+              </button>
+              <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="test.num">
+                <li class="mdl-menu__item">삭제</li>
+                <li class="mdl-menu__item">편집</li>
+              </ul> -->
               <pre>COMMENT-COMMENT</pre>
             </td>
             <!-- <td style="text-align: right; vertical-align: middle;">
@@ -46,7 +57,8 @@
       <!-- ############### table for comments ############### -->
 
       <!-- ############### writing area ############### -->
-      <form (submit)="onWriteComment()"><hr/>
+      <!-- <form (submit)="onWriteComment()"> -->
+        <hr/>
         <table style="width: 96%; margin: auto;">
           <tr style="text-align: center;">
 
@@ -56,7 +68,7 @@
                 <textarea matInput placeholder="" rows="3" name="cmtWrite"
                 [formControl]="cmtWrite" [matAutocomplete]="auto"></textarea>
                 <mat-autocomplete #auto>
-                  <mat-option *ngFor="let option of filteredOptions | async" [value]="'TO::' + option?.value">
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="'TO::' + option?.viewValue">
                     {{option.viewValue}} [{{option.value}}]
                   </mat-option>
                 </mat-autocomplete>
@@ -64,26 +76,12 @@
             </td>
 
             <td style="text-align: center; padding-bottom: 3%;">
-              <button mat-raised-button type="submit" style="width: 60%;">작성</button>
+              <button mat-raised-button type="submit" style="width: 60%;" (click)="asdf()">작성</button>
             </td>
 
           </tr>
-          <!-- <tr>
-
-              <td style="text-align: center;">
-                <mat-form-field style="width: 40%;">
-                  <mat-select placeholder="To." [(ngModel)]="selectedValue" name="food">
-                    <mat-option>[없음]</mat-option>
-                    <mat-option *ngFor="let food of foods" [value]="food.value">
-                      {{food.viewValue}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </td>
-
-          </tr> -->
         </table>
-      </form>
+      <!-- </form> -->
       <!-- ############### writing area ############### -->
 
     </div>

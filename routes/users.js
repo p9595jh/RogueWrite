@@ -29,7 +29,7 @@ router.post('/register', function(req, res, next) {
             msg: '이미 존재하는 이메일입니다.'
           });
         } else {
-          User.findOne({nickname: newUser.nickname}, function(err3, ouput3) {
+          User.findOne({nickname: newUser.nickname}, function(err3, output3) {
             if ( output3 != null ) {
               return res.json({
                 success: false,

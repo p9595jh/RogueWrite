@@ -9,6 +9,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class BoardService {
+  authToken: any;
 
   constructor(
     private http: Http,
@@ -30,19 +31,22 @@ export class BoardService {
         .pipe(map(res => res.json()));
     }
 
-    writePost(post: any) {
-      if ( post ) {
-        this.authService.getProfile().subscribe(profile => {
-          post.userid = profile.user.userid;
-          post.nickname = profile.user.nickname;
+    writePost(post) {
+      let headers = new Headers();
+      this.loadToken();
+      headers.append('Authorization', this.authToken);
+      headers.append('Content-Type', 'application/json');
+      return this.http.post(this.funcService.ServerAddress + '/boards/write', post, {headers: headers})
+        .pipe(map(res => res.json()));
+    }
 
-          let headers = new Headers();
-          headers.append('Content-Type', 'application/json');
-          return this.http.post(this.funcService.ServerAddress + '/boards/write', post, {headers: headers})
-            .pipe(map(res => res.json()));
-        });
-      } else return null;
-
+    writeComment(cmt) {
+      let headers = new Headers();
+      this.loadToken();
+      headers.append('Authorization', this.authToken);
+      headers.append('Content-Type', 'application/json');
+      return this.http.post(this.funcService.ServerAddress + '/boards/writeComment', cmt, {headers: headers})
+        .pipe(map(res => res.json()));
     }
 
     removePost(num) {
@@ -50,6 +54,18 @@ export class BoardService {
       headers.append('Content-Type', 'application/json');
       return this.http.post(this.funcService.ServerAddress + '/boards/removePost', {num: num}, {headers: headers})
         .pipe(map(res => res.json()));
+    }
+
+    removeComment(postNum, cmtNum) {
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      return this.http.post(this.funcService.ServerAddress + '/boards/removeComment', {postNum: postNum, cmtNum: cmtNum}, {headers: headers})
+        .pipe(map(res => res.json()));
+    }
+
+    private loadToken() {
+      const token = localStorage.getItem('id_token');
+      this.authToken = token;
     }
 
 }

@@ -25,40 +25,42 @@
         <tbody *ngFor="let comment of content?.comment">
           <tr>
             <td>
-              <span style="font-size: 80%;">{{comment?.writer}} &nbsp;|&nbsp; {{comment?.writedate}}</span>
-              <pre>{{comment?.comment}}</pre>
+              <span style="font-size: 80%;">
+                {{comment?.nickname}} &nbsp;|&nbsp; 
+                {{comment?.writedate}}
+                <span *ngIf="comment?.userid == user?.userid || user?.userid == 'admin'"> &nbsp;|&nbsp; 
+                  <span style="cursor: pointer;" (click)="onRemoveComment(comment.num)">삭제</span>
+                </span>
+              </span>
+              <pre>{{comment?.comment}}</pre><br/>
             </td>
-            <!-- <td style="text-align: right; vertical-align: middle;">
-              <button class="mdl-button mdl-js-button mdl-button--icon" style="font-size: 90%;">
-                ♡ 0
-              </button>
-            </td> -->
           </tr>
         </tbody>
       </table><br/>
       <!-- ############### table for comments ############### -->
 
       <!-- ############### writing area ############### -->
-      <form *ngIf="authService.loggedIn()" (submit)="onWriteComment()">
+      <form *ngIf="authService.loggedIn()" (submit)="onWriteComment()"><hr *ngIf="content?.comment?.length > 0" />
         <table style="width: 96%; margin: auto;">
           <tr style="text-align: center;">
-            <!-- <td>
-              <mat-form-field>
-                <mat-select [(ngModel)]="cmtTo" placeholder="To." *ngFor="let comment of content?.comment">
-                  <mat-option>[없음]</mat-option>
-                  <mat-option value="comment.userid">{{comment.nickname}}</mat-option>
-                </mat-select>
-              </mat-form-field>
-            </td> -->
-            <td style="width: 80%;">
-              <mat-form-field appearance="outline">
+
+            <td rowspan="2" style="width: 85%;">
+              <mat-form-field appearance="outline" style="width: 100%; height: 100%;">
                 <mat-label>댓글을 작성해주세요.</mat-label>
-                <textarea matInput placeholder="Placeholder" rows="3" cols="200" name="cmtWrite" [(ngModel)]="cmtWrite"></textarea>
+                <textarea matInput placeholder="" rows="3" name="cmtWrite"
+                [formControl]="cmtWrite" [matAutocomplete]="auto"></textarea>
+                <mat-autocomplete #auto>
+                  <!-- <mat-option *ngFor="let ct of filteredOptions | async" [value]="'TO::' + ct?.nickname" (onclick)="setCmtTo(ct)">
+                    {{ct.nickname}} [{{ct.userid}}]
+                  </mat-option> -->
+                </mat-autocomplete>
               </mat-form-field>
             </td>
-            <td>
-              <button mat-raised-button type="submit" style="width: 90%; height: 90%;">작성</button>
+
+            <td style="text-align: center; padding-bottom: 3%;">
+              <button mat-raised-button type="submit" style="width: 60%;">작성</button>
             </td>
+
           </tr>
         </table>
       </form>
