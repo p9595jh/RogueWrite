@@ -14,7 +14,7 @@
       <div class="posting" [innerHtml]="content?.content"></div>
       <br/><br/>
       <div style="text-align: center;">
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+        <button mat-raised-button color="primary" (click)="onRecommend()">
           추천 {{content?.recommend?.length}}
         </button>
       </div>

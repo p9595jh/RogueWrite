@@ -17,55 +17,64 @@ export class BoardService {
     private authService: AuthService
   ) { }
 
-    takeOnePost(num) {
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      return this.http.get(this.funcService.ServerAddress + '/boards/takeOnePost?num=' + num, {headers: headers})
-        .pipe(map(res => res.json()))
-    }
+  private loadToken() {
+    const token = localStorage.getItem('id_token');
+    this.authToken = token;
+  }
 
-    takeAllPosts(type) {
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      return this.http.get(this.funcService.ServerAddress + '/boards/takeAllPosts?type=' + type, {headers: headers})
-        .pipe(map(res => res.json()));
-    }
+  takeOnePost(num) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(this.funcService.ServerAddress + '/boards/takeOnePost?num=' + num, {headers: headers})
+      .pipe(map(res => res.json()))
+  }
 
-    writePost(post) {
-      let headers = new Headers();
-      this.loadToken();
-      headers.append('Authorization', this.authToken);
-      headers.append('Content-Type', 'application/json');
-      return this.http.post(this.funcService.ServerAddress + '/boards/write', post, {headers: headers})
-        .pipe(map(res => res.json()));
-    }
+  takeAllPosts(type) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(this.funcService.ServerAddress + '/boards/takeAllPosts?type=' + type, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
 
-    writeComment(cmt) {
-      let headers = new Headers();
-      this.loadToken();
-      headers.append('Authorization', this.authToken);
-      headers.append('Content-Type', 'application/json');
-      return this.http.post(this.funcService.ServerAddress + '/boards/writeComment', cmt, {headers: headers})
-        .pipe(map(res => res.json()));
-    }
+  writePost(post) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/boards/write', post, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
 
-    removePost(num) {
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      return this.http.post(this.funcService.ServerAddress + '/boards/removePost', {num: num}, {headers: headers})
-        .pipe(map(res => res.json()));
-    }
+  writeComment(cmt) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/boards/writeComment', cmt, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
 
-    removeComment(postNum, cmtNum) {
-      let headers = new Headers();
-      headers.append('Content-Type', 'application/json');
-      return this.http.post(this.funcService.ServerAddress + '/boards/removeComment', {postNum: postNum, cmtNum: cmtNum}, {headers: headers})
-        .pipe(map(res => res.json()));
-    }
+  removePost(num) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/boards/removePost', {num: num}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
 
-    private loadToken() {
-      const token = localStorage.getItem('id_token');
-      this.authToken = token;
-    }
+  removeComment(postNum, cmtNum) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/boards/removeComment', {postNum: postNum, cmtNum: cmtNum}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  recommend(num) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/boards/recommend', {num: num}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
 
 }

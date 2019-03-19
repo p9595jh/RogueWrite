@@ -119,16 +119,14 @@ export class BoardComponent implements OnInit, OnDestroy, PipeTransform {
 
   private _filter(value: string): any[] {
     const filterValue = value.toLowerCase();
-
+    // [https://material.angular.io/components/autocomplete/overview]
     // return this.options.filter(option => option.toLowerCase().includes(filterValue));
-
     // let f = [];
     // for (let i=0; i<this.foods.length; i++) {
     //   f[i] = 'TO::' + this.foods[i].viewValue + ' [' + this.foods[i].value + '] ';
     // }
     // return f.filter(option => option.toLowerCase().includes(filterValue));
     // return this.foods;
-
     return this.content.comment;
   }
 
@@ -142,10 +140,8 @@ export class BoardComponent implements OnInit, OnDestroy, PipeTransform {
       _id: this.num
     };
     this.boardService.writeComment(formData).subscribe(data => {
-      console.log(data);
       if ( data.success ) {
         this.router.navigate(['/board/' + this.type + '/' + this.num]);
-        // i'd like to make this comment part to be working as an async way
       } else {
         this.flashMessage.showFlashMessage({
           messages: ['댓글 작성 오류'], 
@@ -186,6 +182,30 @@ export class BoardComponent implements OnInit, OnDestroy, PipeTransform {
         }
       })
     }
+  }
+
+  onRecommend() {
+    if ( !this.authService.loggedIn() ) {
+      this.flashMessage.showFlashMessage({
+        messages: ['로그인 후 이용하실 수 있습니다.'], 
+        type: 'danger', 
+        timeout: 3000
+      });
+    } else {
+      this.boardService.recommend(this.num).subscribe(result => {
+        if ( result.success ) {
+          // document.getElementById('recommend').innerHTML = '추천 ' + result.recommend;
+          this.router.navigate(['/board/' + this.type + '/' + this.num]);
+        } else {
+          this.flashMessage.showFlashMessage({
+            messages: [result.msg], 
+            type: 'danger', 
+            timeout: 3000
+          });
+        }
+      })
+    }
+    
   }
 
 }

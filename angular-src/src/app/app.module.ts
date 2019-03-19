@@ -50,7 +50,7 @@ const appRoutes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'modify', component: ModifyComponent, canActivate: [AuthGuard] },
   { path: 'board/:type/:num', component: BoardComponent },
-  { path: 'write/:type', component: WriteComponent/*, canActivate: [AuthGuard]*/ },
+  { path: 'write/:type', component: WriteComponent, canActivate: [AuthGuard] },
   { path: 'test', component: TestComponent }
 ]
 

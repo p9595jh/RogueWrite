@@ -73,8 +73,7 @@ router.post('/writeComment', passport.authenticate('jwt', {session: false}), fun
         nickname: req.user.nickname,
         comment: req.body.comment
     };
-    console.log(cmtData);
-    Board.updateOne({_id: req.body._id}, {$push: {comment: cmtData}}, function(err, post) {
+    Board.findOneAndUpdate({_id: req.body._id}, {$push: {comment: cmtData}}, function(err, post) {
         if ( err ) {
             res.json({
                 success: false
@@ -126,6 +125,38 @@ router.post('/removeComment', function(req, res, next) {
             });
         }
     })
+})
+
+router.post('/recommend', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+    const num = req.body.num;
+    Board.findOne({_id: num}, function(err, post) {
+        let flag = true;
+        for (let val of post.recommend) {
+            if ( val == req.user.userid ) {
+                flag = false;
+                break;
+            }
+        }
+        if ( !flag ) {
+            res.json({
+                success: false,
+                msg: '이미 추천하셨습니다.'
+            });
+        } else {
+            Board.findOneAndUpdate({_id: num}, {$push: {recommend: req.user.userid}}, function(err, output) {
+                if ( err ) {
+                    res.json({
+                        success: false,
+                        msg: err
+                    });
+                } else res.json({
+                    success: true,
+                    recommend: output.recommend.length
+                });
+            })
+        }
+    })
+    
 })
 
 //==================================================
