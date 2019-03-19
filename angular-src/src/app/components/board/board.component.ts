@@ -8,6 +8,7 @@ import { FuncService } from '../../services/func.service';
 import { AuthService } from '../../services/auth.service';
 import { BoardService } from '../../services/board.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { NgFlashMessageService } from 'ng-flash-messages';
 
 @Component({
   selector: 'app-board',
@@ -31,7 +32,8 @@ export class BoardComponent implements OnInit, OnDestroy, PipeTransform {
     private boardService: BoardService,
     private http: Http,
     private router: Router,
-    private sanitized: DomSanitizer
+    private sanitized: DomSanitizer,
+    private flashMessage: NgFlashMessageService
   ) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       if ( e instanceof NavigationEnd ) {
@@ -115,17 +117,19 @@ export class BoardComponent implements OnInit, OnDestroy, PipeTransform {
   }
 
   onRemovePost() {
-
+    this.boardService.removePost(this.num).subscribe(result => {
+      if ( result.success ) {
+        this.router.navigate(['/board/' + this.type + '/list']);
+      } else {
+        this.flashMessage.showFlashMessage({
+          messages: ['삭제 오류'], 
+          type: 'danger', 
+          timeout: 3000
+        });
+      }
+    })
   }
 
-}
-
-interface HavingPost {
-  post: any;
-}
-
-interface HavingPosts {
-  posts: Object[];
 }
 
 interface ResponseWriting {

@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"mdl-demo mdl-base\">\r\n  <div class=\"mdl-layout mdl-js-layout mdl-layout--fixed-tabs\">\r\n    <!-- <app-navbar></app-navbar> -->\r\n\r\n    <!-- header for large display -->\r\n    <header class=\"mdl-layout__header mdl-layout__header--scroll mdl-color--primary\">\r\n            \r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n      \r\n      <!-- title -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\">\r\n        <h3 [routerLink]=\"['/']\" style=\"cursor: pointer; font-family: 'Ubuntu', sans-serif;\">RogueWrite</h3>\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" >\r\n          <a *ngIf=\"!authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/login']\">LOGIN</a>\r\n          <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n          <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n        </nav>\r\n      </div>\r\n      \r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n\r\n      <!-- nav bar -->\r\n      <nav mat-tab-nav-bar mat-stretch-tabs\r\n        mat-align-tabs=\"center\"\r\n        [color]=\"'primary'\"\r\n        [backgroundColor]=\"'accent'\"\r\n        style=\"border-bottom-color: black;\">\r\n        <a mat-tab-link *ngFor=\"let link of navLinks\"\r\n          (click)=\"activeLink = link.path\"\r\n          [routerLink]=\"[link.path]\"\r\n          [active]=\"activeLink == link.path\">{{link.label}}</a>\r\n      </nav>\r\n\r\n    </header>\r\n\r\n    <!-- header for mobile -->\r\n    <header class=\"mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <h3 class=\"mdl-navigation__link\" style=\"font-family: 'Ubuntu', sans-serif;\">RogueWrite</h3>\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\">\r\n          <a *ngIf=\"!authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/login']\">LOGIN</a>\r\n          <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n          <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    <div class=\"mdl-layout__drawer mdl-layout--small-screen-only\">\r\n      <span class=\"mdl-layout__title\" style=\"font-family: 'Ubuntu', sans-serif;\">RogueWrite</span>\r\n      <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"#\">menu1</a>\r\n        <a class=\"mdl-navigation__link\" href=\"#\">menu2</a>\r\n        <a class=\"mdl-navigation__link\" href=\"#\">menu3</a>\r\n        <a class=\"mdl-navigation__link\" href=\"#\">menu4</a>\r\n        <a class=\"mdl-navigation__link\" href=\"#\">menu5</a>\r\n      </nav>\r\n    </div>\r\n\r\n    <ng-flash-message></ng-flash-message>\r\n    <main class=\"mdl-layout__content\">\r\n      <div class=\"mdl-layout__tab-panel is-active\" id=\"overview\">\r\n        <router-outlet></router-outlet>\r\n        <br/><br/>\r\n      </div>\r\n\r\n      <!-- footer -->\r\n      <footer class=\"mdl-mega-footer\">\r\n        <div class=\"mdl-mega-footer--bottom-section\">\r\n          <div class=\"mdl-logo\">\r\n            powered by Project RogueWrite\r\n          </div>\r\n          <ul class=\"mdl-mega-footer--link-list\">\r\n            <li><a target=\"_blank\" href=\"https://getmdl.io/index.html\">MDL</a></li>\r\n            <li><a target=\"_blank\" href=\"https://material.angular.io/\">Angular Material</a></li>\r\n            <li><a target=\"_blank\" href=\"https://github.com/p9595jh/RogueWrite\">Github</a></li>\r\n          </ul>\r\n        </div>\r\n      </footer>\r\n      <!-- footer -->\r\n\r\n    </main>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"mdl-demo mdl-base\">\r\n  <div class=\"mdl-layout mdl-js-layout mdl-layout--fixed-tabs\">\r\n    <!-- <app-navbar></app-navbar> -->\r\n\r\n    <!-- header for large display -->\r\n    <header class=\"mdl-layout__header mdl-layout__header--scroll mdl-color--primary\">\r\n            \r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n      \r\n      <!-- title -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\">\r\n        <h3 [routerLink]=\"['/']\" style=\"cursor: pointer; font-family: 'Ubuntu', sans-serif;\">{{siteName}}</h3>\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" >\r\n          <a *ngIf=\"!authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/login']\">LOGIN</a>\r\n          <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n          <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n        </nav>\r\n      </div>\r\n      \r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n\r\n      <!-- nav bar -->\r\n      <nav mat-tab-nav-bar mat-stretch-tabs\r\n        mat-align-tabs=\"center\"\r\n        [color]=\"'primary'\"\r\n        [backgroundColor]=\"'accent'\"\r\n        style=\"border-bottom-color: black;\">\r\n        <a mat-tab-link *ngFor=\"let link of navLinks\"\r\n          (click)=\"activeLink = link.path\"\r\n          [routerLink]=\"[link.path]\"\r\n          [active]=\"activeLink == link.path\">{{link.label}}</a>\r\n      </nav>\r\n\r\n    </header>\r\n\r\n    <!-- header for mobile -->\r\n    <header class=\"mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <h3 class=\"mdl-navigation__link\" style=\"font-family: 'Ubuntu', sans-serif;\">{{siteName}}</h3>\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\">\r\n          <a *ngIf=\"!authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/login']\">LOGIN</a>\r\n          <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n          <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    <div class=\"mdl-layout__drawer mdl-layout--small-screen-only\">\r\n      <span class=\"mdl-layout__title\" style=\"font-family: 'Ubuntu', sans-serif;\">{{siteName}}</span>\r\n      <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" href=\"#\">menu1</a>\r\n        <a class=\"mdl-navigation__link\" href=\"#\">menu2</a>\r\n        <a class=\"mdl-navigation__link\" href=\"#\">menu3</a>\r\n        <a class=\"mdl-navigation__link\" href=\"#\">menu4</a>\r\n        <a class=\"mdl-navigation__link\" href=\"#\">menu5</a>\r\n      </nav>\r\n    </div>\r\n\r\n    <ng-flash-message></ng-flash-message>\r\n    <main class=\"mdl-layout__content\">\r\n      <div class=\"mdl-layout__tab-panel is-active\" id=\"overview\">\r\n        <router-outlet></router-outlet>\r\n        <br/><br/>\r\n      </div>\r\n\r\n      <!-- footer -->\r\n      <footer class=\"mdl-mega-footer\">\r\n        <div class=\"mdl-mega-footer--bottom-section\">\r\n          <div class=\"mdl-logo\">\r\n            powered by Project RogueWrite\r\n          </div>\r\n          <ul class=\"mdl-mega-footer--link-list\">\r\n            <li><a target=\"_blank\" href=\"https://getmdl.io/index.html\">MDL</a></li>\r\n            <li><a target=\"_blank\" href=\"https://material.angular.io/\">Angular Material</a></li>\r\n            <li><a target=\"_blank\" href=\"https://github.com/p9595jh/RogueWrite\">Github</a></li>\r\n          </ul>\r\n        </div>\r\n      </footer>\r\n      <!-- footer -->\r\n\r\n    </main>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -78,12 +78,13 @@ var AppComponent = /** @class */ (function () {
         this.authService = authService;
         this.router = router;
         this.flashMessage = flashMessage;
+        this.siteName = 'RogueWrite';
         this.navLinks = [
             { label: 'HOME', path: '/' },
             { label: '자유게시판', path: '/board/free/list' },
             { label: 'THIRD', path: '/login' },
             { label: 'FORTH', path: '/register' },
-            { label: 'FIFTH', path: '/write/free' } // these links are just for testing
+            { label: 'FIFTH', path: '/write/free' }
         ];
         this.activeLink = this.navLinks[0];
     }
@@ -133,32 +134,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _angular_material_table__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/material/table */ "./node_modules/@angular/material/esm5/table.es5.js");
-/* harmony import */ var _angular_material_form_field__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/material/form-field */ "./node_modules/@angular/material/esm5/form-field.es5.js");
-/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/material/button */ "./node_modules/@angular/material/esm5/button.es5.js");
-/* harmony import */ var _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/material/toolbar */ "./node_modules/@angular/material/esm5/toolbar.es5.js");
-/* harmony import */ var _angular_material_tabs__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @angular/material/tabs */ "./node_modules/@angular/material/esm5/tabs.es5.js");
-/* harmony import */ var _angular_material_menu__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @angular/material/menu */ "./node_modules/@angular/material/esm5/menu.es5.js");
-/* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/material/icon */ "./node_modules/@angular/material/esm5/icon.es5.js");
-/* harmony import */ var _angular_material_select__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/material/select */ "./node_modules/@angular/material/esm5/select.es5.js");
-/* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/material/core */ "./node_modules/@angular/material/esm5/core.es5.js");
-/* harmony import */ var _services_validate_service__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./services/validate.service */ "./src/app/services/validate.service.ts");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./services/auth.service */ "./src/app/services/auth.service.ts");
-/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ng-flash-messages */ "./node_modules/ng-flash-messages/ng-flash-messages.umd.js");
-/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(ng_flash_messages__WEBPACK_IMPORTED_MODULE_20__);
-/* harmony import */ var _guards_auth_guard__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./guards/auth.guard */ "./src/app/guards/auth.guard.ts");
-/* harmony import */ var angular_froala_wysiwyg__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! angular-froala-wysiwyg */ "./node_modules/angular-froala-wysiwyg/index.js");
-/* harmony import */ var ng2_file_upload__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ng2-file-upload */ "./node_modules/ng2-file-upload/index.js");
-/* harmony import */ var ng2_file_upload__WEBPACK_IMPORTED_MODULE_23___default = /*#__PURE__*/__webpack_require__.n(ng2_file_upload__WEBPACK_IMPORTED_MODULE_23__);
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/login/login.component */ "./src/app/components/login/login.component.ts");
-/* harmony import */ var _components_register_register_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/register/register.component */ "./src/app/components/register/register.component.ts");
-/* harmony import */ var _components_home_home_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/home/home.component */ "./src/app/components/home/home.component.ts");
-/* harmony import */ var _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/profile/profile.component */ "./src/app/components/profile/profile.component.ts");
-/* harmony import */ var _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/modify/modify.component */ "./src/app/components/modify/modify.component.ts");
-/* harmony import */ var _components_board_board_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/board/board.component */ "./src/app/components/board/board.component.ts");
-/* harmony import */ var _components_write_write_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./components/write/write.component */ "./src/app/components/write/write.component.ts");
-/* harmony import */ var _components_test_test_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./components/test/test.component */ "./src/app/components/test/test.component.ts");
+/* harmony import */ var _services_validate_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./services/validate.service */ "./src/app/services/validate.service.ts");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ng-flash-messages */ "./node_modules/ng-flash-messages/ng-flash-messages.umd.js");
+/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(ng_flash_messages__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var _guards_auth_guard__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./guards/auth.guard */ "./src/app/guards/auth.guard.ts");
+/* harmony import */ var angular_froala_wysiwyg__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! angular-froala-wysiwyg */ "./node_modules/angular-froala-wysiwyg/index.js");
+/* harmony import */ var ng2_file_upload__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ng2-file-upload */ "./node_modules/ng2-file-upload/index.js");
+/* harmony import */ var ng2_file_upload__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(ng2_file_upload__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/login/login.component */ "./src/app/components/login/login.component.ts");
+/* harmony import */ var _components_register_register_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/register/register.component */ "./src/app/components/register/register.component.ts");
+/* harmony import */ var _components_home_home_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/home/home.component */ "./src/app/components/home/home.component.ts");
+/* harmony import */ var _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/profile/profile.component */ "./src/app/components/profile/profile.component.ts");
+/* harmony import */ var _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/modify/modify.component */ "./src/app/components/modify/modify.component.ts");
+/* harmony import */ var _components_board_board_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/board/board.component */ "./src/app/components/board/board.component.ts");
+/* harmony import */ var _components_write_write_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/write/write.component */ "./src/app/components/write/write.component.ts");
+/* harmony import */ var _components_test_test_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/test/test.component */ "./src/app/components/test/test.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -173,15 +165,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-
-
-
-
-
-
-
-
-
+// import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 
 
 
@@ -199,14 +183,14 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 var appRoutes = [
-    { path: '', component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_27__["HomeComponent"] },
-    { path: 'register', component: _components_register_register_component__WEBPACK_IMPORTED_MODULE_26__["RegisterComponent"] },
-    { path: 'login', component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_25__["LoginComponent"] },
-    { path: 'profile', component: _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_28__["ProfileComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_21__["AuthGuard"]] },
-    { path: 'modify', component: _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_29__["ModifyComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_21__["AuthGuard"]] },
-    { path: 'board/:type/:num', component: _components_board_board_component__WEBPACK_IMPORTED_MODULE_30__["BoardComponent"] },
-    { path: 'write/:type', component: _components_write_write_component__WEBPACK_IMPORTED_MODULE_31__["WriteComponent"] /*, canActivate: [AuthGuard]*/ },
-    { path: 'test', component: _components_test_test_component__WEBPACK_IMPORTED_MODULE_32__["TestComponent"] }
+    { path: '', component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_18__["HomeComponent"] },
+    { path: 'register', component: _components_register_register_component__WEBPACK_IMPORTED_MODULE_17__["RegisterComponent"] },
+    { path: 'login', component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_16__["LoginComponent"] },
+    { path: 'profile', component: _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_19__["ProfileComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_12__["AuthGuard"]] },
+    { path: 'modify', component: _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_20__["ModifyComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_12__["AuthGuard"]] },
+    { path: 'board/:type/:num', component: _components_board_board_component__WEBPACK_IMPORTED_MODULE_21__["BoardComponent"] },
+    { path: 'write/:type', component: _components_write_write_component__WEBPACK_IMPORTED_MODULE_22__["WriteComponent"] /*, canActivate: [AuthGuard]*/ },
+    { path: 'test', component: _components_test_test_component__WEBPACK_IMPORTED_MODULE_23__["TestComponent"] }
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -214,16 +198,16 @@ var AppModule = /** @class */ (function () {
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [
-                ng2_file_upload__WEBPACK_IMPORTED_MODULE_23__["FileSelectDirective"],
-                _app_component__WEBPACK_IMPORTED_MODULE_24__["AppComponent"],
-                _components_login_login_component__WEBPACK_IMPORTED_MODULE_25__["LoginComponent"],
-                _components_register_register_component__WEBPACK_IMPORTED_MODULE_26__["RegisterComponent"],
-                _components_home_home_component__WEBPACK_IMPORTED_MODULE_27__["HomeComponent"],
-                _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_28__["ProfileComponent"],
-                _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_29__["ModifyComponent"],
-                _components_board_board_component__WEBPACK_IMPORTED_MODULE_30__["BoardComponent"],
-                _components_write_write_component__WEBPACK_IMPORTED_MODULE_31__["WriteComponent"],
-                _components_test_test_component__WEBPACK_IMPORTED_MODULE_32__["TestComponent"]
+                ng2_file_upload__WEBPACK_IMPORTED_MODULE_14__["FileSelectDirective"],
+                _app_component__WEBPACK_IMPORTED_MODULE_15__["AppComponent"],
+                _components_login_login_component__WEBPACK_IMPORTED_MODULE_16__["LoginComponent"],
+                _components_register_register_component__WEBPACK_IMPORTED_MODULE_17__["RegisterComponent"],
+                _components_home_home_component__WEBPACK_IMPORTED_MODULE_18__["HomeComponent"],
+                _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_19__["ProfileComponent"],
+                _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_20__["ModifyComponent"],
+                _components_board_board_component__WEBPACK_IMPORTED_MODULE_21__["BoardComponent"],
+                _components_write_write_component__WEBPACK_IMPORTED_MODULE_22__["WriteComponent"],
+                _components_test_test_component__WEBPACK_IMPORTED_MODULE_23__["TestComponent"]
             ],
             imports: [
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"],
@@ -236,31 +220,35 @@ var AppModule = /** @class */ (function () {
                     useHash: true,
                     onSameUrlNavigation: 'reload'
                 }),
-                ng_flash_messages__WEBPACK_IMPORTED_MODULE_20__["NgFlashMessagesModule"],
+                ng_flash_messages__WEBPACK_IMPORTED_MODULE_11__["NgFlashMessagesModule"],
                 _angular_common__WEBPACK_IMPORTED_MODULE_6__["CommonModule"],
-                _angular_material_table__WEBPACK_IMPORTED_MODULE_9__["MatTableModule"],
+                angular_froala_wysiwyg__WEBPACK_IMPORTED_MODULE_13__["FroalaEditorModule"].forRoot(),
+                angular_froala_wysiwyg__WEBPACK_IMPORTED_MODULE_13__["FroalaViewModule"].forRoot(),
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatTableModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatInputModule"],
-                _angular_material_form_field__WEBPACK_IMPORTED_MODULE_10__["MatFormFieldModule"],
-                _angular_material_button__WEBPACK_IMPORTED_MODULE_11__["MatButtonModule"],
-                _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_12__["MatToolbarModule"],
-                _angular_material_tabs__WEBPACK_IMPORTED_MODULE_13__["MatTabsModule"],
-                _angular_material_menu__WEBPACK_IMPORTED_MODULE_14__["MatMenuModule"],
-                _angular_material_icon__WEBPACK_IMPORTED_MODULE_15__["MatIconModule"],
-                _angular_material_select__WEBPACK_IMPORTED_MODULE_16__["MatSelectModule"],
-                angular_froala_wysiwyg__WEBPACK_IMPORTED_MODULE_22__["FroalaEditorModule"].forRoot(),
-                angular_froala_wysiwyg__WEBPACK_IMPORTED_MODULE_22__["FroalaViewModule"].forRoot()
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatFormFieldModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatButtonModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatToolbarModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatTabsModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatMenuModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatIconModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatSelectModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatBottomSheetModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatSidenavModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatListModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatAutocompleteModule"]
             ],
             exports: [
                 _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"]
             ],
             providers: [
-                _services_validate_service__WEBPACK_IMPORTED_MODULE_18__["ValidateService"],
-                _services_auth_service__WEBPACK_IMPORTED_MODULE_19__["AuthService"],
-                _guards_auth_guard__WEBPACK_IMPORTED_MODULE_21__["AuthGuard"],
-                { provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_17__["ErrorStateMatcher"], useClass: _angular_material_core__WEBPACK_IMPORTED_MODULE_17__["ShowOnDirtyErrorStateMatcher"] }
+                _services_validate_service__WEBPACK_IMPORTED_MODULE_9__["ValidateService"],
+                _services_auth_service__WEBPACK_IMPORTED_MODULE_10__["AuthService"],
+                _guards_auth_guard__WEBPACK_IMPORTED_MODULE_12__["AuthGuard"],
+                { provide: _angular_material__WEBPACK_IMPORTED_MODULE_8__["ErrorStateMatcher"], useClass: _angular_material__WEBPACK_IMPORTED_MODULE_8__["ShowOnDirtyErrorStateMatcher"] }
             ],
             bootstrap: [
-                _app_component__WEBPACK_IMPORTED_MODULE_24__["AppComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_15__["AppComponent"]
             ]
         })
     ], AppModule);
@@ -311,6 +299,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
 /* harmony import */ var _services_board_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../services/board.service */ "./src/app/services/board.service.ts");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
+/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ng-flash-messages */ "./node_modules/ng-flash-messages/ng-flash-messages.umd.js");
+/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(ng_flash_messages__WEBPACK_IMPORTED_MODULE_8__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -329,8 +319,9 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var BoardComponent = /** @class */ (function () {
-    function BoardComponent(route, funcService, authService, boardService, http, router, sanitized) {
+    function BoardComponent(route, funcService, authService, boardService, http, router, sanitized, flashMessage) {
         var _this = this;
         this.route = route;
         this.funcService = funcService;
@@ -339,6 +330,7 @@ var BoardComponent = /** @class */ (function () {
         this.http = http;
         this.router = router;
         this.sanitized = sanitized;
+        this.flashMessage = flashMessage;
         this.navigationSubscription = this.router.events.subscribe(function (e) {
             if (e instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationEnd"]) {
                 _this.initialiseInvites();
@@ -412,6 +404,19 @@ var BoardComponent = /** @class */ (function () {
         });
     };
     BoardComponent.prototype.onRemovePost = function () {
+        var _this = this;
+        this.boardService.removePost(this.num).subscribe(function (result) {
+            if (result.success) {
+                _this.router.navigate(['/board/' + _this.type + '/list']);
+            }
+            else {
+                _this.flashMessage.showFlashMessage({
+                    messages: ['삭제 오류'],
+                    type: 'danger',
+                    timeout: 3000
+                });
+            }
+        });
     };
     BoardComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -426,7 +431,8 @@ var BoardComponent = /** @class */ (function () {
             _services_board_service__WEBPACK_IMPORTED_MODULE_6__["BoardService"],
             _angular_http__WEBPACK_IMPORTED_MODULE_2__["Http"],
             _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
-            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__["DomSanitizer"]])
+            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__["DomSanitizer"],
+            ng_flash_messages__WEBPACK_IMPORTED_MODULE_8__["NgFlashMessageService"]])
     ], BoardComponent);
     return BoardComponent;
 }());
@@ -834,14 +840,12 @@ var RegisterComponent = /** @class */ (function () {
     };
     RegisterComponent.prototype.onRegisterSubmit = function () {
         var _this = this;
-        // this.emailFormControl.setValue('email');
-        this.email = this.emailFormControl.value;
         var user = {
             userid: this.userid,
             pw: this.pw,
             pwchk: this.pwchk,
             nickname: this.nickname,
-            email: this.email,
+            email: this.emailFormControl.value,
             introduction: this.introduction
         };
         // Required Fields
@@ -922,7 +926,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\" #helloElement>\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>Test</h4><hr/>\r\n\r\n      <p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p>\r\n      <p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p>\r\n      <p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p>\r\n      <p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p>\r\n      <p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p>\r\n      <p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p>\r\n      <p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p>\r\n      <p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p>\r\n      <p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p><p>Hello!!</p>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>!!!!!!</h4><hr/>\r\n\r\n      <a (click)=\"scrollToPost(helloElement)\" href=\"javascript:;\">Hello?</a>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n"
+module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">TITLE</h4>\r\n\r\n      <span style=\"float: right; text-align: right; font-size: 80%;\">\r\n        NICKNAME<br/>WRITE-DATE\r\n      </span>\r\n      <hr/>\r\n      <div class=\"posting\">hello</div>\r\n      <br/><br/>\r\n      <div style=\"text-align: center;\">\r\n        <button class=\"mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored\">\r\n          추천 0\r\n        </button>\r\n      </div>\r\n      <br/><hr/>\r\n\r\n      <!-- ############### table for comments ############### -->\r\n      <table style=\"width: 96%; margin: auto;\">\r\n        <tbody>\r\n          <tr>\r\n            <td>\r\n              <span style=\"font-size: 80%;\">COMMENT-NICKNAME &nbsp;|&nbsp; COMMENT-WRITE-DATE</span>\r\n              <pre>COMMENT-COMMENT</pre>\r\n            </td>\r\n            <!-- <td style=\"text-align: right; vertical-align: middle;\">\r\n              <button class=\"mdl-button mdl-js-button mdl-button--icon\" style=\"font-size: 90%;\">\r\n                ♡ 0\r\n              </button>\r\n            </td> -->\r\n          </tr>\r\n          <tr>\r\n            <td>\r\n              <span style=\"font-size: 80%;\">COMMENT-NICKNAME &nbsp;|&nbsp; COMMENT-WRITE-DATE</span>\r\n              <pre>COMMENT-COMMENT</pre>\r\n            </td>\r\n            <!-- <td style=\"text-align: right; vertical-align: middle;\">\r\n              <button class=\"mdl-button mdl-js-button mdl-button--icon\" style=\"font-size: 90%;\">\r\n                ♡ 0\r\n              </button>\r\n            </td> -->\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n      <!-- ############### table for comments ############### -->\r\n\r\n      <!-- ############### writing area ############### -->\r\n      <form (submit)=\"onWriteComment()\"><hr/>\r\n        <table style=\"width: 96%; margin: auto;\">\r\n          <tr style=\"text-align: center;\">\r\n\r\n            <td rowspan=\"2\" style=\"width: 85%;\">\r\n              <mat-form-field appearance=\"outline\" style=\"width: 100%; height: 100%;\">\r\n                <mat-label>댓글을 작성해주세요.</mat-label>\r\n                <textarea matInput placeholder=\"\" rows=\"3\" name=\"cmtWrite\"\r\n                [formControl]=\"cmtWrite\" [matAutocomplete]=\"auto\"></textarea>\r\n                <mat-autocomplete #auto>\r\n                  <mat-option *ngFor=\"let option of filteredOptions | async\" [value]=\"'TO::' + option?.value\">\r\n                    {{option.viewValue}} [{{option.value}}]\r\n                  </mat-option>\r\n                </mat-autocomplete>\r\n              </mat-form-field>\r\n            </td>\r\n\r\n            <td style=\"text-align: center; padding-bottom: 3%;\">\r\n              <button mat-raised-button type=\"submit\" style=\"width: 60%;\">작성</button>\r\n            </td>\r\n\r\n          </tr>\r\n          <!-- <tr>\r\n\r\n              <td style=\"text-align: center;\">\r\n                <mat-form-field style=\"width: 40%;\">\r\n                  <mat-select placeholder=\"To.\" [(ngModel)]=\"selectedValue\" name=\"food\">\r\n                    <mat-option>[없음]</mat-option>\r\n                    <mat-option *ngFor=\"let food of foods\" [value]=\"food.value\">\r\n                      {{food.viewValue}}\r\n                    </mat-option>\r\n                  </mat-select>\r\n                </mat-form-field>\r\n              </td>\r\n\r\n          </tr> -->\r\n        </table>\r\n      </form>\r\n      <!-- ############### writing area ############### -->\r\n\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"aboutPost\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #aboutPost>\r\n    <button mat-menu-item *ngIf=\"content?.userid == user?.userid || content?.userid == 'admin'\" (click)=\"onRemovePost()\">\r\n      <span>삭제</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">asdf</h4>\r\n      <hr/>\r\n      <input type=\"text\" (keyup)=\"onKeyUp(demo.value)\" #demo><br/>\r\n      <p>{{demo.value}}</p><p #hihi></p>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -937,7 +941,9 @@ module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TestComponent", function() { return TestComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -949,17 +955,40 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-// import { ScrollToService } from 'ng2-scroll-to-el';
+
+
 var TestComponent = /** @class */ (function () {
     function TestComponent(funcService) {
         this.funcService = funcService;
+        this.foods = [
+            { value: 'steak-0', viewValue: 'Steak' },
+            { value: 'pizza-1', viewValue: 'Pizza' },
+            { value: 'tacos-2', viewValue: 'Tacos' }
+        ];
+        this.cmtWrite = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormControl"]();
+        this.options = ['One', 'Two', 'Three'];
         this.funcService.setTitle('TEST!!!!');
     }
-    TestComponent.prototype.scrollToPost = function (el) {
-        // this.scrollService.scrollTo(el);
-        el.scrollIntoView();
-    };
     TestComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.filteredOptions = this.cmtWrite.valueChanges.pipe(
+        // startWith('TO::'),
+        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (value) { return _this._filter(value); }));
+    };
+    TestComponent.prototype._filter = function (value) {
+        var filterValue = value.toLowerCase();
+        // return this.options.filter(option => option.toLowerCase().includes(filterValue));
+        var f = [];
+        for (var i = 0; i < this.foods.length; i++) {
+            f[i] = 'TO::' + this.foods[i].viewValue + ' [' + this.foods[i].value + '] ';
+        }
+        // return f.filter(option => option.toLowerCase().includes(filterValue));
+        return this.foods;
+    };
+    TestComponent.prototype.onKeyUp = function (s) {
+        if (s.toLowerCase() == 'hello') {
+            alert('HELLO!');
+        }
     };
     TestComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -967,7 +996,7 @@ var TestComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./test.component.html */ "./src/app/components/test/test.component.html"),
             styles: [__webpack_require__(/*! ./test.component.css */ "./src/app/components/test/test.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_1__["FuncService"]])
+        __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_2__["FuncService"]])
     ], TestComponent);
     return TestComponent;
 }());
@@ -994,7 +1023,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>글쓰기</h4><hr/>\r\n      <div style=\"width: 98%; margin: auto;\">\r\n        <form (submit)=\"onWritePost()\">\r\n          <mat-form-field style=\"width: 100%;\">\r\n            <input matInput placeholder=\"제목\" type=\"text\" name=\"title\" [(ngModel)]=\"title\">\r\n          </mat-form-field>\r\n          <textarea [froalaEditor]=\"options\" [(ngModel)]=\"content\" name=\"content\"></textarea>\r\n          <br/>\r\n          <button mat-raised-button type=\"submit\" style=\"float: right;\">작성</button>\r\n        </form><br/>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>글쓰기</h4><hr/>\r\n      <div style=\"width: 98%; margin: auto;\">\r\n        <form (submit)=\"onWritePost()\">\r\n          <mat-form-field style=\"width: 100%;\">\r\n            <input matInput placeholder=\"제목\" type=\"text\" name=\"title\" [(ngModel)]=\"title\">\r\n          </mat-form-field>\r\n          <textarea [froalaEditor]=\"options\" [(ngModel)]=\"content\" name=\"content\"></textarea>\r\n          <br/>\r\n          <button mat-raised-button type=\"submit\" style=\"float: right;\">작성</button>\r\n        </form><br/>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</section>\r\n"
 
 /***/ }),
 
@@ -1100,8 +1129,8 @@ var WriteComponent = /** @class */ (function () {
                 };
                 var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_2__["Headers"]();
                 headers.append('Content-Type', 'application/json');
-                _this.http.post(_this.funcService.ServerAddress + '/boards/write', formData, { headers: headers }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) { return res.json(); }))
-                    .subscribe(function (data) {
+                _this.http.post(_this.funcService.ServerAddress + '/boards/write', formData, { headers: headers })
+                    .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) { return res.json(); })).subscribe(function (data) {
                     if (data.success) {
                         _this.router.navigate(['/board/' + _this.type + '/' + data.num]);
                     }
@@ -1336,6 +1365,12 @@ var BoardService = /** @class */ (function () {
         }
         else
             return null;
+    };
+    BoardService.prototype.removePost = function (num) {
+        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(this.funcService.ServerAddress + '/boards/removePost', { num: num }, { headers: headers })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     BoardService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({

@@ -53,7 +53,13 @@
             <td rowspan="2" style="width: 85%;">
               <mat-form-field appearance="outline" style="width: 100%; height: 100%;">
                 <mat-label>댓글을 작성해주세요.</mat-label>
-                <textarea matInput placeholder="" rows="3" name="cmtWrite" [(ngModel)]="cmtWrite"></textarea>
+                <textarea matInput placeholder="" rows="3" name="cmtWrite"
+                [formControl]="cmtWrite" [matAutocomplete]="auto"></textarea>
+                <mat-autocomplete #auto>
+                  <mat-option *ngFor="let option of filteredOptions | async" [value]="'TO::' + option?.value">
+                    {{option.viewValue}} [{{option.value}}]
+                  </mat-option>
+                </mat-autocomplete>
               </mat-form-field>
             </td>
 
@@ -97,8 +103,8 @@
     <div class="mdl-card__supporting-text">
       <h4 style="display: inline;">asdf</h4>
       <hr/>
-      <input type="text" [formControl]="demo"><br/>
-      <span>{{demo.getValue()}}</span>
+      <input type="text" (keyup)="onKeyUp(demo.value)" #demo><br/>
+      <p>{{demo.value}}</p><p #hihi></p>
 
     </div>
   </div>

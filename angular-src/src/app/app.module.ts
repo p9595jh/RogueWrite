@@ -7,17 +7,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
-import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
-import { MatInputModule } from '@angular/material';
-import { MatTableModule } from '@angular/material/table';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
-import { MatSelectModule } from '@angular/material/select';
-import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+// import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
+import {
+  ErrorStateMatcher,
+  ShowOnDirtyErrorStateMatcher,
+  MatInputModule,
+  MatTableModule,
+  MatFormFieldModule,
+  MatButtonModule,
+  MatToolbarModule,
+  MatTabsModule,
+  MatMenuModule,
+  MatIconModule,
+  MatSelectModule,
+  MatBottomSheetModule,
+  MatSidenavModule,
+  MatListModule,
+  MatAutocompleteModule
+} from '@angular/material';
 
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
@@ -85,7 +92,10 @@ const appRoutes: Routes = [
     MatMenuModule,
     MatIconModule,
     MatSelectModule,
-    MatBottomSheetModule
+    MatBottomSheetModule,
+    MatSidenavModule,
+    MatListModule,
+    MatAutocompleteModule
   ],
   exports: [
     RouterModule

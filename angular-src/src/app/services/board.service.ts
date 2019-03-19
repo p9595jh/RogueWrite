@@ -45,4 +45,11 @@ export class BoardService {
 
     }
 
+    removePost(num) {
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      return this.http.post(this.funcService.ServerAddress + '/boards/removePost', {num: num}, {headers: headers})
+        .pipe(map(res => res.json()));
+    }
+
 }

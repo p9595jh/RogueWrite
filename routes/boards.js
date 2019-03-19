@@ -7,6 +7,21 @@ const config = require('../config/database');
 const bcrypt = require('bcryptjs');
 const Board = require('../models/board');
 
+function set2LetterFormat(num) {
+    num = num >= 10 ? num : '0' + num;
+    return num;
+}
+
+function getNowDate() {
+    let date = new Date();
+    return date.getFullYear() + "-"
+    + set2LetterFormat(date.getMonth() + 1) + "-"
+    + set2LetterFormat(date.getDate()) + " "
+    + set2LetterFormat(date.getHours()) + ":"
+    + set2LetterFormat(date.getMinutes()) + ":"
+    + set2LetterFormat(date.getSeconds());
+}
+
 router.get('/takeOnePost', function(req, res, next) {
     var num = req.query.num;
     Board.findOne({_id: num}, function(err, post) {
@@ -35,7 +50,7 @@ router.post('/write', function(req, res, next) {
         hit: 0,
         recommend: [],
         comment: [],
-        writedate: ''
+        writedate: getNowDate()
     });
     Board.addPost(newPost, (err, post) => {
         if ( err ) {
@@ -49,6 +64,50 @@ router.post('/write', function(req, res, next) {
             });
         }
     });
+})
+
+router.post('/writeComment', function(req, res, next) {
+    let cmtData = {
+        num: new Date().getMilliseconds() + req.user.userid,
+        writedate: getNowDate(),
+        userid: req.user.userid,
+        nickname: req.user.nickname,
+        comment: req.body.comment,
+    };
+    if ( req.body.cmtTo ) {
+        cmtData.cmtTo = {
+            userid: req.body.cmtToUserid,
+            nickname: req.body.cmtToNickname
+        };
+    }
+    Board.updateOne({_id: req.body.num}, {$push: {comment: cmtData}}, function(err, post) {
+        if ( err ) {
+            res.json({
+                success: false
+            });
+        } else {
+            res.json({
+                success: true,
+                post: post
+            });
+        }
+    })
+
+})
+
+router.post('/removePost', function(req, res, next) {
+    const num = req.body.num;
+    Board.findOneAndRemove({_id: num}, function(err, output) {
+        if ( err ) {
+            res.json({
+                success: false
+            });
+        } else {
+            res.json({
+                success: true
+            })
+        }
+    })
 })
 
 //==================================================

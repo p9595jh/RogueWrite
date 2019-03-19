@@ -86,8 +86,8 @@ export class WriteComponent implements OnInit {
         };
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
-        this.http.post(this.funcService.ServerAddress + '/boards/write', formData, {headers: headers}).pipe(map((res: Response) => res.json()))
-         .subscribe((data: any) => {
+        this.http.post(this.funcService.ServerAddress + '/boards/write', formData, {headers: headers})
+          .pipe(map((res: Response) => res.json())).subscribe((data: any) => {
           if ( data.success ) {
             this.router.navigate(['/board/' + this.type + '/' + data.num]);
           } else {
