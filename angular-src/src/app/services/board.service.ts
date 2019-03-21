@@ -25,7 +25,8 @@ export class BoardService {
   takeOnePost(num) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(this.funcService.ServerAddress + '/boards/takeOnePost?num=' + num, {headers: headers})
+    let loggedIn = this.authService.loggedIn() ? 'yes' : 'no';
+    return this.http.get(this.funcService.ServerAddress + '/boards/takeOnePost?num=' + num + '&loggedIn=' + loggedIn, {headers: headers})
       .pipe(map(res => res.json()))
   }
 

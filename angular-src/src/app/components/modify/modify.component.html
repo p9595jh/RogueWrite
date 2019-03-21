@@ -4,7 +4,7 @@
       <h4>회원정보수정</h4><hr/><br/><br/>
 
       <!-- registration form for large display -->
-      <form class="mdl-layout--large-screen-only" (submit)="onRegisterSubmit()">
+      <form class="mdl-layout--large-screen-only" (submit)="onModifyUser()">
         <div style="width: 100%; text-align: center;">
           <mat-form-field class="largeInputEle">
             <input matInput placeholder="아이디" type="text" [value]="user?.userid" disabled>
@@ -20,7 +20,7 @@
           </mat-form-field>
           <br/><br/>
           <mat-form-field class="largeInputEle">
-            <input matInput placeholder="닉네임" type="text" name="nickname" [(ngModel)]="nickname" [value]="user?.nickname">
+            <input matInput placeholder="닉네임" type="text" name="nickname" [(ngModel)]="nickname">
           </mat-form-field>
           <br/><br/>
           <mat-form-field class="largeInputEle">
@@ -28,7 +28,7 @@
           </mat-form-field>
           <br/><br/>
           <mat-form-field class="largeInputEle">
-            <input matInput placeholder="한 줄 소개" type="text" name="introduction" [(ngModel)]="introduction" [value]="user?.introduction">
+            <input matInput placeholder="한 줄 소개" type="text" name="introduction" [(ngModel)]="introduction">
           </mat-form-field>
           <br/><br/>
           <br/>
@@ -39,7 +39,7 @@
       </form>
 
       <!-- registration form for small display -->
-      <form class="mdl-layout--small-screen-only" (submit)="onRegisterSubmit()">
+      <form class="mdl-layout--small-screen-only" (submit)="onModifyUser()">
         <div style="width: 100%; text-align: center;">
           <mat-form-field class="smallInputEle">
             <input matInput placeholder="아이디" type="text" [value]="user?.userid" disabled>
@@ -55,7 +55,7 @@
           </mat-form-field>
           <br/><br/>
           <mat-form-field class="smallInputEle">
-            <input matInput placeholder="닉네임" type="text" name="nickname" [(ngModel)]="nickname" [value]="user?.nickname">
+            <input matInput placeholder="닉네임" type="text" name="nickname" [(ngModel)]="nickname">
           </mat-form-field>
           <br/><br/>
           <mat-form-field class="smallInputEle">
@@ -63,7 +63,7 @@
           </mat-form-field>
           <br/><br/>
           <mat-form-field class="smallInputEle">
-            <input matInput placeholder="한 줄 소개" type="text" name="introduction" [(ngModel)]="introduction" [value]="user?.introduction">
+            <input matInput placeholder="한 줄 소개" type="text" name="introduction" [(ngModel)]="introduction">
           </mat-form-field>
           <br/><br/>
           <br/>

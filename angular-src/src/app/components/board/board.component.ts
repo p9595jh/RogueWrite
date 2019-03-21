@@ -11,6 +11,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import { PageEvent } from '@angular/material';
 
 @Component({
   selector: 'app-board',
@@ -28,6 +29,10 @@ export class BoardComponent implements OnInit, OnDestroy, PipeTransform {
   contents: Object[];
   cmtWrite = new FormControl();
   user: any;
+  
+  pagingSize = 25;
+  pagingFrom: Number = 0;
+  pagingTo: Number = this.pagingSize;
 
   ct: any = null;
 
@@ -194,7 +199,6 @@ export class BoardComponent implements OnInit, OnDestroy, PipeTransform {
     } else {
       this.boardService.recommend(this.num).subscribe(result => {
         if ( result.success ) {
-          // document.getElementById('recommend').innerHTML = '추천 ' + result.recommend;
           this.router.navigate(['/board/' + this.type + '/' + this.num]);
         } else {
           this.flashMessage.showFlashMessage({
@@ -206,6 +210,12 @@ export class BoardComponent implements OnInit, OnDestroy, PipeTransform {
       })
     }
     
+  }
+
+  paging(pageEvent: PageEvent) {
+    this.pagingFrom = pageEvent.pageIndex * this.pagingSize;
+    this.pagingTo = (pageEvent.pageIndex + 1) * this.pagingSize;
+    this.router.navigate(['/board/' + this.type + '/' + this.num]);
   }
 
 }

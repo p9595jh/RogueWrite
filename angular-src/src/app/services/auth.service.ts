@@ -60,4 +60,13 @@ export class AuthService {
     this.user = null;
     localStorage.clear();
   }
+
+  modifyUser(user) {
+    let headers = new Headers();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/users/modify', user, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
 }

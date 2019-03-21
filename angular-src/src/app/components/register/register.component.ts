@@ -47,26 +47,26 @@ export class RegisterComponent implements OnInit {
 
     // Required Fields
     if ( !this.validateService.validateRegister(user) ) {
-      this.flashMessage.showFlashMessage({messages: ['빈 항목이 있습니다'], type: 'danger', timeout: 2000});
+      this.flashMessage.showFlashMessage({messages: ['빈 항목이 있습니다'], type: 'danger', timeout: 3000});
       return false;
     }
 
     // Password check
     if ( this.pw != this.pwchk ) {
-      this.flashMessage.showFlashMessage({messages: ['비밀번호가 일치하지 않습니다'], type: 'danger', timeout: 2000});
+      this.flashMessage.showFlashMessage({messages: ['비밀번호가 일치하지 않습니다'], type: 'danger', timeout: 3000});
       return false;
     }
 
     // Check with conditions
     let conditions: any = this.validateService.validateConditions(user);
     if ( !conditions.valid ) {
-      this.flashMessage.showFlashMessage({messages: [conditions.msg], type: 'danger', timeout: 2000});
+      this.flashMessage.showFlashMessage({messages: [conditions.msg], type: 'danger', timeout: 3000});
       return false;
     }
 
     // Validate Email
     if( !this.validateService.validateEmail(user.email) ) {
-      this.flashMessage.showFlashMessage({messages: ['이메일 형식이 맞지 않습니다'], type: 'danger', timeout: 2000});
+      this.flashMessage.showFlashMessage({messages: ['이메일 형식이 맞지 않습니다'], type: 'danger', timeout: 3000});
       return false;
     }
 

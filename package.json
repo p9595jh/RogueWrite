@@ -12,14 +12,16 @@
     "cors": "*",
     "debug": "~2.6.9",
     "express": "~4.16.0",
+    "fs-extra": "^7.0.1",
     "http-errors": "~1.6.2",
     "jsonwebtoken": "*",
     "mongoose": "*",
     "morgan": "~1.9.0",
-    "multer": "^1.4.1",
     "passport": "*",
     "passport-jwt": "*",
     "pug": "^2.0.3",
-    "rxjs": "^6.3.3"
+    "request": "^2.88.0",
+    "rxjs": "^6.3.3",
+    "xmldom": "^0.1.27"
   }
 }

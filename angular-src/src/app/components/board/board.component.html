@@ -97,7 +97,7 @@
             <th>추천</th>
           </tr>
         </thead>
-        <tbody *ngFor="let val of contents">
+        <tbody *ngFor="let val of contents | slice:pagingFrom:pagingTo; let i=index">
           <tr>
             <td class="mdl-data-table__cell--non-numeric">{{extractDate(val.writedate)}}</td>
             <td class="mdl-data-table__cell--non-numeric">
@@ -115,7 +115,7 @@
 
       <!-- for small display -->
       <table class="mdl-data-table mdl-js-data-table mdl-layout--small-screen-only" style="margin: auto; width: 98%;">
-        <tbody *ngFor="let val of contents">
+        <tbody *ngFor="let val of contents | slice:pagingFrom:pagingTo; let i=index">
           <tr>
             <td class="mdl-data-table__cell--non-numeric">
               <div>
@@ -134,6 +134,10 @@
           </tr>
         </tbody>
       </table><br/>
+
+      <mat-paginator [length]="contents?.length" [pageSize]="pagingSize" (page)="paging($event)">
+      </mat-paginator>
+
       <div *ngIf="authService.loggedIn()" style="float: right;">
         <a mat-raised-button [routerLink]="['/write/'+type]">글쓰기</a>
       </div>

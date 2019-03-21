@@ -4,7 +4,23 @@ const router = express.Router();
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
+const bcrypt = require('bcryptjs');
 const User = require('../models/user');
+
+function set2LetterFormat(num) {
+  num = num >= 10 ? num : '0' + num;
+  return num;
+}
+
+function getNowDate() {
+  let date = new Date();
+  return date.getFullYear() + "-"
+      + set2LetterFormat(date.getMonth() + 1) + "-"
+      + set2LetterFormat(date.getDate()) + " "
+      + set2LetterFormat(date.getHours()) + ":"
+      + set2LetterFormat(date.getMinutes()) + ":"
+      + set2LetterFormat(date.getSeconds());
+}
 
 router.post('/register', function(req, res, next) {
   const newUser = new User({
@@ -12,7 +28,8 @@ router.post('/register', function(req, res, next) {
     pw: req.body.pw,
     email: req.body.email,
     nickname: req.body.nickname,
-    introduction: req.body.introduction
+    introduction: req.body.introduction,
+    registerdate: getNowDate()
   });
 
   User.findOne({userid: newUser.userid}, function(err1, output1) {
@@ -75,7 +92,7 @@ router.post('/authenticate', function(req, res, next) {
   User.getUserByUsername(userid, (err, user) => {
     // if(err) throw err;
     if ( !user ) {
-      return res.json({success: false, msg: 'User not found'});
+      return res.json({success: false, msg: '사용자를 찾을 수 없습니다.'});
     }
     
     User.comparePassword(pw, user.pw, (err, isMatch) => {
@@ -95,11 +112,36 @@ router.post('/authenticate', function(req, res, next) {
           }
         });
       } else {
-        return res.json({success: false, msg: '비밀번호가 잘못됐습니다.'});
+        return res.json({success: false, msg: '비밀번호가 잘못되었습니다.'});
       }
     })
   })
 });
+
+router.post('/modify', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+  User.findOne({nickname: req.body.nickname}, function(err, user) {
+    if ( user && user.userid != req.user.userid ) {
+      res.json({success: false, msg: '이미 존재하는 닉네임입니다.'});
+    } else {
+      if ( req.body.pw != '' ) {
+        bcrypt.genSalt(10, (err, salt) => {
+          bcrypt.hash(req.body.pw, salt, (err, hash) => {
+            let pw = hash;
+            User.findOneAndUpdate({_id: req.user._id}, {pw: pw, nickname: req.body.nickname, introduction: req.body.introduction}, function(err, output) {
+              if ( err ) res.json({success: false, msg: err});
+              else res.json({success: true});
+            })
+          });
+        });
+      } else {
+        User.findOneAndUpdate({_id: req.user._id}, {nickname: req.body.nickname, introduction: req.body.introduction}, function(err, output) {
+          if ( err ) res.json({success: false, msg: err});
+          else res.json({success: true});
+        });
+      }
+    }
+  })
+})
 
 router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res, next) => {
   res.json({user: req.user});

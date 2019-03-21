@@ -7,7 +7,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
-// import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import {
   ErrorStateMatcher,
   ShowOnDirtyErrorStateMatcher,
@@ -23,7 +22,9 @@ import {
   MatBottomSheetModule,
   MatSidenavModule,
   MatListModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatButtonToggleModule,
+  MatPaginatorModule
 } from '@angular/material';
 
 import { ValidateService } from './services/validate.service';
@@ -95,7 +96,9 @@ const appRoutes: Routes = [
     MatBottomSheetModule,
     MatSidenavModule,
     MatListModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatButtonToggleModule,
+    MatPaginatorModule
   ],
   exports: [
     RouterModule

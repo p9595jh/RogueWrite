@@ -20,7 +20,7 @@ export class ValidateService {
     // if ( !idvalid.test(user.userid) ) {
     //   return {
     //     valid: false,
-    //     msg: '아이디는 영어, 숫자로 이루어진 6~15 글자여야 합니다'
+    //     msg: '아이디는 영어, 숫자로 이루어진 6~15 글자여야 합니다.'
     //   };
     // }
 
@@ -28,7 +28,15 @@ export class ValidateService {
     // if ( !pwvalid.test(user.pw) ) {
     //   return {
     //     valid: false,
-    //     msg: '비밀번호는 10글자 이상이어야 합니다'
+    //     msg: '비밀번호는 10글자 이상이어야 합니다.'
+    //   }
+    // }
+
+    // let nickValid = /^[a-Zㄱ-힣0-9]{4,8}$/;
+    // if ( !nickValid.test(user.nickname) ) {
+    //   return {
+    //     valid: false,
+    //     msg: '닉네임은 한글, 알파벳, 숫자로 이루어진 4~8 글자여야 합니다.'
     //   }
     // }
 
@@ -41,4 +49,11 @@ export class ValidateService {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
   }
+
+  validateModify(user) {
+    return !(user.pw == undefined || user.pw == '' ||
+        user.nickname == undefined || user.nickname == '' ||
+        user.introduction == undefined || user.introduction == '');
+  }
+
 }

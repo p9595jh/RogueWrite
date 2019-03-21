@@ -165,7 +165,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-// import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 
 
 
@@ -236,7 +235,9 @@ var AppModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatBottomSheetModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatSidenavModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatListModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatAutocompleteModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatAutocompleteModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatButtonToggleModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatPaginatorModule"]
             ],
             exports: [
                 _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"]
@@ -277,7 +278,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- element for representing the location of the post to be scrolled -->\r\n<span style=\"display: hidden;\" #postLocation></span>\r\n\r\n<!-- section for a post -->\r\n<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">{{content?.title}}</h4>\r\n\r\n      <span style=\"float: right; text-align: right; font-size: 80%;\">\r\n        {{content?.nickname}}<br/>{{content?.writedate}}\r\n      </span>\r\n      <hr/>\r\n      <div class=\"posting\" [innerHtml]=\"content?.content\"></div>\r\n      <br/><br/>\r\n      <div style=\"text-align: center;\">\r\n        <button mat-raised-button color=\"primary\" (click)=\"onRecommend()\">\r\n          추천 {{content?.recommend?.length}}\r\n        </button>\r\n      </div>\r\n      <br/><hr/>\r\n\r\n      <!-- ############### table for comments ############### -->\r\n      <table style=\"width: 96%; margin: auto;\">\r\n        <tbody *ngFor=\"let comment of content?.comment\">\r\n          <tr>\r\n            <td>\r\n              <span style=\"font-size: 80%;\">\r\n                {{comment?.nickname}} &nbsp;|&nbsp; \r\n                {{comment?.writedate}}\r\n                <span *ngIf=\"comment?.userid == user?.userid || user?.userid == 'admin'\"> &nbsp;|&nbsp; \r\n                  <span style=\"cursor: pointer;\" (click)=\"onRemoveComment(comment.num)\">삭제</span>\r\n                </span>\r\n              </span>\r\n              <pre>{{comment?.comment}}</pre><br/>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n      <!-- ############### table for comments ############### -->\r\n\r\n      <!-- ############### writing area ############### -->\r\n      <form *ngIf=\"authService.loggedIn()\" (submit)=\"onWriteComment()\"><hr *ngIf=\"content?.comment?.length > 0\" />\r\n        <table style=\"width: 96%; margin: auto;\">\r\n          <tr style=\"text-align: center;\">\r\n\r\n            <td rowspan=\"2\" style=\"width: 85%;\">\r\n              <mat-form-field appearance=\"outline\" style=\"width: 100%; height: 100%;\">\r\n                <mat-label>댓글을 작성해주세요.</mat-label>\r\n                <textarea matInput placeholder=\"\" rows=\"3\" name=\"cmtWrite\"\r\n                [formControl]=\"cmtWrite\" [matAutocomplete]=\"auto\"></textarea>\r\n                <mat-autocomplete #auto>\r\n                  <!-- <mat-option *ngFor=\"let ct of filteredOptions | async\" [value]=\"'TO::' + ct?.nickname\" (onclick)=\"setCmtTo(ct)\">\r\n                    {{ct.nickname}} [{{ct.userid}}]\r\n                  </mat-option> -->\r\n                </mat-autocomplete>\r\n              </mat-form-field>\r\n            </td>\r\n\r\n            <td style=\"text-align: center; padding-bottom: 3%;\">\r\n              <button mat-raised-button type=\"submit\" style=\"width: 60%;\">작성</button>\r\n            </td>\r\n\r\n          </tr>\r\n        </table>\r\n      </form>\r\n      <!-- ############### writing area ############### -->\r\n\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"aboutPost\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #aboutPost>\r\n    <button mat-menu-item *ngIf=\"content?.userid == user?.userid || content?.userid == 'admin'\" (click)=\"onRemovePost()\">\r\n      <span>삭제</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<!-- section for a board -->\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 *ngIf=\"type == 'free'\">자유게시판</h4>\r\n      <h4 *ngIf=\"type != 'free'\">{{type}} 게시판</h4>\r\n      <hr/>\r\n      \r\n      <!-- for large display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--large-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">날짜</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\r\n            <th>글쓴이</th>\r\n            <th>조회수</th>\r\n            <th>추천</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody *ngFor=\"let val of contents\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{extractDate(val.writedate)}}</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/board/'+type+'/'+val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\r\n                (click)=\"scrollToPost(postLocation)\">{{val.title}}</a>&nbsp;\r\n              <span *ngIf=\"val.comment.length > 0\" style=\"font-size: 85%; color: grey;\">[{{val.comment.length}}]</span>\r\n            </td>\r\n            <td>{{val.nickname}}</td>\r\n            <td>{{val.hit}}</td>\r\n            <td>{{val.recommend.length}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <!-- for small display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--small-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <tbody *ngFor=\"let val of contents\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <div>\r\n                <a [routerLink]=\"['/board/'+type+'/'+val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\r\n                (click)=\"scrollToPost(postLocation)\">{{val.title}}</a>&nbsp;\r\n                <span *ngIf=\"val.comment.length > 0\" style=\"color: grey;\">[{{val.comment.length}}]</span>\r\n              </div>\r\n              <div style=\"font-size: 85%; margin-top: 1%;\">\r\n                <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>추천 {{val.recommend.length}}</span>\r\n              </div>\r\n            </td>\r\n            <td>{{extractDate(val.writedate)}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n      <div *ngIf=\"authService.loggedIn()\" style=\"float: right;\">\r\n        <a mat-raised-button [routerLink]=\"['/write/'+type]\">글쓰기</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"board\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #board>\r\n    <button mat-menu-item *ngIf=\"authService.loggedIn()\">\r\n      <span>즐겨찾는 게시판 설정</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<!-- element for representing the location of the post to be scrolled -->\r\n<span style=\"display: hidden;\" #postLocation></span>\r\n\r\n<!-- section for a post -->\r\n<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">{{content?.title}}</h4>\r\n\r\n      <span style=\"float: right; text-align: right; font-size: 80%;\">\r\n        {{content?.nickname}}<br/>{{content?.writedate}}\r\n      </span>\r\n      <hr/>\r\n      <div class=\"posting\" [innerHtml]=\"content?.content\"></div>\r\n      <br/><br/>\r\n      <div style=\"text-align: center;\">\r\n        <button mat-raised-button color=\"primary\" (click)=\"onRecommend()\">\r\n          추천 {{content?.recommend?.length}}\r\n        </button>\r\n      </div>\r\n      <br/><hr/>\r\n\r\n      <!-- ############### table for comments ############### -->\r\n      <table style=\"width: 96%; margin: auto;\">\r\n        <tbody *ngFor=\"let comment of content?.comment\">\r\n          <tr>\r\n            <td>\r\n              <span style=\"font-size: 80%;\">\r\n                {{comment?.nickname}} &nbsp;|&nbsp; \r\n                {{comment?.writedate}}\r\n                <span *ngIf=\"comment?.userid == user?.userid || user?.userid == 'admin'\"> &nbsp;|&nbsp; \r\n                  <span style=\"cursor: pointer;\" (click)=\"onRemoveComment(comment.num)\">삭제</span>\r\n                </span>\r\n              </span>\r\n              <pre>{{comment?.comment}}</pre><br/>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n      <!-- ############### table for comments ############### -->\r\n\r\n      <!-- ############### writing area ############### -->\r\n      <form *ngIf=\"authService.loggedIn()\" (submit)=\"onWriteComment()\"><hr *ngIf=\"content?.comment?.length > 0\" />\r\n        <table style=\"width: 96%; margin: auto;\">\r\n          <tr style=\"text-align: center;\">\r\n\r\n            <td rowspan=\"2\" style=\"width: 85%;\">\r\n              <mat-form-field appearance=\"outline\" style=\"width: 100%; height: 100%;\">\r\n                <mat-label>댓글을 작성해주세요.</mat-label>\r\n                <textarea matInput placeholder=\"\" rows=\"3\" name=\"cmtWrite\"\r\n                [formControl]=\"cmtWrite\" [matAutocomplete]=\"auto\"></textarea>\r\n                <mat-autocomplete #auto>\r\n                  <!-- <mat-option *ngFor=\"let ct of filteredOptions | async\" [value]=\"'TO::' + ct?.nickname\" (onclick)=\"setCmtTo(ct)\">\r\n                    {{ct.nickname}} [{{ct.userid}}]\r\n                  </mat-option> -->\r\n                </mat-autocomplete>\r\n              </mat-form-field>\r\n            </td>\r\n\r\n            <td style=\"text-align: center; padding-bottom: 3%;\">\r\n              <button mat-raised-button type=\"submit\" style=\"width: 60%;\">작성</button>\r\n            </td>\r\n\r\n          </tr>\r\n        </table>\r\n      </form>\r\n      <!-- ############### writing area ############### -->\r\n\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"aboutPost\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #aboutPost>\r\n    <button mat-menu-item *ngIf=\"content?.userid == user?.userid || content?.userid == 'admin'\" (click)=\"onRemovePost()\">\r\n      <span>삭제</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<!-- section for a board -->\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 *ngIf=\"type == 'free'\">자유게시판</h4>\r\n      <h4 *ngIf=\"type != 'free'\">{{type}} 게시판</h4>\r\n      <hr/>\r\n      \r\n      <!-- for large display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--large-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">날짜</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\r\n            <th>글쓴이</th>\r\n            <th>조회수</th>\r\n            <th>추천</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{extractDate(val.writedate)}}</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/board/'+type+'/'+val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\r\n                (click)=\"scrollToPost(postLocation)\">{{val.title}}</a>&nbsp;\r\n              <span *ngIf=\"val.comment.length > 0\" style=\"font-size: 85%; color: grey;\">[{{val.comment.length}}]</span>\r\n            </td>\r\n            <td>{{val.nickname}}</td>\r\n            <td>{{val.hit}}</td>\r\n            <td>{{val.recommend.length}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <!-- for small display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--small-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <tbody *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <div>\r\n                <a [routerLink]=\"['/board/'+type+'/'+val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\r\n                (click)=\"scrollToPost(postLocation)\">{{val.title}}</a>&nbsp;\r\n                <span *ngIf=\"val.comment.length > 0\" style=\"color: grey;\">[{{val.comment.length}}]</span>\r\n              </div>\r\n              <div style=\"font-size: 85%; margin-top: 1%;\">\r\n                <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>추천 {{val.recommend.length}}</span>\r\n              </div>\r\n            </td>\r\n            <td>{{extractDate(val.writedate)}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"contents?.length\" [pageSize]=\"pagingSize\" (page)=\"paging($event)\">\r\n      </mat-paginator>\r\n\r\n      <div *ngIf=\"authService.loggedIn()\" style=\"float: right;\">\r\n        <a mat-raised-button [routerLink]=\"['/write/'+type]\">글쓰기</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"board\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #board>\r\n    <button mat-menu-item *ngIf=\"authService.loggedIn()\">\r\n      <span>즐겨찾는 게시판 설정</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -334,6 +335,9 @@ var BoardComponent = /** @class */ (function () {
         this.sanitized = sanitized;
         this.flashMessage = flashMessage;
         this.cmtWrite = new _angular_forms__WEBPACK_IMPORTED_MODULE_9__["FormControl"]();
+        this.pagingSize = 25;
+        this.pagingFrom = 0;
+        this.pagingTo = this.pagingSize;
         this.ct = null;
         this.navigationSubscription = this.router.events.subscribe(function (e) {
             if (e instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationEnd"]) {
@@ -482,7 +486,6 @@ var BoardComponent = /** @class */ (function () {
         else {
             this.boardService.recommend(this.num).subscribe(function (result) {
                 if (result.success) {
-                    // document.getElementById('recommend').innerHTML = '추천 ' + result.recommend;
                     _this.router.navigate(['/board/' + _this.type + '/' + _this.num]);
                 }
                 else {
@@ -494,6 +497,11 @@ var BoardComponent = /** @class */ (function () {
                 }
             });
         }
+    };
+    BoardComponent.prototype.paging = function (pageEvent) {
+        this.pagingFrom = pageEvent.pageIndex * this.pagingSize;
+        this.pagingTo = (pageEvent.pageIndex + 1) * this.pagingSize;
+        this.router.navigate(['/board/' + this.type + '/' + this.num]);
     };
     BoardComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -667,11 +675,6 @@ var LoginComponent = /** @class */ (function () {
             this.authService.authenticateUser(user).subscribe(function (data) {
                 if (data.success) {
                     _this.authService.storeUserData(data.token, data.user);
-                    // this.flashMessage.showFlashMessage({
-                    //   messages: [data.msg], 
-                    //   type: 'success', 
-                    //   timeout:3000
-                    // });
                     _this.router.navigate(['/']);
                 }
                 else {
@@ -680,7 +683,6 @@ var LoginComponent = /** @class */ (function () {
                         type: 'danger',
                         timeout: 3000
                     });
-                    // this.router.navigate(['login']);
                 }
             });
         }
@@ -721,7 +723,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>회원정보수정</h4><hr/><br/><br/>\r\n\r\n      <!-- registration form for large display -->\r\n      <form class=\"mdl-layout--large-screen-only\" (submit)=\"onRegisterSubmit()\">\r\n        <div style=\"width: 100%; text-align: center;\">\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"아이디\" type=\"text\" [value]=\"user?.userid\" disabled>\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"기존 비밀번호 (필수)\" type=\"password\" name=\"pw\" [(ngModel)]=\"pw\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"새 비밀번호\" type=\"password\" name=\"newpw\" [(ngModel)]=\"newpw\">\r\n            <mat-hint><strong>비밀번호 미변경 시 공백 유지</strong></mat-hint>\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"닉네임\" type=\"text\" name=\"nickname\" [(ngModel)]=\"nickname\" [value]=\"user?.nickname\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"이메일\" type=\"text\" [value]=\"user?.email\" disabled>\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"한 줄 소개\" type=\"text\" name=\"introduction\" [(ngModel)]=\"introduction\" [value]=\"user?.introduction\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <br/>\r\n          <button mat-raised-button type=\"submit\" class=\"largeInputEle\" color=\"primary\">회원가입</button>\r\n          <br/><br/><br/><hr/>\r\n          회원코드 : [ {{user?._id}} ]\r\n        </div>\r\n      </form>\r\n\r\n      <!-- registration form for small display -->\r\n      <form class=\"mdl-layout--small-screen-only\" (submit)=\"onRegisterSubmit()\">\r\n        <div style=\"width: 100%; text-align: center;\">\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"아이디\" type=\"text\" [value]=\"user?.userid\" disabled>\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"기존 비밀번호\" type=\"password\" name=\"pw\" [(ngModel)]=\"pw\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"새 비밀번호\" type=\"password\" name=\"newpw\" [(ngModel)]=\"newpw\">\r\n            <mat-hint><strong>비밀번호 미변경 시 공백 유지</strong></mat-hint>\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"닉네임\" type=\"text\" name=\"nickname\" [(ngModel)]=\"nickname\" [value]=\"user?.nickname\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"이메일\" type=\"text\" name=\"email\" [value]=\"user?.email\" disabled>\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"한 줄 소개\" type=\"text\" name=\"introduction\" [(ngModel)]=\"introduction\" [value]=\"user?.introduction\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <br/>\r\n          <button mat-raised-button type=\"submit\" class=\"smallInputEle\" color=\"primary\">회원가입</button>\r\n          <br/><br/><br/><hr/>\r\n          회원코드 : [ {{user?._id}} ]\r\n        </div>\r\n      </form>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>회원정보수정</h4><hr/><br/><br/>\r\n\r\n      <!-- registration form for large display -->\r\n      <form class=\"mdl-layout--large-screen-only\" (submit)=\"onModifyUser()\">\r\n        <div style=\"width: 100%; text-align: center;\">\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"아이디\" type=\"text\" [value]=\"user?.userid\" disabled>\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"기존 비밀번호 (필수)\" type=\"password\" name=\"pw\" [(ngModel)]=\"pw\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"새 비밀번호\" type=\"password\" name=\"newpw\" [(ngModel)]=\"newpw\">\r\n            <mat-hint><strong>비밀번호 미변경 시 공백 유지</strong></mat-hint>\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"닉네임\" type=\"text\" name=\"nickname\" [(ngModel)]=\"nickname\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"이메일\" type=\"text\" [value]=\"user?.email\" disabled>\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"한 줄 소개\" type=\"text\" name=\"introduction\" [(ngModel)]=\"introduction\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <br/>\r\n          <button mat-raised-button type=\"submit\" class=\"largeInputEle\" color=\"primary\">회원가입</button>\r\n          <br/><br/><br/><hr/>\r\n          회원코드 : [ {{user?._id}} ]\r\n        </div>\r\n      </form>\r\n\r\n      <!-- registration form for small display -->\r\n      <form class=\"mdl-layout--small-screen-only\" (submit)=\"onModifyUser()\">\r\n        <div style=\"width: 100%; text-align: center;\">\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"아이디\" type=\"text\" [value]=\"user?.userid\" disabled>\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"기존 비밀번호\" type=\"password\" name=\"pw\" [(ngModel)]=\"pw\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"새 비밀번호\" type=\"password\" name=\"newpw\" [(ngModel)]=\"newpw\">\r\n            <mat-hint><strong>비밀번호 미변경 시 공백 유지</strong></mat-hint>\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"닉네임\" type=\"text\" name=\"nickname\" [(ngModel)]=\"nickname\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"이메일\" type=\"text\" name=\"email\" [value]=\"user?.email\" disabled>\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"한 줄 소개\" type=\"text\" name=\"introduction\" [(ngModel)]=\"introduction\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <br/>\r\n          <button mat-raised-button type=\"submit\" class=\"smallInputEle\" color=\"primary\">회원가입</button>\r\n          <br/><br/><br/><hr/>\r\n          회원코드 : [ {{user?._id}} ]\r\n        </div>\r\n      </form>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -738,6 +740,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
 /* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
+/* harmony import */ var _services_validate_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/validate.service */ "./src/app/services/validate.service.ts");
+/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ng-flash-messages */ "./node_modules/ng-flash-messages/ng-flash-messages.umd.js");
+/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(ng_flash_messages__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -750,16 +756,75 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
+
 var ModifyComponent = /** @class */ (function () {
-    function ModifyComponent(authService, funcService) {
+    function ModifyComponent(authService, funcService, validateService, flashMessage, router) {
         this.authService = authService;
         this.funcService = funcService;
+        this.validateService = validateService;
+        this.flashMessage = flashMessage;
+        this.router = router;
         this.funcService.setTitle('회원정보수정');
     }
     ModifyComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.authService.getProfile().subscribe(function (profile) {
             _this.user = profile.user;
+            _this.nickname = _this.user.nickname;
+            _this.introduction = _this.user.introduction;
+        });
+    };
+    ModifyComponent.prototype.onModifyUser = function () {
+        var _this = this;
+        if (!this.validateService.validateModify({ pw: this.pw, nickname: this.nickname, introduction: this.introduction })) {
+            this.flashMessage.showFlashMessage({
+                messages: ['필드가 비어있습니다.'],
+                type: 'danger',
+                timeout: 3000
+            });
+            return false;
+        }
+        var conditions = this.validateService
+            .validateConditions({ userid: this.user.userid, pw: (this.newpw == undefined || this.newpw == '' ? this.pw : this.newpw), nickname: this.nickname });
+        if (!conditions.valid) {
+            this.flashMessage.showFlashMessage({ messages: [conditions.msg], type: 'danger', timeout: 3000 });
+            return false;
+        }
+        this.authService.authenticateUser({ userid: this.user.userid, pw: this.pw }).subscribe(function (data) {
+            if (!data.success) {
+                _this.flashMessage.showFlashMessage({
+                    messages: ['비밀번호가 잘못되었습니다.'],
+                    type: 'danger',
+                    timeout: 3000
+                });
+                return false;
+            }
+            else {
+                var formData = {
+                    nickname: _this.nickname,
+                    pw: (_this.newpw == undefined || _this.newpw == '' ? '' : _this.newpw),
+                    introduction: _this.introduction
+                };
+                _this.authService.modifyUser(formData).subscribe(function (result) {
+                    if (result.success) {
+                        _this.flashMessage.showFlashMessage({
+                            messages: ['회원정보가 변경되었습니다.'],
+                            type: 'success',
+                            timeout: 2000
+                        });
+                        _this.router.navigate(['/']);
+                    }
+                    else {
+                        _this.flashMessage.showFlashMessage({
+                            messages: [result.msg],
+                            type: 'danger',
+                            timeout: 3000
+                        });
+                    }
+                });
+            }
         });
     };
     ModifyComponent = __decorate([
@@ -769,7 +834,10 @@ var ModifyComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./modify.component.css */ "./src/app/components/modify/modify.component.css")]
         }),
         __metadata("design:paramtypes", [_services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"],
-            _services_func_service__WEBPACK_IMPORTED_MODULE_2__["FuncService"]])
+            _services_func_service__WEBPACK_IMPORTED_MODULE_2__["FuncService"],
+            _services_validate_service__WEBPACK_IMPORTED_MODULE_3__["ValidateService"],
+            ng_flash_messages__WEBPACK_IMPORTED_MODULE_4__["NgFlashMessageService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
     ], ModifyComponent);
     return ModifyComponent;
 }());
@@ -939,23 +1007,23 @@ var RegisterComponent = /** @class */ (function () {
         };
         // Required Fields
         if (!this.validateService.validateRegister(user)) {
-            this.flashMessage.showFlashMessage({ messages: ['빈 항목이 있습니다'], type: 'danger', timeout: 2000 });
+            this.flashMessage.showFlashMessage({ messages: ['빈 항목이 있습니다'], type: 'danger', timeout: 3000 });
             return false;
         }
         // Password check
         if (this.pw != this.pwchk) {
-            this.flashMessage.showFlashMessage({ messages: ['비밀번호가 일치하지 않습니다'], type: 'danger', timeout: 2000 });
+            this.flashMessage.showFlashMessage({ messages: ['비밀번호가 일치하지 않습니다'], type: 'danger', timeout: 3000 });
             return false;
         }
         // Check with conditions
         var conditions = this.validateService.validateConditions(user);
         if (!conditions.valid) {
-            this.flashMessage.showFlashMessage({ messages: [conditions.msg], type: 'danger', timeout: 2000 });
+            this.flashMessage.showFlashMessage({ messages: [conditions.msg], type: 'danger', timeout: 3000 });
             return false;
         }
         // Validate Email
         if (!this.validateService.validateEmail(user.email)) {
-            this.flashMessage.showFlashMessage({ messages: ['이메일 형식이 맞지 않습니다'], type: 'danger', timeout: 2000 });
+            this.flashMessage.showFlashMessage({ messages: ['이메일 형식이 맞지 않습니다'], type: 'danger', timeout: 3000 });
             return false;
         }
         // Register User
@@ -1176,7 +1244,7 @@ var WriteComponent = /** @class */ (function () {
         this.boardService = boardService;
         this.options = {
             placeholderText: '',
-            height: 300,
+            height: 500,
             imageDefaultAlign: 'left'
         };
         this.type = this.route.snapshot.paramMap.get('type');
@@ -1366,6 +1434,13 @@ var AuthService = /** @class */ (function () {
         this.authToken = null;
         this.user = null;
         localStorage.clear();
+    };
+    AuthService.prototype.modifyUser = function (user) {
+        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(this.funcService.ServerAddress + '/users/modify', user, { headers: headers })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     AuthService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -1564,14 +1639,21 @@ var ValidateService = /** @class */ (function () {
         // if ( !idvalid.test(user.userid) ) {
         //   return {
         //     valid: false,
-        //     msg: '아이디는 영어, 숫자로 이루어진 6~15 글자여야 합니다'
+        //     msg: '아이디는 영어, 숫자로 이루어진 6~15 글자여야 합니다.'
         //   };
         // }
         // let pwvalid = /^{10,}/;
         // if ( !pwvalid.test(user.pw) ) {
         //   return {
         //     valid: false,
-        //     msg: '비밀번호는 10글자 이상이어야 합니다'
+        //     msg: '비밀번호는 10글자 이상이어야 합니다.'
+        //   }
+        // }
+        // let nickValid = /^[a-Zㄱ-힣0-9]{4,8}$/;
+        // if ( !nickValid.test(user.nickname) ) {
+        //   return {
+        //     valid: false,
+        //     msg: '닉네임은 한글, 알파벳, 숫자로 이루어진 4~8 글자여야 합니다.'
         //   }
         // }
         return {
@@ -1581,6 +1663,11 @@ var ValidateService = /** @class */ (function () {
     ValidateService.prototype.validateEmail = function (email) {
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
+    };
+    ValidateService.prototype.validateModify = function (user) {
+        return !(user.pw == undefined || user.pw == '' ||
+            user.nickname == undefined || user.nickname == '' ||
+            user.introduction == undefined || user.introduction == '');
     };
     ValidateService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
@@ -1659,7 +1746,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\PJH\1494054\RogueWrite\angular-src\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\Hoon\PJH\others\web\rwrite\angular-src\src\main.ts */"./src/main.ts");
 
 
 /***/ })

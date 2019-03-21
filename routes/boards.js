@@ -2,9 +2,11 @@ const express = require('express');
 const router = express.Router();
 //=======================================<
 const passport = require('passport');
-const jwt = require('jsonwebtoken');
+// const fs = require('fs-extra');
+const fs = require('fs');
+const DOMParser = require('xmldom').DOMParser;
+const request = require('request');
 const Board = require('../models/board');
-const User = require('../models/user');
 
 function set2LetterFormat(num) {
     num = num >= 10 ? num : '0' + num;
@@ -23,12 +25,13 @@ function getNowDate() {
 
 router.get('/takeOnePost', function(req, res, next) {
     var num = req.query.num;
+    var loggedIn = req.query.loggedIn;
     Board.findOne({_id: num}, function(err, post) {
-        if ( req.user && req.user.userid != post.userid ) {
-            let hit = post.hit + 1;
-            Board.findOneAndUpdate({_id: num}, {hit: hit}, function(err, post) {});
-        }
-        res.json({post: post});
+        if ( loggedIn == 'yes' ) {
+            Board.findOneAndUpdate({_id: num}, {hit: post.hit + 1}, function(err, output) {
+                res.json({post: output});
+            });
+        } else res.json({post: post});
     });
 })
 
@@ -40,6 +43,22 @@ router.get('/takeAllPosts', function(req, res, next) {
 })
 
 router.post('/write', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+    var htmlDoc = new DOMParser().parseFromString(req.body.content, 'text/html');
+    var img = htmlDoc.getElementsByTagName('img');
+    for (let i=0; i<img.length; i++) {
+        console.log('RRRR');
+        // request.get(img[i].getAttribute('src'), function(err, res, buf) {
+        //     if ( err ) console.log(err);
+        //     fs.createWriteStream('public/' + i + '.jpg').write(buf);
+        //     console.log('WHAT???');
+        // });
+        request({url: img[i].getAttribute('src'), encoding: null}, (err, res, buf) => {
+            if ( err ) console.log(err);
+            fs.createWriteStream('public/' + i + '.jpg').write(buf);
+            console.log('WHAT???');
+        });
+    }
+
     const newPost = new Board({
         type: req.body.type,
         userid: req.user.userid,
@@ -66,25 +85,32 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
 })
 
 router.post('/writeComment', passport.authenticate('jwt', {session: false}), function(req, res, next) {
-    const cmtData = {
-        num: new Date().getMilliseconds() + req.user.userid,
-        writedate: getNowDate(),
-        userid: req.user.userid,
-        nickname: req.user.nickname,
-        comment: req.body.comment
-    };
-    Board.findOneAndUpdate({_id: req.body._id}, {$push: {comment: cmtData}}, function(err, post) {
-        if ( err ) {
-            res.json({
-                success: false
-            });
-        } else {
-            res.json({
-                success: true,
-                post: post
-            });
-        }
+    Board.findOne({_id: req.body._id}, function(err, post) {
+        let num = 0;
+        if ( post.comment.length > 0 )
+            num = post.comment[post.comment.length-1].num + 1;
+        
+        const cmtData = {
+            num: num,
+            writedate: getNowDate(),
+            userid: req.user.userid,
+            nickname: req.user.nickname,
+            comment: req.body.comment
+        };
+        Board.findOneAndUpdate({_id: req.body._id}, {$push: {comment: cmtData}}, function(err, output) {
+            if ( err ) {
+                res.json({
+                    success: false
+                });
+            } else {
+                res.json({
+                    success: true,
+                    post: output
+                });
+            }
+        })
     })
+    
 
 })
 

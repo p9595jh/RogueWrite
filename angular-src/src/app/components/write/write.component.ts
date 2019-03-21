@@ -17,7 +17,7 @@ import { NgFlashMessageService } from 'ng-flash-messages';
 export class WriteComponent implements OnInit {
   options: Object = {
     placeholderText: '',
-    height: 300,
+    height: 500,
     imageDefaultAlign: 'left'
   };
 
