@@ -63,9 +63,28 @@ export class AuthService {
 
   modifyUser(user) {
     let headers = new Headers();
+    this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
     return this.http.post(this.funcService.ServerAddress + '/users/modify', user, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  administrateUser(_id, clean: Boolean) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/users/admin', {_id: _id, clean: clean}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  getAllUsers() {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/users/getAllUsers', {}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 

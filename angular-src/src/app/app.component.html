@@ -13,9 +13,9 @@
         <h3 [routerLink]="['/']" style="cursor: pointer; font-family: 'Ubuntu', sans-serif;">{{siteName}}</h3>
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" >
-          <a *ngIf="!authService.loggedIn()" class="mdl-navigation__link" [routerLink]="['/login']">LOGIN</a>
-          <a *ngIf="authService.loggedIn()" class="mdl-navigation__link" [routerLink]="['/profile']">PROFILE</a>
-          <a *ngIf="authService.loggedIn()" class="mdl-navigation__link" (click)="onLogoutClick()" href="#">LOGOUT</a>
+          <a class="mdl-navigation__link" *ngIf="!authService.loggedIn()" [routerLink]="['/login']">LOGIN</a>
+          <a class="mdl-navigation__link" *ngIf="authService.loggedIn()" [routerLink]="['/profile']">PROFILE</a>
+          <a class="mdl-navigation__link" *ngIf="authService.loggedIn()" (click)="onLogoutClick()" href="#">LOGOUT</a>
         </nav>
       </div>
       
@@ -51,11 +51,8 @@
     <div class="mdl-layout__drawer mdl-layout--small-screen-only">
       <span class="mdl-layout__title" style="font-family: 'Ubuntu', sans-serif;">{{siteName}}</span>
       <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" href="#">menu1</a>
-        <a class="mdl-navigation__link" href="#">menu2</a>
-        <a class="mdl-navigation__link" href="#">menu3</a>
-        <a class="mdl-navigation__link" href="#">menu4</a>
-        <a class="mdl-navigation__link" href="#">menu5</a>
+        <a class="mdl-navigation__link" *ngFor="let link of navLinks"
+          [routerLink]="[link.path]">{{link.label}}</a>
       </nav>
     </div>
 

@@ -30,9 +30,9 @@ import {
 import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { NgFlashMessagesModule } from 'ng-flash-messages';
-import { AuthGuard } from './guards/auth.guard';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { FileSelectDirective } from 'ng2-file-upload';
+import { AuthGuard } from './guards/auth.guard';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -43,6 +43,8 @@ import { ModifyComponent } from './components/modify/modify.component';
 import { BoardComponent } from './components/board/board.component';
 import { WriteComponent } from './components/write/write.component';
 import { TestComponent } from './components/test/test.component';
+import { NoPageComponent } from './components/no-page/no-page.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -52,7 +54,9 @@ const appRoutes: Routes = [
   { path: 'modify', component: ModifyComponent, canActivate: [AuthGuard] },
   { path: 'board/:type/:num', component: BoardComponent },
   { path: 'write/:type', component: WriteComponent, canActivate: [AuthGuard] },
-  { path: 'test', component: TestComponent }
+  { path: 'test', component: TestComponent },
+  { path: 'no-page', component: NoPageComponent },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] }
 ]
 
 @NgModule({
@@ -66,7 +70,9 @@ const appRoutes: Routes = [
     ModifyComponent,
     BoardComponent,
     WriteComponent,
-    TestComponent
+    TestComponent,
+    NoPageComponent,
+    AdminComponent
   ],
   imports: [
     ReactiveFormsModule,

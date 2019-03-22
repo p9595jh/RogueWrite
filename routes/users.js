@@ -29,7 +29,8 @@ router.post('/register', function(req, res, next) {
     email: req.body.email,
     nickname: req.body.nickname,
     introduction: req.body.introduction,
-    registerdate: getNowDate()
+    registerdate: getNowDate(),
+    clean: true
   });
 
   User.findOne({userid: newUser.userid}, function(err1, output1) {
@@ -141,7 +142,39 @@ router.post('/modify', passport.authenticate('jwt', {session: false}), function(
       }
     }
   })
-})
+});
+
+router.post('/admin', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+  if ( req.user.userid == 'admin' ) {
+    User.findOneAndUpdate({_id: req.body._id}, {clean: !req.body.clean}, function(err, user) {
+      if ( err ) {
+        res.json({
+          success: false,
+          msg: err
+        });
+      } else res.json({success: true});
+    });
+  } else {
+    res.json({
+      success: false,
+      msg: 'cannot access'
+    });
+  }
+});
+
+router.post('/getAllUsers', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+  if ( req.user.userid != 'admin' ) {
+    res.json({
+      users: []
+    });
+  } else {
+    User.find({}, function(err, users) {
+      res.json({
+        users: users
+      });
+    });
+  }
+});
 
 router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res, next) => {
   res.json({user: req.user});

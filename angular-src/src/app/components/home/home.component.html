@@ -1,3 +1,22 @@
+<section *ngIf="user?.userid == 'admin'" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+    <div class="demo-card-wide mdl-card" style="width: 100%;">
+      <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">Welcome, Admin</h2>
+      </div>
+      <div class="mdl-card__supporting-text">
+        반갑습니다, 어드민님
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <!-- <a mat-button color="primary" [routerLink]="['/admin']"> -->
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" [routerLink]="['/admin']">
+          어드민 페이지
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">

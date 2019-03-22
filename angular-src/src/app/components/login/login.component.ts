@@ -18,10 +18,11 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private flashMessage: NgFlashMessageService,
     private funcService: FuncService
-    ) { }
+    ) {
+      this.funcService.setTitle('로그인');
+    }
 
   ngOnInit() {
-    this.funcService.setTitle('로그인');
   }
 
   onLoginSubmit() {
@@ -43,7 +44,7 @@ export class LoginComponent implements OnInit {
       this.authService.authenticateUser(user).subscribe(data => {
         if( data.success ) {
           this.authService.storeUserData(data.token, data.user);
-          this.router.navigate(['/']);
+          this.router.navigate([this.funcService.getPreviousUrl()]);
         } else {
           this.flashMessage.showFlashMessage({
             messages: [data.msg], 

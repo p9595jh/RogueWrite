@@ -1,0 +1,37 @@
+<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+    <div class="mdl-card__supporting-text">
+      <h4>어드민 게시판</h4>
+      <hr/>
+      
+      <!-- for large display -->
+      <table class="mdl-data-table mdl-js-data-table mdl-layout--large-screen-only" style="margin: auto; width: 98%;">
+        <thead>
+          <tr>
+            <th class="mdl-data-table__cell--non-numeric">아이디</th>
+            <th class="mdl-data-table__cell--non-numeric">닉네임</th>
+            <th>관리</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let val of users | slice:pagingFrom:pagingTo;">
+          <tr *ngIf="val?.userid != 'admin'">
+            <td class="mdl-data-table__cell--non-numeric">{{val.userid}}</td>
+            <td class="mdl-data-table__cell--non-numeric">{{val.nickname}}</td>
+            <td *ngIf="val?.clean">
+              <button mat-button color="primary" (click)="administrate(val?._id, val?.clean)">클린회원</button>
+            </td>
+            <td *ngIf="!val?.clean">
+              <button mat-button color="warn" (click)="administrate(val?._id, val?.clean)">정지회원</button>
+            </td>
+          </tr>
+        </tbody>
+      </table><br/>
+
+      <mat-paginator [length]="users?.length" [pageSize]="pagingSize" (page)="paging($event)">
+      </mat-paginator>
+
+    </div>
+  </div>
+</section>
+
+<section></section>

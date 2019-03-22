@@ -1,7 +1,3 @@
-/* more theme:: [https://material.angular.io/guide/theming] */
-/* It has been applied a custom theme via app-theme.scss already, so it's not working now */
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
-
 pre {
   font-family: gothic;
   font-size: 105%;

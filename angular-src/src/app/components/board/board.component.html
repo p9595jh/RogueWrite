@@ -117,11 +117,13 @@
       <table class="mdl-data-table mdl-js-data-table mdl-layout--small-screen-only" style="margin: auto; width: 98%;">
         <tbody *ngFor="let val of contents | slice:pagingFrom:pagingTo; let i=index">
           <tr>
-            <td class="mdl-data-table__cell--non-numeric">
+            <td class="mdl-data-table__cell--non-numeric"
+              [routerLink]="['/board/'+type+'/'+val?._id]" (click)="scrollToPost(postLocation)">
               <div>
-                <a [routerLink]="['/board/'+type+'/'+val?._id]"
+                <!-- <a [routerLink]="['/board/'+type+'/'+val?._id]"
                 style="color: black; text-decoration: none; font-weight: 400;"
-                (click)="scrollToPost(postLocation)">{{val.title}}</a>&nbsp;
+                (click)="scrollToPost(postLocation)">{{val.title}}</a>&nbsp; -->
+                {{val.title}}
                 <span *ngIf="val.comment.length > 0" style="color: grey;">[{{val.comment.length}}]</span>
               </div>
               <div style="font-size: 85%; margin-top: 1%;">

@@ -42,6 +42,7 @@ export class BoardService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
+    // headers.append('Content-Type', 'multipart/form-data');
     return this.http.post(this.funcService.ServerAddress + '/boards/write', post, {headers: headers})
       .pipe(map(res => res.json()));
   }

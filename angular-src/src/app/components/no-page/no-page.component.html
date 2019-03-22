@@ -1,0 +1,18 @@
+<section *ngIf="num != 'list'" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+    <div class="mdl-card__supporting-text">
+      <h4 style="display: inline;">404 ERROR</h4>
+
+      <hr/>
+      <div class="posting">
+        <img src="images/404.jpg" style="width: 100%;"><br/><br/>
+        페이지가 존재하지 않습니다.<br/><br/>
+        <a mat-raised-button color="primary" [routerLink]="[this.funcService.getPreviousUrl()]">이전 페이지로 돌아가기</a><br/><br/>
+      </div>
+      <br/><br/>
+
+    </div>
+  </div>
+</section>
+
+<section></section>

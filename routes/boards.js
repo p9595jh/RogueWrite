@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 //=======================================<
 const passport = require('passport');
-// const fs = require('fs-extra');
 const fs = require('fs');
 const DOMParser = require('xmldom').DOMParser;
 const request = require('request');
+const formidable = require('formidable');
 const Board = require('../models/board');
 
 function set2LetterFormat(num) {
@@ -27,7 +27,11 @@ router.get('/takeOnePost', function(req, res, next) {
     var num = req.query.num;
     var loggedIn = req.query.loggedIn;
     Board.findOne({_id: num}, function(err, post) {
-        if ( loggedIn == 'yes' ) {
+        if ( !post ) {
+            res.json({
+                fail: true
+            });
+        } else if ( loggedIn == 'yes' ) {
             Board.findOneAndUpdate({_id: num}, {hit: post.hit + 1}, function(err, output) {
                 res.json({post: output});
             });
@@ -42,46 +46,83 @@ router.get('/takeAllPosts', function(req, res, next) {
     });
 })
 
-router.post('/write', passport.authenticate('jwt', {session: false}), function(req, res, next) {
-    var htmlDoc = new DOMParser().parseFromString(req.body.content, 'text/html');
-    var img = htmlDoc.getElementsByTagName('img');
-    for (let i=0; i<img.length; i++) {
-        console.log('RRRR');
-        // request.get(img[i].getAttribute('src'), function(err, res, buf) {
-        //     if ( err ) console.log(err);
-        //     fs.createWriteStream('public/' + i + '.jpg').write(buf);
-        //     console.log('WHAT???');
-        // });
-        request({url: img[i].getAttribute('src'), encoding: null}, (err, res, buf) => {
-            if ( err ) console.log(err);
-            fs.createWriteStream('public/' + i + '.jpg').write(buf);
-            console.log('WHAT???');
-        });
-    }
+// router.post('/write', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+router.post('/write', function(req, res, next) {
+    // var htmlDoc = new DOMParser().parseFromString(req.body.content, 'text/html');
+    // var img = htmlDoc.getElementsByTagName('img');
+    // for (let i=0; i<img.length; i++) {
+    //     console.log('RRRR');
+    //     // request.get(img[i].getAttribute('src'), function(err, res, buf) {
+    //     //     if ( err ) console.log(err);
+    //     //     fs.createWriteStream('public/' + i + '.jpg').write(buf);
+    //     //     console.log('WHAT???');
+    //     // });
+    //     request({url: img[i].getAttribute('src'), encoding: null}, (err, res, buf) => {
+    //         if ( err ) console.log(err);
+    //         fs.createWriteStream('public/' + i + '.jpg').write(buf);
+    //         console.log('WHAT???');
+    //     });
+    // }
 
-    const newPost = new Board({
-        type: req.body.type,
-        userid: req.user.userid,
-        nickname: req.user.nickname,
-        title: req.body.title,
-        content: req.body.content,
-        hit: 0,
-        recommend: [],
-        comment: [],
-        writedate: getNowDate()
-    });
-    Board.addPost(newPost, (err, post) => {
-        if ( err ) {
-            res.json({
-                success: false
-            });
-        } else {
-            res.json({
-                success: true,
-                num: post._id
-            });
-        }
-    });
+    console.log('HELLO???');
+    var form = new formidable.IncomingForm();
+    form.encoding = 'utf-8';
+    // form.uploadDir = '/public/images';
+    // form.multiples = true;
+    // form.keepExtensions = true;
+    form.parse(req, function(err, fields, files) {
+        console.log(err);
+        console.log(fields);
+        const newPost = new Board({
+            type: fields.type,
+            // userid: req.user.userid,
+            // nickname: req.user.nickname,
+            title: fields.title,
+            content: fields.content,
+            hit: 0,
+            recommend: [],
+            comment: [],
+            writedate: getNowDate()
+        });
+        Board.addPost(newPost, (err, post) => {
+            if ( err ) {
+                res.json({
+                    success: false
+                });
+            } else {
+                res.json({
+                    success: true,
+                    num: post._id
+                });
+            }
+        });
+    })
+
+    // console.log(req.body);
+    // const newPost = new Board({
+    //     type: req.body.type,
+    //     userid: req.user.userid,
+    //     nickname: req.user.nickname,
+    //     title: req.body.title,
+    //     content: req.body.content,
+    //     hit: 0,
+    //     recommend: [],
+    //     comment: [],
+    //     writedate: getNowDate()
+    // });
+    // Board.addPost(newPost, (err, post) => {
+    //     if ( err ) {
+    //         res.json({
+    //             success: false
+    //         });
+    //     } else {
+    //         res.json({
+    //             success: true,
+    //             num: post._id
+    //         });
+    //     }
+    // });
+
 })
 
 router.post('/writeComment', passport.authenticate('jwt', {session: false}), function(req, res, next) {
@@ -89,6 +130,17 @@ router.post('/writeComment', passport.authenticate('jwt', {session: false}), fun
         let num = 0;
         if ( post.comment.length > 0 )
             num = post.comment[post.comment.length-1].num + 1;
+
+        let split = req.body.comment.split(' ');
+        let comment = split[0];
+        const regex = /^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?/;
+        for (let s of split) {
+            if ( regex.test(s) ) {
+                s = "<a target='_blank' href='" + s + "'>" + s + "</a>";
+            }
+            comment += " " + s;
+        }
+        
         
         const cmtData = {
             num: num,

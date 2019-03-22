@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { FuncService } from '../../services/func.service';
+import { AuthService } from '../../services/auth.service';
 import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
 import { Observable } from 'rxjs';
 import { startWith, map } from 'rxjs/operators';
+import { Http, Headers } from '@angular/http';
+import { NgFlashMessageService } from 'ng-flash-messages';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-test',
@@ -12,64 +16,67 @@ import { startWith, map } from 'rxjs/operators';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
-  foods: any[] = [
-    {value: 'steak-0', viewValue: 'Steak'},
-    {value: 'pizza-1', viewValue: 'Pizza'},
-    {value: 'tacos-2', viewValue: 'Tacos'}
-  ];
-  cmtWrite = new FormControl();
-  options: string[] = ['One', 'Two', 'Three'];
-  filteredOptions: Observable<string[]>;
+  options: Object = {
+    placeholderText: '',
+    height: 500,
+    imageDefaultAlign: 'left'
+  };
 
-  test = { num: 1 };
+  type: String = 'free';
+  title: String;
+  content: String;
 
   constructor(
-    private funcService: FuncService
+    private funcService: FuncService,
+    private authService: AuthService,
+    private http: Http,
+    private router: Router,
+    private flashMessage: NgFlashMessageService
   ) {
     this.funcService.setTitle('TEST!!!!');
-    
   }
 
   ngOnInit() {
-    // this.filteredOptions = this.cmtWrite.valueChanges.pipe(
-    //   startWith('TO::'),
-    //   map(value => this._filter(value))
-    // );
-    this.setFilteredOptions();
   }
 
-  private setFilteredOptions() {
-    this.filteredOptions = this.cmtWrite.valueChanges.pipe(
-      // startWith('TO::'),
-      map(value => this._filter(value))
-    );
-  }
+  onWritePost() {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this.authService.getProfile().subscribe(profile => {
 
-  private _filter(value: string): any[] {
-    const filterValue = value.toLowerCase();
+      const post = {
+        type: this.type,
+        title: this.title,
+        content: this.content,
+        userid: profile.user.userid,
+        nickname: profile.user.nickname
+      };
 
-    // return this.options.filter(option => option.toLowerCase().includes(filterValue));
+      let headers = new Headers();
+      // headers.append('Content-Type', 'application/json');
+      headers.append('Content-Type', 'multipart/form-data');
 
-    let f = [];
-    for (let i=0; i<this.foods.length; i++) {
-      f[i] = 'TO::' + this.foods[i].viewValue + ' [' + this.foods[i].value + '] ';
-    }
-    // return f.filter(option => option.toLowerCase().includes(filterValue));
-    return this.foods;
-  }
+      this.http.post(this.funcService.ServerAddress + '/boards/write', post, {headers: headers})
+       .pipe(map((res: any) => res.json())).subscribe(data => {
+          if ( data.success ) {
+            this.flashMessage.showFlashMessage({
+              messages: ['SUCCESS'],
+              type: 'success',
+              timeout: 2000
+            });
+            console.log('[[SUCCESS]]');
+          } else {
+            this.flashMessage.showFlashMessage({
+              messages: ['FAIL'],
+              type: 'danger',
+              timeout: 3000
+            });
+            console.log('[[FAIL]]');
+          }
 
-  onKeyUp(s: string) {
-    if ( s.toLowerCase() == 'hello' ) {
-      alert('HELLO!');
-    }
-  }
-
-  asdf() {
-    console.log(this.cmtWrite.value);
-  }
-
-  hello(a) {
-    alert(a);
+       });
+    })
+      
   }
 
 }

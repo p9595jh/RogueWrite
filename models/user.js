@@ -24,6 +24,9 @@ const UserSchema = mongoose.Schema({
   },
   registerdate: {
     type: String
+  },
+  clean: {
+    type: Boolean
   }
 });
 

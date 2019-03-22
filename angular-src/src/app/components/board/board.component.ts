@@ -21,7 +21,7 @@ import { PageEvent } from '@angular/material';
 @Pipe({ name: 'safeHtml' })
 export class BoardComponent implements OnInit, OnDestroy, PipeTransform {
   navigationSubscription;
-  filteredOptions: Observable<string[]>;
+  filteredOptions: Observable<string[]>;  // not using for now; a function for commenting
 
   type: String;
   num: String;
@@ -92,6 +92,10 @@ export class BoardComponent implements OnInit, OnDestroy, PipeTransform {
       this.contents = data.posts;
       if ( this.num != 'list' ) {
         this.boardService.takeOnePost(this.num).subscribe(result => {
+          if ( result.fail ) {
+            this.router.navigate(['/no-page']);
+            return false;
+          }
           this.content = result.post;
           this.funcService.setTitle(this.content.title + ' :: ' + (this.type == 'free' ? '자유게시판' : this.type + ' 게시판'));
           if ( this.authService.loggedIn() ) {

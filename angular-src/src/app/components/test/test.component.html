@@ -1,111 +1,17 @@
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
-      <h4 style="display: inline;">TITLE</h4>
-
-      <span style="float: right; text-align: right; font-size: 80%;">
-        NICKNAME<br/>WRITE-DATE
-      </span>
-      <hr/>
-      <div class="posting">hello</div>
-      <br/><br/>
-      <div style="text-align: center;">
-        <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
-          추천 0
-        </button>
+      <h4>글쓰기</h4><hr/>
+      <div style="width: 98%; margin: auto;">
+        <form (submit)="onWritePost()">
+          <mat-form-field style="width: 100%;">
+            <input matInput placeholder="제목" type="text" name="title" [(ngModel)]="title">
+          </mat-form-field>
+          <textarea [froalaEditor]="options" [(ngModel)]="content" name="content"></textarea>
+          <br/>
+          <button mat-raised-button type="submit" style="float: right;">작성</button>
+        </form><br/>
       </div>
-      <br/><hr/>
-
-      <!-- ############### table for comments ############### -->
-      <table style="width: 96%; margin: auto;">
-        <tbody>
-          <tr>
-            <td>
-              <span style="font-size: 80%;">
-                COMMENT-NICKNAME &nbsp;|&nbsp; 
-                COMMENT-WRITE-DATE &nbsp;|&nbsp; 
-                <a href="javascript:;" [attr.id]="test.num" (click)="hello(test.num)">삭제</a>
-              </span>
-              <!-- <button class="mdl-button mdl-js-button mdl-button--icon" style="font-size: 80%;" [attr.id]="test.num">
-                관리
-              </button>
-              <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="test.num">
-                <li class="mdl-menu__item">삭제</li>
-                <li class="mdl-menu__item">편집</li>
-              </ul> -->
-              <pre>COMMENT-COMMENT</pre>
-            </td>
-            <!-- <td style="text-align: right; vertical-align: middle;">
-              <button class="mdl-button mdl-js-button mdl-button--icon" style="font-size: 90%;">
-                ♡ 0
-              </button>
-            </td> -->
-          </tr>
-          <tr>
-            <td>
-              <span style="font-size: 80%;">COMMENT-NICKNAME &nbsp;|&nbsp; COMMENT-WRITE-DATE</span>
-              <pre>COMMENT-COMMENT</pre>
-            </td>
-            <!-- <td style="text-align: right; vertical-align: middle;">
-              <button class="mdl-button mdl-js-button mdl-button--icon" style="font-size: 90%;">
-                ♡ 0
-              </button>
-            </td> -->
-          </tr>
-        </tbody>
-      </table><br/>
-      <!-- ############### table for comments ############### -->
-
-      <!-- ############### writing area ############### -->
-      <!-- <form (submit)="onWriteComment()"> -->
-        <hr/>
-        <table style="width: 96%; margin: auto;">
-          <tr style="text-align: center;">
-
-            <td rowspan="2" style="width: 85%;">
-              <mat-form-field appearance="outline" style="width: 100%; height: 100%;">
-                <mat-label>댓글을 작성해주세요.</mat-label>
-                <textarea matInput placeholder="" rows="3" name="cmtWrite"
-                [formControl]="cmtWrite" [matAutocomplete]="auto"></textarea>
-                <mat-autocomplete #auto>
-                  <mat-option *ngFor="let option of filteredOptions | async" [value]="'TO::' + option?.viewValue">
-                    {{option.viewValue}} [{{option.value}}]
-                  </mat-option>
-                </mat-autocomplete>
-              </mat-form-field>
-            </td>
-
-            <td style="text-align: center; padding-bottom: 3%;">
-              <button mat-raised-button type="submit" style="width: 60%;" (click)="asdf()">작성</button>
-            </td>
-
-          </tr>
-        </table>
-      <!-- </form> -->
-      <!-- ############### writing area ############### -->
-
-    </div>
-  </div>
-  <button mat-icon-button [matMenuTriggerFor]="aboutPost">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #aboutPost>
-    <button mat-menu-item *ngIf="content?.userid == user?.userid || content?.userid == 'admin'" (click)="onRemovePost()">
-      <span>삭제</span>
-    </button>
-  </mat-menu>
-</section>
-
-<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-  <div class="mdl-card mdl-cell mdl-cell--12-col">
-    <div class="mdl-card__supporting-text">
-      <h4 style="display: inline;">asdf</h4>
-      <hr/>
-      <input type="text" (keyup)="onKeyUp(demo.value)" #demo><br/>
-      <p>{{demo.value}}</p><p #hihi></p>
-
     </div>
   </div>
 </section>
-
-<section></section>
