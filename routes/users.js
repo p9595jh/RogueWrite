@@ -5,6 +5,7 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const bcrypt = require('bcryptjs');
+const fs = require('fs-extra');
 const User = require('../models/user');
 
 function set2LetterFormat(num) {
@@ -56,17 +57,23 @@ router.post('/register', function(req, res, next) {
             } else {
               User.addUser(newUser, (err, user) => {
                 if ( err ) {
-                    res.json({
-                      success: false,
-                      msg:'등록에 실패하였습니다.',
-                      err: err
-                    });
-                  } else {
-                    res.json({
-                      success: true,
-                      msg:'등록 완료'
-                    });
-                  }
+                  res.json({
+                    success: false,
+                    msg:'등록에 실패하였습니다.',
+                    err: err
+                  });
+                } else {
+                  fs.copy('public/images/noimage.jpg', 'public/images/profileimages/' + user.userid, function(err) {
+                    if ( err ) console.log(err);
+                  });
+                  fs.copy('public/images/noimage.jpg', 'angular-src/src/images/profileimages/' + user.userid, function(err) {
+                    if ( err ) console.log(err);
+                  });
+                  res.json({
+                    success: true,
+                    msg:'등록 완료'
+                  });
+                }
               });
             }
           })

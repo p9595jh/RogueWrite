@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session');
 
 //========================================<
 
@@ -27,6 +28,7 @@ mongoose.connection.on('error', (err) => {
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var boardsRouter = require('./routes/boards');
+var modalsRouter = require('./routes/modals');
 var testRouter = require('./routes/test');
 
 var app = express();
@@ -46,6 +48,13 @@ app.use(passport.session());
 
 require('./config/passport')(passport);
 
+app.use(session({
+  key: 'sid',
+  secret: '0123456789abcdefghijklmnopqrstuvwxyz!@#$%',
+  resave: false,
+  saveUninitialized: true
+}));
+
 //========================================>
 
 app.use(logger('dev'));
@@ -57,6 +66,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/boards', boardsRouter);
+app.use('/modals', modalsRouter);
 app.use('/api', testRouter);
 
 // catch 404 and forward to error handler

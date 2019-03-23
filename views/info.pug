@@ -1,0 +1,30 @@
+extends layout
+
+block content
+    br
+    span(style="font-size: 20px;")
+        b= user.userid
+        span 님의 정보 
+        span(style="float: right;")
+            img(src="../images/profileimages/" + user.userid, width="70", height="70")
+        hr
+        - if ( !user.clean )
+            b(style="color:red;")  정지회원
+        - else if ( user.userid == 'admin' )
+            b  사이트 어드민
+            br
+        br
+
+        p 닉네임: #{user.nickname}
+        p 이메일: #{user.email}
+        p 자기소개: #{user.introduction}
+        p 가입일: #{user.registerdate}
+        //- br
+        br
+        br
+        
+        br
+        br
+        button(onclick="window.open('about:blank', '_self').close()") 닫기
+        br
+        br

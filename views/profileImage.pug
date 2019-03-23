@@ -1,0 +1,17 @@
+extends layout
+
+block content
+    hr
+    br
+    br
+    div(style="margin: auto;")
+        form(method="POST", action="./setProfileImage?userid=" + userid, enctype="multipart/form-data", style="text-align: center;")
+            input(type="file", name="image")
+            br
+            br
+            input(type="submit" value="적용")
+        br
+        p(style="color: red;") #{errmsg}
+    br
+    br
+    button(onclick="window.open('about:blank', '_self').close()") 닫기

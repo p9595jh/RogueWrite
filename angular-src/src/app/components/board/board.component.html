@@ -8,7 +8,7 @@
       <h4 style="display: inline;">{{content?.title}}</h4>
 
       <span style="float: right; text-align: right; font-size: 80%;">
-        {{content?.nickname}}<br/>{{content?.writedate}}
+        <span class="toProfile" (click)="funcService.openInfoWindow(val?.userid)">{{content?.nickname}}</span><br/>{{content?.writedate}}
       </span>
       <hr/>
       <div class="posting" [innerHtml]="content?.content"></div>
@@ -26,7 +26,7 @@
           <tr>
             <td>
               <span style="font-size: 80%;">
-                {{comment?.nickname}} &nbsp;|&nbsp; 
+                <span class="toProfile" (click)="funcService.openInfoWindow(comment?.userid)">{{comment?.nickname}}</span> &nbsp;|&nbsp; 
                 {{comment?.writedate}}
                 <span *ngIf="comment?.userid == user?.userid || user?.userid == 'admin'"> &nbsp;|&nbsp; 
                   <span style="cursor: pointer;" (click)="onRemoveComment(comment.num)">삭제</span>
@@ -106,7 +106,9 @@
                 (click)="scrollToPost(postLocation)">{{val.title}}</a>&nbsp;
               <span *ngIf="val.comment.length > 0" style="font-size: 85%; color: grey;">[{{val.comment.length}}]</span>
             </td>
-            <td>{{val.nickname}}</td>
+            <td>
+              <span class="toProfile" (click)="funcService.openInfoWindow(val?.userid)">{{val.nickname}}</span>
+            </td>
             <td>{{val.hit}}</td>
             <td>{{val.recommend.length}}</td>
           </tr>
