@@ -34,7 +34,8 @@ export class AppComponent {
       type: 'success', 
       timeout: 2000
     });
-    this.router.navigate([this.funcService.getPreviousUrl()]);
+    // this.router.navigate([this.funcService.getPreviousUrl()]);
+    this.router.navigate(['/login']);
     return false;
   }
 }

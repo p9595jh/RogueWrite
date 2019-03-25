@@ -1,8 +1,9 @@
 <section *ngIf="user" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
-      <h4>PROFILE &nbsp;-&nbsp; {{user.userid}}</h4>
-      <hr/><br/>
+      <h4 style="display: inline;">PROFILE &nbsp;-&nbsp; <span (click)="funcService.openInfoWindow(user.userid)" style="cursor: pointer;">{{user.userid}}</span></h4>
+      <span style="float: right"><img [attr.src]="'images/profileimages/' + user.userid" class="profileImage"></span>
+      <hr/><br/><br/>
       
       <table class="mdl-data-table mdl-js-data-table" style="margin: auto; width: 80%;">
         <tbody>

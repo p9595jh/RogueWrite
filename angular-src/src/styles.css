@@ -2,6 +2,13 @@ pre {
   font-family: gothic;
   font-size: 105%;
 }
+pre > a {
+  text-decoration: none;
+  color: rgb(0, 105, 151);
+}
+pre > a:hover {
+  text-decoration: underline;
+}
 .posting {
   padding: 1%;
   padding-top: 5%;
@@ -15,6 +22,11 @@ pre {
 }
 .toProfile {
   cursor: pointer;
+}
+.profileImage {
+  border: 1px solid black;
+  width: 70px;
+  height: 70px;
 }
 
 /* ========================================================================== */

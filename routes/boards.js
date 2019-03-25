@@ -1,12 +1,15 @@
 const express = require('express');
 const router = express.Router();
 //=======================================<
+const Board = require('../models/board');
 const passport = require('passport');
-const fs = require('fs');
+const fs = require('fs-extra');
 const DOMParser = require('xmldom').DOMParser;
 const request = require('request');
 const formidable = require('formidable');
-const Board = require('../models/board');
+
+
+const regex = /^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?/;
 
 function set2LetterFormat(num) {
     num = num >= 10 ? num : '0' + num;
@@ -21,6 +24,13 @@ function getNowDate() {
         + set2LetterFormat(date.getHours()) + ":"
         + set2LetterFormat(date.getMinutes()) + ":"
         + set2LetterFormat(date.getSeconds());
+}
+
+function taggingUrl(url) {
+    if ( regex.test(url) ) {
+        url = "<a target='_blank' href='" + (url.toLowerCase().startsWith('http') ? url : 'https://' + url) + "'>" + url + "</a>";
+    }
+    return url;
 }
 
 router.get('/takeOnePost', function(req, res, next) {
@@ -46,82 +56,41 @@ router.get('/takeAllPosts', function(req, res, next) {
     });
 })
 
-// router.post('/write', passport.authenticate('jwt', {session: false}), function(req, res, next) {
-router.post('/write', function(req, res, next) {
-    // var htmlDoc = new DOMParser().parseFromString(req.body.content, 'text/html');
-    // var img = htmlDoc.getElementsByTagName('img');
-    // for (let i=0; i<img.length; i++) {
-    //     console.log('RRRR');
-    //     // request.get(img[i].getAttribute('src'), function(err, res, buf) {
-    //     //     if ( err ) console.log(err);
-    //     //     fs.createWriteStream('public/' + i + '.jpg').write(buf);
-    //     //     console.log('WHAT???');
-    //     // });
-    //     request({url: img[i].getAttribute('src'), encoding: null}, (err, res, buf) => {
-    //         if ( err ) console.log(err);
-    //         fs.createWriteStream('public/' + i + '.jpg').write(buf);
-    //         console.log('WHAT???');
-    //     });
-    // }
-
-    console.log('HELLO???');
-    var form = new formidable.IncomingForm();
-    form.encoding = 'utf-8';
-    // form.uploadDir = '/public/images';
-    // form.multiples = true;
-    // form.keepExtensions = true;
-    form.parse(req, function(err, fields, files) {
-        console.log(err);
-        console.log(fields);
-        const newPost = new Board({
-            type: fields.type,
-            // userid: req.user.userid,
-            // nickname: req.user.nickname,
-            title: fields.title,
-            content: fields.content,
-            hit: 0,
-            recommend: [],
-            comment: [],
-            writedate: getNowDate()
+router.post('/write', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+    var htmlDoc = new DOMParser().parseFromString(req.body.content, 'text/html');
+    var img = htmlDoc.getElementsByTagName('img');
+    for (let i=0; i<img.length; i++) {
+        console.log('RRRR');
+        let blob = await fetch(img[i].getAttribute('src')).then(r => r.blob());
+        let buf = new Buffer(blob, 'base64');
+        fs.writeFile('public/' + i + '.jpg', buf, function(err) {
+            if ( err ) console.log(err);
         });
-        Board.addPost(newPost, (err, post) => {
-            if ( err ) {
-                res.json({
-                    success: false
-                });
-            } else {
-                res.json({
-                    success: true,
-                    num: post._id
-                });
-            }
-        });
-    })
+    }
 
-    // console.log(req.body);
-    // const newPost = new Board({
-    //     type: req.body.type,
-    //     userid: req.user.userid,
-    //     nickname: req.user.nickname,
-    //     title: req.body.title,
-    //     content: req.body.content,
-    //     hit: 0,
-    //     recommend: [],
-    //     comment: [],
-    //     writedate: getNowDate()
-    // });
-    // Board.addPost(newPost, (err, post) => {
-    //     if ( err ) {
-    //         res.json({
-    //             success: false
-    //         });
-    //     } else {
-    //         res.json({
-    //             success: true,
-    //             num: post._id
-    //         });
-    //     }
-    // });
+    const newPost = new Board({
+        type: req.body.type,
+        userid: req.user.userid,
+        nickname: req.user.nickname,
+        title: req.body.title,
+        content: req.body.content,
+        hit: 0,
+        recommend: [],
+        comment: [],
+        writedate: getNowDate()
+    });
+    Board.addPost(newPost, (err, post) => {
+        if ( err ) {
+            res.json({
+                success: false
+            });
+        } else {
+            res.json({
+                success: true,
+                num: post._id
+            });
+        }
+    });
 
 })
 
@@ -131,23 +100,24 @@ router.post('/writeComment', passport.authenticate('jwt', {session: false}), fun
         if ( post.comment.length > 0 )
             num = post.comment[post.comment.length-1].num + 1;
 
-        let split = req.body.comment.split(' ');
-        let comment = split[0];
-        const regex = /^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?/;
-        for (let s of split) {
-            if ( regex.test(s) ) {
-                s = "<a target='_blank' href='" + s + "'>" + s + "</a>";
-            }
-            comment += " " + s;
+        // encoding html chars to entity
+        let comment = req.body.comment.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
+            return '&#' + i.charCodeAt(0) + ';';
+        });
+
+        let split = comment.split(' ');
+        comment = '';
+        for (let i=0; i<split.length-1; i++) {
+            comment += taggingUrl(split[i]) + ' ';
         }
-        
+        comment += taggingUrl(split[split.length-1]);
         
         const cmtData = {
             num: num,
             writedate: getNowDate(),
             userid: req.user.userid,
             nickname: req.user.nickname,
-            comment: req.body.comment
+            comment: comment
         };
         Board.findOneAndUpdate({_id: req.body._id}, {$push: {comment: cmtData}}, function(err, output) {
             if ( err ) {
@@ -157,7 +127,7 @@ router.post('/writeComment', passport.authenticate('jwt', {session: false}), fun
             } else {
                 res.json({
                     success: true,
-                    post: output
+                    // post: output
                 });
             }
         })

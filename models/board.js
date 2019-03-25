@@ -15,7 +15,7 @@ const BoardSchema = mongoose.Schema({
     comment: Array
     /*
         each comment: {
-            num: String,    // millisecond + userid
+            num: String,    // unique value
             writedate: String,
             userid: String,
             nickname: String,

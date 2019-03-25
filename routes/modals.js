@@ -14,8 +14,9 @@ router.get('/', function(req, res) {
 
 /*
     To add/modify an user's profile image,
-    or something that needs authentication,
+    or something else that needs authentication,
     have to use the code below.
+    Make a secret code and add to a session so that can be used for checking whether it is logged in or not.
 */
 router.post('/getCode', passport.authenticate('jwt', {session: false}), function(req, res) {
     if ( req.body.userid == req.user.userid ) {
@@ -43,7 +44,7 @@ router.get('/profileImage', function(req, res) {
             userid: userid,
             errmsg: ''
         });
-    }
+    } else res.redirect("https://www.youtube.com/");
 });
 
 router.post('/setProfileImage', function(req, res) {
@@ -65,7 +66,6 @@ router.post('/setProfileImage', function(req, res) {
             fs.copy(filePath, 'angular-src/src/images/profileimages/' + userid, function(err) {
                 if ( err ) console.log('error while putting image to /angular-src');
             });
-            // var done = "<p onclick=\"window.open('about:blank', '_self').close()\">완료</p>";
             var done = "<script>alert('적용 완료');window.open('about:blank', '_self').close();</script>";
             res.send(done);
         }

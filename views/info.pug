@@ -1,12 +1,11 @@
 extends layout
 
 block content
-    br
     span(style="font-size: 20px;")
         b= user.userid
         span 님의 정보 
         span(style="float: right;")
-            img(src="../images/profileimages/" + user.userid, width="70", height="70")
+            img(src="../images/profileimages/" + user.userid, width="70", height="70", style="border: 1px solid black;")
         hr
         - if ( !user.clean )
             b(style="color:red;")  정지회원
@@ -14,17 +13,30 @@ block content
             b  사이트 어드민
             br
         br
+        br
+        
+        table(class="mdl-data-table mdl-js-data-table", style="margin:auto; width: 90%;")
+            tr
+                td(class="mdl-data-table__cell--non-numeric") 아이디
+                td(class="mdl-data-table__cell--non-numeric") #{user.userid}
+            tr
+                td(class="mdl-data-table__cell--non-numeric") 닉네임
+                td(class="mdl-data-table__cell--non-numeric") #{user.nickname}
+            tr
+                td(class="mdl-data-table__cell--non-numeric") 이메일
+                td(class="mdl-data-table__cell--non-numeric") #{user.email}
+            tr
+                td(class="mdl-data-table__cell--non-numeric") 한 줄 소개
+                td(class="mdl-data-table__cell--non-numeric") #{user.introduction}
+            tr
+                td(class="mdl-data-table__cell--non-numeric") 가입일
+                td(class="mdl-data-table__cell--non-numeric") #{user.registerdate}
 
-        p 닉네임: #{user.nickname}
-        p 이메일: #{user.email}
-        p 자기소개: #{user.introduction}
-        p 가입일: #{user.registerdate}
-        //- br
         br
         br
         
         br
         br
-        button(onclick="window.open('about:blank', '_self').close()") 닫기
+        button(class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", onclick="window.open('about:blank', '_self').close()") 닫기
         br
         br

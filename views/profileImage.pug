@@ -1,17 +1,37 @@
 extends layout
 
 block content
+    h4 프로필 이미지 변경 (#{userid})
     hr
     br
     br
     div(style="margin: auto;")
         form(method="POST", action="./setProfileImage?userid=" + userid, enctype="multipart/form-data", style="text-align: center;")
-            input(type="file", name="image")
+            label(class="image_input_button mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-js-ripple-effect mdl-button--colored")
+                i(class="material-icons") file_upload
+                input(type="file", name="image", accept="image/*", style="display: none;", id="file_input_file")
+            span(id="demo")
             br
             br
-            input(type="submit" value="적용")
+            input(type="submit" value="적용", class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored")
         br
         p(style="color: red;") #{errmsg}
     br
     br
-    button(onclick="window.open('about:blank', '_self').close()") 닫기
+    button(onclick="window.open('about:blank', '_self').close()", class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect") 닫기
+
+    script(type="text/javascript").
+        var fileInput = document.getElementById('file_input_file');
+        fileInput.addEventListener('change', changeInputText);
+
+        function changeInputText() {
+            var str = fileInput.value;
+            var i;
+            if (str.lastIndexOf('\\')) {
+                i = str.lastIndexOf('\\') + 1;
+            } else if (str.lastIndexOf('/')) {
+                i = str.lastIndexOf('/') + 1;
+            }
+            document.getElementById("demo").innerHTML = '&nbsp;&nbsp;&nbsp;&nbsp;' + str.slice(i, str.length);
+        }
+    

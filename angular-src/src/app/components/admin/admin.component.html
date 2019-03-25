@@ -15,7 +15,9 @@
         </thead>
         <tbody *ngFor="let val of users | slice:pagingFrom:pagingTo;">
           <tr *ngIf="val?.userid != 'admin'">
-            <td class="mdl-data-table__cell--non-numeric" (click)="funcSerivce.openInfoWindow(val?.userid)">{{val.userid}}</td>
+            <td class="mdl-data-table__cell--non-numeric">
+              <span (click)="funcService.openInfoWindow(val?.userid)" style="cursor: pointer;">{{val.userid}}</span>
+            </td>
             <td class="mdl-data-table__cell--non-numeric">{{val.nickname}}</td>
             <td *ngIf="val?.clean">
               <button mat-button color="primary" (click)="administrate(val?._id, val?.clean)">정상</button>
