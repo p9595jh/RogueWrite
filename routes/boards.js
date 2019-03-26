@@ -4,10 +4,7 @@ const router = express.Router();
 const Board = require('../models/board');
 const passport = require('passport');
 const fs = require('fs-extra');
-const DOMParser = require('xmldom').DOMParser;
-const request = require('request');
 const formidable = require('formidable');
-
 
 const regex = /^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?/;
 
@@ -56,18 +53,23 @@ router.get('/takeAllPosts', function(req, res, next) {
     });
 })
 
-router.post('/write', passport.authenticate('jwt', {session: false}), function(req, res, next) {
-    var htmlDoc = new DOMParser().parseFromString(req.body.content, 'text/html');
-    var img = htmlDoc.getElementsByTagName('img');
-    for (let i=0; i<img.length; i++) {
-        console.log('RRRR');
-        let blob = await fetch(img[i].getAttribute('src')).then(r => r.blob());
-        let buf = new Buffer(blob, 'base64');
-        fs.writeFile('public/' + i + '.jpg', buf, function(err) {
+router.post('/images', function(req, res) {
+    var form = formidable.IncomingForm();
+    form.parse(req, function(err, fields, files) {
+        const filePath = files.image.path;
+        const ext = files.image.name.substring(files.image.name.lastIndexOf('.')).toLowerCase();
+        const name = new Date().getTime() + ext;
+        fs.copy(filePath, 'public/images/board/' + name, function(err) {
             if ( err ) console.log(err);
         });
-    }
+        fs.copy(filePath, 'angular-src/src/images/board/' + name, function(err) {
+            if ( err ) console.log(err);
+        });
+        res.json({link: 'images/board/' + name});
+    });
+})
 
+router.post('/write', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     const newPost = new Board({
         type: req.body.type,
         userid: req.user.userid,

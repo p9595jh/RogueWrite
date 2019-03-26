@@ -25,7 +25,7 @@
         <tbody *ngFor="let comment of content?.comment">
           <tr>
             <td style="width: 15%;">
-              <img [attr.src]="'images/profileimages/' + comment.userid" class="profileImage" />
+              <img [attr.src]="'images/profile/' + comment.userid" class="profileImage" />
             </td>
             <td>
               <span style="font-size: 80%;">
@@ -75,7 +75,7 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #aboutPost>
-    <button mat-menu-item *ngIf="content?.userid == user?.userid || content?.userid == 'admin'" (click)="onRemovePost()">
+    <button mat-menu-item *ngIf="content?.userid == user?.userid || user?.userid == 'admin'" (click)="onRemovePost()">
       <span>삭제</span>
     </button>
   </mat-menu>

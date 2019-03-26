@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Http, Headers } from '@angular/http';
-import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 import { FuncService } from '../../services/func.service';
-import { AuthService } from '../../services/auth.service';
 import { BoardService } from '../../services/board.service';
 import { NgFlashMessageService } from 'ng-flash-messages';
 
@@ -15,10 +12,21 @@ import { NgFlashMessageService } from 'ng-flash-messages';
   styleUrls: ['./write.component.css']
 })
 export class WriteComponent implements OnInit {
-  options: Object = {
+  options: any = {
     placeholderText: '',
     height: 500,
-    imageDefaultAlign: 'left'
+    imageDefaultAlign: 'left',
+
+    charCounterCount: true,
+    imageUploadParam: 'image',
+    imageUploadURL: '/boards/images',
+    imageUploadMethod: 'POST',
+    imageMaxSize: 5 * 1024 * 1024,  // maximun size : 5MB
+    imageAllowTypes: [ 'jpeg', 'jpg', 'png', 'gif', 'webp' ],
+
+    toolbarButtonsXS: [
+      'insertImage', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript'
+    ]
   };
 
   type: String;
@@ -28,9 +36,7 @@ export class WriteComponent implements OnInit {
   constructor(
     private funcService: FuncService,
     private route: ActivatedRoute,
-    private authService: AuthService,
     private flashMessage: NgFlashMessageService,
-    private http: Http,
     private router: Router,
     private boardService: BoardService
   ) {

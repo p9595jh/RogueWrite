@@ -2,17 +2,21 @@ pre {
   font-family: gothic;
   font-size: 105%;
 }
-pre > a {
+a {
   text-decoration: none;
   color: rgb(0, 105, 151);
 }
-pre > a:hover {
+a:hover {
   text-decoration: underline;
 }
 .posting {
   padding: 1%;
   padding-top: 5%;
   word-wrap: break-word;
+}
+.posting img {
+  height: auto;
+  max-width: 100%;
 }
 .largeInputEle {
   width: 45%;

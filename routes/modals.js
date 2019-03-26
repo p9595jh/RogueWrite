@@ -51,6 +51,7 @@ router.post('/setProfileImage', function(req, res) {
     var form = formidable.IncomingForm();
     form.parse(req, function(err, fields, files) {
         const userid = req.query.userid;
+        const ext = files.image.name.substring(files.image.name.lastIndexOf('.') + 1).toLowerCase();
         if ( !files.image.name || files.image.name == '' ) {
             res.render('./profileImage', {
                 title: '프로필 이미지',
@@ -58,12 +59,26 @@ router.post('/setProfileImage', function(req, res) {
                 errmsg: '선택된 사진이 없습니다.'
             });
             return false;
+        } else if ( ext != 'jpg' && ext != 'jpeg' && ext != 'png' && ext != 'gif' && ext != 'webp' ) {
+            res.render('./profileImage', {
+                title: '프로필 이미지',
+                userid: userid,
+                errmsg: '지원되는 형식이 아닙니다. (jpg, jpeg, png, gif, webp)'
+            });
+            return false;
+        } else if ( files.image.size > (1024 * 1024) ) {
+            res.render('./profileImage', {
+                title: '프로필 이미지',
+                userid: userid,
+                errmsg: '1MB 이하의 파일을 사용하여 주십시오.'
+            });
+            return false;
         } else {
             const filePath = files.image.path;
-            fs.copy(filePath, 'public/images/profileimages/' + userid, function(err) {
+            fs.copy(filePath, 'public/images/profile/' + userid, function(err) {
                 if ( err ) console.log('error while putting image to /public');
             });
-            fs.copy(filePath, 'angular-src/src/images/profileimages/' + userid, function(err) {
+            fs.copy(filePath, 'angular-src/src/images/profile/' + userid, function(err) {
                 if ( err ) console.log('error while putting image to /angular-src');
             });
             var done = "<script>alert('적용 완료');window.open('about:blank', '_self').close();</script>";
