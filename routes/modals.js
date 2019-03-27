@@ -28,6 +28,7 @@ router.post('/getCode', passport.authenticate('jwt', {session: false}), function
             randomstring += chars.substring(rnum, rnum + 1);
         }
         req.session.code = randomstring;
+        req.session.userid = req.body.userid;
         res.json({
             code: randomstring
         });
@@ -37,8 +38,8 @@ router.post('/getCode', passport.authenticate('jwt', {session: false}), function
 // ==============================================
 
 router.get('/profileImage', function(req, res) {
-    if ( req.session.code == req.query.c ) {
-        var userid = req.query.userid;
+    const userid = req.query.userid;
+    if ( req.session.code == req.query.c && req.session.userid == userid ) {
         res.render('./profileImage', {
             title: '프로필 이미지',
             userid: userid,
