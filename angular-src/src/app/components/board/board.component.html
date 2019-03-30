@@ -11,7 +11,7 @@
         <span class="toProfile" (click)="funcService.openInfoWindow(content?.userid)">{{content?.nickname}}</span><br/>{{content?.writedate}}
       </span>
       <hr/>
-      <div class="posting" [innerHtml]="content?.content"></div>
+      <div class="posting content" [innerHtml]="content?.content | youtube"></div>
       <br/><br/>
       <div style="text-align: center;">
         <button mat-raised-button color="primary" (click)="onRecommend()">
@@ -35,7 +35,7 @@
                   <span style="cursor: pointer;" (click)="onRemoveComment(comment.num)">삭제</span>
                 </span>
               </span>
-              <pre [innerHTML]="comment?.comment"></pre><br/>
+              <pre class="content" [innerHTML]="comment?.comment"></pre><br/>
             </td>
           </tr>
         </tbody>

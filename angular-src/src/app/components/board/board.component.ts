@@ -55,7 +55,8 @@ export class BoardComponent implements OnInit, OnDestroy, PipeTransform {
   }
 
   transform(value) {
-    return this.sanitized.bypassSecurityTrustHtml(value);
+    // return this.sanitized.bypassSecurityTrustHtml(value);
+    return this.sanitized.bypassSecurityTrustResourceUrl(value);
   }
 
   extractDate(date) {

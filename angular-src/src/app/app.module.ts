@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 
-import {
+import {  // angular-material modules
   ErrorStateMatcher,
   ShowOnDirtyErrorStateMatcher,
   MatInputModule,
@@ -24,7 +24,8 @@ import {
   MatListModule,
   MatAutocompleteModule,
   MatButtonToggleModule,
-  MatPaginatorModule
+  MatPaginatorModule,
+  MatSnackBarModule
 } from '@angular/material';
 
 import { ValidateService } from './services/validate.service';
@@ -33,6 +34,7 @@ import { NgFlashMessagesModule } from 'ng-flash-messages';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { AuthGuard } from './guards/auth.guard';
+import { Youtube } from '../pipes/youtube';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -45,6 +47,7 @@ import { WriteComponent } from './components/write/write.component';
 import { TestComponent } from './components/test/test.component';
 import { NoPageComponent } from './components/no-page/no-page.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { ToolComponent } from './components/tool/tool.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -56,11 +59,13 @@ const appRoutes: Routes = [
   { path: 'write/:type', component: WriteComponent, canActivate: [AuthGuard] },
   { path: 'test', component: TestComponent },
   { path: 'no-page', component: NoPageComponent },
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] }
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+  { path: 'tool', component: ToolComponent/*, canActivate: [AuthGuard]*/ }
 ]
 
 @NgModule({
   declarations: [
+    Youtube,
     FileSelectDirective,
     AppComponent,
     LoginComponent,
@@ -72,7 +77,8 @@ const appRoutes: Routes = [
     WriteComponent,
     TestComponent,
     NoPageComponent,
-    AdminComponent
+    AdminComponent,
+    ToolComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -104,7 +110,8 @@ const appRoutes: Routes = [
     MatListModule,
     MatAutocompleteModule,
     MatButtonToggleModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatSnackBarModule
   ],
   exports: [
     RouterModule
@@ -117,6 +124,10 @@ const appRoutes: Routes = [
   ],
   bootstrap: [
     AppComponent
+  ],
+  schemas: [
+    NO_ERRORS_SCHEMA,
+    CUSTOM_ELEMENTS_SCHEMA
   ]
 })
 export class AppModule { }

@@ -1,0 +1,12 @@
+<iframe src="http://localhost:3000/games/tool" height="700" style="width: 100%"></iframe>
+
+<div style="margin: auto; text-align: center;">
+  <mat-form-field appearance="outline" style="width: 40%;">
+    <mat-label>HTML 태그</mat-label>
+    <input matInput readonly #tags>
+  </mat-form-field>&nbsp;&nbsp;&nbsp;
+  <button mat-raised-button (click)="extractTag(area, tags)">클립보드로 복사</button>
+</div>
+<div style="margin: auto;">
+  <textarea [froalaEditor]="options" style="width: 90%;" #area></textarea>
+</div>

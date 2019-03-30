@@ -16,6 +16,7 @@ export class WriteComponent implements OnInit {
     placeholderText: '',
     height: 500,
     imageDefaultAlign: 'left',
+    imageDefaultWidth: 0,
 
     charCounterCount: true,
     imageUploadParam: 'image',

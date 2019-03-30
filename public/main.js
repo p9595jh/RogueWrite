@@ -147,17 +147,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ng2_file_upload__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ng2-file-upload */ "./node_modules/ng2-file-upload/index.js");
 /* harmony import */ var ng2_file_upload__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(ng2_file_upload__WEBPACK_IMPORTED_MODULE_13__);
 /* harmony import */ var _guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./guards/auth.guard */ "./src/app/guards/auth.guard.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/login/login.component */ "./src/app/components/login/login.component.ts");
-/* harmony import */ var _components_register_register_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/register/register.component */ "./src/app/components/register/register.component.ts");
-/* harmony import */ var _components_home_home_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/home/home.component */ "./src/app/components/home/home.component.ts");
-/* harmony import */ var _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/profile/profile.component */ "./src/app/components/profile/profile.component.ts");
-/* harmony import */ var _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/modify/modify.component */ "./src/app/components/modify/modify.component.ts");
-/* harmony import */ var _components_board_board_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/board/board.component */ "./src/app/components/board/board.component.ts");
-/* harmony import */ var _components_write_write_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/write/write.component */ "./src/app/components/write/write.component.ts");
-/* harmony import */ var _components_test_test_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/test/test.component */ "./src/app/components/test/test.component.ts");
-/* harmony import */ var _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/no-page/no-page.component */ "./src/app/components/no-page/no-page.component.ts");
-/* harmony import */ var _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/admin/admin.component */ "./src/app/components/admin/admin.component.ts");
+/* harmony import */ var _pipes_youtube__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../pipes/youtube */ "./src/pipes/youtube.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/login/login.component */ "./src/app/components/login/login.component.ts");
+/* harmony import */ var _components_register_register_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/register/register.component */ "./src/app/components/register/register.component.ts");
+/* harmony import */ var _components_home_home_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/home/home.component */ "./src/app/components/home/home.component.ts");
+/* harmony import */ var _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/profile/profile.component */ "./src/app/components/profile/profile.component.ts");
+/* harmony import */ var _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/modify/modify.component */ "./src/app/components/modify/modify.component.ts");
+/* harmony import */ var _components_board_board_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/board/board.component */ "./src/app/components/board/board.component.ts");
+/* harmony import */ var _components_write_write_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/write/write.component */ "./src/app/components/write/write.component.ts");
+/* harmony import */ var _components_test_test_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/test/test.component */ "./src/app/components/test/test.component.ts");
+/* harmony import */ var _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/no-page/no-page.component */ "./src/app/components/no-page/no-page.component.ts");
+/* harmony import */ var _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/admin/admin.component */ "./src/app/components/admin/admin.component.ts");
+/* harmony import */ var _components_tool_tool_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/tool/tool.component */ "./src/app/components/tool/tool.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -190,17 +192,20 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
 var appRoutes = [
-    { path: '', component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_18__["HomeComponent"] },
-    { path: 'register', component: _components_register_register_component__WEBPACK_IMPORTED_MODULE_17__["RegisterComponent"] },
-    { path: 'login', component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_16__["LoginComponent"] },
-    { path: 'profile', component: _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_19__["ProfileComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
-    { path: 'modify', component: _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_20__["ModifyComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
-    { path: 'board/:type/:num', component: _components_board_board_component__WEBPACK_IMPORTED_MODULE_21__["BoardComponent"] },
-    { path: 'write/:type', component: _components_write_write_component__WEBPACK_IMPORTED_MODULE_22__["WriteComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
-    { path: 'test', component: _components_test_test_component__WEBPACK_IMPORTED_MODULE_23__["TestComponent"] },
-    { path: 'no-page', component: _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_24__["NoPageComponent"] },
-    { path: 'admin', component: _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_25__["AdminComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] }
+    { path: '', component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_19__["HomeComponent"] },
+    { path: 'register', component: _components_register_register_component__WEBPACK_IMPORTED_MODULE_18__["RegisterComponent"] },
+    { path: 'login', component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_17__["LoginComponent"] },
+    { path: 'profile', component: _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_20__["ProfileComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
+    { path: 'modify', component: _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_21__["ModifyComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
+    { path: 'board/:type/:num', component: _components_board_board_component__WEBPACK_IMPORTED_MODULE_22__["BoardComponent"] },
+    { path: 'write/:type', component: _components_write_write_component__WEBPACK_IMPORTED_MODULE_23__["WriteComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
+    { path: 'test', component: _components_test_test_component__WEBPACK_IMPORTED_MODULE_24__["TestComponent"] },
+    { path: 'no-page', component: _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_25__["NoPageComponent"] },
+    { path: 'admin', component: _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_26__["AdminComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
+    { path: 'tool', component: _components_tool_tool_component__WEBPACK_IMPORTED_MODULE_27__["ToolComponent"] /*, canActivate: [AuthGuard]*/ }
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -208,18 +213,20 @@ var AppModule = /** @class */ (function () {
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [
+                _pipes_youtube__WEBPACK_IMPORTED_MODULE_15__["Youtube"],
                 ng2_file_upload__WEBPACK_IMPORTED_MODULE_13__["FileSelectDirective"],
-                _app_component__WEBPACK_IMPORTED_MODULE_15__["AppComponent"],
-                _components_login_login_component__WEBPACK_IMPORTED_MODULE_16__["LoginComponent"],
-                _components_register_register_component__WEBPACK_IMPORTED_MODULE_17__["RegisterComponent"],
-                _components_home_home_component__WEBPACK_IMPORTED_MODULE_18__["HomeComponent"],
-                _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_19__["ProfileComponent"],
-                _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_20__["ModifyComponent"],
-                _components_board_board_component__WEBPACK_IMPORTED_MODULE_21__["BoardComponent"],
-                _components_write_write_component__WEBPACK_IMPORTED_MODULE_22__["WriteComponent"],
-                _components_test_test_component__WEBPACK_IMPORTED_MODULE_23__["TestComponent"],
-                _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_24__["NoPageComponent"],
-                _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_25__["AdminComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_16__["AppComponent"],
+                _components_login_login_component__WEBPACK_IMPORTED_MODULE_17__["LoginComponent"],
+                _components_register_register_component__WEBPACK_IMPORTED_MODULE_18__["RegisterComponent"],
+                _components_home_home_component__WEBPACK_IMPORTED_MODULE_19__["HomeComponent"],
+                _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_20__["ProfileComponent"],
+                _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_21__["ModifyComponent"],
+                _components_board_board_component__WEBPACK_IMPORTED_MODULE_22__["BoardComponent"],
+                _components_write_write_component__WEBPACK_IMPORTED_MODULE_23__["WriteComponent"],
+                _components_test_test_component__WEBPACK_IMPORTED_MODULE_24__["TestComponent"],
+                _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_25__["NoPageComponent"],
+                _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_26__["AdminComponent"],
+                _components_tool_tool_component__WEBPACK_IMPORTED_MODULE_27__["ToolComponent"]
             ],
             imports: [
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"],
@@ -262,7 +269,11 @@ var AppModule = /** @class */ (function () {
                 { provide: _angular_material__WEBPACK_IMPORTED_MODULE_8__["ErrorStateMatcher"], useClass: _angular_material__WEBPACK_IMPORTED_MODULE_8__["ShowOnDirtyErrorStateMatcher"] }
             ],
             bootstrap: [
-                _app_component__WEBPACK_IMPORTED_MODULE_15__["AppComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_16__["AppComponent"]
+            ],
+            schemas: [
+                _angular_core__WEBPACK_IMPORTED_MODULE_1__["NO_ERRORS_SCHEMA"],
+                _angular_core__WEBPACK_IMPORTED_MODULE_1__["CUSTOM_ELEMENTS_SCHEMA"]
             ]
         })
     ], AppModule);
@@ -428,7 +439,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- element for representing the location of the post to be scrolled -->\r\n<span style=\"display: hidden;\" #postLocation></span>\r\n\r\n<!-- section for a post -->\r\n<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">{{content?.title}}</h4>\r\n\r\n      <span style=\"float: right; text-align: right; font-size: 80%;\">\r\n        <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(content?.userid)\">{{content?.nickname}}</span><br/>{{content?.writedate}}\r\n      </span>\r\n      <hr/>\r\n      <div class=\"posting\" [innerHtml]=\"content?.content\"></div>\r\n      <br/><br/>\r\n      <div style=\"text-align: center;\">\r\n        <button mat-raised-button color=\"primary\" (click)=\"onRecommend()\">\r\n          추천 {{content?.recommend?.length}}\r\n        </button>\r\n      </div>\r\n      <br/><hr/>\r\n\r\n      <!-- ############### table for comments ############### -->\r\n      <table style=\"width: 96%; margin: auto;\">\r\n        <tbody *ngFor=\"let comment of content?.comment\">\r\n          <tr>\r\n            <td style=\"width: 15%;\">\r\n              <img [attr.src]=\"'images/profile/' + comment.userid\" class=\"profileImage\" />\r\n            </td>\r\n            <td>\r\n              <span style=\"font-size: 80%;\">\r\n                <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(comment?.userid)\">{{comment?.nickname}}</span> &nbsp;|&nbsp; \r\n                {{comment?.writedate}}\r\n                <span *ngIf=\"comment?.userid == user?.userid || user?.userid == 'admin'\"> &nbsp;|&nbsp; \r\n                  <span style=\"cursor: pointer;\" (click)=\"onRemoveComment(comment.num)\">삭제</span>\r\n                </span>\r\n              </span>\r\n              <pre [innerHTML]=\"comment?.comment\"></pre><br/>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n      <!-- ############### table for comments ############### -->\r\n\r\n      <!-- ############### writing area ############### -->\r\n      <form *ngIf=\"authService.loggedIn()\" (submit)=\"onWriteComment()\"><hr *ngIf=\"content?.comment?.length > 0\" />\r\n        <table style=\"width: 96%; margin: auto;\">\r\n          <tr style=\"text-align: center;\">\r\n\r\n            <td rowspan=\"2\" style=\"width: 85%;\">\r\n              <mat-form-field appearance=\"outline\" style=\"width: 100%; height: 100%;\">\r\n                <mat-label>댓글을 작성해주세요.</mat-label>\r\n                <textarea matInput placeholder=\"\" rows=\"3\" name=\"cmtWrite\"\r\n                [formControl]=\"cmtWrite\" [matAutocomplete]=\"auto\"></textarea>\r\n                <mat-autocomplete #auto>\r\n                  <!-- <mat-option *ngFor=\"let ct of filteredOptions | async\" [value]=\"'TO::' + ct?.nickname\" (onclick)=\"setCmtTo(ct)\">\r\n                    {{ct.nickname}} [{{ct.userid}}]\r\n                  </mat-option> -->\r\n                </mat-autocomplete>\r\n              </mat-form-field>\r\n            </td>\r\n\r\n            <td style=\"text-align: center; padding-bottom: 3%;\">\r\n              <button mat-raised-button type=\"submit\" style=\"width: 60%;\">작성</button>\r\n            </td>\r\n\r\n          </tr>\r\n        </table>\r\n      </form>\r\n      <!-- ############### writing area ############### -->\r\n\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"aboutPost\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #aboutPost>\r\n    <button mat-menu-item *ngIf=\"content?.userid == user?.userid || user?.userid == 'admin'\" (click)=\"onRemovePost()\">\r\n      <span>삭제</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<!-- section for a board -->\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 *ngIf=\"type == 'free'\">자유게시판</h4>\r\n      <h4 *ngIf=\"type != 'free'\">{{type}} 게시판</h4>\r\n      <hr/>\r\n      \r\n      <!-- for large display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--large-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">날짜</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\r\n            <th>글쓴이</th>\r\n            <th>조회수</th>\r\n            <th>추천</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{extractDate(val.writedate)}}</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/board/'+type+'/'+val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\r\n                (click)=\"scrollToPost(postLocation)\">{{val.title}}</a>&nbsp;\r\n              <span *ngIf=\"val.comment.length > 0\" style=\"font-size: 85%; color: grey;\">[{{val.comment.length}}]</span>\r\n            </td>\r\n            <td>\r\n              <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(val?.userid)\">{{val.nickname}}</span>\r\n            </td>\r\n            <td>{{val.hit}}</td>\r\n            <td>{{val.recommend.length}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <!-- for small display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--small-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <tbody *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\"\r\n              [routerLink]=\"['/board/'+type+'/'+val?._id]\" (click)=\"scrollToPost(postLocation)\">\r\n              <div>\r\n                <!-- <a [routerLink]=\"['/board/'+type+'/'+val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\r\n                (click)=\"scrollToPost(postLocation)\">{{val.title}}</a>&nbsp; -->\r\n                {{val.title}}\r\n                <span *ngIf=\"val.comment.length > 0\" style=\"color: grey;\">[{{val.comment.length}}]</span>\r\n              </div>\r\n              <div style=\"font-size: 85%; margin-top: 1%;\">\r\n                <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>추천 {{val.recommend.length}}</span>\r\n              </div>\r\n            </td>\r\n            <td>{{extractDate(val.writedate)}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"contents?.length\" [pageSize]=\"pagingSize\" (page)=\"paging($event)\">\r\n      </mat-paginator>\r\n\r\n      <div *ngIf=\"authService.loggedIn()\" style=\"float: right;\">\r\n        <a mat-raised-button [routerLink]=\"['/write/'+type]\">글쓰기</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"board\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #board>\r\n    <button mat-menu-item *ngIf=\"authService.loggedIn()\">\r\n      <span>즐겨찾는 게시판 설정</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<!-- element for representing the location of the post to be scrolled -->\r\n<span style=\"display: hidden;\" #postLocation></span>\r\n\r\n<!-- section for a post -->\r\n<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">{{content?.title}}</h4>\r\n\r\n      <span style=\"float: right; text-align: right; font-size: 80%;\">\r\n        <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(content?.userid)\">{{content?.nickname}}</span><br/>{{content?.writedate}}\r\n      </span>\r\n      <hr/>\r\n      <div class=\"posting content\" [innerHtml]=\"content?.content | youtube\"></div>\r\n      <br/><br/>\r\n      <div style=\"text-align: center;\">\r\n        <button mat-raised-button color=\"primary\" (click)=\"onRecommend()\">\r\n          추천 {{content?.recommend?.length}}\r\n        </button>\r\n      </div>\r\n      <br/><hr/>\r\n\r\n      <!-- ############### table for comments ############### -->\r\n      <table style=\"width: 96%; margin: auto;\">\r\n        <tbody *ngFor=\"let comment of content?.comment\">\r\n          <tr>\r\n            <td style=\"width: 15%;\">\r\n              <img [attr.src]=\"'images/profile/' + comment.userid\" class=\"profileImage\" />\r\n            </td>\r\n            <td>\r\n              <span style=\"font-size: 80%;\">\r\n                <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(comment?.userid)\">{{comment?.nickname}}</span> &nbsp;|&nbsp; \r\n                {{comment?.writedate}}\r\n                <span *ngIf=\"comment?.userid == user?.userid || user?.userid == 'admin'\"> &nbsp;|&nbsp; \r\n                  <span style=\"cursor: pointer;\" (click)=\"onRemoveComment(comment.num)\">삭제</span>\r\n                </span>\r\n              </span>\r\n              <pre class=\"content\" [innerHTML]=\"comment?.comment\"></pre><br/>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n      <!-- ############### table for comments ############### -->\r\n\r\n      <!-- ############### writing area ############### -->\r\n      <form *ngIf=\"authService.loggedIn()\" (submit)=\"onWriteComment()\"><hr *ngIf=\"content?.comment?.length > 0\" />\r\n        <table style=\"width: 96%; margin: auto;\">\r\n          <tr style=\"text-align: center;\">\r\n\r\n            <td rowspan=\"2\" style=\"width: 85%;\">\r\n              <mat-form-field appearance=\"outline\" style=\"width: 100%; height: 100%;\">\r\n                <mat-label>댓글을 작성해주세요.</mat-label>\r\n                <textarea matInput placeholder=\"\" rows=\"3\" name=\"cmtWrite\"\r\n                [formControl]=\"cmtWrite\" [matAutocomplete]=\"auto\"></textarea>\r\n                <mat-autocomplete #auto>\r\n                  <!-- <mat-option *ngFor=\"let ct of filteredOptions | async\" [value]=\"'TO::' + ct?.nickname\" (onclick)=\"setCmtTo(ct)\">\r\n                    {{ct.nickname}} [{{ct.userid}}]\r\n                  </mat-option> -->\r\n                </mat-autocomplete>\r\n              </mat-form-field>\r\n            </td>\r\n\r\n            <td style=\"text-align: center; padding-bottom: 3%;\">\r\n              <button mat-raised-button type=\"submit\" style=\"width: 60%;\">작성</button>\r\n            </td>\r\n\r\n          </tr>\r\n        </table>\r\n      </form>\r\n      <!-- ############### writing area ############### -->\r\n\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"aboutPost\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #aboutPost>\r\n    <button mat-menu-item *ngIf=\"content?.userid == user?.userid || user?.userid == 'admin'\" (click)=\"onRemovePost()\">\r\n      <span>삭제</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<!-- section for a board -->\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 *ngIf=\"type == 'free'\">자유게시판</h4>\r\n      <h4 *ngIf=\"type != 'free'\">{{type}} 게시판</h4>\r\n      <hr/>\r\n      \r\n      <!-- for large display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--large-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">날짜</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\r\n            <th>글쓴이</th>\r\n            <th>조회수</th>\r\n            <th>추천</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{extractDate(val.writedate)}}</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/board/'+type+'/'+val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\r\n                (click)=\"scrollToPost(postLocation)\">{{val.title}}</a>&nbsp;\r\n              <span *ngIf=\"val.comment.length > 0\" style=\"font-size: 85%; color: grey;\">[{{val.comment.length}}]</span>\r\n            </td>\r\n            <td>\r\n              <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(val?.userid)\">{{val.nickname}}</span>\r\n            </td>\r\n            <td>{{val.hit}}</td>\r\n            <td>{{val.recommend.length}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <!-- for small display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--small-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <tbody *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\"\r\n              [routerLink]=\"['/board/'+type+'/'+val?._id]\" (click)=\"scrollToPost(postLocation)\">\r\n              <div>\r\n                <!-- <a [routerLink]=\"['/board/'+type+'/'+val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\r\n                (click)=\"scrollToPost(postLocation)\">{{val.title}}</a>&nbsp; -->\r\n                {{val.title}}\r\n                <span *ngIf=\"val.comment.length > 0\" style=\"color: grey;\">[{{val.comment.length}}]</span>\r\n              </div>\r\n              <div style=\"font-size: 85%; margin-top: 1%;\">\r\n                <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>추천 {{val.recommend.length}}</span>\r\n              </div>\r\n            </td>\r\n            <td>{{extractDate(val.writedate)}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"contents?.length\" [pageSize]=\"pagingSize\" (page)=\"paging($event)\">\r\n      </mat-paginator>\r\n\r\n      <div *ngIf=\"authService.loggedIn()\" style=\"float: right;\">\r\n        <a mat-raised-button [routerLink]=\"['/write/'+type]\">글쓰기</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"board\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #board>\r\n    <button mat-menu-item *ngIf=\"authService.loggedIn()\">\r\n      <span>즐겨찾는 게시판 설정</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -496,7 +507,8 @@ var BoardComponent = /** @class */ (function () {
         });
     }
     BoardComponent.prototype.transform = function (value) {
-        return this.sanitized.bypassSecurityTrustHtml(value);
+        // return this.sanitized.bypassSecurityTrustHtml(value);
+        return this.sanitized.bypassSecurityTrustResourceUrl(value);
     };
     BoardComponent.prototype.extractDate = function (date) {
         var writeDate = new Date(date);
@@ -1177,7 +1189,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>회원가입</h4><hr/><br/><br/>\r\n\r\n      <!-- registration form for large display -->\r\n      <form class=\"mdl-layout--large-screen-only\" (submit)=\"onRegisterSubmit()\">\r\n        <div style=\"width: 100%; text-align: center;\">\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"아이디\" type=\"text\" name=\"userid\" [(ngModel)]=\"userid\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"비밀번호\" type=\"password\" name=\"pw\" [(ngModel)]=\"pw\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"비밀번호 확인\" type=\"password\" name=\"pwchk\" [(ngModel)]=\"pwchk\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"닉네임\" type=\"text\" name=\"nickname\" [(ngModel)]=\"nickname\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"이메일\" type=\"text\" name=\"email\" [formControl]=\"emailFormControl\" [errorStateMatcher]=\"matcher\">\r\n            <mat-error *ngIf=\"emailFormControl.hasError('email')\">\r\n              이메일을 입력해주세요.\r\n            </mat-error>\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"한 줄 소개\" type=\"text\" name=\"introduction\" [(ngModel)]=\"introduction\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <br/>\r\n          <button mat-raised-button type=\"submit\" class=\"largeInputEle\" color=\"primary\">회원가입</button>\r\n          <br/><br/><br/><hr/>\r\n          여기에다가 뭔가 알려둘 사항 같은 걸 써두면 됨\r\n        </div>\r\n      </form>\r\n\r\n      <!-- registration form for small display -->\r\n      <form class=\"mdl-layout--small-screen-only\" (submit)=\"onRegisterSubmit()\">\r\n        <div style=\"width: 100%; text-align: center;\">\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"아이디\" type=\"text\" name=\"userid\" [(ngModel)]=\"userid\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"비밀번호\" type=\"password\" name=\"pw\" [(ngModel)]=\"pw\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"비밀번호 확인\" type=\"password\" name=\"pwchk\" [(ngModel)]=\"pwchk\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"닉네임\" type=\"text\" name=\"nickname\" [(ngModel)]=\"nickname\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"이메일\" type=\"text\" name=\"email\" [formControl]=\"emailFormControl\" [errorStateMatcher]=\"matcher\">\r\n            <mat-error *ngIf=\"emailFormControl.hasError('email')\">\r\n              이메일을 입력해주세요.\r\n            </mat-error>\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"한 줄 소개\" type=\"text\" name=\"introduction\" [(ngModel)]=\"introduction\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <br/>\r\n          <button mat-raised-button type=\"submit\" class=\"smallInputEle\" color=\"primary\">회원가입</button>\r\n          <br/><br/><br/><hr/>\r\n          여기에다가 뭔가 알려둘 사항 같은 걸 써두면 됨\r\n        </div>\r\n      </form>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>회원가입</h4><hr/><br/><br/>\r\n\r\n      <!-- registration form for large display -->\r\n      <form class=\"mdl-layout--large-screen-only\" (submit)=\"onRegisterSubmit()\">\r\n        <div style=\"width: 100%; text-align: center;\">\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"아이디\" type=\"text\" name=\"userid\" [(ngModel)]=\"userid\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"비밀번호\" type=\"password\" name=\"pw\" [(ngModel)]=\"pw\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"비밀번호 확인\" type=\"password\" name=\"pwchk\" [(ngModel)]=\"pwchk\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"닉네임\" type=\"text\" name=\"nickname\" [(ngModel)]=\"nickname\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"이메일\" type=\"text\" name=\"email\" [formControl]=\"emailFormControl\" [errorStateMatcher]=\"matcher\">\r\n            <mat-error *ngIf=\"emailFormControl.hasError('email')\">\r\n              이메일을 입력해주세요.\r\n            </mat-error>\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"largeInputEle\">\r\n            <input matInput placeholder=\"한 줄 소개\" type=\"text\" name=\"introduction\" [(ngModel)]=\"introduction\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <br/>\r\n          <button mat-raised-button type=\"submit\" class=\"largeInputEle\" color=\"primary\">회원가입</button>\r\n          <br/><br/><br/><hr/>\r\n          <!-- 여기에다가 뭔가 알려둘 사항 같은 걸 써두면 됨 -->\r\n        </div>\r\n      </form>\r\n\r\n      <!-- registration form for small display -->\r\n      <form class=\"mdl-layout--small-screen-only\" (submit)=\"onRegisterSubmit()\">\r\n        <div style=\"width: 100%; text-align: center;\">\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"아이디\" type=\"text\" name=\"userid\" [(ngModel)]=\"userid\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"비밀번호\" type=\"password\" name=\"pw\" [(ngModel)]=\"pw\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"비밀번호 확인\" type=\"password\" name=\"pwchk\" [(ngModel)]=\"pwchk\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"닉네임\" type=\"text\" name=\"nickname\" [(ngModel)]=\"nickname\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"이메일\" type=\"text\" name=\"email\" [formControl]=\"emailFormControl\" [errorStateMatcher]=\"matcher\">\r\n            <mat-error *ngIf=\"emailFormControl.hasError('email')\">\r\n              이메일을 입력해주세요.\r\n            </mat-error>\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <mat-form-field class=\"smallInputEle\">\r\n            <input matInput placeholder=\"한 줄 소개\" type=\"text\" name=\"introduction\" [(ngModel)]=\"introduction\">\r\n          </mat-form-field>\r\n          <br/><br/>\r\n          <br/>\r\n          <button mat-raised-button type=\"submit\" class=\"smallInputEle\" color=\"primary\">회원가입</button>\r\n          <br/><br/><br/><hr/>\r\n          <!-- 여기에다가 뭔가 알려둘 사항 같은 걸 써두면 됨 -->\r\n        </div>\r\n      </form>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -1318,7 +1330,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>글쓰기</h4><hr/>\r\n      <div style=\"width: 98%; margin: auto;\">\r\n        <form (submit)=\"onWritePost()\">\r\n          <mat-form-field style=\"width: 100%;\">\r\n            <input matInput placeholder=\"제목\" type=\"text\" name=\"title\" [(ngModel)]=\"title\">\r\n          </mat-form-field>\r\n          <textarea [froalaEditor]=\"options\" [(ngModel)]=\"content\" name=\"content\"></textarea>\r\n          <br/>\r\n          <button mat-raised-button type=\"submit\" style=\"float: right;\">작성</button>\r\n        </form><br/>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</section>\r\n"
+module.exports = "<!-- section for a post -->\r\n<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">TITLE</h4>\r\n\r\n      <span style=\"float: right; text-align: right; font-size: 80%;\">\r\n        <span class=\"toProfile\">NICKNAME</span><br/>WRITE-DATE\r\n      </span>\r\n      <hr/>\r\n      <div class=\"posting\">\r\n        <div #stage_content>{{text.content}}</div>\r\n        <table>\r\n          <tbody *ngFor=\"let choice of text.choice\">\r\n            <tr>\r\n              <td>{{choice.choice_num}}</td>\r\n              <td (click)=\"select(choice?.set_param)\">{{choice.content}}</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n      </div>\r\n      <br/><br/>\r\n      <div style=\"text-align: center;\">\r\n        <button mat-raised-button color=\"primary\">\r\n          추천 0\r\n        </button>\r\n      </div>\r\n      <br/><hr/>\r\n\r\n      <!-- ############### table for comments ############### -->\r\n      <table style=\"width: 96%; margin: auto;\">\r\n        <tbody *ngFor=\"let comment of content?.comment\">\r\n          <tr>\r\n            <td style=\"width: 15%;\">\r\n              <img [attr.src]=\"'images/profile/' + comment.userid\" class=\"profileImage\" />\r\n            </td>\r\n            <td>\r\n              <span style=\"font-size: 80%;\">\r\n                <span class=\"toProfile\">COMMENT-NICKNAME</span> &nbsp;|&nbsp; \r\n                COMMENT-WRITE-DATE\r\n              </span>\r\n              <pre>\r\n                COMMENT\r\n              </pre><br/>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n      <!-- ############### table for comments ############### -->\r\n\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"aboutPost\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #aboutPost>\r\n    <button mat-menu-item>\r\n      <span>삭제</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n"
 
 /***/ }),
 
@@ -1334,12 +1346,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TestComponent", function() { return TestComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
-/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ng-flash-messages */ "./node_modules/ng-flash-messages/ng-flash-messages.umd.js");
-/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(ng_flash_messages__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1351,63 +1357,74 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-
-
-
-
-
 var TestComponent = /** @class */ (function () {
-    function TestComponent(funcService, authService, http, router, flashMessage) {
+    function TestComponent(funcService) {
         this.funcService = funcService;
-        this.authService = authService;
-        this.http = http;
-        this.router = router;
-        this.flashMessage = flashMessage;
-        this.options = {
-            placeholderText: '',
-            height: 500,
-            imageDefaultAlign: 'left'
+        this.data = {
+        // game data will be placed here
         };
-        this.type = 'free';
+        this.paramMap = new Map(); // <'parameter_name', {'value: number', 'visible: boolean'}>
+        this.stageNum = 0;
+        this.text = undefined;
+        this.phaseNum = 0;
         this.funcService.setTitle('TEST!!!!');
     }
     TestComponent.prototype.ngOnInit = function () {
+        for (var _i = 0, _a = this.data.param; _i < _a.length; _i++) { // [{param1: {value: 0, visible: true}}, {param2: {value: 100, visible: false}}, ...]
+            var obj = _a[_i];
+            this.paramMap.set(obj.param_name, { value: obj.default, visible: obj.visible });
+        }
+        for (var _b = 0, _c = this.data.stage; _b < _c.length; _b++) {
+            var stage = _c[_b];
+            if (stage.stage_num == 0) {
+                this.text = stage.texts[0];
+                break;
+            }
+        }
     };
-    TestComponent.prototype.onWritePost = function () {
-        var _this = this;
-        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_4__["Headers"]();
-        headers.append('Content-Type', 'application/json');
-        this.authService.getProfile().subscribe(function (profile) {
-            var post = {
-                type: _this.type,
-                title: _this.title,
-                content: _this.content,
-                userid: profile.user.userid,
-                nickname: profile.user.nickname
-            };
-            var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_4__["Headers"]();
-            // headers.append('Content-Type', 'application/json');
-            headers.append('Content-Type', 'multipart/form-data');
-            _this.http.post(_this.funcService.ServerAddress + '/boards/write', post, { headers: headers })
-                .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) { return res.json(); })).subscribe(function (data) {
-                if (data.success) {
-                    _this.flashMessage.showFlashMessage({
-                        messages: ['SUCCESS'],
-                        type: 'success',
-                        timeout: 2000
-                    });
-                    console.log('[[SUCCESS]]');
+    TestComponent.prototype.checkNextStageCondition = function (condition) {
+        for (var _i = 0, condition_1 = condition; _i < condition_1.length; _i++) {
+            var c = condition_1[_i];
+            var value = this.paramMap.get(c.param).value;
+            if (!(c.above <= value && value <= c.below))
+                return false;
+        }
+        return true;
+    };
+    TestComponent.prototype.select = function (condition) {
+        this.stageNum++;
+        for (var _i = 0, condition_2 = condition; _i < condition_2.length; _i++) {
+            var val = condition_2[_i];
+            var pv = this.paramMap.get(val.param);
+            this.paramMap.delete(val.param);
+            pv.value += condition.add;
+            this.paramMap.set(val.param, pv);
+        }
+        if (this.stageNum > this.data.stage.length) {
+            // this is the end of the game
+            return true;
+        }
+        for (var _a = 0, _b = this.data.stage; _a < _b.length; _a++) {
+            var stage = _b[_a];
+            if (stage.stage_num == this.stageNum) {
+                for (var _c = 0, _d = stage.texts; _c < _d.length; _c++) {
+                    var text = _d[_c];
+                    var b = false;
+                    for (var _e = 0, _f = text.condition; _e < _f.length; _e++) {
+                        var c = _f[_e];
+                        if ((b = this.checkNextStageCondition(c))) {
+                            this.text = text;
+                            // refresh page without using 'ngOnInit'
+                            return true;
+                        }
+                    }
+                    if (!b) {
+                        // in this part, there is no condition to be fit to param
+                        return false;
+                    }
                 }
-                else {
-                    _this.flashMessage.showFlashMessage({
-                        messages: ['FAIL'],
-                        type: 'danger',
-                        timeout: 3000
-                    });
-                    console.log('[[FAIL]]');
-                }
-            });
-        });
+            }
+        }
     };
     TestComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1415,13 +1432,91 @@ var TestComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./test.component.html */ "./src/app/components/test/test.component.html"),
             styles: [__webpack_require__(/*! ./test.component.css */ "./src/app/components/test/test.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_1__["FuncService"],
-            _services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"],
-            _angular_http__WEBPACK_IMPORTED_MODULE_4__["Http"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"],
-            ng_flash_messages__WEBPACK_IMPORTED_MODULE_5__["NgFlashMessageService"]])
+        __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_1__["FuncService"]])
     ], TestComponent);
     return TestComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/components/tool/tool.component.css":
+/*!****************************************************!*\
+  !*** ./src/app/components/tool/tool.component.css ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvdG9vbC90b29sLmNvbXBvbmVudC5jc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/components/tool/tool.component.html":
+/*!*****************************************************!*\
+  !*** ./src/app/components/tool/tool.component.html ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<iframe src=\"http://localhost:3000/games/tool\" height=\"700\" style=\"width: 100%\"></iframe>\n<br/>\n\n<div style=\"margin: auto; text-align: center;\">\n  <mat-form-field appearance=\"outline\" style=\"width: 60%;\">\n    <mat-label>HTML 태그</mat-label>\n    <input matInput disabled #tags>\n  </mat-form-field>&nbsp;&nbsp;&nbsp;\n  <button mat-raised-button (click)=\"extractTag(area, tags)\">태그 추출</button>\n</div>\n<div style=\"margin: auto;\">\n  <textarea [froalaEditor]=\"options\" style=\"width: 90%;\" #area></textarea>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/components/tool/tool.component.ts":
+/*!***************************************************!*\
+  !*** ./src/app/components/tool/tool.component.ts ***!
+  \***************************************************/
+/*! exports provided: ToolComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToolComponent", function() { return ToolComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var ToolComponent = /** @class */ (function () {
+    function ToolComponent(funcService) {
+        this.funcService = funcService;
+        this.options = {
+            placeholderText: '',
+            height: 500,
+            imageDefaultAlign: 'left',
+            imageDefaultWidth: 0,
+            charCounterCount: true,
+            imageUploadParam: 'image',
+            imageUploadURL: '/games/images',
+            imageUploadMethod: 'POST',
+            imageMaxSize: 5 * 1024 * 1024,
+            imageAllowTypes: ['jpeg', 'jpg', 'png', 'gif', 'webp'],
+        };
+        this.funcService.setTitle('게임 만들기');
+    }
+    ToolComponent.prototype.ngOnInit = function () {
+    };
+    ToolComponent.prototype.extractTag = function (area, tags) {
+        tags.value = area.value;
+    };
+    ToolComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-tool',
+            template: __webpack_require__(/*! ./tool.component.html */ "./src/app/components/tool/tool.component.html"),
+            styles: [__webpack_require__(/*! ./tool.component.css */ "./src/app/components/tool/tool.component.css")]
+        }),
+        __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_1__["FuncService"]])
+    ], ToolComponent);
+    return ToolComponent;
 }());
 
 
@@ -1492,6 +1587,7 @@ var WriteComponent = /** @class */ (function () {
             placeholderText: '',
             height: 500,
             imageDefaultAlign: 'left',
+            imageDefaultWidth: 0,
             charCounterCount: true,
             imageUploadParam: 'image',
             imageUploadURL: '/boards/images',
@@ -2055,6 +2151,50 @@ if (_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].produc
 }
 Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformBrowserDynamic"])().bootstrapModule(_app_app_module__WEBPACK_IMPORTED_MODULE_3__["AppModule"])
     .catch(function (err) { return console.log(err); });
+
+
+/***/ }),
+
+/***/ "./src/pipes/youtube.ts":
+/*!******************************!*\
+  !*** ./src/pipes/youtube.ts ***!
+  \******************************/
+/*! exports provided: Youtube */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Youtube", function() { return Youtube; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+// class to be available youtube on the boards
+var Youtube = /** @class */ (function () {
+    function Youtube(dom) {
+        this.dom = dom;
+    }
+    Youtube.prototype.transform = function (value, args) {
+        return this.dom.bypassSecurityTrustHtml(value);
+    };
+    Youtube = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Pipe"])({
+            name: 'youtube',
+        }),
+        __metadata("design:paramtypes", [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["DomSanitizer"]])
+    ], Youtube);
+    return Youtube;
+}());
+
 
 
 /***/ }),

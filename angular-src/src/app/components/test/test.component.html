@@ -1,17 +1,61 @@
-<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+<!-- section for a post -->
+<section *ngIf="num != 'list'" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
-      <h4>글쓰기</h4><hr/>
-      <div style="width: 98%; margin: auto;">
-        <form (submit)="onWritePost()">
-          <mat-form-field style="width: 100%;">
-            <input matInput placeholder="제목" type="text" name="title" [(ngModel)]="title">
-          </mat-form-field>
-          <textarea [froalaEditor]="options" [(ngModel)]="content" name="content"></textarea>
-          <br/>
-          <button mat-raised-button type="submit" style="float: right;">작성</button>
-        </form><br/>
+      <h4 style="display: inline;">TITLE</h4>
+
+      <span style="float: right; text-align: right; font-size: 80%;">
+        <span class="toProfile">NICKNAME</span><br/>WRITE-DATE
+      </span>
+      <hr/>
+      <div class="posting">
+        <div #stage_content>{{text.content}}</div>
+        <table>
+          <tbody *ngFor="let choice of text.choice">
+            <tr>
+              <td>{{choice.choice_num}}</td>
+              <td (click)="select(choice?.set_param)">{{choice.content}}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
+      <br/><br/>
+      <div style="text-align: center;">
+        <button mat-raised-button color="primary">
+          추천 0
+        </button>
+      </div>
+      <br/><hr/>
+
+      <!-- ############### table for comments ############### -->
+      <table style="width: 96%; margin: auto;">
+        <tbody *ngFor="let comment of content?.comment">
+          <tr>
+            <td style="width: 15%;">
+              <img [attr.src]="'images/profile/' + comment.userid" class="profileImage" />
+            </td>
+            <td>
+              <span style="font-size: 80%;">
+                <span class="toProfile">COMMENT-NICKNAME</span> &nbsp;|&nbsp; 
+                COMMENT-WRITE-DATE
+              </span>
+              <pre>
+                COMMENT
+              </pre><br/>
+            </td>
+          </tr>
+        </tbody>
+      </table><br/>
+      <!-- ############### table for comments ############### -->
+
     </div>
   </div>
+  <button mat-icon-button [matMenuTriggerFor]="aboutPost">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #aboutPost>
+    <button mat-menu-item>
+      <span>삭제</span>
+    </button>
+  </mat-menu>
 </section>

@@ -2,11 +2,11 @@ pre {
   font-family: gothic;
   font-size: 105%;
 }
-section a {
+.content a {
   text-decoration: none;
   color: rgb(0, 105, 151);
 }
-section a:hover {
+.content a:hover {
   text-decoration: underline;
 }
 .posting {

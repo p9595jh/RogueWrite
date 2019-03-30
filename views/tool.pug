@@ -1,0 +1,47 @@
+doctype html
+html
+    head
+        //- mdl (material design lite)
+        link(rel='stylesheet', href='https://fonts.googleapis.com/icon?family=Material+Icons')
+        link(rel='stylesheet', href='https://code.getmdl.io/1.3.0/material.blue_grey-red.min.css')
+        script(defer='', src='https://code.getmdl.io/1.3.0/material.min.js')
+
+        script(src='../resources/blockly/blockly_compressed.js')
+        script(src='../resources/blockly/blocks_compressed.js')
+        script(src='../resources/blockly/javascript_compressed.js')
+        script(src='../resources/blockly/en.js')
+    
+    body
+        
+        button(class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored", style='width: 100px; height: 30px;', onclick='save()') 저장
+        //- textarea#textarea(rows='35', cols='165')
+        br
+        div#blocklyDiv(style='height: 500px; width: 100%;')
+
+        xml#toolbox(style='display: none')
+            category(name='big_one')
+                block(type='game')
+                block(type='stage')
+                block(type='phase')
+                block(type='choice')
+            category(name='small_one')
+                block(type='text')
+                block(type='math_number')
+                block(type='logic_boolean')
+                block(type='condition')
+                block(type='set_param')
+                block(type='parameter')
+            category(name='param', custom='VARIABLE')
+
+        script.
+            var demoWorkspace = Blockly.inject('blocklyDiv', {
+                media: '../resources/blockly/google-blockly-82871b3/media/',
+                toolbox: document.getElementById('toolbox')
+            });
+
+            function save() {
+                confirm('저장하시겠습니까?');
+                var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+                alert(code);
+                // document.getElementById('textarea').value = code;
+            }

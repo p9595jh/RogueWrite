@@ -1,14 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { FuncService } from '../../services/func.service';
-import { AuthService } from '../../services/auth.service';
-import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
-import { MatBottomSheet, MatBottomSheetRef } from '@angular/material';
-import { Observable } from 'rxjs';
-import { startWith, map } from 'rxjs/operators';
-import { Http, Headers } from '@angular/http';
-import { NgFlashMessageService } from 'ng-flash-messages';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-test',
@@ -16,67 +7,74 @@ import { Router } from '@angular/router';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
-  options: Object = {
-    placeholderText: '',
-    height: 500,
-    imageDefaultAlign: 'left'
+  data: any = {
+    // game data will be placed here
   };
+  paramMap = new Map<string, any>(); // <'parameter_name', {'value: number', 'visible: boolean'}>
 
-  type: String = 'free';
-  title: String;
-  content: String;
+  stageNum = 0;
+  text: any = undefined;
+  phaseNum = 0;
 
   constructor(
     private funcService: FuncService,
-    private authService: AuthService,
-    private http: Http,
-    private router: Router,
-    private flashMessage: NgFlashMessageService
   ) {
     this.funcService.setTitle('TEST!!!!');
   }
 
   ngOnInit() {
+    for (let obj of this.data.param) {  // [{param1: {value: 0, visible: true}}, {param2: {value: 100, visible: false}}, ...]
+      this.paramMap.set(obj.param_name, {value: obj.default, visible: obj.visible});
+    }
+    for (let stage of this.data.stage) {
+      if ( stage.stage_num == 0 ) {
+        this.text = stage.texts[0];
+        break;
+      }
+    }
+
   }
 
-  onWritePost() {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    this.authService.getProfile().subscribe(profile => {
+  checkNextStageCondition(condition): boolean {
+    for (let c of condition) {
+      let value: number = this.paramMap.get(c.param).value;
+      if ( !(c.above <= value && value <= c.below) ) return false;
+    }
+    return true;
+  }
 
-      const post = {
-        type: this.type,
-        title: this.title,
-        content: this.content,
-        userid: profile.user.userid,
-        nickname: profile.user.nickname
-      };
+  select(condition: any) {
+    this.stageNum++;
+    for (let val of condition) {
+      let pv: any = this.paramMap.get(val.param);
+      this.paramMap.delete(val.param);
+      pv.value += condition.add;
+      this.paramMap.set(val.param, pv);
+    }
 
-      let headers = new Headers();
-      // headers.append('Content-Type', 'application/json');
-      headers.append('Content-Type', 'multipart/form-data');
+    if ( this.stageNum > this.data.stage.length ) {
+      // this is the end of the game
+      return true;
+    }
 
-      this.http.post(this.funcService.ServerAddress + '/boards/write', post, {headers: headers})
-       .pipe(map((res: any) => res.json())).subscribe(data => {
-          if ( data.success ) {
-            this.flashMessage.showFlashMessage({
-              messages: ['SUCCESS'],
-              type: 'success',
-              timeout: 2000
-            });
-            console.log('[[SUCCESS]]');
-          } else {
-            this.flashMessage.showFlashMessage({
-              messages: ['FAIL'],
-              type: 'danger',
-              timeout: 3000
-            });
-            console.log('[[FAIL]]');
+    for (let stage of this.data.stage) {
+      if ( stage.stage_num == this.stageNum ) {
+        for (let text of stage.texts) {
+          let b: boolean = false;
+          for (let c of text.condition) {
+            if ( (b = this.checkNextStageCondition(c)) ) {
+              this.text = text;
+              // refresh page without using 'ngOnInit'
+              return true;
+            }
           }
-
-       });
-    })
-      
+          if ( !b ) {
+            // in this part, there is no condition to be fit to param
+            return false;
+          }
+        }
+      }
+    }
   }
 
 }

@@ -60,12 +60,18 @@ router.post('/images', function(req, res) {
         const ext = files.image.name.substring(files.image.name.lastIndexOf('.')).toLowerCase();
         const name = new Date().getTime() + ext;
         fs.copy(filePath, 'public/images/board/' + name, function(err) {
-            if ( err ) console.log(err);
+            if ( err ) {
+                console.log(err);
+                res.json({});
+            } else {
+                fs.copy(filePath, 'angular-src/src/images/board/' + name, function(err) {
+                    if ( err ) {
+                        console.log(err);
+                        res.json({});
+                    } else res.json({link: 'images/board/' + name});
+                });
+            }
         });
-        fs.copy(filePath, 'angular-src/src/images/board/' + name, function(err) {
-            if ( err ) console.log(err);
-        });
-        res.json({link: 'images/board/' + name});
     });
 })
 
