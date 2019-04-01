@@ -1,0 +1,72 @@
+extends layout2
+block content
+
+    script.
+        $(function() {
+            $('#editor').froalaEditor({
+                placeholderText: '',
+                imageDefaultAlign: 'left',
+                imageDefaultWidth: 0,
+                height: 600,
+                toolbarButtonsSM: [
+                    'fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|',
+                    'fontFamily', 'fontSize', 'color', 'inlineClass', 'inlineStyle', 'paragraphStyle', 'lineHeight', '|',
+                    'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-',
+                    'insertLink', 'insertImage', 'insertVideo', 'embedly', 'insertFile', 'insertTable', '|',
+                    'emoticons', 'fontAwesome', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|',
+                    'print', 'getPDF', 'spellChecker', 'help', 'html', '|',
+                    'undo', 'redo'
+                ],
+                toolbarButtonsXS: [
+                    'fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|',
+                    'fontFamily', 'fontSize', 'color', 'inlineClass', 'inlineStyle', 'paragraphStyle', 'lineHeight', '-',
+                    'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-',
+                    'insertLink', 'insertImage', 'insertVideo', 'embedly', 'insertFile', 'insertTable', '|',
+                    'emoticons', 'fontAwesome', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|',
+                    'print', 'getPDF', 'spellChecker', 'help', 'html', '|',
+                    'undo', 'redo'
+                ],
+
+                charCounterCount: true,
+                imageUploadParam: 'image',
+                imageUploadURL: './images',
+                imageUploadMethod: 'POST',
+                imageMaxSize: 5 * 1024 * 1024,  // maximun size : 5MB
+                imageAllowTypes: [ 'jpeg', 'jpg', 'png', 'gif', 'webp' ]
+            });
+        });
+
+        function copy() {
+            var editor = document.getElementById("editor");
+            var tags = document.getElementById("t1");
+            tags.value = editor.value;
+            tags.select();
+            document.execCommand('copy');
+        }
+
+    div(style="margin: auto; text-align: center;")
+        div(class="mdl-textfield mdl-js-textfield")
+            input(class="mdl-textfield__input", type="text", placeholder="HTML 태그", id="t1", readonly)
+        span &nbsp;&nbsp;&nbsp;
+        button(class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", id="show-toast", onclick="copy()") 클립보드로 복사
+        span &nbsp;&nbsp;&nbsp;
+        
+        button(class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="window.open('about:blank', '_self').close()") 닫기
+        div(id="toast", class="mdl-js-snackbar mdl-snackbar")
+            div(class="mdl-snackbar__text")
+            button(class="mdl-snackbar__action", type="button")
+        script.
+            (function() {
+                'use strict';
+                var snackbarContainer = document.querySelector('#toast');
+                var showToastButton = document.querySelector('#show-toast');
+                showToastButton.addEventListener('click', function() {
+                    'use strict';
+                    snackbarContainer.MaterialSnackbar.showSnackbar({
+                        message: '복사되었습니다.',
+                        timeout: 1000
+                    });
+                });
+            }());
+    
+    textarea#editor(style="width: 100%;")= defaultText

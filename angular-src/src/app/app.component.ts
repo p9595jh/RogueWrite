@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { Router } from '@angular/router';
-import { FuncService } from 'src/app/services/func.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +13,7 @@ export class AppComponent {
   navLinks = [
     { label: 'HOME', path: '/' },
     { label: '자유게시판', path: '/board/free/list' },
-    { label: 'THIRD', path: '/login' },
+    { label: '게임게시판', path: '/game' },
     { label: 'FORTH', path: '/register' },
     { label: 'FIFTH', path: '/write/free' }
   ];
@@ -23,8 +22,7 @@ export class AppComponent {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private flashMessage: NgFlashMessageService,
-    private funcService: FuncService
+    private flashMessage: NgFlashMessageService
   ) { }
 
   onLogoutClick() {

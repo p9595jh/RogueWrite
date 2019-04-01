@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FuncService } from '../../services/func.service';
-import { MatSnackBar } from '@angular/material';
+import { GameService } from '../../services/game.service';
 
 @Component({
   selector: 'app-tool',
@@ -21,10 +21,11 @@ export class ToolComponent implements OnInit {
     imageMaxSize: 5 * 1024 * 1024,  // maximun size : 5MB
     imageAllowTypes: [ 'jpeg', 'jpg', 'png', 'gif', 'webp' ],
   };
+  content: String;
 
   constructor(
     private funcService: FuncService,
-    private snackBar: MatSnackBar
+    private gameService: GameService
   ) {
     this.funcService.setTitle('게임 만들기');
   }
@@ -32,20 +33,9 @@ export class ToolComponent implements OnInit {
   ngOnInit() {
   }
 
-  extractTag(area: HTMLInputElement, tags: HTMLInputElement) {
-    if ( !area.value || area.value == '' ) {
-      this.snackBar.open('비어있습니다.', '', {
-        duration: 1000,
-      });
-      return false;
-    }
-
-    tags.value = area.value;
-    tags.select();
-    document.execCommand('copy');
-
-    this.snackBar.open('복사되었습니다.', '', {
-      duration: 1000,
+  onWriteGame() {
+    this.gameService.writeGame(this.content).subscribe(data => {
+      // handle
     });
   }
 

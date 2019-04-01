@@ -1,12 +1,29 @@
 <iframe src="http://localhost:3000/games/tool" height="700" style="width: 100%"></iframe>
 
-<div style="margin: auto; text-align: center;">
-  <mat-form-field appearance="outline" style="width: 40%;">
-    <mat-label>HTML 태그</mat-label>
-    <input matInput readonly #tags>
-  </mat-form-field>&nbsp;&nbsp;&nbsp;
-  <button mat-raised-button (click)="extractTag(area, tags)">클립보드로 복사</button>
-</div>
-<div style="margin: auto;">
-  <textarea [froalaEditor]="options" style="width: 90%;" #area></textarea>
-</div>
+<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+    <div class="mdl-card__supporting-text">
+      
+      <form (submit)="onWriteGame()">
+        <table style="width: 96%; margin: auto;">
+          <tr style="text-align: center;">
+
+            <td rowspan="2" style="width: 85%;">
+              <mat-form-field appearance="outline" style="width: 100%; height: 100%;">
+                <mat-label>주석</mat-label>
+                <textarea matInput placeholder="" rows="3"
+                  name="content" [(ngModel)]="content"></textarea>
+              </mat-form-field>
+            </td>
+
+            <td style="text-align: center; padding-bottom: 3%;">
+              <button mat-raised-button type="submit" style="width: 60%;">작성</button>
+            </td>
+
+          </tr>
+        </table>
+      </form>
+
+    </div>
+  </div>
+</section>

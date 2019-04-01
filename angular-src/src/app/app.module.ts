@@ -48,6 +48,7 @@ import { TestComponent } from './components/test/test.component';
 import { NoPageComponent } from './components/no-page/no-page.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ToolComponent } from './components/tool/tool.component';
+import { GameComponent } from './components/game/game.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -78,7 +79,8 @@ const appRoutes: Routes = [
     TestComponent,
     NoPageComponent,
     AdminComponent,
-    ToolComponent
+    ToolComponent,
+    GameComponent
   ],
   imports: [
     ReactiveFormsModule,

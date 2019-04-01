@@ -1,0 +1,207 @@
+<!-- element for representing the location of the post to be scrolled -->
+<span style="display: hidden;" #postLocation></span>
+
+<!-- section for a post -->
+<section *ngIf="num != 'list'" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+    <div class="mdl-card__supporting-text">
+      <h4 style="display: inline;">{{content?.title}}</h4>
+
+      <span style="float: right; text-align: right; font-size: 80%;">
+        <span class="toProfile" (click)="funcService.openInfoWindow(content?.userid)">{{content?.nickname}}</span><br/>{{content?.writedate}}
+      </span>
+      <hr/>
+      <!-- ############### ENGINE WILL BE PLACED HERE ############### -->
+      <div class="posting content" [innerHtml]="content?.content | youtube"></div>
+      <div>{{content?.content}}</div>
+      <br/><br/>
+
+      <!-- not logging in -->
+      <!-- <div class="recommends" *ngIf="!funcService.loggedIn()">
+        <button mat-raised-button color="primary" (click)="unloggedIn()">
+          추천 {{content?.recommend}}
+        </button>
+        <button mat-raised-button color="accent" (click)="unloggedIn()">
+          비추천 {{content?.unrecommend}}
+        </button>
+      </div> -->
+
+      <!-- normal user -->
+      <!-- <div class="recommends" *ngIf="funcService.loggedIn() && user?.userid != content?.userid && user?.userid != 'admin'"> -->
+      <div class="recommends" *ngIf="user?.userid != content?.userid && user?.userid != 'admin'">
+        <button mat-raised-button color="primary" (click)="onRecommend(true)">
+          추천 {{content?.recommend}}
+        </button>
+        <button mat-raised-button color="accent" (click)="onRecommend(false)">
+          비추천 {{content?.unrecommend}}
+        </button>
+      </div>
+
+      <!-- writer -->
+      <div class="recommends" *ngIf="funcService.loggedIn() && user?.userid == content?.userid && user?.userid != 'admin'">
+        <button mat-raised-button color="primary" (click)="onRecommend(true)">
+          추천 {{content?.recommend}}
+        </button>
+        <button mat-raised-button color="accent" (click)="onRecommend(false)">
+          비추천 {{content?.unrecommend}}
+        </button>
+        <button mat-raised-button
+          *ngIf="content?.boardRequest == 0 && (content?.recommend - content?.unrecommend) >= 3"
+          (click)="requestBoard()">
+          게시판 생성 요청
+        </button>
+      </div>
+
+      <!-- admin -->
+      <div class="recommends" *ngIf="funcService.loggedIn() && user?.userid == 'admin'">
+        <button mat-raised-button color="primary" (click)="onRecommend(true)">
+          추천 {{content?.recommend}}
+        </button>
+        <button mat-raised-button color="accent" (click)="onRecommend(false)">
+          비추천 {{content?.unrecommend}}
+        </button>
+        <button mat-raised-button
+          *ngIf="content?.boardRequest == 1" (click)="acceptBoard()">
+          게시판 생성 요청 수락
+        </button>
+      </div>
+
+      <br/><hr/>
+
+      <!-- ############### table for comments ############### -->
+      <table style="width: 96%; margin: auto;">
+        <tbody *ngFor="let comment of content?.comment">
+          <tr>
+            <td style="width: 15%;">
+              <img [attr.src]="'images/profile/' + comment.userid" class="profileImage" />
+            </td>
+            <td>
+              <span style="font-size: 80%;">
+                <span class="toProfile" (click)="funcService.openInfoWindow(comment?.userid)">{{comment?.nickname}}</span> &nbsp;|&nbsp; 
+                {{comment?.writedate}}
+                <span *ngIf="comment?.userid == user?.userid || user?.userid == 'admin'"> &nbsp;|&nbsp; 
+                  <span style="cursor: pointer;" (click)="onRemoveComment(comment.num)">삭제</span>
+                </span>
+              </span>
+              <pre class="content" [innerHTML]="comment?.comment"></pre><br/>
+            </td>
+          </tr>
+        </tbody>
+      </table><br/>
+      <!-- ############### table for comments ############### -->
+
+      <!-- ############### writing area ############### -->
+      <form *ngIf="authService.loggedIn()" (submit)="onWriteComment()"><hr *ngIf="content?.comment?.length > 0" />
+        <table style="width: 96%; margin: auto;">
+          <tr style="text-align: center;">
+
+            <td rowspan="2" style="width: 85%;">
+              <mat-form-field appearance="outline" style="width: 100%; height: 100%;">
+                <mat-label>댓글을 작성해주세요.</mat-label>
+                <textarea matInput placeholder="" rows="3" name="cmtWrite"
+                [formControl]="cmtWrite" [matAutocomplete]="auto"></textarea>
+                <mat-autocomplete #auto>
+                  <!-- <mat-option *ngFor="let ct of filteredOptions | async" [value]="'TO::' + ct?.nickname" (onclick)="setCmtTo(ct)">
+                    {{ct.nickname}} [{{ct.userid}}]
+                  </mat-option> -->
+                </mat-autocomplete>
+              </mat-form-field>
+            </td>
+
+            <td style="text-align: center; padding-bottom: 3%;">
+              <button mat-raised-button type="submit" style="width: 60%;">작성</button>
+            </td>
+
+          </tr>
+        </table>
+      </form>
+      <!-- ############### writing area ############### -->
+
+    </div>
+  </div>
+  <button mat-icon-button [matMenuTriggerFor]="aboutPost">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #aboutPost>
+    <button mat-menu-item *ngIf="content?.userid == user?.userid || user?.userid == 'admin'" (click)="onRemovePost()">
+      <span>삭제</span>
+    </button>
+  </mat-menu>
+</section>
+
+<!-- section for a board -->
+<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+    <div class="mdl-card__supporting-text">
+      <h4>게임게시판</h4>
+      <hr/>
+      
+      <!-- for large display -->
+      <table class="mdl-data-table mdl-js-data-table mdl-layout--large-screen-only" style="margin: auto; width: 98%;">
+        <thead>
+          <tr>
+            <th class="mdl-data-table__cell--non-numeric">날짜</th>
+            <th class="mdl-data-table__cell--non-numeric">제목</th>
+            <th>글쓴이</th>
+            <th>조회수</th>
+            <th>추천</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let val of contents | slice:pagingFrom:pagingTo; let i=index">
+          <tr>
+            <td class="mdl-data-table__cell--non-numeric">{{extractDate(val.writedate)}}</td>
+            <td class="mdl-data-table__cell--non-numeric">
+              <a [routerLink]="['/game/'+val?._id]"
+                style="color: black; text-decoration: none; font-weight: 400;"
+                (click)="scrollToPost(postLocation)">{{val.title}}</a>&nbsp;
+              <span *ngIf="val.comment.length > 0" style="font-size: 85%; color: grey;">[{{val.comment.length}}]</span>
+            </td>
+            <td>
+              <span class="toProfile" (click)="funcService.openInfoWindow(val?.userid)">{{val.nickname}}</span>
+            </td>
+            <td>{{val.hit}}</td>
+            <td>{{val.recommend}}&sol;{{val.unrecommend}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- for small display -->
+      <table class="mdl-data-table mdl-js-data-table mdl-layout--small-screen-only" style="margin: auto; width: 98%;">
+        <tbody *ngFor="let val of contents | slice:pagingFrom:pagingTo; let i=index">
+          <tr>
+            <td class="mdl-data-table__cell--non-numeric"
+              [routerLink]="['/board/'+val?._id]" (click)="scrollToPost(postLocation)">
+              <div>
+                {{val.title}}
+                <span *ngIf="val.comment.length > 0" style="color: grey;">[{{val.comment.length}}]</span>
+              </div>
+              <div style="font-size: 85%; margin-top: 1%;">
+                <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;
+                <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;
+                <span>추천 {{val.recommend}}&sol;{{val.unrecommend}}</span>
+              </div>
+            </td>
+            <td>{{extractDate(val.writedate)}}</td>
+          </tr>
+        </tbody>
+      </table><br/>
+
+      <mat-paginator [length]="contents?.length" [pageSize]="pagingSize" (page)="paging($event)">
+      </mat-paginator>
+
+      <div *ngIf="authService.loggedIn()" style="float: right;">
+        <a mat-raised-button [routerLink]="['/tool']">작성</a>
+      </div>
+    </div>
+  </div>
+  <button mat-icon-button [matMenuTriggerFor]="board">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #board>
+    <button mat-menu-item *ngIf="authService.loggedIn()">
+      <span>즐겨찾는 게시판 설정</span>
+    </button>
+  </mat-menu>
+</section>
+
+<section></section>
