@@ -77,13 +77,19 @@ router.post('/setProfileImage', function(req, res) {
         } else {
             const filePath = files.image.path;
             fs.copy(filePath, 'public/images/profile/' + userid, function(err) {
-                if ( err ) console.log('error while putting image to /public');
+                if ( err ) console.log(err);
+                else {
+                    fs.copy(filePath, 'angular-src/src/images/profile/' + userid, function(err) {
+                        if ( err ) console.log(err);
+                        else {
+                            req.session.destroy();
+                            res.clearCookie('sid');
+                            var done = "<script>alert('적용 완료');window.open('about:blank', '_self').close();</script>";
+                            res.send(done);
+                        }
+                    });
+                }
             });
-            fs.copy(filePath, 'angular-src/src/images/profile/' + userid, function(err) {
-                if ( err ) console.log('error while putting image to /angular-src');
-            });
-            var done = "<script>alert('적용 완료');window.open('about:blank', '_self').close();</script>";
-            res.send(done);
         }
     })
 });

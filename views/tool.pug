@@ -36,6 +36,7 @@ block content
         function save() {
             if ( !confirm('저장하시겠습니까?') ) return;
             var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
+            //- code = '{data:' + code + '}';
             //- 'code' is a string, so no need to be stringify or parse
 
             var xhr = new XMLHttpRequest();

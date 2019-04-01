@@ -13,7 +13,7 @@ export class AppComponent {
   navLinks = [
     { label: 'HOME', path: '/' },
     { label: '자유게시판', path: '/board/free/list' },
-    { label: '게임게시판', path: '/game' },
+    { label: '게임게시판', path: '/game/list' },
     { label: 'FORTH', path: '/register' },
     { label: 'FIFTH', path: '/write/free' }
   ];

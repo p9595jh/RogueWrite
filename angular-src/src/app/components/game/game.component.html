@@ -12,7 +12,19 @@
       </span>
       <hr/>
       <!-- ############### ENGINE WILL BE PLACED HERE ############### -->
-      <div class="posting content" [innerHtml]="content?.content | youtube"></div>
+      <!-- <div class="posting content" [innerHtml]="content?.content | youtube"></div> -->
+      <div class="posting">
+        <div #stage_content>{{text.content}}</div>
+        <table>
+          <tbody *ngFor="let choice of text.choice">
+            <tr>
+              <td>{{choice.choice_num}}</td>
+              <td (click)="select(choice?.set_param)">{{choice.content}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <div>{{content?.content}}</div>
       <br/><br/>
 
@@ -160,7 +172,7 @@
               <span class="toProfile" (click)="funcService.openInfoWindow(val?.userid)">{{val.nickname}}</span>
             </td>
             <td>{{val.hit}}</td>
-            <td>{{val.recommend}}&sol;{{val.unrecommend}}</td>
+            <td>{{val.recommend}} {{val.unrecommend}}</td>
           </tr>
         </tbody>
       </table>
@@ -178,7 +190,7 @@
               <div style="font-size: 85%; margin-top: 1%;">
                 <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;
                 <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;
-                <span>추천 {{val.recommend}}&sol;{{val.unrecommend}}</span>
+                <span>추천 {{val.recommend}} {{val.unrecommend}}</span>
               </div>
             </td>
             <td>{{extractDate(val.writedate)}}</td>
