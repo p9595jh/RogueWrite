@@ -22,27 +22,27 @@ export class GameService {
     this.authToken = token;
   }
 
-  takeOnePost(num) {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    let loggedIn = this.authService.loggedIn() ? 'yes' : 'no';
-    return this.http.get(this.funcService.ServerAddress + '/games/takeOnePost?num=' + num + '&loggedIn=' + loggedIn, {headers: headers})
-      .pipe(map(res => res.json()))
-  }
-
-  takeAllPosts() {
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    return this.http.get(this.funcService.ServerAddress + '/games/takeAllPosts', {headers: headers})
-      .pipe(map(res => res.json()));
-  }
-
   writeGame(content) {
     let headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
     return this.http.post(this.funcService.ServerAddress + '/games/write', {content: content}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  takeOnePost(num) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    let loggedIn = this.authService.loggedIn() ? 'yes' : 'no';
+    return this.http.get(this.funcService.ServerAddress + '/games/takeOnePost?num=' + num + '&loggedIn=' + loggedIn, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  takeAllPosts() {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(this.funcService.ServerAddress + '/games/takeAllPosts', {headers: headers})
       .pipe(map(res => res.json()));
   }
 

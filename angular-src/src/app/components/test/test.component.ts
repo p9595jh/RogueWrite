@@ -1,30 +1,27 @@
-import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FuncService } from '../../services/func.service';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css']
 })
-@Pipe({ name: 'safeHtml' })
-export class TestComponent implements OnInit, PipeTransform {
+export class TestComponent implements OnInit {
 
-  url = 'https://www.google.com/';
+  url = 'https://www.youtube.com/embed/9OTkhsJUK0U';
+  tag = '<iframe src="' + this.url + '" style="width: 100%; height: 600px;"></iframe>';
 
   constructor(
-    private funcService: FuncService,
-    private sanitized: DomSanitizer
+    private funcService: FuncService
   ) {
     this.funcService.setTitle('TEST!!!!');
   }
 
-  transform(value) {
-    return this.sanitized.bypassSecurityTrustResourceUrl(value);
+  ngOnInit() {
   }
 
-  ngOnInit() {
-
+  get() {
+    return this.url;
   }
 
 }

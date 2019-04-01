@@ -1,11 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-// class to be available youtube on the boards
 @Pipe({
-  name: 'youtube',
+  name: 'safe'
 })
-export class Youtube implements PipeTransform {
+export class SafeHtml implements PipeTransform {
   constructor (private dom: DomSanitizer) {
 
   }

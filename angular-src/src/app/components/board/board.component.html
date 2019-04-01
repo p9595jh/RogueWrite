@@ -11,7 +11,7 @@
         <span class="toProfile" (click)="funcService.openInfoWindow(content?.userid)">{{content?.nickname}}</span><br/>{{content?.writedate}}
       </span>
       <hr/>
-      <div class="posting content" [innerHtml]="content?.content | youtube"></div>
+      <div class="posting content" [innerHtml]="content?.content | safe"></div>
       <br/><br/>
       <div style="text-align: center;">
         <button mat-raised-button color="primary" (click)="onRecommend()">

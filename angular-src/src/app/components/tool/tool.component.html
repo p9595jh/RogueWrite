@@ -1,4 +1,4 @@
-<iframe src="http://localhost:3000/games/tool" height="700" style="width: 100%"></iframe>
+<div [innerHTML]="iframe | safe"></div>
 
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
@@ -7,7 +7,6 @@
       <form (submit)="onWriteGame()">
         <table style="width: 96%; margin: auto;">
           <tr style="text-align: center;">
-
             <td rowspan="2" style="width: 85%;">
               <mat-form-field appearance="outline" style="width: 100%; height: 100%;">
                 <mat-label>주석</mat-label>
@@ -15,11 +14,9 @@
                   name="content" [(ngModel)]="content"></textarea>
               </mat-form-field>
             </td>
-
             <td style="text-align: center; padding-bottom: 3%;">
               <button mat-raised-button type="submit" style="width: 60%;">작성</button>
             </td>
-
           </tr>
         </table>
       </form>

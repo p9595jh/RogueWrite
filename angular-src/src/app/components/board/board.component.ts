@@ -1,13 +1,11 @@
-import { Component, OnInit, OnDestroy, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Http, Headers } from '@angular/http';
 import { map } from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
 
 import { FuncService } from '../../services/func.service';
 import { AuthService } from '../../services/auth.service';
 import { BoardService } from '../../services/board.service';
-import { DomSanitizer } from '@angular/platform-browser';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
@@ -18,8 +16,7 @@ import { PageEvent } from '@angular/material';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css']
 })
-@Pipe({ name: 'safeHtml' })
-export class BoardComponent implements OnInit, OnDestroy, PipeTransform {
+export class BoardComponent implements OnInit, OnDestroy {
   navigationSubscription;
   filteredOptions: Observable<string[]>;  // not using for now; a function for commenting
 
@@ -41,9 +38,7 @@ export class BoardComponent implements OnInit, OnDestroy, PipeTransform {
     private funcService: FuncService,
     private authService: AuthService,
     private boardService: BoardService,
-    private http: Http,
     private router: Router,
-    private sanitized: DomSanitizer,
     private flashMessage: NgFlashMessageService
   ) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
@@ -52,11 +47,6 @@ export class BoardComponent implements OnInit, OnDestroy, PipeTransform {
       }
     });
     
-  }
-
-  transform(value) {
-    // return this.sanitized.bypassSecurityTrustHtml(value);
-    return this.sanitized.bypassSecurityTrustResourceUrl(value);
   }
 
   extractDate(date) {

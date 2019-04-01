@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, Pipe, PipeTransform } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
@@ -6,7 +6,6 @@ import { Router, NavigationEnd } from '@angular/router';
 import { FuncService } from '../../services/func.service';
 import { AuthService } from '../../services/auth.service';
 import { GameService } from '../../services/game.service';
-import { DomSanitizer } from '@angular/platform-browser';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
@@ -17,8 +16,7 @@ import { PageEvent } from '@angular/material';
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
-@Pipe({ name: 'safeHtml' })
-export class GameComponent implements OnInit, OnDestroy, PipeTransform {
+export class GameComponent implements OnInit, OnDestroy {
   navigationSubscription;
 
   num: String;
@@ -45,7 +43,6 @@ export class GameComponent implements OnInit, OnDestroy, PipeTransform {
     private authService: AuthService,
     private gameService: GameService,
     private router: Router,
-    private sanitized: DomSanitizer,
     private flashMessage: NgFlashMessageService
   ) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
@@ -53,10 +50,6 @@ export class GameComponent implements OnInit, OnDestroy, PipeTransform {
         this.initialiseInvites();
       }
     });
-  }
-
-  transform(value) {
-    return this.sanitized.bypassSecurityTrustResourceUrl(value);
   }
 
   extractDate(date) {

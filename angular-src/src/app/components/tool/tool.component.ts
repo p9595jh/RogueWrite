@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FuncService } from '../../services/func.service';
+import { AuthService } from '../../services/auth.service';
 import { GameService } from '../../services/game.service';
 
 @Component({
@@ -22,12 +23,19 @@ export class ToolComponent implements OnInit {
     imageAllowTypes: [ 'jpeg', 'jpg', 'png', 'gif', 'webp' ],
   };
   content: String;
+  user: any;
+
+  iframe = '<iframe src="' + this.funcService.ServerAddress + '/games/tool" style="width: 100%; height: 700px;"></iframe>';
 
   constructor(
     private funcService: FuncService,
+    private authService: AuthService,
     private gameService: GameService
   ) {
     this.funcService.setTitle('게임 만들기');
+    this.authService.getProfile().subscribe(profile => {
+      this.user = profile.user;
+    })
   }
 
   ngOnInit() {

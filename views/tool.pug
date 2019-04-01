@@ -37,7 +37,7 @@ block content
             if ( !confirm('저장하시겠습니까?') ) return;
             var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
             //- code = '{data:' + code + '}';
-            //- 'code' is a string, so no need to be stringify or parse
+            //- 'code' is a string, so no need to parse
 
             var xhr = new XMLHttpRequest();
             xhr.open('POST', './save');
@@ -46,7 +46,6 @@ block content
 
             xhr.addEventListener('load', () => {
                 var result = JSON.parse(xhr.responseText);
-                //- codes to handle with result
                 if ( result.success ) {
                     // document.getElementById('save') -> disabled
                 }

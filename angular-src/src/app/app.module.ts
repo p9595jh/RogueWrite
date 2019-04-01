@@ -34,7 +34,7 @@ import { NgFlashMessagesModule } from 'ng-flash-messages';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { AuthGuard } from './guards/auth.guard';
-import { Youtube } from '../pipes/youtube';
+import { SafeHtml } from '../pipes/safeHtml';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -67,7 +67,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    Youtube,
+    SafeHtml,
     FileSelectDirective,
     AppComponent,
     LoginComponent,
