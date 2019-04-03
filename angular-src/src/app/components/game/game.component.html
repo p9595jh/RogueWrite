@@ -11,12 +11,15 @@
         <span class="toProfile" (click)="funcService.openInfoWindow(content?.userid)">{{content?.nickname}}</span><br/>{{content?.writedate}}
       </span>
       <hr/>
-      <!-- ############### ENGINE WILL BE PLACED HERE ############### -->
+
+      <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ENGINE (GAME) ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
+
       <!-- <div class="posting content" [innerHtml]="content?.content | safe"></div> -->
+
       <div class="posting">
-        <div #stage_content>{{text.content}}</div>
+        <div #stage_content>{{phase.content}}</div>
         <table>
-          <tbody *ngFor="let choice of text.choice">
+          <tbody *ngFor="let choice of phase.choice">
             <tr>
               <td>{{choice.choice_num}}</td>
               <td (click)="select(choice?.set_param)">{{choice.content}}</td>
@@ -24,6 +27,7 @@
           </tbody>
         </table>
       </div>
+      <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ENGINE (GAME) ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
 
       <div>{{content?.content}}</div>
       <br/><br/>

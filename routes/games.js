@@ -24,9 +24,8 @@ function getNowDate() {
 }
 
 function taggingUrl(url) {
-    if ( regex.test(url) ) {
+    if ( regex.test(url) )
         url = "<a target='_blank' href='" + (url.toLowerCase().startsWith('http') ? url : 'https://' + url) + "'>" + url + "</a>";
-    }
     return url;
 }
 
@@ -71,19 +70,84 @@ router.post('/images', function(req, res, next) {
     });
 });
 
+function isNotValid(s) {
+    return s == undefined || s == '';
+}
+
+function lucky(s) {
+    const arr = [ '+', '-', '*', '/', '(', ')', ' ' ];
+    for (let l of arr)
+        if ( s == l ) return true;
+    return false;
+}
+
 router.post('/save', function(req, res, next) {
-    var title = req.body.title;
-    // codes to find in Game whether it is duplicated or not
-    // after checking, save the data into the session
-    res.json({success: false});
+    // title(string), stage(array), param(array), score(string)
+    const data = {
+        title: req.body.title,
+        stage: req.body.stage,
+        param: req.body.param,
+        score: req.body.score
+    };
+
+    if ( isNotValid(data.title) ) {
+        return res.json({success: false, msg: '제목이 비어있습니다.'});
+    } else if ( data.param.length == 0 ) {
+        return res.json({success: false, msg: '파라미터가 비어있습니다.'});
+    } else if ( data.stage.length == 0 ) {
+        return res.json({success: false, msg: '스테이지가 비어있습니다.'});
+    } else if ( isNotValid(data.score) ) {
+        return res.json({success: false, msg: '점수계산이 비어있습니다.'});
+    } else {
+        const pattern = /^[a-zA-Z0-9]*$/;
+        for (let i=0; i<data.score.length; i++) {
+            if ( !pattern.test(data.score.substring(i, i+1)) ) {
+                if ( !lucky(data.score.substring(i, i+1)) ) {
+                    return res.json({success: false, msg: '점수계산이 잘못되었습니다.'});
+                }
+            }
+        }
+        req.session.data = data;
+        res.json({success: true});
+    }
+    
 });
 
 //=============================================================
 
 router.post('/write', passport.authenticate('jwt', {session: false}), function(req, res, next) {
-    // take game data from the session
-    var user = req.user;
-    var content = req.body.content;
+    if ( !req.session.data ) {
+        res.json({success: false, msg: '먼저 저장을 해야 합니다.'});
+    } else {
+        const newGame = new Game({
+            userid: req.user.userid,
+            nickname: req.user.nickname,
+            title: req.session.data.title,
+            content: req.body.content,
+            game: req.session.data,
+            boardRequest: 0,
+            hit: 0,
+            recommend: 0,
+            unrecommend: 0,
+            recommendby: [],
+            comment: [],
+            writedate: getNowDate()
+        });
+        Game.addPost(newGame, (err, post) => {
+            if ( err ) {
+                res.json({
+                    success: false
+                });
+            } else {
+                req.session.destroy();
+                res.clearCookie('sid');
+                res.json({
+                    success: true,
+                    num: post._id
+                });
+            }
+        });
+    }
 });
 
 //=============================================================

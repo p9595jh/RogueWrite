@@ -3,6 +3,9 @@ import { FuncService } from '../../services/func.service';
 import { AuthService } from '../../services/auth.service';
 import { GameService } from '../../services/game.service';
 
+import { Router } from '@angular/router';
+import { NgFlashMessageService } from 'ng-flash-messages';
+
 @Component({
   selector: 'app-tool',
   templateUrl: './tool.component.html',
@@ -30,7 +33,9 @@ export class ToolComponent implements OnInit {
   constructor(
     private funcService: FuncService,
     private authService: AuthService,
-    private gameService: GameService
+    private gameService: GameService,
+    private router: Router,
+    private flashMessage: NgFlashMessageService
   ) {
     this.funcService.setTitle('게임 만들기');
     this.authService.getProfile().subscribe(profile => {
@@ -43,7 +48,15 @@ export class ToolComponent implements OnInit {
 
   onWriteGame() {
     this.gameService.writeGame(this.content).subscribe(data => {
-      // handle
+      if ( data.success ) {
+        this.router.navigate(['/game/' + data.num]);
+      } else {
+        this.flashMessage.showFlashMessage({
+          messages: ['게임 생성 오류'], 
+          type: 'danger', 
+          timeout: 3000
+        });
+      }
     });
   }
 

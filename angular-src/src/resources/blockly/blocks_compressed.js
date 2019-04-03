@@ -170,19 +170,14 @@ d=document.createElement("field");d.setAttribute("name","VAR");d.setAttribute("v
 e={text:Blockly.Msg.DELETE_VARIABLE.replace("%1",f),enabled:!0,callback:Blockly.Constants.Variables.DELETE_OPTION_CALLBACK_FACTORY(this)},a.unshift(b),a.unshift(e)},onchange:function(){var a=this.getFieldValue("VAR");a=this.workspace.getVariableById(a);"variables_get_dynamic"==this.type?this.outputConnection.setCheck(a.type):this.getInput("VALUE").connection.setCheck(a.type)}};
 Blockly.Constants.VariablesDynamic.RENAME_OPTION_CALLBACK_FACTORY=function(a){return function(){var b=a.workspace,c=a.getField("VAR").getVariable();Blockly.Variables.renameVariable(b,c)}};Blockly.Constants.VariablesDynamic.DELETE_OPTION_CALLBACK_FACTORY=function(a){return function(){var b=a.workspace,c=a.getField("VAR").getVariable();b.deleteVariableById(c.getId());b.refreshToolboxSelection()}};Blockly.Extensions.registerMixin("contextMenu_variableDynamicSetterGetter",Blockly.Constants.VariablesDynamic.CUSTOM_CONTEXT_MENU_VARIABLE_GETTER_SETTER_MIXIN);
 
-
 Blockly.defineBlocksWithJsonArray([
   {
     "type": "game",
-    "message0": "title %1 id %2 stage %3 param %4",
-    "args0": [{
-        "type": "input_value",
-        "name": "title",
-        "check": "String"
-      },
+    "message0": "제목 %1 스테이지 %2 변수 %3 점수 %4",
+    "args0": [
       {
         "type": "input_value",
-        "name": "id",
+        "name": "title",
         "check": "String"
       },
       {
@@ -194,164 +189,170 @@ Blockly.defineBlocksWithJsonArray([
         "type": "input_statement",
         "name": "param",
         "check": "parameter"
+      },
+      {
+        "type": "input_value",
+        "name": "score",
+        "check": "String"
       }
     ],
     "inputsInline": false
-  }, {
-    "type": "stage",
-    "message0": "stage_num %1 phase %2",
-    "args0": [{
-        "type": "input_value",
-        "name": "stage_num",
-        "check": "Number"
-      },
-      {
-        "type": "input_statement",
-        "name": "phase",
-        "check": "phase"
-      }
-    ],
-    "inputsInline": false,
-    "previousStatement": "stage",
-    "nextStatement": "stage",
-    "colour": 20
   },
-  {
-    "type": "phase",
-    "message0": "phase_num %1 content %2 condition %3 choice %4",
-    "args0": [{
-        "type": "input_value",
-        "name": "phase_num",
-        "check": "Number"
+    {
+        "type": "stage",
+        "message0": "스테이지 번호 %1 페이즈 %2",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "stage_num",
+            "check": "Number"
+          },
+          {
+            "type": "input_statement",
+            "name": "phase",
+            "check": "phase"
+          }
+        ],
+        "inputsInline": false,
+        "previousStatement": "stage",
+        "nextStatement": "stage",
+        "colour": 20
       },
+      // stage design block
       {
-        "type": "input_value",
-        "name": "content",
-        "check": "String"
+        "type": "phase",
+  "message0": "페이즈 번호 %1 내용 %2 조건 %3 선택 %4",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "phase_num",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "content",
+      "check": "String"
+    },
+    {
+      "type": "input_statement",
+      "name": "condition",
+      "check": "condition"
+    },
+    {
+      "type": "input_statement",
+      "name": "choice",
+      "check": "choice"
+    }
+  ],
+  "inputsInline": false,
+  "previousStatement": "phase",
+  "nextStatement": "phase",
+  "colour": 65
       },
+      //phase design block
       {
-        "type": "input_statement",
-        "name": "condition",
-        "check": "condition"
+        "type": "choice",
+  "message0": "조건 번호 %1 내용 %2 변수 변화 %3",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "choice_num",
+      "check": "Number"
+    },
+    {
+      "type": "input_value",
+      "name": "content",
+      "check": "String"
+    },
+    {
+      "type": "input_statement",
+      "name": "set_param",
+      "check": "condition"
+    }
+  ],
+        "inputsInline": false,
+        "previousStatement": "choice",
+        "nextStatement": "choice",
+        "colour": 120
       },
+      // phase design block
       {
-        "type": "input_statement",
-        "name": "choice",
-        "check": "choice"
+        "type": "condition",
+        "message0": "변수 %1 이상 : %2 이하 : %3",
+        "args0": [
+          {
+            "type": "input_value",
+            "name": "param",
+            "check": "String"
+          },
+          {
+            "type": "input_value",
+            "name": "above",
+            "check": "Number"
+          },
+          {
+            "type": "input_value",
+            "name": "below",
+            "check": "Number"
+          }
+        ],
+        "inputsInline": true,
+        "previousStatement": "condition",
+        "nextStatement": "condition", 
+        "colour": 210
+      },
+      // {
+      //   "type": "set_param",
+      //   "message0": "param %1 add %2",
+      //   "args0": [
+      //     {
+      //       "type": "input_value",
+      //       "name": "param",
+      //       "check": "param"
+      //     },
+      //     {
+      //       "type": "input_value",
+      //       "name": "add",
+      //       "check": "Number"
+      //     }
+      //   ],
+      //   "inputsInline": true,
+      //   "previousStatement": "set_param",
+      //   "nextStatement": "set_param",
+      //   "colour": 210
+      // },
+      {
+        "type": "parameter",
+  "message0": "변수 이름 %1 기본값 %2 가시성 %3",
+  "args0": [
+    {
+      "type": "input_value",
+      "name": "param_name",
+      "check": "String"
+    },
+    {
+      "type": "input_value",
+      "name": "default",
+      "check": "Number"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "visible",
+      "options": [
+        [
+          "true",
+          "true"
+        ],
+        [
+          "false",
+          "false"
+        ]
+      ]
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": "parameter",
+  "nextStatement": "parameter",
+  "colour": 290
       }
-    ],
-    "inputsInline": false,
-    "previousStatement": "phase",
-    "nextStatement": "phase",
-    "colour": 65
-  },
-  {
-    "type": "choice",
-    "message0": "choice_num %1 content %2 set_param %3",
-    "args0": [{
-        "type": "input_value",
-        "name": "choice_num",
-        "check": "Number"
-      },
-      {
-        "type": "input_value",
-        "name": "content",
-        "check": "String"
-      },
-      {
-        "type": "input_statement",
-        "name": "set_param",
-        "check": "set_param"
-      }
-    ],
-    "inputsInline": false,
-    "previousStatement": "choice",
-    "nextStatement": "choice",
-    "colour": 120
-  },
-  {
-    "type": "condition",
-    "message0": "param %1 above %2 below %3",
-    "args0": [{
-        "type": "input_value",
-        "name": "param",
-        "check": "param"
-      },
-      {
-        "type": "input_value",
-        "name": "above",
-        "check": "Number"
-      },
-      {
-        "type": "input_value",
-        "name": "below",
-        "check": "Number"
-      }
-    ],
-    "inputsInline": true,
-    "previousStatement": "condition",
-    "nextStatement": "condition",
-    "colour": 210
-  }, {
-    "type": "set_param",
-    "message0": "param %1 add %2",
-    "args0": [{
-        "type": "input_value",
-        "name": "param",
-        "check": "param"
-      },
-      {
-        "type": "input_value",
-        "name": "add",
-        "check": "Number"
-      }
-    ],
-    "inputsInline": true,
-    "previousStatement": "set_param",
-    "nextStatement": "set_param",
-    "colour": 210
-  }, {
-    "type": "parameter",
-    "message0": "param_name %1 visible %2 default %3",
-    "args0": [{
-        "type": "input_value",
-        "name": "param_name",
-        "check": "String"
-      },
-      {
-        "type": "input_value",
-        "name": "visible",
-        "check": "Boolean"
-      },
-      {
-        "type": "input_value",
-        "name": "default",
-        "check": "Number"
-      }
-    ],
-    "inputsInline": true,
-    "previousStatement": "parameter",
-    "nextStatement": "parameter",
-    "colour": 290
-  }
-]);
-
-Blockly.Blocks['text_comment'] = {
-   /**
-   * Block for adding in comments.
-   * @this Blockly.Block
-   */
-  init: function() {
-  
-    this.setColour(160);
-    //this.setHelpUrl(Blockly.Msg.TEXT_PROMPT_HELPURL);
-    this.appendDummyInput()
-      .appendField("Comment:");
-    this.appendDummyInput()    
-      .appendField(new Blockly.FieldTextArea(''), 'COMMENT');
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
-    // this.setTooltip(Blockly.Msg.TEXT_TEXT_TOOLTIP);
-  },
-  typeblock: Blockly.Msg.TEXT_COMMENT_TYPEBLOCK
-};
+]); 

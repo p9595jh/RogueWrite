@@ -96,24 +96,39 @@ Blockly.JavaScript.text_replace=function(a){var b=Blockly.JavaScript.valueToCode
 Blockly.JavaScript.variablesDynamic={};Blockly.JavaScript.variables_get_dynamic=Blockly.JavaScript.variables_get;Blockly.JavaScript.variables_set_dynamic=Blockly.JavaScript.variables_set;
 
 function removeSingleQuote(s) {
-  return s.substring(1, s.length-1).split('"').join('\"');
+  return s.substring(1, s.length-1);
+}
+function removeComma(s) {
+  return s.substring(0, s.length-2);
+}
+function removeMinus(s) {
+  var value = String(s);
+  if (s > 0) {
+    return value;
+  }
+  return value.substring(1, value.length-1);
 }
 
 Blockly.JavaScript['game']=function(block) {
-  var value_title = Blockly.JavaScript.valueToCode(block, 'title', Blockly.JavaScript.ORDER_ATOMIC);
-  var value_id = Blockly.JavaScript.valueToCode(block, 'id', Blockly.JavaScript.ORDER_ATOMIC);
-  var statements_stage = Blockly.JavaScript.statementToCode(block, 'stage');
-  var statements_param = Blockly.JavaScript.statementToCode(block, 'param');
+    var value_title = Blockly.JavaScript.valueToCode(block, 'title', Blockly.JavaScript.ORDER_ATOMIC);
+    var statements_stage = Blockly.JavaScript.statementToCode(block, 'stage');
+    var statements_param = Blockly.JavaScript.statementToCode(block, 'param');
+    var value_score = Blockly.JavaScript.valueToCode(block, 'score', Blockly.JavaScript.ORDER_ATOMIC);
+    
+    var code = '{ "title": "' + removeSingleQuote(value_title) + '", "stage": [ ' + removeComma(statements_stage);
+    code = code + ' ], "param": [ ' + removeComma(statements_param); 
+    code = code + ' ], "score": "'+ removeSingleQuote(value_score) +'" }';
 
-  var code = '{ "title": "' + removeSingleQuote(value_title) + '", "id": "' + removeSingleQuote(value_id) + '", "stage": [ ' + statements_stage + ' ], "param": [ ' + statements_param + ' ] }';
-  return code;
+    return code;
 };
 
 Blockly.JavaScript['stage'] = function(block) {
   var value_stage_num = Blockly.JavaScript.valueToCode(block, 'stage_num', Blockly.JavaScript.ORDER_ATOMIC);
   var statements_phase = Blockly.JavaScript.statementToCode(block, 'phase');
 
-  var code = '{ "stage_num": ' + value_stage_num + ', "phase" : [ ' + statements_phase + ' ] }, ';
+  var code = '{ "stage_num": ' + removeMinus(value_stage_num) + ', "phase" : [ ' + removeComma(statements_phase);
+  code = code + ' ] }, ';
+
   return code;
 };
 
@@ -123,7 +138,10 @@ Blockly.JavaScript['phase'] = function(block) {
   var statements_condition = Blockly.JavaScript.statementToCode(block, 'condition');
   var statements_choice = Blockly.JavaScript.statementToCode(block, 'choice');
 
-  var code = '{ "phase_num" : ' + value_phase_num + ', "content": "' + removeSingleQuote(value_content) + '", "condition": [ ' + statements_condition + ' ], "choice": [ ' + statements_choice + ' ] }, ';
+  var code = '{ "phase_num" : ' + removeMinus(value_phase_num) + ', "content": "' + removeSingleQuote(value_content) + '", "condition": [ ' + removeComma(statements_condition);
+  code = code + ' ], "choice": [ ' + removeComma(statements_choice);
+  code = code + ' ] }, ';
+  
   return code;
 };
 
@@ -132,7 +150,9 @@ Blockly.JavaScript['choice'] = function(block) {
   var value_content = Blockly.JavaScript.valueToCode(block, 'content', Blockly.JavaScript.ORDER_ATOMIC);
   var statements_set_param = Blockly.JavaScript.statementToCode(block, 'set_param');
 
-  var code = '{ "choice_num": ' + value_choice_num + ', "content": "' + removeSingleQuote(value_content) + '", "set_param": [ ' + statements_set_param + ' ] }, ';
+  var code = '{ "choice_num": ' + removeMinus(value_choice_num) + ', "content": "' + removeSingleQuote(value_content) + '", "set_param": [ ' + removeComma(statements_set_param);
+  code = code + ' ] }, ';
+
   return code;
 };
 
@@ -141,32 +161,25 @@ Blockly.JavaScript['condition'] = function(block) {
   var value_above = Blockly.JavaScript.valueToCode(block, 'above', Blockly.JavaScript.ORDER_ATOMIC);
   var value_below = Blockly.JavaScript.valueToCode(block, 'below', Blockly.JavaScript.ORDER_ATOMIC);
 
-  var code = '{ "param": "' + value_param + '", "above": ' + value_above + ', "below": ' + value_below + " }, ";
+  var code = '{ "param": "' + removeMinus(value_param) + '", "above": ' + removeMinus(value_above) + ', "below": ' + removeMinus(value_below) + ' }, ';
+
   return code;
 };
 
-Blockly.JavaScript['set_param'] = function(block) {
-  var value_param = Blockly.JavaScript.valueToCode(block, 'param', Blockly.JavaScript.ORDER_ATOMIC);
-  var value_add = Blockly.JavaScript.valueToCode(block, 'add', Blockly.JavaScript.ORDER_ATOMIC);
+// Blockly.JavaScript['set_param'] = function(block) {
+//   var value_param = Blockly.JavaScript.valueToCode(block, 'param', Blockly.JavaScript.ORDER_ATOMIC);
+//   var value_add = Blockly.JavaScript.valueToCode(block, 'add', Blockly.JavaScript.ORDER_ATOMIC);
 
-  var code = '{ "param": "' + value_param + '", "add": ' + value_add + ' }, ';
-  return code;
-};
+//   var code = '{ "param": "' + value_param + '", "add": ' + value_add + ' }, ';
+//   return code;
+// };
 
 Blockly.JavaScript['parameter'] = function(block) {
   var value_param_name = Blockly.JavaScript.valueToCode(block, 'param_name', Blockly.JavaScript.ORDER_ATOMIC);
-  var value_visible = Blockly.JavaScript.valueToCode(block, 'visible', Blockly.JavaScript.ORDER_ATOMIC);
   var value_default = Blockly.JavaScript.valueToCode(block, 'default', Blockly.JavaScript.ORDER_ATOMIC);
+  var dropdown_visible = block.getFieldValue('visible');
 
-  var code = '{ "param_name": "' + value_param_name + '", "visible": ' + value_visible + ', "default": ' + value_default + ' }, ';
+  var code = '{ "param_name": "' + removeSingleQuote(value_param_name) + '", "default": ' + removeMinus(value_default) + ', "visible": ' + dropdown_visible + ' }, ';
+
   return code;
-};
-
-Blockly.JavaScript['text_comment'] = function(block) {
-  // Display comment
-  
-  var comment = block.getFieldValue('COMMENT') || '';
-  var code = '/*\n' + comment + '\n*/\n';
-  
-  return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };

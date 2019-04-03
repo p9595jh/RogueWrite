@@ -1,7 +1,7 @@
 extends layout2
 block content
 
-    div#blocklyDiv(style='height: 500px; width: 100%;')
+    div#blocklyDiv(style='height: 550px; width: 100%;')
     br
 
     div(style="text-align: center;")
@@ -14,30 +14,37 @@ block content
 
     xml#toolbox(style='display: none')
         category(name='big_one')
-            block(type='game')
             block(type='stage')
             block(type='phase')
             block(type='choice')
         category(name='small_one')
             block(type='text')
             block(type='math_number')
-            block(type='logic_boolean')
             block(type='condition')
-            block(type='set_param')
             block(type='parameter')
-        category(name='param', custom='VARIABLE')
+    
+    xml#startBlocks(style="display: none;")
+        block(type="game", inline="false", x="20", y="20")
 
     script.
         var demoWorkspace = Blockly.inject('blocklyDiv', {
             media: '../resources/blockly/google-blockly-82871b3/media/',
             toolbox: document.getElementById('toolbox')
         });
+        Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'), demoWorkspace);
 
         function save() {
             if ( !confirm('저장하시겠습니까?') ) return;
             var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
-            //- code = '{data:' + code + '}';
-            //- 'code' is a string, so no need to parse
+            //- title(string), stage(array), param(array), score(string)
+
+            try {
+                code = JSON.parse(code);
+                code = JSON.stringify(code);
+            } catch (e) {
+                alert('에러가 발생하였습니다.\n' + e);
+                return false;
+            }
 
             var xhr = new XMLHttpRequest();
             xhr.open('POST', './save');
@@ -50,14 +57,14 @@ block content
                     // document.getElementById('save') -> disabled
                 }
                 else {
-                    alert('ERROR MESSAGE');
+                    alert(result.msg);
                 }
             });
         }
 
         function openEditor() {
             var w = 950;
-            var h = 750;
+            var h = 700;
             
             var x = (window.screen.width / 2) - (w / 2);
             var y = (window.screen.height / 2) - (h / 2);
