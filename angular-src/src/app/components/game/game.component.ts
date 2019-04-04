@@ -28,12 +28,10 @@ export class GameComponent implements OnInit, OnDestroy {
   pagingTo: Number = this.pagingSize;
 
   // GAME DATA
-  data: any = {
-    // game data will be placed here
-  };
+  data: any;
   paramMap = new Map<string, any>(); // <'parameter_name', {'value: number', 'visible: boolean'}>
   stageNum = 0;
-  phase: any = undefined;
+  phase: any;
   phaseNum = 0;
 
   constructor(
@@ -114,7 +112,7 @@ export class GameComponent implements OnInit, OnDestroy {
     }
   }
 
-  gameSet() { // only for first
+  gameSet() { // on first
     this.data = this.content.game;
     for (let obj of this.data.param) {  // [{param1: {value: 0, visible: true}}, {param2: {value: 100, visible: false}}, ...]
       this.paramMap.set(obj.param_name, {value: obj.default, visible: obj.visible});
@@ -146,6 +144,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
     if ( this.stageNum > this.data.stage.length ) {
       // this is the end of the game
+      console.log('[[END]]');
       return true;
     }
 
@@ -162,6 +161,7 @@ export class GameComponent implements OnInit, OnDestroy {
           }
           if ( !b ) {
             // in this part, there is no condition to be fit to param
+            console.log('[[NO MATCHED CONDITION]]');
             return false;
           }
         }
