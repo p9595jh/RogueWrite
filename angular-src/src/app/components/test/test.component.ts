@@ -10,8 +10,7 @@ import { Router, NavigationEnd } from '@angular/router';
 export class TestComponent implements OnInit, OnDestroy {
   navigationSubscription;
 
-  url = 'https://www.youtube.com/embed/9OTkhsJUK0U';
-  tag = '<iframe src="' + this.url + '" style="width: 100%; height: 600px;"></iframe>';
+  asdf = '<button (click)="hello()">click</button>'
 
   constructor(
     private funcService: FuncService,
@@ -36,6 +35,10 @@ export class TestComponent implements OnInit, OnDestroy {
 
   initialiseInvites() {
     // this.ngOnInit();
+  }
+
+  hello() {
+    alert('Hi');
   }
 
 }

@@ -29,10 +29,11 @@ export class GameComponent implements OnInit, OnDestroy {
 
   // GAME DATA
   data: any;
-  paramMap = new Map<string, any>(); // <'parameter_name', {'value: number', 'visible: boolean'}>
-  stageNum = 0;
+  paramMap: any;  // Map
+  stageNum: number;
   phase: any;
-  phaseNum = 0;
+  phaseNum: number;
+  end: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -49,8 +50,19 @@ export class GameComponent implements OnInit, OnDestroy {
     });
   }
 
+  showParams() {
+    this.paramMap.forEach((value, key) => {
+      console.log(key + ' : ' + value.value);
+    });
+  }
+
   ngOnInit() {
     this.num = this.route.snapshot.paramMap.get('num');
+
+    this.stageNum = 0;
+    this.phaseNum = 0;
+    this.end = false;
+    this.paramMap = new Map<string, any>(); // <'parameter_name', {'value: number', 'visible: boolean'}>
 
     this.gameService.takeAllPosts().subscribe(data => {
       this.contents = data.posts;
@@ -138,12 +150,15 @@ export class GameComponent implements OnInit, OnDestroy {
     for (let val of condition) {
       let pv: any = this.paramMap.get(val.param);
       this.paramMap.delete(val.param);
-      pv.value += condition.add;
+      // pv.value += condition.add;
+      pv.value += Math.floor(Math.random() * (val.below - val.above + 1)) + val.above;
       this.paramMap.set(val.param, pv);
     }
+    // this.showParams();
 
-    if ( this.stageNum > this.data.stage.length ) {
+    if ( this.stageNum >= this.data.stage.length ) {
       // this is the end of the game
+      this.end = true;
       console.log('[[END]]');
       return true;
     }
@@ -151,22 +166,35 @@ export class GameComponent implements OnInit, OnDestroy {
     for (let stage of this.data.stage) {
       if ( stage.stage_num == this.stageNum ) {
         for (let phase of stage.phase) {
-          let b: boolean = false;
-          for (let c of phase.condition) {
-            if ( (b = this.checkNextStageCondition(c)) ) {
-              this.phase = phase;
-              // refresh page without using 'ngOnInit'
-              return true;
-            }
-          }
-          if ( !b ) {
-            // in this part, there is no condition to be fit to param
-            console.log('[[NO MATCHED CONDITION]]');
-            return false;
+          if ( this.checkNextStageCondition(phase.condition) ) {
+            this.phase = phase;
+            // refresh page without using 'ngOnInit'
+            return true;
           }
         }
+        // in this part, there is no condition to be fit to param
+        console.log('[[NO MATCHED CONDITION]]');
+        return false;
       }
     }
+  }
+
+  onWriteComment() {
+    const formData = {
+      comment: this.cmtWrite.value,
+      _id: this.num
+    };
+    this.gameService.writeComment(formData).subscribe(data => {
+      if ( data.success ) {
+        this.router.navigate(['/game/' + this.num]);
+      } else {
+        this.flashMessage.showFlashMessage({
+          messages: ['댓글 작성 오류'], 
+          type: 'danger', 
+          timeout: 3000
+        });
+      }
+    });
   }
 
   onRemovePost() {
@@ -174,6 +202,22 @@ export class GameComponent implements OnInit, OnDestroy {
       this.gameService.removePost(this.num).subscribe(result => {
         if ( result.success ) {
           this.router.navigate(['/game/list']);
+        } else {
+          this.flashMessage.showFlashMessage({
+            messages: ['삭제 오류'], 
+            type: 'danger', 
+            timeout: 3000
+          });
+        }
+      })
+    }
+  }
+
+  onRemoveComment(cmtNum) {
+    if ( confirm('삭제하시겠습니까?') ) {
+      this.gameService.removeComment(this.num, cmtNum).subscribe(result => {
+        if ( result.success ) {
+          this.router.navigate(['/game/' + this.num]);
         } else {
           this.flashMessage.showFlashMessage({
             messages: ['삭제 오류'], 

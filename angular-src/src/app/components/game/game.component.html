@@ -13,19 +13,37 @@
       <hr/>
 
       <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ENGINE (GAME) ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
-
-      <!-- <div class="posting content" [innerHtml]="content?.content | safe"></div> -->
-
       <div class="posting">
+
+        <!-- PHASE-CONTENT -->
         <div #stage_content>{{phase?.content}}</div><br/>
-        <table class="mdl-data-table mdl-js-data-table">
+
+        <!-- CHOICES -->
+        <table class="mdl-data-table mdl-js-data-table" *ngIf="!end">
           <tbody *ngFor="let choice of phase?.choice">
             <tr>
               <td class="mdl-data-table__cell--non-numeric">{{choice?.choice_num}}</td>
               <td class="mdl-data-table__cell--non-numeric" (click)="select(choice?.set_param)">{{choice?.content}}</td>
             </tr>
           </tbody>
+        </table><br/>
+
+        <!-- THE END -->
+        <div *ngIf="end">
+          -THE END-<br/>
+          <button mat-raised-button (click)="ngOnInit()">다시하기</button>
+        </div><br/>
+
+        <!-- PARAMETERS -->
+        <table>
+          <tbody *ngFor="let param of paramMap | keyvalue">
+            <tr *ngIf="param?.value?.visible">
+              <td>{{param.key}}</td>
+              <td>{{param.value.value}}</td>
+            </tr>
+          </tbody>
         </table>
+
       </div>
       <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ENGINE (GAME) ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
 
@@ -128,7 +146,9 @@
                   <span style="cursor: pointer;" (click)="onRemoveComment(comment.num)">삭제</span>
                 </span>
               </span>
-              <pre class="content" [innerHTML]="comment?.comment"></pre><br/>
+              <pre class="content writerText" *ngIf="comment?.userid == content?.userid" [innerHTML]="comment?.comment"></pre>
+              <pre class="content" *ngIf="comment?.userid != content?.userid" [innerHTML]="comment?.comment"></pre>
+              <br/>
             </td>
           </tr>
         </tbody>

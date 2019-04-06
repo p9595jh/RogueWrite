@@ -46,6 +46,15 @@ export class GameService {
       .pipe(map(res => res.json()));
   }
 
+  writeComment(cmt) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/games/writeComment', cmt, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
   removePost(num) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');

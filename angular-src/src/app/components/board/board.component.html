@@ -35,7 +35,9 @@
                   <span style="cursor: pointer;" (click)="onRemoveComment(comment.num)">삭제</span>
                 </span>
               </span>
-              <pre class="content" [innerHTML]="comment?.comment"></pre><br/>
+              <pre class="content writerText" *ngIf="comment?.userid == content?.userid" [innerHTML]="comment?.comment"></pre>
+              <pre class="content" *ngIf="comment?.userid != content?.userid" [innerHTML]="comment?.comment"></pre>
+              <br/>
             </td>
           </tr>
         </tbody>
