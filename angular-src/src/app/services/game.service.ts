@@ -31,6 +31,20 @@ export class GameService {
       .pipe(map(res => res.json()));
   }
 
+  getSessionGame() {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(this.funcService.ServerAddress + '/games/getSessionGame', {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  deleteSessionGame() {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(this.funcService.ServerAddress + '/games/deleteSessionGame', {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
   takeOnePost(num) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -75,6 +89,24 @@ export class GameService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
     return this.http.post(this.funcService.ServerAddress + '/games/recommend', {num: num, isRecommend: isRecommend}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  requestBoard(num) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/games/requestBoard', {num: num}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  acceptBoard(num) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/games/acceptBoard', {num: num}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 

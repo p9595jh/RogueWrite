@@ -5,6 +5,7 @@ block content
     br
 
     div(style="text-align: center;")
+        p#msg
         div(class="mdl-textfield mdl-js-textfield")
             input(class="mdl-textfield__input", type="text", id="t1", placeholder="HTML 태그")
         span &nbsp;&nbsp;&nbsp;
@@ -33,8 +34,16 @@ block content
         });
         Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'), demoWorkspace);
 
+        const msg = document.getElementById("msg");
+        function setMessage(text, color, time) {
+            msg.innerHTML = text;
+            msg.style.color = color;
+            setTimeout(() => {
+                msg.innerHTML = "";
+            }, time);
+        }
+
         function save() {
-            if ( !confirm('저장하시겠습니까?') ) return;
             var code = Blockly.JavaScript.workspaceToCode(demoWorkspace);
             //- title(string), stage(array), param(array), score(string)
 
@@ -42,7 +51,8 @@ block content
                 code = JSON.parse(code);
                 code = JSON.stringify(code);
             } catch (e) {
-                alert('에러가 발생하였습니다.\n' + e);
+                //- alert('에러가 발생하였습니다.\n' + e);
+                setMessage("에러가 발생하였습니다: " + e, "red", 2000);
                 return false;
             }
 
@@ -54,10 +64,11 @@ block content
             xhr.addEventListener('load', () => {
                 var result = JSON.parse(xhr.responseText);
                 if ( result.success ) {
-                    // document.getElementById('save') -> disabled
+                    setMessage("저장되었습니다.", "blue", 1500);
                 }
                 else {
-                    alert(result.msg);
+                    //- alert(result.msg);
+                    setMessage(result.msg, "red", 2000);
                 }
             });
         }

@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class PlayService {
 
-  data: any;
-  paramMap;  // Map
+  private data: any;
+  paramMap: Map<string, any>;  // Map
   stageNum: number;
   phase: any;
   phaseNum: number;
@@ -21,7 +21,8 @@ export class PlayService {
     this.paramMap = new Map<string, any>();
 
     this.data = gameData;
-    for (let obj of this.data.param) {  // [{param1: {value: 0, visible: true}}, {param2: {value: 100, visible: false}}, ...]
+    for (let obj of this.data.param) {
+      // [{param1: {value: 0, visible: true}}, {param2: {value: 100, visible: false}}, ...]
       this.paramMap.set(obj.param_name, {value: obj.default, visible: obj.visible});
     }
     for (let stage of this.data.stage) {
@@ -32,7 +33,11 @@ export class PlayService {
     }
   }
 
-  checkNextStageCondition(condition): boolean {
+  replay() {
+    this.gameSet(this.data);
+  }
+
+  private checkNextStageCondition(condition): boolean {
     for (let c of condition) {
       let value: number = this.paramMap.get(c.param).value;
       if ( !(c.above <= value && value <= c.below) ) return false;
@@ -40,21 +45,29 @@ export class PlayService {
     return true;
   }
 
+  private ending() {
+    this.end = true;
+    console.log('[[END]]');
+    console.log('[[SELECTED ENDING: ' + (this.stageNum-1) + '-' + this.phaseNum + ']]');
+  }
+
+  private noCondition() {
+    this.end = true;
+    console.log('[[NO MATCHED CONDITION]]');
+  }
+
   select(condition: any) {
     this.stageNum++;
     for (let val of condition) {
       let pv: any = this.paramMap.get(val.param);
       this.paramMap.delete(val.param);
-      // pv.value += condition.add;
       pv.value += Math.floor(Math.random() * (val.below - val.above + 1)) + val.above;
       this.paramMap.set(val.param, pv);
     }
-    // this.showParams();
 
+    // this is the end of the game
     if ( this.stageNum >= this.data.stage.length ) {
-      // this is the end of the game
-      this.end = true;
-      console.log('[[END]]');
+      this.ending();
       return true;
     }
 
@@ -63,15 +76,21 @@ export class PlayService {
         for (let phase of stage.phase) {
           if ( this.checkNextStageCondition(phase.condition) ) {
             this.phase = phase;
-            // refresh page without using 'ngOnInit'
+            this.phaseNum = phase.phase_num;
             return true;
           }
         }
         // in this part, there is no condition to be fit to param
-        console.log('[[NO MATCHED CONDITION]]');
+        this.noCondition();
         return false;
       }
     }
+  }
+
+  private showParams() {
+    this.paramMap.forEach((value, key) => {
+      console.log(key + ' : ' + value.value);
+    });
   }
 
 }

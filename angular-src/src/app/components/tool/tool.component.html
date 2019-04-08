@@ -1,5 +1,74 @@
 <div [innerHTML]="iframe | safe"></div>
 
+<!-- game preview section -->
+<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+    <div class="mdl-card__supporting-text">
+
+      <h4 style="display: inline;">미리보기</h4>
+      <button mat-button class="previewButton"
+        (click)="gameOn()"
+        matTooltip="게임 적용"
+        [matTooltipPosition]="tooltipPosition"
+        [matTooltipShowDelay]="showDelay">
+        <mat-icon>play_circle_outline</mat-icon>
+      </button>
+      <button mat-button class="previewButton" *ngIf="set"
+        (click)="playService.replay()"
+        matTooltip="리플레이"
+        [matTooltipPosition]="tooltipPosition"
+        [matTooltipShowDelay]="showDelay">
+        <mat-icon>autorenew</mat-icon>
+      </button>
+      <button mat-button class="previewButton" *ngIf="set"
+        (click)="delete()"
+        matTooltip="저장된 게임 삭제"
+        [matTooltipPosition]="tooltipPosition"
+        [matTooltipShowDelay]="showDelay">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <hr/>
+
+      <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ENGINE (GAME) ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
+      <div class="posting" *ngIf="set">
+
+        <!-- PHASE-CONTENT -->
+        <div #stage_content>{{playService?.phase?.content}}</div><br/>
+
+        <!-- CHOICES -->
+        <table class="mdl-data-table mdl-js-data-table" *ngIf="!playService.end">
+          <tbody *ngFor="let choice of playService?.phase?.choice">
+            <tr (click)="playService.select(choice?.set_param)">
+              <td class="mdl-data-table__cell--non-numeric">{{choice?.choice_num}}</td>
+              <td class="mdl-data-table__cell--non-numeric">{{choice?.content}}</td>
+            </tr>
+          </tbody>
+        </table><br/>
+
+        <!-- END -->
+        <div *ngIf="playService.end">
+          -THE END-
+          <br/>
+          <button mat-raised-button (click)="playService.replay()">다시하기</button>
+        </div><br/>
+
+        <!-- SHOW PARAMETERS -->
+        <table>
+          <tbody *ngFor="let param of playService?.paramMap | keyvalue">
+            <tr *ngIf="param?.value?.visible">
+              <td>{{param?.key}}</td>
+              <td>{{param?.value?.value}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ENGINE (GAME) ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
+
+    </div>
+  </div>
+</section>
+
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">

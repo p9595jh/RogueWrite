@@ -10,6 +10,7 @@ const GameSchema = mongoose.Schema({
     content: String,
     game: Object,   // game data
     boardRequest: Number,   // 0: normal, 1: requested, 2: accepted
+    board: String,
     hit: Number,
     writedate: String,
     recommend: Number,

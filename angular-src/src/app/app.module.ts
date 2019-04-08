@@ -25,7 +25,8 @@ import {  // angular-material modules
   MatAutocompleteModule,
   MatButtonToggleModule,
   MatPaginatorModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatTooltipModule
 } from '@angular/material';
 
 import { ValidateService } from './services/validate.service';
@@ -49,6 +50,7 @@ import { NoPageComponent } from './components/no-page/no-page.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ToolComponent } from './components/tool/tool.component';
 import { GameComponent } from './components/game/game.component';
+import { SubComponent } from './components/sub/sub.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -59,10 +61,11 @@ const appRoutes: Routes = [
   { path: 'board/:type/:num', component: BoardComponent },
   { path: 'write/:type', component: WriteComponent, canActivate: [AuthGuard] },
   { path: 'test', component: TestComponent },
-  { path: 'no-page', component: NoPageComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: 'game/:num', component: GameComponent },
-  { path: 'tool', component: ToolComponent/*, canActivate: [AuthGuard]*/ }
+  { path: 'tool', component: ToolComponent, canActivate: [AuthGuard] },
+  { path: 'no-page', component: NoPageComponent },
+  { path: '**', component: NoPageComponent }
 ]
 
 @NgModule({
@@ -81,7 +84,8 @@ const appRoutes: Routes = [
     NoPageComponent,
     AdminComponent,
     ToolComponent,
-    GameComponent
+    GameComponent,
+    SubComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -114,7 +118,8 @@ const appRoutes: Routes = [
     MatAutocompleteModule,
     MatButtonToggleModule,
     MatPaginatorModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTooltipModule
   ],
   exports: [
     RouterModule

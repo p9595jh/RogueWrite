@@ -10,8 +10,6 @@ import { Router, NavigationEnd } from '@angular/router';
 export class TestComponent implements OnInit, OnDestroy {
   navigationSubscription;
 
-  asdf = '<button (click)="hello()">click</button>'
-
   constructor(
     private funcService: FuncService,
     private router: Router
@@ -34,11 +32,11 @@ export class TestComponent implements OnInit, OnDestroy {
   }
 
   initialiseInvites() {
-    // this.ngOnInit();
+    this.ngOnInit();
   }
 
-  hello() {
-    alert('Hi');
+  click(btn: HTMLElement) {
+    btn.style.display = 'none';
   }
 
 }

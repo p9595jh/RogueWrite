@@ -5,6 +5,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { FuncService } from '../../services/func.service';
 import { AuthService } from '../../services/auth.service';
 import { GameService } from '../../services/game.service';
+import { PlayService } from '../../services/play.service';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { FormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material';
@@ -17,7 +18,7 @@ import { PageEvent } from '@angular/material';
 export class GameComponent implements OnInit, OnDestroy {
   navigationSubscription;
 
-  num: String;
+  num: String = '';
   content: any;
   contents: Object[];
   cmtWrite = new FormControl();
@@ -27,19 +28,12 @@ export class GameComponent implements OnInit, OnDestroy {
   pagingFrom: Number = 0;
   pagingTo: Number = this.pagingSize;
 
-  // GAME DATA
-  data: any;
-  paramMap: any;  // Map
-  stageNum: number;
-  phase: any;
-  phaseNum: number;
-  end: boolean;
-
   constructor(
     private route: ActivatedRoute,
     private funcService: FuncService,
     private authService: AuthService,
     private gameService: GameService,
+    private playService: PlayService,
     private router: Router,
     private flashMessage: NgFlashMessageService
   ) {
@@ -50,19 +44,9 @@ export class GameComponent implements OnInit, OnDestroy {
     });
   }
 
-  showParams() {
-    this.paramMap.forEach((value, key) => {
-      console.log(key + ' : ' + value.value);
-    });
-  }
-
   ngOnInit() {
-    this.num = this.route.snapshot.paramMap.get('num');
-
-    this.stageNum = 0;
-    this.phaseNum = 0;
-    this.end = false;
-    this.paramMap = new Map<string, any>(); // <'parameter_name', {'value: number', 'visible: boolean'}>
+    const b: boolean = this.num != this.route.snapshot.paramMap.get('num'); // first or another post
+    if ( b ) this.num = this.route.snapshot.paramMap.get('num');
 
     this.gameService.takeAllPosts().subscribe(data => {
       this.contents = data.posts;
@@ -73,8 +57,10 @@ export class GameComponent implements OnInit, OnDestroy {
             return false;
           }
           this.content = result.post;
-          this.funcService.setTitle(this.content.title + ' :: 게임게시판');
-          this.gameSet();
+          if ( b ) {
+            this.funcService.setTitle(this.content.title + ' :: 게임게시판');
+            this.playService.gameSet(this.content.game);
+          }
           if ( this.authService.loggedIn() ) {
             this.authService.getProfile().subscribe(profile => {
               this.user = profile.user;
@@ -87,95 +73,12 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   initialiseInvites() {
-    if ( this.num != this.route.snapshot.paramMap.get('num') ) {
-      this.ngOnInit();
-    } else {
-      this.gameService.takeAllPosts().subscribe(data => {
-        this.contents = data.posts;
-        if ( this.num != 'list' ) {
-          this.gameService.takeOnePost(this.num).subscribe(result => {
-            if ( result.fail ) {
-              this.router.navigate(['/no-page']);
-              return false;
-            }
-            // this.content = result.post;
-            this.content.boardRequest = result.post.boardRequest;
-            this.content.hit = result.post.hit;
-            this.content.recommend = result.post.recommend;
-            this.content.unrecommend = result.post.unrecommend;
-            this.content.recommendby = result.post.recommendby;
-            this.content.comment = result.post.comment;
-
-            if ( this.authService.loggedIn() ) {
-              this.authService.getProfile().subscribe(profile => {
-                this.user = profile.user;
-              });
-            }
-          });
-        } else this.funcService.setTitle('게임 게시판');
-      });
-
-    }
+    this.ngOnInit();
   }
 
   ngOnDestroy() {
     if ( this.navigationSubscription ) {
       this.navigationSubscription.unsubscribe();
-    }
-  }
-
-  gameSet() { // on first
-    this.data = this.content.game;
-    for (let obj of this.data.param) {  // [{param1: {value: 0, visible: true}}, {param2: {value: 100, visible: false}}, ...]
-      this.paramMap.set(obj.param_name, {value: obj.default, visible: obj.visible});
-    }
-    for (let stage of this.data.stage) {
-      if ( stage.stage_num == 0 ) {
-        this.phase = stage.phase[0];
-        break;
-      }
-    }
-  }
-
-  checkNextStageCondition(condition): boolean {
-    for (let c of condition) {
-      let value: number = this.paramMap.get(c.param).value;
-      if ( !(c.above <= value && value <= c.below) ) return false;
-    }
-    return true;
-  }
-
-  select(condition: any) {
-    this.stageNum++;
-    for (let val of condition) {
-      let pv: any = this.paramMap.get(val.param);
-      this.paramMap.delete(val.param);
-      // pv.value += condition.add;
-      pv.value += Math.floor(Math.random() * (val.below - val.above + 1)) + val.above;
-      this.paramMap.set(val.param, pv);
-    }
-    // this.showParams();
-
-    if ( this.stageNum >= this.data.stage.length ) {
-      // this is the end of the game
-      this.end = true;
-      console.log('[[END]]');
-      return true;
-    }
-
-    for (let stage of this.data.stage) {
-      if ( stage.stage_num == this.stageNum ) {
-        for (let phase of stage.phase) {
-          if ( this.checkNextStageCondition(phase.condition) ) {
-            this.phase = phase;
-            // refresh page without using 'ngOnInit'
-            return true;
-          }
-        }
-        // in this part, there is no condition to be fit to param
-        console.log('[[NO MATCHED CONDITION]]');
-        return false;
-      }
     }
   }
 
@@ -250,6 +153,45 @@ export class GameComponent implements OnInit, OnDestroy {
       })
     }
     
+  }
+
+  requestBoard() {
+    this.gameService.requestBoard(this.num).subscribe(data => {
+      if ( data.success ) {
+        this.content.boardRequest = 1;
+        this.flashMessage.showFlashMessage({
+          messages: ['요청되었습니다.'], 
+          type: 'success', 
+          timeout: 2000
+        });
+      } else {
+        this.flashMessage.showFlashMessage({
+          messages: [data.msg], 
+          type: 'danger', 
+          timeout: 3000
+        });
+      }
+    });
+  }
+
+  acceptBoard() {
+    this.gameService.acceptBoard(this.num).subscribe(data => {
+      if ( data.success ) {
+        this.content.boardRequest = 2;
+        this.content.board = data.link;
+        this.flashMessage.showFlashMessage({
+          messages: ['수락되었습니다.'], 
+          type: 'success', 
+          timeout: 2000
+        });
+      } else {
+        this.flashMessage.showFlashMessage({
+          messages: [data.msg], 
+          type: 'danger', 
+          timeout: 3000
+        });
+      }
+    });
   }
 
   extractDate(date) {

@@ -5,7 +5,8 @@
 <section *ngIf="num != 'list'" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
-      <h4 style="display: inline;">{{content?.title}}</h4>
+      <h4 style="display: inline;">{{content?.title}}</h4>&nbsp;
+      <span *ngIf="content?.board != ''">[<a [routerLink]="content?.board">●</a>]</span>
 
       <span style="float: right; text-align: right; font-size: 80%;">
         <span class="toProfile" (click)="funcService.openInfoWindow(content?.userid)">{{content?.nickname}}</span><br/>{{content?.writedate}}
@@ -16,30 +17,31 @@
       <div class="posting">
 
         <!-- PHASE-CONTENT -->
-        <div #stage_content>{{phase?.content}}</div><br/>
+        <div #stage_content>{{playService?.phase?.content}}</div><br/>
 
         <!-- CHOICES -->
-        <table class="mdl-data-table mdl-js-data-table" *ngIf="!end">
-          <tbody *ngFor="let choice of phase?.choice">
-            <tr>
+        <table class="mdl-data-table mdl-js-data-table" *ngIf="!playService.end">
+          <tbody *ngFor="let choice of playService?.phase?.choice">
+            <tr (click)="playService.select(choice?.set_param)">
               <td class="mdl-data-table__cell--non-numeric">{{choice?.choice_num}}</td>
-              <td class="mdl-data-table__cell--non-numeric" (click)="select(choice?.set_param)">{{choice?.content}}</td>
+              <td class="mdl-data-table__cell--non-numeric">{{choice?.content}}</td>
             </tr>
           </tbody>
         </table><br/>
 
-        <!-- THE END -->
-        <div *ngIf="end">
-          -THE END-<br/>
-          <button mat-raised-button (click)="ngOnInit()">다시하기</button>
+        <!-- END -->
+        <div *ngIf="playService.end">
+          -THE END-
+          <br/>
+          <button mat-raised-button (click)="playService.replay()">다시하기</button>
         </div><br/>
 
-        <!-- PARAMETERS -->
+        <!-- SHOW PARAMETERS -->
         <table>
-          <tbody *ngFor="let param of paramMap | keyvalue">
+          <tbody *ngFor="let param of playService?.paramMap | keyvalue">
             <tr *ngIf="param?.value?.visible">
-              <td>{{param.key}}</td>
-              <td>{{param.value.value}}</td>
+              <td>{{param?.key}}</td>
+              <td>{{param?.value?.value}}</td>
             </tr>
           </tbody>
         </table>
@@ -51,24 +53,7 @@
       <div>{{content?.content}}</div>
       <br/><br/>
 
-      <!-- not logged in -->
-      <!-- <table class="recommends" *ngIf="!authService.loggedIn()">
-        <tr>
-          <td>
-            <button mat-raised-button color="primary" (click)="unloggedIn()">
-              추천 {{content?.recommend}}
-            </button>
-          </td>
-          <td>
-            <button mat-raised-button color="accent" (click)="unloggedIn()">
-              비추천 {{content?.unrecommend}}
-            </button>
-          </td>
-        </tr>
-      </table> -->
-
       <!-- normal user -->
-      <!-- <table class="recommends" *ngIf="authService.loggedIn() && user?.userid != content?.userid && user?.userid != 'admin'"> -->
       <table class="recommends" *ngIf="user?.userid != content?.userid && user?.userid != 'admin'">
         <tr>
           <td>
@@ -99,7 +84,7 @@
           </td>
           <td>
             <button mat-raised-button
-              *ngIf="content?.boardRequest == 0 && (content?.recommend - content?.unrecommend) >= 3"
+              *ngIf="content?.boardRequest == 0 && (content?.recommend - content?.unrecommend) >= 1"
               (click)="requestBoard()">
               게시판 생성 요청
             </button>
@@ -216,7 +201,7 @@
           <tr>
             <td class="mdl-data-table__cell--non-numeric">{{extractDate(val.writedate)}}</td>
             <td class="mdl-data-table__cell--non-numeric">
-              <a [routerLink]="['/game/'+val?._id]"
+              <a [routerLink]="['/game/' + val?._id]"
                 style="color: black; text-decoration: none; font-weight: 400;"
                 (click)="scrollToPost(postLocation)">{{val.title}}</a>&nbsp;
               <span *ngIf="val.comment.length > 0" style="font-size: 85%; color: grey;">[{{val.comment.length}}]</span>
@@ -225,7 +210,7 @@
               <span class="toProfile" (click)="funcService.openInfoWindow(val?.userid)">{{val.nickname}}</span>
             </td>
             <td>{{val.hit}}</td>
-            <td>{{val.recommend}} {{val.unrecommend}}</td>
+            <td>{{val.recommend}}<span>/</span>{{val.unrecommend}}</td>
           </tr>
         </tbody>
       </table>
@@ -235,7 +220,7 @@
         <tbody *ngFor="let val of contents | slice:pagingFrom:pagingTo; let i=index">
           <tr>
             <td class="mdl-data-table__cell--non-numeric"
-              [routerLink]="['/board/'+val?._id]" (click)="scrollToPost(postLocation)">
+              [routerLink]="['/board/' + val?._id]" (click)="scrollToPost(postLocation)">
               <div>
                 {{val.title}}
                 <span *ngIf="val.comment.length > 0" style="color: grey;">[{{val.comment.length}}]</span>
@@ -243,7 +228,7 @@
               <div style="font-size: 85%; margin-top: 1%;">
                 <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;
                 <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;
-                <span>추천 {{val.recommend}} {{val.unrecommend}}</span>
+                <span>추천 {{val.recommend}}<span>/</span>{{val.unrecommend}}</span>
               </div>
             </td>
             <td>{{extractDate(val.writedate)}}</td>

@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 //=======================================<
 const Game = require('../models/game');
+const Sub = require('../models/sub');
 const passport = require('passport');
 const fs = require('fs-extra');
 const formidable = require('formidable');
@@ -113,6 +114,26 @@ router.post('/save', function(req, res, next) {
     
 });
 
+router.get('/getSessionGame', function(req, res, next) {
+    if ( !req.session.data ) {
+        res.json({
+            success: false,
+            msg: '먼저 저장을 해야 합니다.'
+        });
+    } else {
+        res.json({
+            success: true,
+            data: req.session.data
+        });
+    }
+});
+
+router.get('/deleteSessionGame', function(req, res, next) {
+    req.session.destroy();
+    res.clearCookie('sid');
+    res.json({});
+});
+
 //=============================================================
 
 router.post('/write', passport.authenticate('jwt', {session: false}), function(req, res, next) {
@@ -126,6 +147,7 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
             content: req.body.content,
             game: req.session.data,
             boardRequest: 0,
+            board: '',
             hit: 0,
             recommend: 0,
             unrecommend: 0,
@@ -311,7 +333,127 @@ router.post('/recommend', passport.authenticate('jwt', {session: false}), functi
         }
     })
     
-})
+});
+
+router.post('/requestBoard', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+    const num = req.body.num;
+    Game.findOne({_id: num}, function(err, post) {
+        if ( err ) {
+            res.json({
+                success: false,
+                msg: err
+            });
+        } else if ( req.user.userid != post.userid ) {
+            res.json({
+                success: false,
+                msg: 'the HIATUS - Catch You Later'
+            });
+        } else {
+            Game.findOneAndUpdate({_id: num}, {boardRequest: 1}, function(err, output) {
+                if ( err ) {
+                    res.json({
+                        success: false,
+                        msg: err
+                    });
+                } else {
+                    res.json({
+                        success: true
+                    });
+                }
+            });
+        }
+    })
+});
+
+function makeURL(title) {
+    title = title.split(' ');
+    let text = '';
+    const regex = /^[a-zA-Z0-9]$/;
+    for (let t of title) {
+        for (let i=0; i<t.length; i++) {
+            let l = t.substring(i, i+1);
+            if ( !regex.test(l) ) {
+                let c = l.charCodeAt(0);
+                if ( c > 16 ) c = c % 16;
+                c = c.toString(16);
+                text += c;
+            } else text += l;
+        }
+        text += '-';
+    }
+    if ( text.length > 22 ) text = text.substring(0, 22);
+    return text;
+}
+
+// function makeRandomCode(lengthOfRandomCode) {
+//     return (new Date().getTime() % (Math.pow(16, lengthOfRandomCode))).toString(16);
+// }
+
+function makeRandomCode(lengthOfRandomCode) {
+    const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let randomstring = '';
+    for (let i=0; i<lengthOfRandomCode; i++) {
+        let rnum = Math.floor(Math.random() * chars.length);
+        randomstring += chars.substring(rnum, rnum + 1);
+    }
+    return randomstring;
+}
+
+router.post('/acceptBoard', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+    const num = req.body.num;
+    if ( req.user.userid != 'admin' ) {
+        res.json({
+            success: false,
+            msg: 'so i have made up this whole story'
+        });
+    } else {
+        Game.findOne({_id: num}, function(err, output) {
+            if ( err ) {
+                res.json({
+                    success: false,
+                    msg: err
+                });
+            } else {
+                Game.findOneAndUpdate({_id: num}, {boardRequest: 2}, function(err, post) {
+                    if ( err ) {
+                        res.json({
+                            success: false,
+                            msg: err
+                        });
+                    } else {
+
+                        let text = makeURL(post.game.title);
+                        text += makeRandomCode(3);
+
+                        const sub = new Sub({
+                            url: text,
+                            title: post.game.title + ' (' + post.nickname + ')',
+                            gameid: post._id,
+                            createdate: getNowDate()
+                        });
+                        Sub.add(sub, (err, sub) => {
+                            if ( err ) {
+                                res.json({
+                                    success: false,
+                                    msg: err
+                                });
+                            } else {
+                                Game.findOneAndUpdate({_id: num}, {board: '/board/' + text + '/list'}, function(err, game) {
+                                    res.json({
+                                        success: true,
+                                        link: game.board
+                                    });
+                                });
+                            }
+                        });
+
+                    }
+                });
+            }
+        })
+    }
+    
+});
 
 //=============================================================
 
