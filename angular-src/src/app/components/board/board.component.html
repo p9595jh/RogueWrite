@@ -88,7 +88,7 @@
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
       <h4 *ngIf="type == 'free'">자유게시판</h4>
-      <h4 *ngIf="type != 'free'">{{type}} 게시판</h4>
+      <h4 *ngIf="type != 'free'">{{sub?.title}} 게시판</h4>
       <hr/>
       
       <!-- for large display -->

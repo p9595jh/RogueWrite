@@ -6,7 +6,7 @@
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
       <h4 style="display: inline;">{{content?.title}}</h4>&nbsp;
-      <span *ngIf="content?.board != ''">[<a [routerLink]="content?.board">●</a>]</span>
+      <span *ngIf="content?.board && content?.board != ''">[<a [routerLink]="['/board/' + content?.board + '/list']" style="text-decoration: none; color: black;">●</a>]</span>
 
       <span style="float: right; text-align: right; font-size: 80%;">
         <span class="toProfile" (click)="funcService.openInfoWindow(content?.userid)">{{content?.nickname}}</span><br/>{{content?.writedate}}

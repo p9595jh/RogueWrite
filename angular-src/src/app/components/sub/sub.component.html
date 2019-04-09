@@ -3,7 +3,7 @@
     <div class="mdl-card__supporting-text">
       
       <ul *ngFor="let sub of subs">
-        <li>{{sub}}</li>
+        <li><a [routerLink]="['/board/' + sub?.url + '/list']">{{sub.title}}</a></li>
       </ul>
 
     </div>

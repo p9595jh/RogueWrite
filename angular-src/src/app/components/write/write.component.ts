@@ -43,6 +43,11 @@ export class WriteComponent implements OnInit {
   ) {
     this.type = this.route.snapshot.paramMap.get('type');
     this.funcService.setTitle('글 작성');
+    this.boardService.checkBoardExists(this.type).subscribe(result => {
+      if ( !result.exist ) {
+        this.router.navigate(['/no-page']);
+      }
+    });
   }
 
   ngOnInit() {

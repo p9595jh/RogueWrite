@@ -85,4 +85,18 @@ export class BoardService {
       .pipe(map(res => res.json()));
   }
 
+  checkBoardExists(type) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(this.funcService.ServerAddress + '/boards/checkBoardExists?type=' + type, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  getSub(type) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(this.funcService.ServerAddress + '/boards/sub?url=' + type, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
 }

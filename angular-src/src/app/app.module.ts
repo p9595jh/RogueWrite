@@ -64,6 +64,7 @@ const appRoutes: Routes = [
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: 'game/:num', component: GameComponent },
   { path: 'tool', component: ToolComponent, canActivate: [AuthGuard] },
+  { path: 'sub', component: SubComponent },
   { path: 'no-page', component: NoPageComponent },
   { path: '**', component: NoPageComponent }
 ]

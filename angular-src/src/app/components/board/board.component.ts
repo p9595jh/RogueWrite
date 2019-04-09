@@ -26,6 +26,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   contents: Object[];
   cmtWrite = new FormControl();
   user: any;
+  sub: any;
   
   pagingSize = 25;
   pagingFrom: Number = 0;
@@ -46,7 +47,6 @@ export class BoardComponent implements OnInit, OnDestroy {
         this.initialiseInvites();
       }
     });
-    
   }
 
   extractDate(date) {
@@ -77,6 +77,16 @@ export class BoardComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.type = this.route.snapshot.paramMap.get('type');
     this.num = this.route.snapshot.paramMap.get('num');
+    this.boardService.checkBoardExists(this.type).subscribe(result => {
+      if ( !result.exist ) {
+        this.router.navigate(['/no-page']);
+      }
+    });
+    if ( this.type != 'free' ) {
+      this.boardService.getSub(this.type).subscribe(data => {
+        this.sub = data.sub;
+      });
+    }
 
     this.setFilteredOptions();
     this.boardService.takeAllPosts(this.type).subscribe(data => {

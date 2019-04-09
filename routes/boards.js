@@ -55,8 +55,8 @@ router.get('/takeAllPosts', function(req, res, next) {
 });
 
 router.get('/takeAllBoards', function(req, res, next) {
-    Sub.find({}).sort({_id: -1}).exec(function(err, subs) {
-        res.json({posts: subs});
+    Sub.find({}, function(err, subs) {
+        res.json({subs: subs});
     });
 });
 
@@ -220,7 +220,29 @@ router.post('/recommend', passport.authenticate('jwt', {session: false}), functi
         }
     })
     
-})
+});
+
+router.get('/checkBoardExists', function(req, res, next) {
+    const type = req.query.type;
+    if ( type == 'free' ) {
+        res.json({exist: true});
+    } else {
+        Sub.findOne({url: type}, function(err, post) {
+            if ( err | !post ) {
+                res.json({exist: false});
+            } else {
+                res.json({exist: true});
+            }
+        });
+    }
+});
+
+router.get('/sub', function(req, res, next) {
+    const url = req.query.url;
+    Sub.findOne({url: url}, function(err, sub) {
+        res.json({sub: sub});
+    });
+});
 
 //==================================================
 
