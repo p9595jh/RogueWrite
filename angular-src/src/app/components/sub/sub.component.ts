@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FuncService } from '../../services/func.service';
+import { BoardService } from '../../services/board.service';
 
 @Component({
   selector: 'app-sub',
@@ -6,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sub.component.css']
 })
 export class SubComponent implements OnInit {
+  subs;
 
-  constructor() { }
+  constructor(
+    private funcService: FuncService,
+    private boardService: BoardService
+  ) {
+    this.funcService.setTitle('서브게시판 목록');
+  }
 
   ngOnInit() {
+    this.boardService.takeAllBoards().subscribe(data => {
+      this.subs = data.subs;
+    });
   }
 
 }

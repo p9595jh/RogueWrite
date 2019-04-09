@@ -37,6 +37,13 @@ export class BoardService {
       .pipe(map(res => res.json()));
   }
 
+  takeAllBoards() {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(this.funcService.ServerAddress + '/boards/takeAllBoards', {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
   writePost(post) {
     let headers = new Headers();
     this.loadToken();

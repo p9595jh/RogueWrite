@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 //=======================================<
 const Board = require('../models/board');
+const Sub = require('../models/sub');
 const passport = require('passport');
 const fs = require('fs-extra');
 const formidable = require('formidable');
@@ -51,7 +52,13 @@ router.get('/takeAllPosts', function(req, res, next) {
     Board.find({type: type}).sort({_id: -1}).exec(function(err, posts) {
         res.json({posts: posts});
     });
-})
+});
+
+router.get('/takeAllBoards', function(req, res, next) {
+    Sub.find({}).sort({_id: -1}).exec(function(err, subs) {
+        res.json({posts: subs});
+    });
+});
 
 router.post('/images', function(req, res) {
     var form = formidable.IncomingForm();
