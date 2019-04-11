@@ -72,7 +72,7 @@ app.use('/games', gamesRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   // next(createError(404));
-  res.redirect('http://localhost:3000/images/404.jpg');
+  res.redirect('/no-page');
 });
 
 // error handler

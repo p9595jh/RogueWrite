@@ -5,46 +5,46 @@
 <section *ngIf="num != 'list'" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
-      <h4 style="display: inline;">{{content?.title}}</h4>&nbsp;
-      <span *ngIf="content?.board && content?.board != ''">[<a [routerLink]="['/board/' + content?.board + '/list']" style="text-decoration: none; color: black;">●</a>]</span>
-
+      <h4 style="display: inline;">{{content?.title}}</h4>
       <span style="float: right; text-align: right; font-size: 80%;">
         <span class="toProfile" (click)="funcService.openInfoWindow(content?.userid)">{{content?.nickname}}</span><br/>{{content?.writedate}}
       </span>
       <hr/>
 
       <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ENGINE (GAME) ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
-      <div class="posting">
+      <div class="engine-layout">
 
         <!-- PHASE-CONTENT -->
-        <div #stage_content>{{playService?.phase?.content}}</div><br/>
+        <div class="stage-content" [innerHTML]="playService?.phase?.content | safe"></div>
 
         <!-- CHOICES -->
-        <table class="mdl-data-table mdl-js-data-table" *ngIf="!playService.end">
+        <table style="width: 100%;" *ngIf="!playService.end">
           <tbody *ngFor="let choice of playService?.phase?.choice">
-            <tr (click)="playService.select(choice?.set_param)">
-              <td class="mdl-data-table__cell--non-numeric">{{choice?.choice_num}}</td>
-              <td class="mdl-data-table__cell--non-numeric">{{choice?.content}}</td>
-            </tr>
-          </tbody>
-        </table><br/>
-
-        <!-- END -->
-        <div *ngIf="playService.end">
-          -THE END-
-          <br/>
-          <button mat-raised-button (click)="playService.replay()">다시하기</button>
-        </div><br/>
-
-        <!-- SHOW PARAMETERS -->
-        <table>
-          <tbody *ngFor="let param of playService?.paramMap | keyvalue">
-            <tr *ngIf="param?.value?.visible">
-              <td>{{param?.key}}</td>
-              <td>{{param?.value?.value}}</td>
+            <tr (click)="playService.select(choice?.set_param)" style="height: 50px;">
+              <td class="mdl-data-table__cell--non-numeric stage-choice">{{choice?.content}}</td>
             </tr>
           </tbody>
         </table>
+
+        <!-- END -->
+        <table *ngIf="playService.end" class="mdl-data-table mdl-js-data-table" style="width: 100%;">
+          <tr>
+            <td class="mdl-data-table__cell--non-numeric">THE END.</td>
+            <td>점수 : 얼마얼마</td>
+          </tr>
+          <tr>
+            <td colspan="2"><button mat-button (click)="playService.replay()" style="float: right;">다시하기</button></td>
+          </tr>
+        </table>
+
+        <!-- SHOW PARAMETERS -->
+        <div class="row align-items-center" *ngFor="let arr of playService?.paramArr">
+          <div class="col-sm grid-cell" *ngFor="let val of arr">
+            <span *ngIf="val?.value?.visible">
+              {{val?.key}}<span>: </span>{{val?.value?.value}}
+            </span>
+          </div>
+        </div>
 
       </div>
       <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ENGINE (GAME) ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
@@ -173,6 +173,9 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #aboutPost>
+    <button mat-menu-item *ngIf="content?.board && content?.board != ''" [routerLink]="['/board/' + content?.board + '/list']">
+      <span>게시판으로 이동</span>
+    </button>
     <button mat-menu-item *ngIf="content?.userid == user?.userid || user?.userid == 'admin'" (click)="onRemovePost()">
       <span>삭제</span>
     </button>

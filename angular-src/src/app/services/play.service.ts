@@ -11,6 +11,7 @@ export class PlayService {
   phase: any;
   phaseNum: number;
   end: boolean;
+  paramArr: Array<any[]>;
 
   constructor() {}
 
@@ -25,6 +26,7 @@ export class PlayService {
       // [{param1: {value: 0, visible: true}}, {param2: {value: 100, visible: false}}, ...]
       this.paramMap.set(obj.param_name, {value: obj.default, visible: obj.visible});
     }
+    this.paramArr = this.formatAsDoubleDimension();
     for (let stage of this.data.stage) {
       if ( stage.stage_num == 0 ) {
         this.phase = stage.phase[0];
@@ -85,6 +87,21 @@ export class PlayService {
         return false;
       }
     }
+  }
+
+  private formatAsDoubleDimension(): Array<any[]> {
+    let arr = new Array();
+    arr.push([]);
+    this.paramMap.forEach((value, key) => {
+      if ( value.visible ) {
+        if ( arr[arr.length-1].length < 3 ) {
+          arr[arr.length-1].push({key: key, value: value});
+        } else {
+          arr.push([{key: key, value: value}]);
+        }
+      }
+    });
+    return arr;
   }
 
   private showParams() {

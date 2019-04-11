@@ -7,4 +7,10 @@ router.get('/', function(req, res, next) {
   res.send('Invalid Endpoint');
 });
 
+router.get('/no-page', function(req, res, next) {
+  res.render('no-page', {
+    title: '404'
+  });
+});
+
 module.exports = router;

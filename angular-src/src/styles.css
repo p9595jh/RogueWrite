@@ -35,6 +35,75 @@ pre {
 .writerText {
   color: red;
 }
+a:hover {
+  text-decoration: none;
+}
+
+/* ENGINE ========================================================================== */
+
+.engine-layout {
+  padding: 0px;
+  margin: 0px;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.stage-content {
+  background-image: url('./images/engine/content_bg.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 10%;
+}
+
+.stage-choice {
+  text-align: left;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+
+  background-image: url('./images/engine/select_bg_default.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.stage-choice:hover {
+  background-image: url('./images/engine/select_bg_hover.png');
+}
+
+.stage-choice:active {
+  background-image: url('./images/engine/select_bg_clicked.png');
+}
+
+.grid-cell {
+  background-color: rgb(230, 230, 230);
+  height: 40px;
+  border-bottom: 1px solid rgb(163, 163, 163);
+  border-right: 1px solid rgb(163, 163, 163);
+  padding: 10px 40px 10px 40px;
+}
+
+.grid-cell:hover {
+  background-color: rgb(202, 202, 202);
+
+}
+
+.grid-cell a {
+  font-weight: 300;
+  text-decoration: none;
+  color: black;
+}
+
+.grid-cell a:hover {
+  font-weight: 400;
+}
 
 /* ========================================================================== */
 

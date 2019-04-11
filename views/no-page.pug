@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    section.section--center.mdl-grid.mdl-grid--no-spacing.mdl-shadow--2dp(*ngif="num != 'list'")
+        div.mdl-card.mdl-cell.mdl-cell--12-col
+            div.mdl-card__supporting-text
+                h4(style='display: inline;') 404 ERROR
+                hr
+
+                img(src='../images/404.jpg', style='width: 100%;')
+                br
+                br
+                span 페이지가 존재하지 않습니다.
+

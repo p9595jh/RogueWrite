@@ -12,12 +12,6 @@ router.get('/', function(req, res) {
 
 // ==============================================
 
-/*
-    To add/modify an user's profile image,
-    or something else that needs authentication,
-    use the code below.
-    Make a secret code and add to a session so that can be used for checking whether it is logged in or not.
-*/
 router.post('/getCode', passport.authenticate('jwt', {session: false}), function(req, res) {
     if ( req.body.userid == req.user.userid ) {
         const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';

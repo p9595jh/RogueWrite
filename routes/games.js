@@ -438,10 +438,10 @@ router.post('/acceptBoard', passport.authenticate('jwt', {session: false}), func
                                     msg: err
                                 });
                             } else {
-                                Game.findOneAndUpdate({_id: num}, {board: '/board/' + text + '/list'}, function(err, game) {
+                                Game.findOneAndUpdate({_id: num}, {board: text}, function(err, game) {
                                     res.json({
                                         success: true,
-                                        link: game.board
+                                        link: text
                                     });
                                 });
                             }

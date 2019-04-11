@@ -1,42 +1,25 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FuncService } from '../../services/func.service';
 import { Router, NavigationEnd } from '@angular/router';
+import { PlayService } from '../../services/play.service';
 
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.css']
 })
-export class TestComponent implements OnInit, OnDestroy {
-  navigationSubscription;
+export class TestComponent implements OnInit {
 
   constructor(
     private funcService: FuncService,
+    private playService: PlayService,
     private router: Router
   ) {
     this.funcService.setTitle('TEST!!!!');
-    this.navigationSubscription = this.router.events.subscribe((e: any) => {
-      if ( e instanceof NavigationEnd ) {
-        this.initialiseInvites();
-      }
-    });
   }
 
   ngOnInit() {
-  }
-
-  ngOnDestroy() {
-    if ( this.navigationSubscription ) {
-      this.navigationSubscription.unsubscribe();
-    }
-  }
-
-  initialiseInvites() {
-    this.ngOnInit();
-  }
-
-  click(btn: HTMLElement) {
-    btn.style.display = 'none';
+    
   }
 
 }

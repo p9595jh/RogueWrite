@@ -33,34 +33,38 @@
       <div class="posting" *ngIf="set">
 
         <!-- PHASE-CONTENT -->
-        <div #stage_content>{{playService?.phase?.content}}</div><br/>
+        <div class="stage-content">{{playService?.phase?.content}}</div>
 
         <!-- CHOICES -->
-        <table class="mdl-data-table mdl-js-data-table" *ngIf="!playService.end">
+        <table style="width: 100%;" *ngIf="!playService.end">
           <tbody *ngFor="let choice of playService?.phase?.choice">
-            <tr (click)="playService.select(choice?.set_param)">
-              <td class="mdl-data-table__cell--non-numeric">{{choice?.choice_num}}</td>
-              <td class="mdl-data-table__cell--non-numeric">{{choice?.content}}</td>
-            </tr>
-          </tbody>
-        </table><br/>
-
-        <!-- END -->
-        <div *ngIf="playService.end">
-          -THE END-
-          <br/>
-          <button mat-raised-button (click)="playService.replay()">다시하기</button>
-        </div><br/>
-
-        <!-- SHOW PARAMETERS -->
-        <table>
-          <tbody *ngFor="let param of playService?.paramMap | keyvalue">
-            <tr *ngIf="param?.value?.visible">
-              <td>{{param?.key}}</td>
-              <td>{{param?.value?.value}}</td>
+            <tr (click)="playService.select(choice?.set_param)" style="height: 50px;">
+              <td class="mdl-data-table__cell--non-numeric stage-choice">{{choice?.content}}</td>
             </tr>
           </tbody>
         </table>
+
+        <!-- END -->
+        <table *ngIf="playService.end" class="mdl-data-table mdl-js-data-table" style="width: 100%;">
+          <tr>
+            <td class="mdl-data-table__cell--non-numeric">THE END.</td>
+            <td>점수 : 얼마얼마</td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <button mat-button (click)="playService.replay()" style="float: right;">다시하기</button>
+            </td>
+          </tr>
+        </table>
+
+        <!-- SHOW PARAMETERS -->
+        <div class="row align-items-center" *ngFor="let arr of playService?.paramArr">
+          <div class="col-sm grid-cell" *ngFor="let val of arr">
+            <span *ngIf="val?.value?.visible">
+              {{val?.key}}<span>: </span>{{val?.value?.value}}
+            </span>
+          </div>
+        </div>
 
       </div>
       <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ENGINE (GAME) ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
