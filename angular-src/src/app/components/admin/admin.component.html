@@ -1,11 +1,10 @@
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
-      <h4>어드민 게시판</h4>
+      <h4>회원 관리</h4>
       <hr/>
       
-      <!-- for large display -->
-      <table class="mdl-data-table mdl-js-data-table mdl-layout--large-screen-only" style="margin: auto; width: 98%;">
+      <table class="mdl-data-table mdl-js-data-table" style="margin: auto; width: 98%;">
         <thead>
           <tr>
             <th class="mdl-data-table__cell--non-numeric">아이디</th>
@@ -13,7 +12,7 @@
             <th>상태</th>
           </tr>
         </thead>
-        <tbody *ngFor="let val of users | slice:pagingFrom:pagingTo;">
+        <tbody *ngFor="let val of users | slice:memberPagingFrom:memberPagingTo;">
           <tr *ngIf="val?.userid != 'admin'">
             <td class="mdl-data-table__cell--non-numeric">
               <span (click)="funcService.openInfoWindow(val?.userid)" style="cursor: pointer;">{{val.userid}}</span>
@@ -29,7 +28,48 @@
         </tbody>
       </table><br/>
 
-      <mat-paginator [length]="users?.length" [pageSize]="pagingSize" (page)="paging($event)">
+      <mat-paginator [length]="users?.length" [pageSize]="pagingSize" (page)="memberPaging($event)">
+      </mat-paginator>
+
+    </div>
+  </div>
+</section>
+
+<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+    <div class="mdl-card__supporting-text">
+      <h4>게시판 생성 요청 관리</h4>
+      <hr/>
+      
+      <table class="mdl-data-table mdl-js-data-table" style="margin: auto; width: 98%;">
+        <thead>
+          <tr>
+            <th class="mdl-data-table__cell--non-numeric">요청자</th>
+            <th class="mdl-data-table__cell--non-numeric">요청 게임</th>
+            <th class="mdl-data-table__cell--non-numeric">추천 비율</th>
+            <th>처리</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let val of games | slice:reqPagingFrom:reqPagingTo;">
+          <tr *ngIf="val?.userid != 'admin'">
+            <td class="mdl-data-table__cell--non-numeric">
+              <span (click)="funcService.openInfoWindow(val?.userid)" style="cursor: pointer;">{{val.nickname}} ({{val.userid}})</span>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">
+              <a [href]="funcService?.ServerAddress + '/game/' + val?._id" target="_blank">{{val.title}}</a>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">{{val.recommend}}/{{val.unrecommend}}</td>
+            <td>
+              <button mat-button color="primary" [attr.id]="'accept-'+val?._id"
+                (click)="acceptRequest(val?._id, val?.title, val?.userid, true)">수락</button>
+              <button mat-button color="warn" [attr.id]="'reject-'+val?._id"
+                (click)="acceptRequest(val?._id, null, null, false)">거절</button>
+            </td>
+          </tr>
+        </tbody>
+      </table><br/>
+
+      <mat-paginator [length]="users?.length" [pageSize]="pagingSize" (page)="reqPaging($event)">
       </mat-paginator>
 
     </div>

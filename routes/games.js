@@ -191,51 +191,51 @@ router.get('/takeOnePost', function(req, res, next) {
 })
 
 router.get('/takeAllPosts', function(req, res, next) {
-    Game.find({}).sort({_id: -1}).exec(function(err, posts) {
+    Game.find({}, {content: 0, game: 0, recommendby: 0}).sort({_id: -1}).exec(function(err, posts) {
         res.json({posts: posts});
     });
-})
+});
+
+router.get('/takeRequestedPosts', function(req, res, next) {
+    Game.find({boardRequest: 1}, {content: 0, game: 0, comment: 0, hit: 0, recommendby: 0}, function(err, posts) {
+        res.json({posts: posts});
+    });
+});
 
 router.post('/writeComment', passport.authenticate('jwt', {session: false}), function(req, res, next) {
-    Game.findOne({_id: req.body._id}, function(err, post) {
-        let num = 0;
-        if ( post.comment.length > 0 )
-            num = post.comment[post.comment.length-1].num + 1;
+    let comment = req.body.comment.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
+        return '&#' + i.charCodeAt(0) + ';';
+    });
 
-        // encoding html chars to entity
-        let comment = req.body.comment.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
-            return '&#' + i.charCodeAt(0) + ';';
-        });
-
-        let split = comment.split(' ');
-        comment = '';
-        for (let i=0; i<split.length-1; i++) {
-            comment += taggingUrl(split[i]) + ' ';
+    let split = comment.split(' ');
+    comment = '';
+    for (let i=0; i<split.length-1; i++) {
+        comment += taggingUrl(split[i]) + ' ';
+    }
+    comment += taggingUrl(split[split.length-1]);
+    
+    const cmtData = {
+        num: new Date().getTime(),
+        writedate: getNowDate(),
+        userid: req.user.userid,
+        nickname: req.user.nickname,
+        comment: comment
+    };
+    
+    Game.findOneAndUpdate({_id: req.body._id}, {$push: {comment: cmtData}}, function(err, output) {
+        if ( err ) {
+            res.json({
+                success: false
+            });
+        } else {
+            res.json({
+                success: true,
+                // post: output
+            });
         }
-        comment += taggingUrl(split[split.length-1]);
-        
-        const cmtData = {
-            num: num,
-            writedate: getNowDate(),
-            userid: req.user.userid,
-            nickname: req.user.nickname,
-            comment: comment
-        };
-        Game.findOneAndUpdate({_id: req.body._id}, {$push: {comment: cmtData}}, function(err, output) {
-            if ( err ) {
-                res.json({
-                    success: false
-                });
-            } else {
-                res.json({
-                    success: true,
-                    // post: output
-                });
-            }
-        })
-    })
+    });
 
-})
+});
 
 router.post('/removePost', function(req, res, next) {
     const num = req.body.num;
@@ -255,7 +255,7 @@ router.post('/removePost', function(req, res, next) {
 router.post('/removeComment', function(req, res, next) {
     const postNum = req.body.postNum;
     const cmtNum = req.body.cmtNum;
-    Game.findOne({_id: postNum}, (err, post) => {
+    Game.findOne({_id: postNum}, {comment: 1}, (err, post) => {
         if ( err || !post ) res.json({success: false});
         else {
             let c;
@@ -279,7 +279,7 @@ router.post('/removeComment', function(req, res, next) {
 router.post('/recommend', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     const num = req.body.num;
     const isRecommend = req.body.isRecommend;
-    Game.findOne({_id: num}, function(err, post) {
+    Game.findOne({_id: num}, {recommendby: 1, recommend: 1, unrecommend: 1}, function(err, post) {
         let flag = true;
         for (let val of post.recommendby) {
             if ( val == req.user.userid ) {
@@ -293,43 +293,37 @@ router.post('/recommend', passport.authenticate('jwt', {session: false}), functi
                 msg: '이미 추천/비추천 하셨습니다.'
             });
         } else {
-            Game.findOneAndUpdate({_id: num}, {$push: {recommendby: req.user.userid}}, function(err, output) {
-                if ( err ) {
-                    res.json({
-                        success: false,
-                        msg: err
-                    });
-                } else {
-                    if ( isRecommend ) {
-                        let l = output.recommend + 1;
-                        Game.findOneAndUpdate({_id: num}, {recommend: l}, function(err, output2) {
-                            if ( err ) {
-                                res.json({
-                                    success: false,
-                                    msg: err
-                                });
-                            } else res.json({
-                                success: true,
-                                recommend: output2.recommend
-                            });
-                        })
+            if ( isRecommend ) {
+                let l = post.recommend + 1;
+                Game.findOneAndUpdate({_id: num}, {$push: {recommendby: req.user.userid}, recommend: l}, function(err, output) {
+                    if ( err ) {
+                        res.json({
+                            success: false,
+                            msg: err
+                        });
                     } else {
-                        let l = output.unrecommend + 1;
-                        Game.findOneAndUpdate({_id: num}, {unrecommend: l}, function(err, output2) {
-                            if ( err ) {
-                                res.json({
-                                    success: false,
-                                    msg: err
-                                });
-                            } else res.json({
-                                success: true,
-                                recommend: output2.unrecommend
-                            });
-                        })
+                        res.json({
+                            success: true,
+                            recommend: output.recommend
+                        });
                     }
-                    
-                }
-            })
+                });
+            } else {
+                let l = output.unrecommend + 1;
+                Game.findOneAndUpdate({_id: num}, {$push: {recommendby: req.user.userid}, unrecommend: l}, function(err, output) {
+                    if ( err ) {
+                        res.json({
+                            success: false,
+                            msg: err
+                        });
+                    } else {
+                        res.json({
+                            success: true,
+                            recommend: output.recommend
+                        });
+                    }
+                });
+            }
         }
     })
     
@@ -337,7 +331,7 @@ router.post('/recommend', passport.authenticate('jwt', {session: false}), functi
 
 router.post('/requestBoard', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     const num = req.body.num;
-    Game.findOne({_id: num}, function(err, post) {
+    Game.findOne({_id: num}, {userid: 1}, function(err, post) {
         if ( err ) {
             res.json({
                 success: false,
@@ -385,10 +379,6 @@ function makeURL(title) {
     return text;
 }
 
-// function makeRandomCode(lengthOfRandomCode) {
-//     return (new Date().getTime() % (Math.pow(16, lengthOfRandomCode))).toString(16);
-// }
-
 function makeRandomCode(lengthOfRandomCode) {
     const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let randomstring = '';
@@ -401,56 +391,55 @@ function makeRandomCode(lengthOfRandomCode) {
 
 router.post('/acceptBoard', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     const num = req.body.num;
+    const accept = req.body.accept;
     if ( req.user.userid != 'admin' ) {
         res.json({
             success: false,
             msg: 'so i have made up this whole story'
         });
     } else {
-        Game.findOne({_id: num}, function(err, output) {
-            if ( err ) {
-                res.json({
-                    success: false,
-                    msg: err
-                });
-            } else {
-                Game.findOneAndUpdate({_id: num}, {boardRequest: 2}, function(err, post) {
-                    if ( err ) {
+        if ( accept ) {
+            const title = req.body.title;
+            const userid = req.body.userid;
+            let text = makeURL(title);
+            text += makeRandomCode(3);
+
+            const sub = new Sub({
+                url: text,
+                title: title + ' (' + userid + ')',
+                gameid: num,
+                createdate: getNowDate()
+            });
+            Sub.add(sub, (err, output) => {
+                if ( err ) {
+                    res.json({
+                        success: false,
+                        msg: err
+                    });
+                } else {
+                    Game.findOneAndUpdate({_id: num}, {board: text, boardRequest: 2}, function(err, game) {
                         res.json({
-                            success: false,
-                            msg: err
+                            success: true,
+                            link: text
                         });
-                    } else {
-
-                        let text = makeURL(post.game.title);
-                        text += makeRandomCode(3);
-
-                        const sub = new Sub({
-                            url: text,
-                            title: post.game.title + ' (' + post.nickname + ')',
-                            gameid: post._id,
-                            createdate: getNowDate()
-                        });
-                        Sub.add(sub, (err, sub) => {
-                            if ( err ) {
-                                res.json({
-                                    success: false,
-                                    msg: err
-                                });
-                            } else {
-                                Game.findOneAndUpdate({_id: num}, {board: text}, function(err, game) {
-                                    res.json({
-                                        success: true,
-                                        link: text
-                                    });
-                                });
-                            }
-                        });
-
-                    }
-                });
-            }
-        })
+                    });
+                }
+            })
+        } else {
+            Game.findOneAndUpdate({_id: num}, {boardRequest: 3}, function(err, post) {
+                if ( err ) {
+                    res.json({
+                        success: false,
+                        msg: err
+                    });
+                } else {
+                    res.json({
+                        success: true
+                    });
+                }
+            });
+            
+        }
     }
     
 });

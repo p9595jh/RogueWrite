@@ -60,6 +60,13 @@ export class GameService {
       .pipe(map(res => res.json()));
   }
 
+  takeRequestedPosts() {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(this.funcService.ServerAddress + '/games/takeRequestedPosts', {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
   writeComment(cmt) {
     let headers = new Headers();
     this.loadToken();
@@ -101,12 +108,27 @@ export class GameService {
       .pipe(map(res => res.json()));
   }
 
-  acceptBoard(num) {
+  acceptBoard(num, title, userid) {
+    const formData = {
+      num: num,
+      accept: true,
+      title: title,
+      userid: userid
+    };
     let headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/games/acceptBoard', {num: num}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/games/acceptBoard', formData, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  rejectBoard(num) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/games/acceptBoard', {num: num, accept: false}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 

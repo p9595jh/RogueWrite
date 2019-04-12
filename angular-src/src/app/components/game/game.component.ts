@@ -175,7 +175,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   acceptBoard() {
-    this.gameService.acceptBoard(this.num).subscribe(data => {
+    this.gameService.acceptBoard(this.num, this.content.game.title, this.content.userid).subscribe(data => {
       if ( data.success ) {
         this.content.boardRequest = 2;
         this.content.board = data.link;
