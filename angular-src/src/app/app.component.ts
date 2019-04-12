@@ -11,11 +11,11 @@ import { Router } from '@angular/router';
 export class AppComponent {
   siteName = 'ЯogueWrite';
   navLinks = [
-    { label: 'HOME', path: '/' },
+    { label: '공지게시판', path: '/board/notice/list' },
     { label: '자유게시판', path: '/board/free/list' },
     { label: '게임게시판', path: '/game/list' },
     { label: '서브게시판', path: '/sub' },
-    { label: 'FIFTH', path: '/write/free' }
+    { label: 'FIFTH', path: '/register' }
   ];
   activeLink = this.navLinks[0];
 

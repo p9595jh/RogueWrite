@@ -13,7 +13,8 @@
           </tr>
         </thead>
         <tbody *ngFor="let val of users | slice:memberPagingFrom:memberPagingTo;">
-          <tr *ngIf="val?.userid != 'admin'">
+          <!-- <tr *ngIf="val?.userid != 'admin'"> -->
+          <tr>
             <td class="mdl-data-table__cell--non-numeric">
               <span (click)="funcService.openInfoWindow(val?.userid)" style="cursor: pointer;">{{val.userid}}</span>
             </td>
@@ -56,7 +57,7 @@
               <span (click)="funcService.openInfoWindow(val?.userid)" style="cursor: pointer;">{{val.nickname}} ({{val.userid}})</span>
             </td>
             <td class="mdl-data-table__cell--non-numeric">
-              <a [href]="funcService?.ServerAddress + '/game/' + val?._id" target="_blank">{{val.title}}</a>
+              <a [routerLink]="['/game/' + val?._id]" target="_blank" style="color: black;">{{val.title}}</a>
             </td>
             <td class="mdl-data-table__cell--non-numeric">{{val.recommend}}/{{val.unrecommend}}</td>
             <td>

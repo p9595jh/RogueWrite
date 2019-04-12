@@ -9,7 +9,7 @@ const GameSchema = mongoose.Schema({
     title: String,
     content: String,
     game: Object,   // game data
-    boardRequest: Number,   // 0: normal, 1: requested, 2: accepted
+    boardRequest: Number,   // 0: normal, 1: requested, 2: accepted, 3: rejected
     board: String,
     hit: Number,
     writedate: String,

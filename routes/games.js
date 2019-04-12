@@ -83,6 +83,7 @@ function lucky(s) {
 }
 
 router.post('/save', function(req, res, next) {
+    console.log(req.body);
     // title(string), stage(array), param(array), score(string)
     const data = {
         title: req.body.title,

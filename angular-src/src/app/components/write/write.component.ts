@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { FuncService } from '../../services/func.service';
 import { BoardService } from '../../services/board.service';
+import { AuthService } from '../../services/auth.service';
 import { NgFlashMessageService } from 'ng-flash-messages';
 
 @Component({
@@ -39,7 +40,8 @@ export class WriteComponent implements OnInit {
     private route: ActivatedRoute,
     private flashMessage: NgFlashMessageService,
     private router: Router,
-    private boardService: BoardService
+    private boardService: BoardService,
+    private authService: AuthService
   ) {
     this.type = this.route.snapshot.paramMap.get('type');
     this.funcService.setTitle('글 작성');
@@ -51,6 +53,11 @@ export class WriteComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.getProfile().subscribe(profile => {
+      if ( this.type == 'notice' && profile.user.userid != 'admin' ) {
+        this.router.navigate(['/no-page']);
+      }
+    });
   }
 
   onWritePost() {

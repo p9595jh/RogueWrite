@@ -26,7 +26,6 @@ const BoardSchema = mongoose.Schema({
             }
         }
     */
-    // image, tag, or others can be here
 });
 
 const Board = module.exports = mongoose.model('Board', BoardSchema);

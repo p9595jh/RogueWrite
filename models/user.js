@@ -27,6 +27,9 @@ const UserSchema = mongoose.Schema({
   },
   clean: {
     type: Boolean
+  },
+  bookmark: {
+    type: Array
   }
 });
 

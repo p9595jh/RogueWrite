@@ -31,24 +31,25 @@ router.post('/register', function(req, res, next) {
     nickname: req.body.nickname,
     introduction: req.body.introduction,
     registerdate: getNowDate(),
-    clean: true
+    clean: true,
+    bookmark: []
   });
 
-  User.findOne({userid: newUser.userid}, function(err1, output1) {
+  User.findOne({userid: newUser.userid}, {_id: 1}, function(err1, output1) {
     if ( output1 != null ) {
       return res.json({
         success: false,
         msg: '이미 존재하는 아이디입니다.'
       });
     } else {
-      User.findOne({email: newUser.email}, function(err2, output2) {
+      User.findOne({email: newUser.email}, {_id: 1}, function(err2, output2) {
         if ( output2 != null ) {
           return res.json({
             success: false,
             msg: '이미 존재하는 이메일입니다.'
           });
         } else {
-          User.findOne({nickname: newUser.nickname}, function(err3, output3) {
+          User.findOne({nickname: newUser.nickname}, {_id: 1}, function(err3, output3) {
             if ( output3 != null ) {
               return res.json({
                 success: false,
@@ -63,10 +64,10 @@ router.post('/register', function(req, res, next) {
                     err: err
                   });
                 } else {
-                  fs.copy('public/images/noimage.jpg', 'public/images/profileimages/' + user.userid, function(err) {
+                  fs.copy('public/images/noimage.jpg', 'public/images/profile/' + user.userid, function(err) {
                     if ( err ) console.log(err);
                   });
-                  fs.copy('public/images/noimage.jpg', 'angular-src/src/images/profileimages/' + user.userid, function(err) {
+                  fs.copy('public/images/noimage.jpg', 'angular-src/src/images/profile/' + user.userid, function(err) {
                     if ( err ) console.log(err);
                   });
                   res.json({
@@ -127,7 +128,7 @@ router.post('/authenticate', function(req, res, next) {
 });
 
 router.post('/modify', passport.authenticate('jwt', {session: false}), function(req, res, next) {
-  User.findOne({nickname: req.body.nickname}, function(err, user) {
+  User.findOne({nickname: req.body.nickname}, {userid: 1}, function(err, user) {
     if ( user && user.userid != req.user.userid ) {
       res.json({success: false, msg: '이미 존재하는 닉네임입니다.'});
     } else {
@@ -175,7 +176,7 @@ router.post('/getAllUsers', passport.authenticate('jwt', {session: false}), func
       users: []
     });
   } else {
-    User.find({}, function(err, users) {
+    User.find({userid: {$ne: 'admin'}}, {_id: 1, userid: 1, nickname: 1, clean: 1}, function(err, users) {
       res.json({
         users: users
       });

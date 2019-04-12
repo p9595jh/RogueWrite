@@ -99,4 +99,22 @@ export class BoardService {
       .pipe(map(res => res.json()));
   }
 
+  bookmark(type) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/boards/bookmark', {type: type}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  removeBookmark(bookmark) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/boards/removeBookmark', {url: bookmark.url, title: bookmark.title}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
 }

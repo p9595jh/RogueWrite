@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FuncService } from '../../services/func.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { PlayService } from '../../services/play.service';
+import { NgFlashMessageService } from 'ng-flash-messages';
 
 @Component({
   selector: 'app-test',
@@ -13,13 +14,29 @@ export class TestComponent implements OnInit {
   constructor(
     private funcService: FuncService,
     private playService: PlayService,
-    private router: Router
+    private router: Router,
+    private flashMessage: NgFlashMessageService
   ) {
     this.funcService.setTitle('TEST!!!!');
   }
 
-  ngOnInit() {
-    
+  ngOnInit() { 
+  }
+
+  success() {
+    this.flashMessage.showFlashMessage({
+      messages: ['SUCCESS', 'WHAT'],
+      type: 'success',
+      timeout: 3000
+    });
+  }
+
+  danger() {
+    this.flashMessage.showFlashMessage({
+      messages: ['DANGER'],
+      type: 'danger',
+      timeout: 3000
+    });
   }
 
 }

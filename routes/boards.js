@@ -3,6 +3,7 @@ const router = express.Router();
 //=======================================<
 const Board = require('../models/board');
 const Sub = require('../models/sub');
+const User = require('../models/user');
 const passport = require('passport');
 const fs = require('fs-extra');
 const formidable = require('formidable');
@@ -49,7 +50,7 @@ router.get('/takeOnePost', function(req, res, next) {
 
 router.get('/takeAllPosts', function(req, res, next) {
     var type = req.query.type;
-    Board.find({type: type}).sort({_id: -1}).exec(function(err, posts) {
+    Board.find({type: type}, {content: 0}).sort({_id: -1}).exec(function(err, posts) {
         res.json({posts: posts});
     });
 });
@@ -110,45 +111,37 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
 })
 
 router.post('/writeComment', passport.authenticate('jwt', {session: false}), function(req, res, next) {
-    Board.findOne({_id: req.body._id}, function(err, post) {
-        let num = 0;
-        if ( post.comment.length > 0 )
-            num = post.comment[post.comment.length-1].num + 1;
+    let comment = req.body.comment.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
+        return '&#' + i.charCodeAt(0) + ';';
+    });
 
-        // encoding html chars to entity
-        let comment = req.body.comment.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
-            return '&#' + i.charCodeAt(0) + ';';
-        });
-
-        let split = comment.split(' ');
-        comment = '';
-        for (let i=0; i<split.length-1; i++) {
-            comment += taggingUrl(split[i]) + ' ';
-        }
-        comment += taggingUrl(split[split.length-1]);
-        
-        const cmtData = {
-            num: num,
-            writedate: getNowDate(),
-            userid: req.user.userid,
-            nickname: req.user.nickname,
-            comment: comment
-        };
-        Board.findOneAndUpdate({_id: req.body._id}, {$push: {comment: cmtData}}, function(err, output) {
-            if ( err ) {
-                res.json({
-                    success: false
-                });
-            } else {
-                res.json({
-                    success: true,
-                    // post: output
-                });
-            }
-        })
-    })
+    let split = comment.split(' ');
+    comment = '';
+    for (let i=0; i<split.length-1; i++) {
+        comment += taggingUrl(split[i]) + ' ';
+    }
+    comment += taggingUrl(split[split.length-1]);
     
-
+    const cmtData = {
+        num: new Date().getTime(),
+        writedate: getNowDate(),
+        userid: req.user.userid,
+        nickname: req.user.nickname,
+        comment: comment
+    };
+    Board.findOneAndUpdate({_id: req.body._id}, {$push: {comment: cmtData}}, function(err, output) {
+        if ( err ) {
+            res.json({
+                success: false
+            });
+        } else {
+            res.json({
+                success: true,
+                // post: output
+            });
+        }
+    });
+    
 })
 
 router.post('/removePost', function(req, res, next) {
@@ -179,6 +172,7 @@ router.post('/removeComment', function(req, res, next) {
                     break;
                 }
             }
+            console.log(c);
             Board.findOneAndUpdate({_id: postNum}, {$pullAll: {comment: [c]}}, (err, output) => {
                 if ( err ) res.json({success: false});
                 else res.json({
@@ -224,7 +218,7 @@ router.post('/recommend', passport.authenticate('jwt', {session: false}), functi
 
 router.get('/checkBoardExists', function(req, res, next) {
     const type = req.query.type;
-    if ( type == 'free' ) {
+    if ( type == 'free' || type == 'notice' ) {
         res.json({exist: true});
     } else {
         Sub.findOne({url: type}, function(err, post) {
@@ -241,6 +235,57 @@ router.get('/sub', function(req, res, next) {
     const url = req.query.url;
     Sub.findOne({url: url}, function(err, sub) {
         res.json({sub: sub});
+    });
+});
+
+router.post('/bookmark', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+    const type = req.body.type;
+    User.findOne({_id: req.user._id}, {bookmark: 1}, (err, bk) => {
+        for (let bookmark of bk.bookmark) {
+            if ( type == bookmark.url ) {
+                return res.json({success: false, msg: '이미 설정되어 있습니다.'});
+            }
+        }
+
+        if ( type == 'free' || type == 'notice' ) {
+            const title = type == 'free' ? '자유게시판' : '공지게시판';
+            User.findOneAndUpdate({_id: req.user._id}, {$push: {bookmark: {url: type, title: title}}}, (err, output) => {
+                if ( err ) {
+                    res.json({success: false, msg: err});
+                } else {
+                    res.json({success: true});
+                }
+            });
+        } else {
+            Sub.findOne({url: type}, {title: 1}, (err, sub) => {
+                if ( err || !sub ) {
+                    res.json({success: false, msg: 'ERROR'});
+                } else {
+                    User.findOneAndUpdate({_id: req.user._id}, {$push: {bookmark: {url: type, title: sub.title}}}, (err, output) => {
+                        if ( err ) {
+                            res.json({success: false, msg: err});
+                        } else {
+                            res.json({success: true});
+                        }
+                    });
+                }
+            });
+        }
+        
+    })
+});
+
+router.post('/removeBookmark', passport.authenticate('jwt', {session: false}), (req, res, next) => {
+    const bookmark = {
+        url: req.body.url,
+        title: req.body.title
+    };
+    User.findOneAndUpdate({_id: req.user._id}, {$pullAll: {bookmark: [bookmark]}}, (err, user) => {
+        if ( err ) {
+            res.json({success: false, msg: err});
+        } else {
+            res.json({success: true, bookmark: user.bookmark});
+        }
     });
 });
 

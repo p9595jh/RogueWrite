@@ -1,3 +1,28 @@
+<section *ngIf="authService.loggedIn()" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+    <div class="mdl-card__supporting-text">
+
+      <h4>즐겨찾는 게시판</h4><hr/><br/>
+
+      <div *ngFor="let bookmark of bkMap | keyvalue">
+        <h5 style="display: inline;">{{bookmark?.key}}</h5><hr/>
+
+        <div style="padding-left: 3%; padding-right: 3%;">
+          <div class="row" *ngFor="let arr of bookmark?.value">
+            <div class="col-sm md-auto grid-cell" *ngFor="let val of arr">
+              <a [routerLink]="['/board/' + val?.url + '/list']">{{val.title}}</a>
+              <span style="float: right; cursor: pointer;" (click)="remove(val)">X</span>
+            </div>
+          </div>
+        </div>
+
+        <br/><br/><br/>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">

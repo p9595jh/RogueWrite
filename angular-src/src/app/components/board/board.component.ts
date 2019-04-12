@@ -78,34 +78,52 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.type = this.route.snapshot.paramMap.get('type');
     this.num = this.route.snapshot.paramMap.get('num');
     this.boardService.checkBoardExists(this.type).subscribe(result => {
-      if ( !result.exist ) {
+      if ( result.exist ) {
+        this.boardService.getSub(this.type).subscribe(data => {
+          this.sub = data.sub;
+          this.setFilteredOptions();
+          this.boardService.takeAllPosts(this.type).subscribe(data => {
+            this.contents = data.posts;
+            if ( this.num != 'list' ) {
+              this.boardService.takeOnePost(this.num).subscribe(result => {
+                if ( result.fail ) {
+                  this.router.navigate(['/no-page']);
+                  return false;
+                }
+                this.content = result.post;
+
+                if ( this.type == 'free' ) {
+                  this.funcService.setTitle(this.content.title + ' :: 자유게시판');
+                } else if ( this.type == 'notice' ) {
+                  this.funcService.setTitle(this.content.title + ' :: 공지게시판');
+                } else {
+                  this.funcService.setTitle(this.content.title + ' :: ' + this.sub.title + ' 게시판');
+                }
+                if ( this.authService.loggedIn() ) {
+                  this.authService.getProfile().subscribe(profile => {
+                    this.user = profile.user;
+                  });
+                }
+              });
+            } else {
+              if ( this.type == 'free' ) {
+                this.funcService.setTitle('자유게시판');
+              } else if ( this.type == 'notice' ) {
+                this.funcService.setTitle('공지게시판');
+              } else {
+                this.funcService.setTitle(this.sub.title + ' 게시판');
+              }
+              if ( this.authService.loggedIn() ) {
+                this.authService.getProfile().subscribe(profile => {
+                  this.user = profile.user;
+                });
+              }
+            }
+          });
+        });
+      } else {
         this.router.navigate(['/no-page']);
       }
-    });
-    if ( this.type != 'free' ) {
-      this.boardService.getSub(this.type).subscribe(data => {
-        this.sub = data.sub;
-      });
-    }
-
-    this.setFilteredOptions();
-    this.boardService.takeAllPosts(this.type).subscribe(data => {
-      this.contents = data.posts;
-      if ( this.num != 'list' ) {
-        this.boardService.takeOnePost(this.num).subscribe(result => {
-          if ( result.fail ) {
-            this.router.navigate(['/no-page']);
-            return false;
-          }
-          this.content = result.post;
-          this.funcService.setTitle(this.content.title + ' :: ' + (this.type == 'free' ? '자유게시판' : this.type + ' 게시판'));
-          if ( this.authService.loggedIn() ) {
-            this.authService.getProfile().subscribe(profile => {
-              this.user = profile.user;
-            });
-          }
-        });
-      } else this.funcService.setTitle(this.type == 'free' ? '자유게시판' : this.type + ' 게시판');
     });
 
   }
@@ -215,6 +233,24 @@ export class BoardComponent implements OnInit, OnDestroy {
       })
     }
     
+  }
+
+  bookmark() {
+    this.boardService.bookmark(this.type).subscribe(result => {
+      if ( result.success ) {
+        this.flashMessage.showFlashMessage({
+          messages: ['등록되었습니다.'], 
+          type: 'success', 
+          timeout: 2000
+        });
+      } else {
+        this.flashMessage.showFlashMessage({
+          messages: [result.msg], 
+          type: 'danger', 
+          timeout: 3000
+        });
+      }
+    });
   }
 
   paging(pageEvent: PageEvent) {

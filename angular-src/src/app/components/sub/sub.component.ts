@@ -1,31 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { FuncService } from '../../services/func.service';
 import { BoardService } from '../../services/board.service';
+import { AuthService } from '../../services/auth.service';
+import { NgFlashMessageService } from 'ng-flash-messages';
 
 @Component({
   selector: 'app-sub',
   templateUrl: './sub.component.html',
   styleUrls: ['./sub.component.css']
 })
-export class SubComponent implements OnInit {
-  source = [];
-  subs = new Map<string, any[][]>();
+export class SubComponent implements OnInit, OnDestroy {
+  navigationSubscription;
+
+  subs: Map<string, any[][]>;
+  user: any;
+  bkMap: Map<string, any[][]>;
 
   constructor(
     private funcService: FuncService,
-    private boardService: BoardService
+    private boardService: BoardService,
+    private authService: AuthService,
+    private router: Router,
+    private flashMessage: NgFlashMessageService
   ) {
     this.funcService.setTitle('서브게시판 목록');
+    this.navigationSubscription = this.router.events.subscribe((e: any) => {
+      if ( e instanceof NavigationEnd ) {
+        this.initialiseInvites();
+      }
+    });
   }
 
-  private mapInput(data: any) {
+  private mapInput(data: any, map: Map<string, any[][]>) {
     let first: string = data.title.substring(0, 1).toUpperCase();
 
     // alphabet (A~Z)
     for (let i=65; i<=90; i++) {
       let capital = String.fromCharCode(i);
       if ( first == capital ) {
-        this.arrInput(capital, data);
+        this.arrInput(map, capital, data);
         return;
       }
     }
@@ -37,7 +51,7 @@ export class SubComponent implements OnInit {
       let end = String.fromCharCode(fcc + 587);
       let regex = new RegExp('^[' + start + '-' + end + ']');
       if ( regex.test(first) ) {
-        this.arrInput(start, data);
+        this.arrInput(map, start, data);
         return;
       }
     }
@@ -46,33 +60,73 @@ export class SubComponent implements OnInit {
     for (let i=0; i<=9; i++) {
       let num = String(i);
       if ( first == num ) {
-        this.arrInput(num, data);
+        this.arrInput(map, num, data);
         return;
       }
     }
 
     // etc.
-    this.arrInput('etc', data);
+    this.arrInput(map, 'etc', data);
   }
 
-  private arrInput(key, data) {
-    if ( this.subs.get(key) ) {
-      if ( this.subs.get(key)[this.subs.get(key).length-1].length < 3 ) {
-        this.subs.get(key)[this.subs.get(key).length-1].push(data);
+  private arrInput(map: Map<string, any[][]>, key, data) {
+    if ( map.get(key) ) {
+      if ( map.get(key)[map.get(key).length-1].length < 3 ) {
+        map.get(key)[map.get(key).length-1].push(data);
       } else {
-        this.subs.get(key).push([data]);
+        map.get(key).push([data]);
       }
     } else {
-      this.subs.set(key, [[data]]);
+      map.set(key, [[data]]);
+    }
+  }
+
+  initialiseInvites() {
+    this.ngOnInit();
+  }
+
+  ngOnDestroy() {
+    if ( this.navigationSubscription ) {
+      this.navigationSubscription.unsubscribe();
     }
   }
 
   ngOnInit() {
     this.boardService.takeAllBoards().subscribe(data => {
+      this.subs = new Map<string, any[][]>();
       for (let s of data.subs) {
-        this.mapInput(s);
+        this.mapInput(s, this.subs);
+      }
+      if ( this.authService.loggedIn() ) {
+        this.authService.getProfile().subscribe(profile => {
+          this.bkMap = new Map<string, any[][]>();
+          this.user = profile.user;
+          for (let bk of this.user.bookmark) {
+            this.mapInput(bk, this.bkMap);
+          }
+        });
       }
     });
+  }
+
+  remove(bk: any) {
+    if ( !confirm('즐겨찾는 게시판에서 지우시겠습니까?') ) return;
+    this.boardService.removeBookmark(bk).subscribe(result => {
+      if ( result.success ) {
+        this.flashMessage.showFlashMessage({
+          messages: ['삭제되었습니다.'], 
+          type: 'success', 
+          timeout: 2000
+        });
+        this.router.navigate(['/sub']);
+      } else {
+        this.flashMessage.showFlashMessage({
+          messages: [result.msg], 
+          type: 'danger', 
+          timeout: 3000
+        });
+      }
+    })
   }
 
 }

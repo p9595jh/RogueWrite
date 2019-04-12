@@ -1,16 +1,18 @@
+<ng-flash-message></ng-flash-message>
+
 <div class="mdl-demo mdl-base">
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-tabs">
-    <!-- <app-navbar></app-navbar> -->
 
     <!-- header for large display -->
-    <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary">
+    <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary" style="background-color: rgb(143, 143, 226);">
             
       <!-- spacing -->
       <div class="mdl-layout--large-screen-only mdl-layout__header-row"></div>
       
       <!-- title -->
       <div class="mdl-layout--large-screen-only mdl-layout__header-row">
-        <h3 [routerLink]="['/']" style="cursor: pointer; font-family: 'Ubuntu', sans-serif;">{{siteName}}</h3>
+        <!-- <h3 [routerLink]="['/']" style="cursor: pointer; font-family: 'Ubuntu', sans-serif;">{{siteName}}</h3> -->
+        <img src="/images/title.png" [routerLink]="['/']" style="cursor: pointer; width: 40%; height: auto;" />
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" >
           <a class="mdl-navigation__link" *ngIf="!authService.loggedIn()" [routerLink]="['/login']">LOGIN</a>
@@ -39,7 +41,8 @@
     <!-- header for mobile -->
     <header class="mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary">
       <div class="mdl-layout__header-row">
-        <h3 class="mdl-navigation__link" style="font-family: 'Ubuntu', sans-serif;">{{siteName}}</h3>
+        <!-- <h3 class="mdl-navigation__link" style="font-family: 'Ubuntu', sans-serif;" [routerLink]="['/']">{{siteName}}</h3> -->
+        <img src="/images/title.png" style="height: 100%; width: auto;" [routerLink]="['/']" />
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
           <a *ngIf="!authService.loggedIn()" class="mdl-navigation__link" [routerLink]="['/login']">LOGIN</a>
@@ -56,7 +59,6 @@
       </nav>
     </div>
 
-    <ng-flash-message></ng-flash-message>
     <main class="mdl-layout__content">
       <div class="mdl-layout__tab-panel is-active" id="overview">
         <router-outlet></router-outlet>

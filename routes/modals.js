@@ -91,7 +91,7 @@ router.post('/setProfileImage', function(req, res) {
 // ==============================================
 
 router.get('/info', function(req, res) {
-    User.findOne({userid: req.query.userid}, function(err, user) {
+    User.findOne({userid: req.query.userid}, {pw: 0}, function(err, user) {
         if ( err || !user ) {
             res.send('사용자를 찾을 수 없습니다.');
         } else {

@@ -41,7 +41,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"mdl-demo mdl-base\">\r\n  <div class=\"mdl-layout mdl-js-layout mdl-layout--fixed-tabs\">\r\n    <!-- <app-navbar></app-navbar> -->\r\n\r\n    <!-- header for large display -->\r\n    <header class=\"mdl-layout__header mdl-layout__header--scroll mdl-color--primary\">\r\n            \r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n      \r\n      <!-- title -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\">\r\n        <h3 [routerLink]=\"['/']\" style=\"cursor: pointer; font-family: 'Ubuntu', sans-serif;\">{{siteName}}</h3>\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" >\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"!authService.loggedIn()\" [routerLink]=\"['/login']\">LOGIN</a>\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"authService.loggedIn()\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"authService.loggedIn()\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n        </nav>\r\n      </div>\r\n      \r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n\r\n      <!-- nav bar -->\r\n      <nav mat-tab-nav-bar mat-stretch-tabs\r\n        mat-align-tabs=\"center\"\r\n        [color]=\"'primary'\"\r\n        [backgroundColor]=\"'accent'\"\r\n        style=\"border-bottom-color: black;\">\r\n        <a mat-tab-link *ngFor=\"let link of navLinks\"\r\n          (click)=\"activeLink = link.path\"\r\n          [routerLink]=\"[link.path]\"\r\n          [active]=\"activeLink == link.path\">{{link.label}}</a>\r\n      </nav>\r\n\r\n    </header>\r\n\r\n    <!-- header for mobile -->\r\n    <header class=\"mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <h3 class=\"mdl-navigation__link\" style=\"font-family: 'Ubuntu', sans-serif;\">{{siteName}}</h3>\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\">\r\n          <a *ngIf=\"!authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/login']\">LOGIN</a>\r\n          <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n          <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    <div class=\"mdl-layout__drawer mdl-layout--small-screen-only\">\r\n      <span class=\"mdl-layout__title\" style=\"font-family: 'Ubuntu', sans-serif;\">{{siteName}}</span>\r\n      <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" *ngFor=\"let link of navLinks\"\r\n          [routerLink]=\"[link.path]\">{{link.label}}</a>\r\n      </nav>\r\n    </div>\r\n\r\n    <ng-flash-message></ng-flash-message>\r\n    <main class=\"mdl-layout__content\">\r\n      <div class=\"mdl-layout__tab-panel is-active\" id=\"overview\">\r\n        <router-outlet></router-outlet>\r\n        <br/><br/>\r\n      </div>\r\n\r\n      <!-- footer -->\r\n      <footer class=\"mdl-mega-footer\">\r\n        <div class=\"mdl-mega-footer--bottom-section\">\r\n          <div class=\"mdl-logo\">\r\n            powered by Project RogueWrite\r\n          </div>\r\n          <ul class=\"mdl-mega-footer--link-list\">\r\n            <li><a target=\"_blank\" href=\"https://getmdl.io/index.html\">MDL</a></li>\r\n            <li><a target=\"_blank\" href=\"https://material.angular.io/\">Angular Material</a></li>\r\n            <li><a target=\"_blank\" href=\"https://github.com/p9595jh/RogueWrite\">Github</a></li>\r\n          </ul>\r\n        </div>\r\n      </footer>\r\n      <!-- footer -->\r\n\r\n    </main>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<ng-flash-message></ng-flash-message>\r\n\r\n<div class=\"mdl-demo mdl-base\">\r\n  <div class=\"mdl-layout mdl-js-layout mdl-layout--fixed-tabs\">\r\n\r\n    <!-- header for large display -->\r\n    <header class=\"mdl-layout__header mdl-layout__header--scroll mdl-color--primary\" style=\"background-color: rgb(143, 143, 226);\">\r\n            \r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n      \r\n      <!-- title -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\">\r\n        <!-- <h3 [routerLink]=\"['/']\" style=\"cursor: pointer; font-family: 'Ubuntu', sans-serif;\">{{siteName}}</h3> -->\r\n        <img src=\"/images/title.png\" [routerLink]=\"['/']\" style=\"cursor: pointer; width: 40%; height: auto;\" />\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" >\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"!authService.loggedIn()\" [routerLink]=\"['/login']\">LOGIN</a>\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"authService.loggedIn()\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"authService.loggedIn()\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n        </nav>\r\n      </div>\r\n      \r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n\r\n      <!-- nav bar -->\r\n      <nav mat-tab-nav-bar mat-stretch-tabs\r\n        mat-align-tabs=\"center\"\r\n        [color]=\"'primary'\"\r\n        [backgroundColor]=\"'accent'\"\r\n        style=\"border-bottom-color: black;\">\r\n        <a mat-tab-link *ngFor=\"let link of navLinks\"\r\n          (click)=\"activeLink = link.path\"\r\n          [routerLink]=\"[link.path]\"\r\n          [active]=\"activeLink == link.path\">{{link.label}}</a>\r\n      </nav>\r\n\r\n    </header>\r\n\r\n    <!-- header for mobile -->\r\n    <header class=\"mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <!-- <h3 class=\"mdl-navigation__link\" style=\"font-family: 'Ubuntu', sans-serif;\" [routerLink]=\"['/']\">{{siteName}}</h3> -->\r\n        <img src=\"/images/title.png\" style=\"height: 100%; width: auto;\" [routerLink]=\"['/']\" />\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\">\r\n          <a *ngIf=\"!authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/login']\">LOGIN</a>\r\n          <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n          <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    <div class=\"mdl-layout__drawer mdl-layout--small-screen-only\">\r\n      <span class=\"mdl-layout__title\" style=\"font-family: 'Ubuntu', sans-serif;\">{{siteName}}</span>\r\n      <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" *ngFor=\"let link of navLinks\"\r\n          [routerLink]=\"[link.path]\">{{link.label}}</a>\r\n      </nav>\r\n    </div>\r\n\r\n    <main class=\"mdl-layout__content\">\r\n      <div class=\"mdl-layout__tab-panel is-active\" id=\"overview\">\r\n        <router-outlet></router-outlet>\r\n        <br/><br/>\r\n      </div>\r\n\r\n      <!-- footer -->\r\n      <footer class=\"mdl-mega-footer\">\r\n        <div class=\"mdl-mega-footer--bottom-section\">\r\n          <div class=\"mdl-logo\">\r\n            powered by Project RogueWrite\r\n          </div>\r\n          <ul class=\"mdl-mega-footer--link-list\">\r\n            <li><a target=\"_blank\" href=\"https://getmdl.io/index.html\">MDL</a></li>\r\n            <li><a target=\"_blank\" href=\"https://material.angular.io/\">Angular Material</a></li>\r\n            <li><a target=\"_blank\" href=\"https://github.com/p9595jh/RogueWrite\">Github</a></li>\r\n          </ul>\r\n        </div>\r\n      </footer>\r\n      <!-- footer -->\r\n\r\n    </main>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -80,11 +80,11 @@ var AppComponent = /** @class */ (function () {
         this.flashMessage = flashMessage;
         this.siteName = 'ЯogueWrite';
         this.navLinks = [
-            { label: 'HOME', path: '/' },
+            { label: '공지게시판', path: '/board/notice/list' },
             { label: '자유게시판', path: '/board/free/list' },
             { label: '게임게시판', path: '/game/list' },
             { label: '서브게시판', path: '/sub' },
-            { label: 'FIFTH', path: '/write/free' }
+            { label: 'FIFTH', path: '/register' }
         ];
         this.activeLink = this.navLinks[0];
     }
@@ -309,7 +309,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>어드민 게시판</h4>\r\n      <hr/>\r\n      \r\n      <!-- for large display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--large-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">아이디</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">닉네임</th>\r\n            <th>상태</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody *ngFor=\"let val of users | slice:pagingFrom:pagingTo;\">\r\n          <tr *ngIf=\"val?.userid != 'admin'\">\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <span (click)=\"funcService.openInfoWindow(val?.userid)\" style=\"cursor: pointer;\">{{val.userid}}</span>\r\n            </td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{val.nickname}}</td>\r\n            <td *ngIf=\"val?.clean\">\r\n              <button mat-button color=\"primary\" (click)=\"administrate(val?._id, val?.clean)\">정상</button>\r\n            </td>\r\n            <td *ngIf=\"!val?.clean\">\r\n              <button mat-button color=\"warn\" (click)=\"administrate(val?._id, val?.clean)\">정지</button>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"users?.length\" [pageSize]=\"pagingSize\" (page)=\"paging($event)\">\r\n      </mat-paginator>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>회원 관리</h4>\r\n      <hr/>\r\n      \r\n      <table class=\"mdl-data-table mdl-js-data-table\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">아이디</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">닉네임</th>\r\n            <th>상태</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody *ngFor=\"let val of users | slice:memberPagingFrom:memberPagingTo;\">\r\n          <!-- <tr *ngIf=\"val?.userid != 'admin'\"> -->\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <span (click)=\"funcService.openInfoWindow(val?.userid)\" style=\"cursor: pointer;\">{{val.userid}}</span>\r\n            </td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{val.nickname}}</td>\r\n            <td *ngIf=\"val?.clean\">\r\n              <button mat-button color=\"primary\" (click)=\"administrate(val?._id, val?.clean)\">정상</button>\r\n            </td>\r\n            <td *ngIf=\"!val?.clean\">\r\n              <button mat-button color=\"warn\" (click)=\"administrate(val?._id, val?.clean)\">정지</button>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"users?.length\" [pageSize]=\"pagingSize\" (page)=\"memberPaging($event)\">\r\n      </mat-paginator>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>게시판 생성 요청 관리</h4>\r\n      <hr/>\r\n      \r\n      <table class=\"mdl-data-table mdl-js-data-table\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">요청자</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">요청 게임</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">추천 비율</th>\r\n            <th>처리</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody *ngFor=\"let val of games | slice:reqPagingFrom:reqPagingTo;\">\r\n          <tr *ngIf=\"val?.userid != 'admin'\">\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <span (click)=\"funcService.openInfoWindow(val?.userid)\" style=\"cursor: pointer;\">{{val.nickname}} ({{val.userid}})</span>\r\n            </td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/game/' + val?._id]\" target=\"_blank\" style=\"color: black;\">{{val.title}}</a>\r\n            </td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{val.recommend}}/{{val.unrecommend}}</td>\r\n            <td>\r\n              <button mat-button color=\"primary\" [attr.id]=\"'accept-'+val?._id\"\r\n                (click)=\"acceptRequest(val?._id, val?.title, val?.userid, true)\">수락</button>\r\n              <button mat-button color=\"warn\" [attr.id]=\"'reject-'+val?._id\"\r\n                (click)=\"acceptRequest(val?._id, null, null, false)\">거절</button>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"users?.length\" [pageSize]=\"pagingSize\" (page)=\"reqPaging($event)\">\r\n      </mat-paginator>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -327,8 +327,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
-/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ng-flash-messages */ "./node_modules/ng-flash-messages/ng-flash-messages.umd.js");
-/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(ng_flash_messages__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _services_game_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/game.service */ "./src/app/services/game.service.ts");
+/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ng-flash-messages */ "./node_modules/ng-flash-messages/ng-flash-messages.umd.js");
+/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(ng_flash_messages__WEBPACK_IMPORTED_MODULE_5__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -343,16 +344,20 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var AdminComponent = /** @class */ (function () {
-    function AdminComponent(funcService, authService, router, flashMessage) {
+    function AdminComponent(funcService, authService, gameService, router, flashMessage) {
         var _this = this;
         this.funcService = funcService;
         this.authService = authService;
+        this.gameService = gameService;
         this.router = router;
         this.flashMessage = flashMessage;
         this.pagingSize = 25;
-        this.pagingFrom = 0;
-        this.pagingTo = this.pagingSize;
+        this.memberPagingFrom = 0;
+        this.memberPagingTo = this.pagingSize;
+        this.reqPagingFrom = 0;
+        this.reqPagingTo = this.pagingSize;
         this.funcService.setTitle('어드민');
         this.navigationSubscription = this.router.events.subscribe(function (e) {
             if (e instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationEnd"]) {
@@ -370,6 +375,9 @@ var AdminComponent = /** @class */ (function () {
             else {
                 _this.authService.getAllUsers().subscribe(function (data) {
                     _this.users = data.users;
+                    _this.gameService.takeRequestedPosts().subscribe(function (result) {
+                        _this.games = result.posts;
+                    });
                 });
             }
         });
@@ -382,9 +390,14 @@ var AdminComponent = /** @class */ (function () {
             this.navigationSubscription.unsubscribe();
         }
     };
-    AdminComponent.prototype.paging = function (pageEvent) {
-        this.pagingFrom = pageEvent.pageIndex * this.pagingSize;
-        this.pagingTo = (pageEvent.pageIndex + 1) * this.pagingSize;
+    AdminComponent.prototype.memberPaging = function (pageEvent) {
+        this.memberPagingFrom = pageEvent.pageIndex * this.pagingSize;
+        this.memberPagingTo = (pageEvent.pageIndex + 1) * this.pagingSize;
+        this.router.navigate(['/admin']);
+    };
+    AdminComponent.prototype.reqPaging = function (pageEvent) {
+        this.reqPagingFrom = pageEvent.pageIndex * this.pagingSize;
+        this.reqPagingTo = (pageEvent.pageIndex + 1) * this.pagingSize;
         this.router.navigate(['/admin']);
     };
     AdminComponent.prototype.administrate = function (_id, clean) {
@@ -410,6 +423,54 @@ var AdminComponent = /** @class */ (function () {
             });
         }
     };
+    AdminComponent.prototype.acceptRequest = function (_id, title, userid, accept) {
+        var _this = this;
+        var work = accept ? '수락' : '거절';
+        if (confirm(work + '하시겠습니까?')) {
+            if (accept) {
+                this.gameService.acceptBoard(_id, title, userid).subscribe(function (result) {
+                    if (result.success) {
+                        document.getElementById('accept-' + _id).disabled = true;
+                        document.getElementById('reject-' + _id).disabled = true;
+                        _this.flashMessage.showFlashMessage({
+                            messages: [work + '되었습니다.'],
+                            type: 'success',
+                            timeout: 2000
+                        });
+                        _this.router.navigate(['/admin']);
+                    }
+                    else {
+                        _this.flashMessage.showFlashMessage({
+                            messages: [result.msg],
+                            type: 'danger',
+                            timeout: 3000
+                        });
+                    }
+                });
+            }
+            else {
+                this.gameService.rejectBoard(_id).subscribe(function (result) {
+                    if (result.success) {
+                        document.getElementById('accept-' + _id).disabled = true;
+                        document.getElementById('reject-' + _id).disabled = true;
+                        _this.flashMessage.showFlashMessage({
+                            messages: [work + '되었습니다.'],
+                            type: 'success',
+                            timeout: 2000
+                        });
+                        _this.router.navigate(['/admin']);
+                    }
+                    else {
+                        _this.flashMessage.showFlashMessage({
+                            messages: [result.msg],
+                            type: 'danger',
+                            timeout: 3000
+                        });
+                    }
+                });
+            }
+        }
+    };
     AdminComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-admin',
@@ -418,8 +479,9 @@ var AdminComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_2__["FuncService"],
             _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"],
+            _services_game_service__WEBPACK_IMPORTED_MODULE_4__["GameService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
-            ng_flash_messages__WEBPACK_IMPORTED_MODULE_4__["NgFlashMessageService"]])
+            ng_flash_messages__WEBPACK_IMPORTED_MODULE_5__["NgFlashMessageService"]])
     ], AdminComponent);
     return AdminComponent;
 }());
@@ -446,7 +508,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- element for representing the location of the post to be scrolled -->\r\n<span style=\"display: hidden;\" #postLocation></span>\r\n\r\n<!-- section for a post -->\r\n<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">{{content?.title}}</h4>\r\n\r\n      <span style=\"float: right; text-align: right; font-size: 80%;\">\r\n        <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(content?.userid)\">{{content?.nickname}}</span><br/>{{content?.writedate}}\r\n      </span>\r\n      <hr/>\r\n      <div class=\"posting content\" [innerHtml]=\"content?.content | safe\"></div>\r\n      <br/><br/>\r\n      <div style=\"text-align: center;\">\r\n        <button mat-raised-button color=\"primary\" (click)=\"onRecommend()\">\r\n          추천 {{content?.recommend?.length}}\r\n        </button>\r\n      </div>\r\n      <br/><hr/>\r\n\r\n      <!-- ############### table for comments ############### -->\r\n      <table style=\"width: 96%; margin: auto;\">\r\n        <tbody *ngFor=\"let comment of content?.comment\">\r\n          <tr>\r\n            <td style=\"width: 15%;\">\r\n              <img [attr.src]=\"'images/profile/' + comment.userid\" class=\"profileImage\" />\r\n            </td>\r\n            <td>\r\n              <span style=\"font-size: 80%;\">\r\n                <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(comment?.userid)\">{{comment?.nickname}}</span> &nbsp;|&nbsp; \r\n                {{comment?.writedate}}\r\n                <span *ngIf=\"comment?.userid == user?.userid || user?.userid == 'admin'\"> &nbsp;|&nbsp; \r\n                  <span style=\"cursor: pointer;\" (click)=\"onRemoveComment(comment.num)\">삭제</span>\r\n                </span>\r\n              </span>\r\n              <pre class=\"content writerText\" *ngIf=\"comment?.userid == content?.userid\" [innerHTML]=\"comment?.comment\"></pre>\r\n              <pre class=\"content\" *ngIf=\"comment?.userid != content?.userid\" [innerHTML]=\"comment?.comment\"></pre>\r\n              <br/>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n      <!-- ############### table for comments ############### -->\r\n\r\n      <!-- ############### writing area ############### -->\r\n      <form *ngIf=\"authService.loggedIn()\" (submit)=\"onWriteComment()\"><hr *ngIf=\"content?.comment?.length > 0\" />\r\n        <table style=\"width: 96%; margin: auto;\">\r\n          <tr style=\"text-align: center;\">\r\n\r\n            <td rowspan=\"2\" style=\"width: 85%;\">\r\n              <mat-form-field appearance=\"outline\" style=\"width: 100%; height: 100%;\">\r\n                <mat-label>댓글을 작성해주세요.</mat-label>\r\n                <textarea matInput placeholder=\"\" rows=\"3\" name=\"cmtWrite\"\r\n                [formControl]=\"cmtWrite\" [matAutocomplete]=\"auto\"></textarea>\r\n                <mat-autocomplete #auto>\r\n                  <!-- <mat-option *ngFor=\"let ct of filteredOptions | async\" [value]=\"'TO::' + ct?.nickname\" (onclick)=\"setCmtTo(ct)\">\r\n                    {{ct.nickname}} [{{ct.userid}}]\r\n                  </mat-option> -->\r\n                </mat-autocomplete>\r\n              </mat-form-field>\r\n            </td>\r\n\r\n            <td style=\"text-align: center; padding-bottom: 3%;\">\r\n              <button mat-raised-button type=\"submit\" style=\"width: 60%;\">작성</button>\r\n            </td>\r\n\r\n          </tr>\r\n        </table>\r\n      </form>\r\n      <!-- ############### writing area ############### -->\r\n\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"aboutPost\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #aboutPost>\r\n    <button mat-menu-item *ngIf=\"content?.userid == user?.userid || user?.userid == 'admin'\" (click)=\"onRemovePost()\">\r\n      <span>삭제</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<!-- section for a board -->\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 *ngIf=\"type == 'free'\">자유게시판</h4>\r\n      <h4 *ngIf=\"type != 'free'\">{{sub?.title}} 게시판</h4>\r\n      <hr/>\r\n      \r\n      <!-- for large display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--large-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">날짜</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\r\n            <th>글쓴이</th>\r\n            <th>조회수</th>\r\n            <th>추천</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{extractDate(val.writedate)}}</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/board/'+type+'/'+val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\r\n                (click)=\"scrollToPost(postLocation)\">{{val.title}}</a>&nbsp;\r\n              <span *ngIf=\"val.comment.length > 0\" style=\"font-size: 85%; color: grey;\">[{{val.comment.length}}]</span>\r\n            </td>\r\n            <td>\r\n              <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(val?.userid)\">{{val.nickname}}</span>\r\n            </td>\r\n            <td>{{val.hit}}</td>\r\n            <td>{{val.recommend.length}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <!-- for small display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--small-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <tbody *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\"\r\n              [routerLink]=\"['/board/'+type+'/'+val?._id]\" (click)=\"scrollToPost(postLocation)\">\r\n              <div>\r\n                <!-- <a [routerLink]=\"['/board/'+type+'/'+val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\r\n                (click)=\"scrollToPost(postLocation)\">{{val.title}}</a>&nbsp; -->\r\n                {{val.title}}\r\n                <span *ngIf=\"val.comment.length > 0\" style=\"color: grey;\">[{{val.comment.length}}]</span>\r\n              </div>\r\n              <div style=\"font-size: 85%; margin-top: 1%;\">\r\n                <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>추천 {{val.recommend.length}}</span>\r\n              </div>\r\n            </td>\r\n            <td>{{extractDate(val.writedate)}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"contents?.length\" [pageSize]=\"pagingSize\" (page)=\"paging($event)\">\r\n      </mat-paginator>\r\n\r\n      <div *ngIf=\"authService.loggedIn()\" style=\"float: right;\">\r\n        <a mat-raised-button [routerLink]=\"['/write/'+type]\">글쓰기</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"board\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #board>\r\n    <button mat-menu-item *ngIf=\"authService.loggedIn()\">\r\n      <span>즐겨찾는 게시판 설정</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<!-- element for representing the location of the post to be scrolled -->\r\n<span style=\"display: hidden;\" #postLocation></span>\r\n\r\n<!-- section for a post -->\r\n<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">{{content?.title}}</h4>\r\n\r\n      <span style=\"float: right; text-align: right; font-size: 80%;\">\r\n        <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(content?.userid)\">{{content?.nickname}}</span><br/>{{content?.writedate}}\r\n      </span>\r\n      <hr/>\r\n      <div class=\"posting content\" [innerHtml]=\"content?.content | safe\"></div>\r\n      <br/><br/>\r\n      <div style=\"text-align: center;\">\r\n        <button mat-raised-button color=\"primary\" (click)=\"onRecommend()\">\r\n          추천 {{content?.recommend?.length}}\r\n        </button>\r\n      </div>\r\n      <br/><hr/>\r\n\r\n      <!-- ############### table for comments ############### -->\r\n      <table style=\"width: 96%; margin: auto;\">\r\n        <tbody *ngFor=\"let comment of content?.comment\">\r\n          <tr>\r\n            <td style=\"width: 15%;\">\r\n              <img [attr.src]=\"'images/profile/' + comment.userid\" class=\"profileImage\" />\r\n            </td>\r\n            <td>\r\n              <span style=\"font-size: 80%;\">\r\n                <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(comment?.userid)\">\r\n                  {{comment?.nickname}}</span> &nbsp;|&nbsp; {{comment?.writedate}}\r\n                <span *ngIf=\"comment?.userid == user?.userid || user?.userid == 'admin'\"> &nbsp;|&nbsp; \r\n                  <span style=\"cursor: pointer;\" (click)=\"onRemoveComment(comment.num)\">삭제</span>\r\n                </span>\r\n              </span>\r\n              <pre class=\"content writerText\" *ngIf=\"comment?.userid == content?.userid\" [innerHTML]=\"comment?.comment\"></pre>\r\n              <pre class=\"content\" *ngIf=\"comment?.userid != content?.userid\" [innerHTML]=\"comment?.comment\"></pre>\r\n              <br/>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n      <!-- ############### table for comments ############### -->\r\n\r\n      <!-- ############### writing area ############### -->\r\n      <form *ngIf=\"authService.loggedIn()\" (submit)=\"onWriteComment()\"><hr *ngIf=\"content?.comment?.length > 0\" />\r\n        <table style=\"width: 96%; margin: auto;\">\r\n          <tr style=\"text-align: center;\">\r\n\r\n            <td rowspan=\"2\" style=\"width: 85%;\">\r\n              <mat-form-field appearance=\"outline\" style=\"width: 100%; height: 100%;\">\r\n                <mat-label>댓글을 작성해주세요.</mat-label>\r\n                <textarea matInput placeholder=\"\" rows=\"3\" name=\"cmtWrite\"\r\n                [formControl]=\"cmtWrite\" [matAutocomplete]=\"auto\"></textarea>\r\n                <mat-autocomplete #auto>\r\n                  <!-- <mat-option *ngFor=\"let ct of filteredOptions | async\" [value]=\"'TO::' + ct?.nickname\" (onclick)=\"setCmtTo(ct)\">\r\n                    {{ct.nickname}} [{{ct.userid}}]\r\n                  </mat-option> -->\r\n                </mat-autocomplete>\r\n              </mat-form-field>\r\n            </td>\r\n\r\n            <td style=\"text-align: center; padding-bottom: 3%;\">\r\n              <button mat-raised-button type=\"submit\" style=\"width: 60%;\">작성</button>\r\n            </td>\r\n\r\n          </tr>\r\n        </table>\r\n      </form>\r\n      <!-- ############### writing area ############### -->\r\n\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"aboutPost\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #aboutPost>\r\n    <button mat-menu-item *ngIf=\"content?.userid == user?.userid || user?.userid == 'admin'\" (click)=\"onRemovePost()\">\r\n      <span>삭제</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<!-- section for a board -->\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 *ngIf=\"type == 'free'\">자유게시판</h4>\r\n      <h4 *ngIf=\"type == 'notice'\">공지게시판</h4>\r\n      <h4 *ngIf=\"type != 'free' && type != 'notice'\">{{sub?.title}} 게시판</h4>\r\n      <hr/>\r\n      \r\n      <!-- for large display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--large-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">날짜</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\r\n            <th>글쓴이</th>\r\n            <th>조회수</th>\r\n            <th>추천</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{extractDate(val.writedate)}}</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/board/'+type+'/'+val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\r\n                (click)=\"scrollToPost(postLocation)\">{{val.title}}</a>&nbsp;\r\n              <span *ngIf=\"val.comment.length > 0\" style=\"font-size: 85%; color: grey;\">[{{val.comment.length}}]</span>\r\n            </td>\r\n            <td>\r\n              <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(val?.userid)\">{{val.nickname}}</span>\r\n            </td>\r\n            <td>{{val.hit}}</td>\r\n            <td>{{val.recommend.length}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <!-- for small display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--small-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <tbody *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\"\r\n              [routerLink]=\"['/board/'+type+'/'+val?._id]\" (click)=\"scrollToPost(postLocation)\">\r\n              <div>\r\n                {{val.title}}\r\n                <span *ngIf=\"val.comment.length > 0\" style=\"color: grey;\">[{{val.comment.length}}]</span>\r\n              </div>\r\n              <div style=\"font-size: 85%; margin-top: 1%;\">\r\n                <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>추천 {{val.recommend.length}}</span>\r\n              </div>\r\n            </td>\r\n            <td>{{extractDate(val.writedate)}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"contents?.length\" [pageSize]=\"pagingSize\" (page)=\"paging($event)\"></mat-paginator>\r\n\r\n      <div *ngIf=\"(type != 'notice' && authService.loggedIn()) || (type == 'notice' && user?.userid == 'admin')\" style=\"float: right;\">\r\n        <a mat-raised-button [routerLink]=\"['/write/' + type]\">글쓰기</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"board\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #board>\r\n    <button mat-menu-item *ngIf=\"authService.loggedIn()\" (click)=\"bookmark()\">\r\n      <span>즐겨찾는 게시판 설정</span>\r\n    </button>\r\n    <button mat-menu-item *ngIf=\"type != 'free' && type != 'notice'\" [routerLink]=\"['/game/' + sub?.gameid]\">\r\n      <span>게임으로 이동</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -534,35 +596,57 @@ var BoardComponent = /** @class */ (function () {
         this.type = this.route.snapshot.paramMap.get('type');
         this.num = this.route.snapshot.paramMap.get('num');
         this.boardService.checkBoardExists(this.type).subscribe(function (result) {
-            if (!result.exist) {
-                _this.router.navigate(['/no-page']);
-            }
-        });
-        if (this.type != 'free') {
-            this.boardService.getSub(this.type).subscribe(function (data) {
-                _this.sub = data.sub;
-            });
-        }
-        this.setFilteredOptions();
-        this.boardService.takeAllPosts(this.type).subscribe(function (data) {
-            _this.contents = data.posts;
-            if (_this.num != 'list') {
-                _this.boardService.takeOnePost(_this.num).subscribe(function (result) {
-                    if (result.fail) {
-                        _this.router.navigate(['/no-page']);
-                        return false;
-                    }
-                    _this.content = result.post;
-                    _this.funcService.setTitle(_this.content.title + ' :: ' + (_this.type == 'free' ? '자유게시판' : _this.type + ' 게시판'));
-                    if (_this.authService.loggedIn()) {
-                        _this.authService.getProfile().subscribe(function (profile) {
-                            _this.user = profile.user;
-                        });
-                    }
+            if (result.exist) {
+                _this.boardService.getSub(_this.type).subscribe(function (data) {
+                    _this.sub = data.sub;
+                    _this.setFilteredOptions();
+                    _this.boardService.takeAllPosts(_this.type).subscribe(function (data) {
+                        _this.contents = data.posts;
+                        if (_this.num != 'list') {
+                            _this.boardService.takeOnePost(_this.num).subscribe(function (result) {
+                                if (result.fail) {
+                                    _this.router.navigate(['/no-page']);
+                                    return false;
+                                }
+                                _this.content = result.post;
+                                if (_this.type == 'free') {
+                                    _this.funcService.setTitle(_this.content.title + ' :: 자유게시판');
+                                }
+                                else if (_this.type == 'notice') {
+                                    _this.funcService.setTitle(_this.content.title + ' :: 공지게시판');
+                                }
+                                else {
+                                    _this.funcService.setTitle(_this.content.title + ' :: ' + _this.sub.title + ' 게시판');
+                                }
+                                if (_this.authService.loggedIn()) {
+                                    _this.authService.getProfile().subscribe(function (profile) {
+                                        _this.user = profile.user;
+                                    });
+                                }
+                            });
+                        }
+                        else {
+                            if (_this.type == 'free') {
+                                _this.funcService.setTitle('자유게시판');
+                            }
+                            else if (_this.type == 'notice') {
+                                _this.funcService.setTitle('공지게시판');
+                            }
+                            else {
+                                _this.funcService.setTitle(_this.sub.title + ' 게시판');
+                            }
+                            if (_this.authService.loggedIn()) {
+                                _this.authService.getProfile().subscribe(function (profile) {
+                                    _this.user = profile.user;
+                                });
+                            }
+                        }
+                    });
                 });
             }
-            else
-                _this.funcService.setTitle(_this.type == 'free' ? '자유게시판' : _this.type + ' 게시판');
+            else {
+                _this.router.navigate(['/no-page']);
+            }
         });
     };
     BoardComponent.prototype.initialiseInvites = function () {
@@ -670,6 +754,25 @@ var BoardComponent = /** @class */ (function () {
                 }
             });
         }
+    };
+    BoardComponent.prototype.bookmark = function () {
+        var _this = this;
+        this.boardService.bookmark(this.type).subscribe(function (result) {
+            if (result.success) {
+                _this.flashMessage.showFlashMessage({
+                    messages: ['등록되었습니다.'],
+                    type: 'success',
+                    timeout: 2000
+                });
+            }
+            else {
+                _this.flashMessage.showFlashMessage({
+                    messages: [result.msg],
+                    type: 'danger',
+                    timeout: 3000
+                });
+            }
+        });
     };
     BoardComponent.prototype.paging = function (pageEvent) {
         this.pagingFrom = pageEvent.pageIndex * this.pagingSize;
@@ -912,7 +1015,7 @@ var GameComponent = /** @class */ (function () {
     };
     GameComponent.prototype.acceptBoard = function () {
         var _this = this;
-        this.gameService.acceptBoard(this.num).subscribe(function (data) {
+        this.gameService.acceptBoard(this.num, this.content.game.title, this.content.userid).subscribe(function (data) {
             if (data.success) {
                 _this.content.boardRequest = 2;
                 _this.content.board = data.link;
@@ -1617,7 +1720,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n\r\n      <div *ngFor=\"let sub of subs | keyvalue\">\r\n        <h5 style=\"display: inline;\">{{sub?.key}}</h5><hr/>\r\n\r\n        <div style=\"padding-left: 3%; padding-right: 3%;\">\r\n          <div class=\"row\" *ngFor=\"let arr of sub?.value\">\r\n            <div class=\"col-sm md-auto grid-cell\" *ngFor=\"let val of arr\">\r\n              <a [routerLink]=\"['/board/' + val?.url + '/list']\">{{val.title}}</a>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <br/><br/><br/>\r\n      </div>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<section *ngIf=\"authService.loggedIn()\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n\r\n      <h4>즐겨찾는 게시판</h4><hr/><br/>\r\n\r\n      <div *ngFor=\"let bookmark of bkMap | keyvalue\">\r\n        <h5 style=\"display: inline;\">{{bookmark?.key}}</h5><hr/>\r\n\r\n        <div style=\"padding-left: 3%; padding-right: 3%;\">\r\n          <div class=\"row\" *ngFor=\"let arr of bookmark?.value\">\r\n            <div class=\"col-sm md-auto grid-cell\" *ngFor=\"let val of arr\">\r\n              <a [routerLink]=\"['/board/' + val?.url + '/list']\">{{val.title}}</a>\r\n              <span style=\"float: right; cursor: pointer;\" (click)=\"remove(val)\">X</span>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <br/><br/><br/>\r\n      </div>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n\r\n      <div *ngFor=\"let sub of subs | keyvalue\">\r\n        <h5 style=\"display: inline;\">{{sub?.key}}</h5><hr/>\r\n\r\n        <div style=\"padding-left: 3%; padding-right: 3%;\">\r\n          <div class=\"row\" *ngFor=\"let arr of sub?.value\">\r\n            <div class=\"col-sm md-auto grid-cell\" *ngFor=\"let val of arr\">\r\n              <a [routerLink]=\"['/board/' + val?.url + '/list']\">{{val.title}}</a>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <br/><br/><br/>\r\n      </div>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -1632,8 +1735,12 @@ module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SubComponent", function() { return SubComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
-/* harmony import */ var _services_board_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/board.service */ "./src/app/services/board.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
+/* harmony import */ var _services_board_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/board.service */ "./src/app/services/board.service.ts");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ng-flash-messages */ "./node_modules/ng-flash-messages/ng-flash-messages.umd.js");
+/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(ng_flash_messages__WEBPACK_IMPORTED_MODULE_5__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1646,21 +1753,31 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
+
 var SubComponent = /** @class */ (function () {
-    function SubComponent(funcService, boardService) {
+    function SubComponent(funcService, boardService, authService, router, flashMessage) {
+        var _this = this;
         this.funcService = funcService;
         this.boardService = boardService;
-        this.source = [];
-        this.subs = new Map();
+        this.authService = authService;
+        this.router = router;
+        this.flashMessage = flashMessage;
         this.funcService.setTitle('서브게시판 목록');
+        this.navigationSubscription = this.router.events.subscribe(function (e) {
+            if (e instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationEnd"]) {
+                _this.initialiseInvites();
+            }
+        });
     }
-    SubComponent.prototype.mapInput = function (data) {
+    SubComponent.prototype.mapInput = function (data, map) {
         var first = data.title.substring(0, 1).toUpperCase();
         // alphabet (A~Z)
         for (var i = 65; i <= 90; i++) {
             var capital = String.fromCharCode(i);
             if (first == capital) {
-                this.arrInput(capital, data);
+                this.arrInput(map, capital, data);
                 return;
             }
         }
@@ -1671,7 +1788,7 @@ var SubComponent = /** @class */ (function () {
             var end = String.fromCharCode(fcc + 587);
             var regex = new RegExp('^[' + start + '-' + end + ']');
             if (regex.test(first)) {
-                this.arrInput(start, data);
+                this.arrInput(map, start, data);
                 return;
             }
         }
@@ -1679,32 +1796,73 @@ var SubComponent = /** @class */ (function () {
         for (var i = 0; i <= 9; i++) {
             var num = String(i);
             if (first == num) {
-                this.arrInput(num, data);
+                this.arrInput(map, num, data);
                 return;
             }
         }
         // etc.
-        this.arrInput('etc', data);
+        this.arrInput(map, 'etc', data);
     };
-    SubComponent.prototype.arrInput = function (key, data) {
-        if (this.subs.get(key)) {
-            if (this.subs.get(key)[this.subs.get(key).length - 1].length < 3) {
-                this.subs.get(key)[this.subs.get(key).length - 1].push(data);
+    SubComponent.prototype.arrInput = function (map, key, data) {
+        if (map.get(key)) {
+            if (map.get(key)[map.get(key).length - 1].length < 3) {
+                map.get(key)[map.get(key).length - 1].push(data);
             }
             else {
-                this.subs.get(key).push([data]);
+                map.get(key).push([data]);
             }
         }
         else {
-            this.subs.set(key, [[data]]);
+            map.set(key, [[data]]);
+        }
+    };
+    SubComponent.prototype.initialiseInvites = function () {
+        this.ngOnInit();
+    };
+    SubComponent.prototype.ngOnDestroy = function () {
+        if (this.navigationSubscription) {
+            this.navigationSubscription.unsubscribe();
         }
     };
     SubComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.boardService.takeAllBoards().subscribe(function (data) {
+            _this.subs = new Map();
             for (var _i = 0, _a = data.subs; _i < _a.length; _i++) {
                 var s = _a[_i];
-                _this.mapInput(s);
+                _this.mapInput(s, _this.subs);
+            }
+            if (_this.authService.loggedIn()) {
+                _this.authService.getProfile().subscribe(function (profile) {
+                    _this.bkMap = new Map();
+                    _this.user = profile.user;
+                    for (var _i = 0, _a = _this.user.bookmark; _i < _a.length; _i++) {
+                        var bk = _a[_i];
+                        _this.mapInput(bk, _this.bkMap);
+                    }
+                });
+            }
+        });
+    };
+    SubComponent.prototype.remove = function (bk) {
+        var _this = this;
+        if (!confirm('즐겨찾는 게시판에서 지우시겠습니까?'))
+            return;
+        this.boardService.removeBookmark(bk).subscribe(function (result) {
+            if (result.success) {
+                _this.flashMessage.showFlashMessage({
+                    messages: ['삭제되었습니다.'],
+                    type: 'success',
+                    timeout: 2000
+                });
+                _this.router.navigate(['/sub']);
+            }
+            else {
+                _this.flashMessage.showFlashMessage({
+                    messages: [result.msg],
+                    type: 'danger',
+                    timeout: 3000
+                });
             }
         });
     };
@@ -1714,8 +1872,11 @@ var SubComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./sub.component.html */ "./src/app/components/sub/sub.component.html"),
             styles: [__webpack_require__(/*! ./sub.component.css */ "./src/app/components/sub/sub.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_1__["FuncService"],
-            _services_board_service__WEBPACK_IMPORTED_MODULE_2__["BoardService"]])
+        __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_2__["FuncService"],
+            _services_board_service__WEBPACK_IMPORTED_MODULE_3__["BoardService"],
+            _services_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+            ng_flash_messages__WEBPACK_IMPORTED_MODULE_5__["NgFlashMessageService"]])
     ], SubComponent);
     return SubComponent;
 }());
@@ -1742,7 +1903,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n\r\n      \r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n\r\n      <button mat-button color=\"primary\" (click)=\"success()\">CLICK</button>\r\n      <button mat-button color=\"warn\" (click)=\"danger()\">CLICK</button>\r\n\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n      <p>HELLO</p>\r\n\r\n      <button mat-button color=\"primary\" (click)=\"success()\">CLICK</button>\r\n      <button mat-button color=\"warn\" (click)=\"danger()\">CLICK</button>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -1760,6 +1921,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _services_play_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/play.service */ "./src/app/services/play.service.ts");
+/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ng-flash-messages */ "./node_modules/ng-flash-messages/ng-flash-messages.umd.js");
+/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(ng_flash_messages__WEBPACK_IMPORTED_MODULE_4__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1773,14 +1936,30 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var TestComponent = /** @class */ (function () {
-    function TestComponent(funcService, playService, router) {
+    function TestComponent(funcService, playService, router, flashMessage) {
         this.funcService = funcService;
         this.playService = playService;
         this.router = router;
+        this.flashMessage = flashMessage;
         this.funcService.setTitle('TEST!!!!');
     }
     TestComponent.prototype.ngOnInit = function () {
+    };
+    TestComponent.prototype.success = function () {
+        this.flashMessage.showFlashMessage({
+            messages: ['SUCCESS', 'WHAT'],
+            type: 'success',
+            timeout: 3000
+        });
+    };
+    TestComponent.prototype.danger = function () {
+        this.flashMessage.showFlashMessage({
+            messages: ['DANGER'],
+            type: 'danger',
+            timeout: 3000
+        });
     };
     TestComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1790,7 +1969,8 @@ var TestComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_1__["FuncService"],
             _services_play_service__WEBPACK_IMPORTED_MODULE_3__["PlayService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+            ng_flash_messages__WEBPACK_IMPORTED_MODULE_4__["NgFlashMessageService"]])
     ], TestComponent);
     return TestComponent;
 }());
@@ -1947,8 +2127,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
 /* harmony import */ var _services_board_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/board.service */ "./src/app/services/board.service.ts");
-/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ng-flash-messages */ "./node_modules/ng-flash-messages/ng-flash-messages.umd.js");
-/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(ng_flash_messages__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ng-flash-messages */ "./node_modules/ng-flash-messages/ng-flash-messages.umd.js");
+/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(ng_flash_messages__WEBPACK_IMPORTED_MODULE_5__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1964,14 +2145,16 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var WriteComponent = /** @class */ (function () {
-    function WriteComponent(funcService, route, flashMessage, router, boardService) {
+    function WriteComponent(funcService, route, flashMessage, router, boardService, authService) {
         var _this = this;
         this.funcService = funcService;
         this.route = route;
         this.flashMessage = flashMessage;
         this.router = router;
         this.boardService = boardService;
+        this.authService = authService;
         this.options = {
             placeholderText: '',
             height: 500,
@@ -1996,6 +2179,12 @@ var WriteComponent = /** @class */ (function () {
         });
     }
     WriteComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.authService.getProfile().subscribe(function (profile) {
+            if (_this.type == 'notice' && profile.user.userid != 'admin') {
+                _this.router.navigate(['/no-page']);
+            }
+        });
     };
     WriteComponent.prototype.onWritePost = function () {
         var _this = this;
@@ -2043,9 +2232,10 @@ var WriteComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_2__["FuncService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
-            ng_flash_messages__WEBPACK_IMPORTED_MODULE_4__["NgFlashMessageService"],
+            ng_flash_messages__WEBPACK_IMPORTED_MODULE_5__["NgFlashMessageService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
-            _services_board_service__WEBPACK_IMPORTED_MODULE_3__["BoardService"]])
+            _services_board_service__WEBPACK_IMPORTED_MODULE_3__["BoardService"],
+            _services_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"]])
     ], WriteComponent);
     return WriteComponent;
 }());
@@ -2322,6 +2512,22 @@ var BoardService = /** @class */ (function () {
         return this.http.get(this.funcService.ServerAddress + '/boards/sub?url=' + type, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
+    BoardService.prototype.bookmark = function (type) {
+        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(this.funcService.ServerAddress + '/boards/bookmark', { type: type }, { headers: headers })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
+    };
+    BoardService.prototype.removeBookmark = function (bookmark) {
+        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(this.funcService.ServerAddress + '/boards/removeBookmark', { url: bookmark.url, title: bookmark.title }, { headers: headers })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
+    };
     BoardService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
@@ -2502,6 +2708,12 @@ var GameService = /** @class */ (function () {
         return this.http.get(this.funcService.ServerAddress + '/games/takeAllPosts', { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
+    GameService.prototype.takeRequestedPosts = function () {
+        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
+        headers.append('Content-Type', 'application/json');
+        return this.http.get(this.funcService.ServerAddress + '/games/takeRequestedPosts', { headers: headers })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
+    };
     GameService.prototype.writeComment = function (cmt) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         this.loadToken();
@@ -2538,12 +2750,26 @@ var GameService = /** @class */ (function () {
         return this.http.post(this.funcService.ServerAddress + '/games/requestBoard', { num: num }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
-    GameService.prototype.acceptBoard = function (num) {
+    GameService.prototype.acceptBoard = function (num, title, userid) {
+        var formData = {
+            num: num,
+            accept: true,
+            title: title,
+            userid: userid
+        };
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/games/acceptBoard', { num: num }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/games/acceptBoard', formData, { headers: headers })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
+    };
+    GameService.prototype.rejectBoard = function (num) {
+        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(this.funcService.ServerAddress + '/games/acceptBoard', { num: num, accept: false }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService = __decorate([
