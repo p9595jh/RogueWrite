@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 //=======================================<
 const Game = require('../models/game');
+const Temp = require('../models/temp');
 const Sub = require('../models/sub');
 const passport = require('passport');
 const fs = require('fs-extra');
@@ -34,9 +35,10 @@ router.get('/', function(req, res, next) {
     res.send('/');
 });
 
-//=============================================================
+// for pug =============================================================
 
 router.get('/tool', function(req, res, next) {
+    req.session.block = [];
     res.render('tool', {
         title: 'TOOL'
     });
@@ -75,15 +77,22 @@ function isNotValid(s) {
     return s == undefined || s == '';
 }
 
-function lucky(s) {
+function scoreCheck(s) {
     const arr = [ '+', '-', '*', '/', '(', ')', ' ' ];
-    for (let l of arr)
-        if ( s == l ) return true;
+    for (let l of arr) if ( s == l ) return true;
     return false;
 }
 
+router.post('/blockEvents', function(req, res, next) {
+    req.session.block.push(req.body.block);
+    res.send(true);
+});
+
+router.post('/temp', function(req, res, next) {
+    res.json({block: req.session.block});
+});
+
 router.post('/save', function(req, res, next) {
-    console.log(req.body);
     // title(string), stage(array), param(array), score(string)
     const data = {
         title: req.body.title,
@@ -104,7 +113,7 @@ router.post('/save', function(req, res, next) {
         const pattern = /^[a-zA-Z0-9]*$/;
         for (let i=0; i<data.score.length; i++) {
             if ( !pattern.test(data.score.substring(i, i+1)) ) {
-                if ( !lucky(data.score.substring(i, i+1)) ) {
+                if ( !scoreCheck(data.score.substring(i, i+1)) ) {
                     return res.json({success: false, msg: '점수계산이 잘못되었습니다.'});
                 }
             }
@@ -129,13 +138,7 @@ router.get('/getSessionGame', function(req, res, next) {
     }
 });
 
-router.get('/deleteSessionGame', function(req, res, next) {
-    req.session.destroy();
-    res.clearCookie('sid');
-    res.json({});
-});
-
-//=============================================================
+// writing =============================================================
 
 router.post('/write', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     if ( !req.session.data ) {
@@ -147,6 +150,7 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
             title: req.session.data.title,
             content: req.body.content,
             game: req.session.data,
+            block: req.session.block,
             boardRequest: 0,
             board: '',
             hit: 0,
@@ -158,9 +162,7 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
         });
         Game.addPost(newGame, (err, post) => {
             if ( err ) {
-                res.json({
-                    success: false
-                });
+                res.json({success: false});
             } else {
                 req.session.destroy();
                 res.clearCookie('sid');
@@ -173,7 +175,32 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
     }
 });
 
-//=============================================================
+// temp writing =============================================================
+
+router.post('/tempWrite', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+    // have to add a code to remove the temp data when writing a game completely (set in '/write' router)
+    const tempGame = {
+        user: req.user._id,
+        block: req.session.block,
+        content: req.body.content
+    };
+    if ( req.session.temp ) {
+        Temp.findOneAndUpdate({_id: req.session.temp}, {block: req.session.block}, function(err, output) {
+            if ( err ) res.json({success: false});
+            else res.json({success: true});
+        });
+    } else {
+        Temp.add(tempGame, (err, output) => {
+            if ( err ) res.json({success: false});
+            else {
+                req.session.temp = output._id;
+                res.json({success: true});
+            }
+        });
+    }
+});
+
+// about game =============================================================
 
 router.get('/takeOnePost', function(req, res, next) {
     var num = req.query.num;
@@ -329,6 +356,8 @@ router.post('/recommend', passport.authenticate('jwt', {session: false}), functi
     })
     
 });
+
+// requesting a board =============================================================
 
 router.post('/requestBoard', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     const num = req.body.num;

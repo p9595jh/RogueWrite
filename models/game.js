@@ -9,6 +9,7 @@ const GameSchema = mongoose.Schema({
     title: String,
     content: String,
     game: Object,   // game data
+    block: Array,   // moves of the block
     boardRequest: Number,   // 0: normal, 1: requested, 2: accepted, 3: rejected
     board: String,
     hit: Number,
@@ -21,6 +22,6 @@ const GameSchema = mongoose.Schema({
 
 const Game = module.exports = mongoose.model('Game', GameSchema);
 
-module.exports.addPost = function(newPost, callback) {
-    newPost.save(callback);
+module.exports.addPost = function(newGame, callback) {
+    newGame.save(callback);
 }

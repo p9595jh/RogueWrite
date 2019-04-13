@@ -40,18 +40,25 @@ export class ToolComponent implements OnInit {
     });
   }
 
-  delete() {
-    this.gameService.deleteSessionGame().subscribe(data => {
-      this.set = false;
-    });
-  }
-
   onWriteGame() {
+    if ( !confirm('저장하시겠습니까?') ) return;
+    // this.content = (<HTMLInputElement> document.getElementById('content')).value;
     this.gameService.writeGame(this.content).subscribe(data => {
       if ( data.success ) {
         this.router.navigate(['/game/' + data.num]);
       } else {
         alert('게임 생성 오류');
+      }
+    });
+  }
+
+  onTempWriteGame() {
+    // this.content = (<HTMLInputElement> document.getElementById('content')).value;
+    this.gameService.tempWriteGame(this.content).subscribe(data => {
+      if ( data.success ) {
+        alert('임시저장 되었습니다.')
+      } else {
+        alert('임시저장 오류');
       }
     });
   }

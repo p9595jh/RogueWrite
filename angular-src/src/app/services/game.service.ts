@@ -31,6 +31,15 @@ export class GameService {
       .pipe(map(res => res.json()));
   }
 
+  tempWriteGame(content) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/games/tempWrite', {content: content}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
   getSessionGame() {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
