@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./tool.component.css']
 })
 export class ToolComponent implements OnInit {
-  content: String;
   iframe = '<iframe src="' + this.funcService.ServerAddress + '/games/tool" style="width: 100%; height: 700px;"></iframe>';
+  temps: Array<any>;
 
   tooltipPosition = 'above';
   showDelay = 500;
@@ -27,6 +27,9 @@ export class ToolComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.gameService.takeAllTemps().subscribe(data => {
+      this.temps = data.temps;
+    });
   }
 
   gameOn() {
@@ -40,10 +43,9 @@ export class ToolComponent implements OnInit {
     });
   }
 
-  onWriteGame() {
+  onWriteGame(content: HTMLTextAreaElement) {
     if ( !confirm('저장하시겠습니까?') ) return;
-    // this.content = (<HTMLInputElement> document.getElementById('content')).value;
-    this.gameService.writeGame(this.content).subscribe(data => {
+    this.gameService.writeGame(content.value).subscribe(data => {
       if ( data.success ) {
         this.router.navigate(['/game/' + data.num]);
       } else {
@@ -52,13 +54,29 @@ export class ToolComponent implements OnInit {
     });
   }
 
-  onTempWriteGame() {
-    // this.content = (<HTMLInputElement> document.getElementById('content')).value;
-    this.gameService.tempWriteGame(this.content).subscribe(data => {
+  onTempWriteGame(content: HTMLTextAreaElement, title: HTMLInputElement) {
+    if ( title.value.trim() == '' ) {
+      alert('임시저장 제목이 비어있습니다.');
+      title.focus();
+      return;
+    }
+    this.gameService.tempWriteGame(content.value, title.value).subscribe(data => {
       if ( data.success ) {
         alert('임시저장 되었습니다.')
       } else {
-        alert('임시저장 오류');
+        alert('임시저장 오류\n' + data.msg);
+      }
+    });
+  }
+
+  loadTemp(_id: string, content: HTMLTextAreaElement, title: HTMLInputElement) {
+    this.iframe = '<iframe src="' + this.funcService.ServerAddress + '/games/tool?_id=' + _id + '" style="width: 100%; height: 700px;"></iframe>';
+    this.gameService.takeOneTemp(_id).subscribe(result => {
+      if ( result.success ) {
+        content.value = result.temp.content;
+        title.value = result.temp.title;
+      } else {
+        alert('불러올 수 없습니다.');
       }
     });
   }

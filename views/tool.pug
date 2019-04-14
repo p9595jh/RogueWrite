@@ -13,8 +13,6 @@ block content
         span &nbsp;&nbsp;&nbsp;
         button#save(class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored", style='width: 100px; height: 30px;', onclick='save()') 저장
 
-    div#demo(style='height: 550px; width: 100%;')
-
     xml#toolbox(style='display: none')
         category(name='big_one')
             block(type='stage')
@@ -25,12 +23,16 @@ block content
             block(type='math_number')
             block(type='condition')
             block(type='parameter')
+
+    //- div#demo(style='height: 550px; width: 100%;')
     
     xml#startBlocks(style="display: none;")
         block(type="game", inline="false", x="20", y="20")
 
+    div#tempData(style="display: none;") #{temp}
+
     script.
-        let workspaceFantasy = Blockly.inject('workspaceFantasy', {
+        var workspaceFantasy = Blockly.inject('workspaceFantasy', {
             media: '../resources/blockly/google-blockly-82871b3/media/',
             toolbox: document.getElementById('toolbox')
         });
@@ -43,10 +45,22 @@ block content
             setTimeout(() => { msg.innerHTML = ''; }, time);
         }
 
-        Blockly.inject('demo', {
-            media: '../resources/blockly/google-blockly-82871b3/media/',
-            readOnly: true
-        });
+        // test
+        //- let demo = Blockly.inject('demo', {
+        //-     media: '../resources/blockly/google-blockly-82871b3/media/',
+        //-     toolbox: document.getElementById('toolbox')
+        //- });
+
+        let tempData = document.getElementById('tempData').innerHTML;
+        if ( tempData != '' ) {
+            tempData = JSON.parse(tempData);
+            for (let block of tempData.block) {
+                Blockly.Events.fromJson(block, workspaceFantasy).run(true);
+            }
+            //- for (let block of tempData.block) {
+            //-     Blockly.Events.fromJson(block, demo).run(true);
+            //- }
+        }
 
         workspaceFantasy.addChangeListener(copyEvent);
         function copyEvent(event) {
@@ -60,26 +74,6 @@ block content
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.send(JSON.stringify(block));
         }
-
-        //- function temp() {
-        //-     setMessage('hello', 'blue', 1500);
-            
-        //-     let xhr = new XMLHttpRequest();
-        //-     xhr.open('POST', './temp');
-        //-     xhr.setRequestHeader('Content-type', 'application/json');
-        //-     xhr.send(JSON.stringify({}));
-
-        //-     xhr.addEventListener('load', () => {
-        //-         let demo = Blockly.inject('demo', {
-        //-             media: '../resources/blockly/google-blockly-82871b3/media/',
-        //-             readOnly: true
-        //-         });
-        //-         let result = JSON.parse(xhr.responseText);
-        //-         for (let block of result.block) {
-        //-             Blockly.Events.fromJson(block, demo).run(true);
-        //-         }
-        //-     });
-        //- }
 
         function save() {
             let code = Blockly.JavaScript.workspaceToCode(workspaceFantasy);

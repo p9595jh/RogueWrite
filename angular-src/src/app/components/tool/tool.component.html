@@ -1,3 +1,22 @@
+<div *ngIf="temps?.length > 0">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>임시저장 불러오기</mat-panel-title>
+        <!-- <mat-panel-description>description here</mat-panel-description> -->
+      </mat-expansion-panel-header>
+
+      <div *ngFor="let temp of temps" style="text-align: center">
+        <button mat-button style="width: 100%; text-align: left;" (click)="loadTemp(temp?._id, content, title)">
+          {{temp.title}}
+        </button>
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+  <br/><br/>
+</div>
+
 <div [innerHTML]="iframe | safe"></div>
 
 <!-- game preview section -->
@@ -72,20 +91,28 @@
       
       <mat-form-field appearance="outline" style="width: 100%;">
         <mat-label>주석</mat-label>
-        <textarea matInput placeholder="" rows="3"
-          name="content" [(ngModel)]="content" #content></textarea>
+        <textarea matInput placeholder="" rows="3" #content></textarea>
       </mat-form-field>
       <br/>
-      <table>
+      <table style="width: 100%;">
         <tr>
-          <td>
+          <td style="width: 50%;">
             <button mat-raised-button style="width: 100%;"
-              (click)="onWriteGame()" style="width: 60%;">작성</button>
+              (click)="onTempWriteGame(content, title)" color="accent">임시작성</button>
           </td>
-          <td>
+          <td style="width: 50%;">
             <button mat-raised-button style="width: 100%;"
-              (click)="onTempWriteGame()" color="accent" style="width: 60%;">임시작성</button>
+              (click)="onWriteGame(content)">작성</button>
           </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <mat-form-field appearance="fill" style="width: 100%;">
+              <mat-label>임시저장용 제목</mat-label>
+              <input matInput placeholder="임시저장 시에 작성해주세요." #title>
+            </mat-form-field>
+          </td>
+          <td></td>
         </tr>
       </table>
 

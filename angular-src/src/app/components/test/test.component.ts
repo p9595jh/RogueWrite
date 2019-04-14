@@ -39,4 +39,8 @@ export class TestComponent implements OnInit {
     });
   }
 
+  hello(content: HTMLTextAreaElement) {
+    console.log(content.value);
+  }
+
 }

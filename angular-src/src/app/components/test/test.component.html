@@ -1,60 +1,33 @@
+<!-- <div *ngIf="temps?.length > 0" style="float: right;">
+  <button mat-button [matMenuTriggerFor]="menu">임시저장 불러오기</button>
+  <mat-menu *ngFor="let temp of temps" #menu="matMenu">
+    <button mat-menu-item (click)="loadTemp(temp?._id, content, title)">{{temp.title}}</button>
+  </mat-menu>
+</div> -->
+
+<div *ngIf="temps?.length > 0">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>임시저장 불러오기</mat-panel-title>
+        <!-- <mat-panel-description>여기는 안써도 되는건가?</mat-panel-description> -->
+      </mat-expansion-panel-header>
+
+      <div *ngFor="let temp of temps" style="text-align: center">
+        <button mat-button style="width: 100%; text-align: left;">{{temp.title}}</button>
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+  <br/><br/>
+</div>
+
+
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
-
-      <button mat-button color="primary" (click)="success()">CLICK</button>
-      <button mat-button color="warn" (click)="danger()">CLICK</button>
-
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-      <p>HELLO</p>
-
-      <button mat-button color="primary" (click)="success()">CLICK</button>
-      <button mat-button color="warn" (click)="danger()">CLICK</button>
+      
+      hi
 
     </div>
   </div>

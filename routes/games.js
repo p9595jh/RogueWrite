@@ -38,10 +38,32 @@ router.get('/', function(req, res, next) {
 // for pug =============================================================
 
 router.get('/tool', function(req, res, next) {
-    req.session.block = [];
-    res.render('tool', {
-        title: 'TOOL'
-    });
+    let blockId = req.query._id;
+    if ( blockId ) {
+        req.session.temp = blockId;
+        Temp.findOne({_id: blockId}, {block: 1}, (err, output) => {
+            if ( err | !output ) {
+                req.session.temp = undefined;
+                req.session.block = [];
+                res.render('tool', {
+                    title: 'TOOL'
+                });
+            } else {
+                req.session.temp = output._id;
+                req.session.block = output.block;
+                res.render('tool', {
+                    title: 'TOOL',
+                    temp: JSON.stringify(output)
+                });
+            }
+        });
+    } else {
+        req.session.temp = undefined;
+        req.session.block = [];
+        res.render('tool', {
+            title: 'TOOL'
+        });
+    }
 });
 
 router.get('/editor', function(req, res, next) {
@@ -164,12 +186,23 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
             if ( err ) {
                 res.json({success: false});
             } else {
-                req.session.destroy();
-                res.clearCookie('sid');
-                res.json({
-                    success: true,
-                    num: post._id
-                });
+                if ( req.session.temp ) {
+                    Temp.findOneAndDelete({_id: req.session.temp}, (err, output) => {
+                        req.session.destroy();
+                        res.clearCookie('sid');
+                        res.json({
+                            success: true,
+                            num: post._id
+                        });
+                    });
+                } else {
+                    req.session.destroy();
+                    res.clearCookie('sid');
+                    res.json({
+                        success: true,
+                        num: post._id
+                    });
+                }
             }
         });
     }
@@ -178,20 +211,22 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
 // temp writing =============================================================
 
 router.post('/tempWrite', passport.authenticate('jwt', {session: false}), function(req, res, next) {
-    // have to add a code to remove the temp data when writing a game completely (set in '/write' router)
-    const tempGame = {
+    const tempGame = new Temp({
         user: req.user._id,
         block: req.session.block,
-        content: req.body.content
-    };
+        content: req.body.content,
+        title: req.body.title
+    });
+
+    // 'req.session.temp' represents it is being fixed
     if ( req.session.temp ) {
         Temp.findOneAndUpdate({_id: req.session.temp}, {block: req.session.block}, function(err, output) {
-            if ( err ) res.json({success: false});
+            if ( err ) res.json({success: false, msg: err});
             else res.json({success: true});
         });
     } else {
         Temp.add(tempGame, (err, output) => {
-            if ( err ) res.json({success: false});
+            if ( err ) res.json({success: false, msg: err});
             else {
                 req.session.temp = output._id;
                 res.json({success: true});
@@ -200,7 +235,7 @@ router.post('/tempWrite', passport.authenticate('jwt', {session: false}), functi
     }
 });
 
-// about game =============================================================
+// take =============================================================
 
 router.get('/takeOnePost', function(req, res, next) {
     var num = req.query.num;
@@ -229,6 +264,21 @@ router.get('/takeRequestedPosts', function(req, res, next) {
         res.json({posts: posts});
     });
 });
+
+router.post('/takeAllTemps', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+    Temp.find({user: req.user._id}, (err, temps) => {
+        res.json({temps: temps});
+    });
+});
+
+router.post('/takeOneTemp', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+    Temp.findOne({_id: req.body.num}, {block: 0}, (err, output) => {
+        if ( err | !output | req.user._id != output.user ) res.json({success: false});
+        else res.json({success: true, temp: output});
+    });
+});
+
+// about posting =============================================================
 
 router.post('/writeComment', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     let comment = req.body.comment.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
