@@ -106,6 +106,7 @@ function scoreCheck(s) {
 }
 
 router.post('/blockEvents', function(req, res, next) {
+    // console.log(req.body.block);
     req.session.block.push(req.body.block);
     res.send(true);
 });
@@ -113,6 +114,10 @@ router.post('/blockEvents', function(req, res, next) {
 router.post('/temp', function(req, res, next) {
     res.json({block: req.session.block});
 });
+
+// router.get('/test', (req, res, next) => {
+//     res.json(req.session.block);
+// });
 
 router.post('/save', function(req, res, next) {
     // title(string), stage(array), param(array), score(string)

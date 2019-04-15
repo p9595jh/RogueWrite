@@ -12,7 +12,6 @@ block content
         button(class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", style='width: 100px; height: 30px;', onclick='openEditor()') 에디터
         span &nbsp;&nbsp;&nbsp;
         button#save(class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored", style='width: 100px; height: 30px;', onclick='save()') 저장
-
     xml#toolbox(style='display: none')
         category(name='big_one')
             block(type='stage')
@@ -43,7 +42,7 @@ block content
         function setMessage(text, color, time) {
             msg.innerHTML = text;
             msg.style.color = color;
-            setTimeout(() => { msg.innerHTML = ''; }, time);
+            setTimeout(() => {msg.innerHTML = ''}, time);
         }
         //- ========================================
 
@@ -65,18 +64,18 @@ block content
         //- ========================================
 
         //- @ add event listener to the default workspace
-        workspaceFantasy.addChangeListener(changeEvent);
-        function changeEvent(event) {
+        workspaceFantasy.addChangeListener((event) => {
             if ( event.type == Blockly.Events.UI ) return;
 
-            let block = { block: event.toJson() };
+            let block = {block: event.toJson()};
             if ( block.block.type == 'finished_loading' ) return;
+            //- console.log(block.block);
 
             let xhr = new XMLHttpRequest();
             xhr.open('POST', './blockEvents');
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.send(JSON.stringify(block));
-        }
+        });
         //- ========================================
 
         //- @ function to save
