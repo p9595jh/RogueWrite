@@ -39,27 +39,28 @@ router.get('/', function(req, res, next) {
 
 router.get('/tool', function(req, res, next) {
     let blockId = req.query._id;
+    req.session.block = [];
     if ( blockId ) {
         req.session.temp = blockId;
         Temp.findOne({_id: blockId}, {block: 1, _id: 1}, (err, output) => {
             if ( err | !output ) {
                 req.session.temp = undefined;
-                req.session.block = [];
+                // req.session.block = [];
                 res.render('tool', {
                     title: 'TOOL'
                 });
             } else {
                 req.session.temp = output._id;
-                req.session.block = output.block;
+                // req.session.block = output.block;
                 res.render('tool', {
                     title: 'TOOL',
-                    temp: 'ヨルシカ - だから僕は音楽を辞めた (https://youtu.be/KTZ-y85Erus)'
+                    temp: output._id
                 });
             }
         });
     } else {
         req.session.temp = undefined;
-        req.session.block = [];
+        // req.session.block = [];
         res.render('tool', {
             title: 'TOOL'
         });
@@ -106,18 +107,23 @@ function scoreCheck(s) {
 }
 
 router.post('/blockEvents', function(req, res, next) {
-    // console.log(req.body.block);
     req.session.block.push(req.body.block);
     res.send(true);
 });
 
 router.post('/temp', function(req, res, next) {
-    res.json({block: req.session.block});
+    Temp.findOne({_id: req.session.temp}, {block: 1}, (err, output) => {
+        if ( err | !output ) res.json({block: req.session.block});
+        else {
+            req.session.block = [];
+            res.json({block: output.block});
+        }
+    });
 });
 
-// router.get('/test', (req, res, next) => {
-//     res.json(req.session.block);
-// });
+router.get('/test', (req, res, next) => {
+    res.json(req.session.block);
+});
 
 router.post('/save', function(req, res, next) {
     // title(string), stage(array), param(array), score(string)

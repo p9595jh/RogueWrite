@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, HostListener } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { Router } from '@angular/router';

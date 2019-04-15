@@ -12,6 +12,9 @@ block content
         button(class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect", style='width: 100px; height: 30px;', onclick='openEditor()') 에디터
         span &nbsp;&nbsp;&nbsp;
         button#save(class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored", style='width: 100px; height: 30px;', onclick='save()') 저장
+        span &nbsp;&nbsp;&nbsp;
+        button#save(class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent", style='width: 100px; height: 30px;', onclick='test()') TEST
+    
     xml#toolbox(style='display: none')
         category(name='big_one')
             block(type='stage')
@@ -46,15 +49,22 @@ block content
         }
         //- ========================================
 
+        //- @ test function
+        var blocks = [];
+        function test() {
+            console.log(blocks);
+        }
+        //- ========================================
+
         //- @ set blocks from temp data to the default workspace
         if ( document.getElementById('tempData').innerHTML != '' ) {
+            workspaceFantasy.clear();
             let xhr = new XMLHttpRequest();
             xhr.open('POST', './temp');
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.send('');
 
             xhr.addEventListener('load', () => {
-                workspaceFantasy.clear();
                 let result = JSON.parse(xhr.responseText);
                 for (let block of result.block) {
                     Blockly.Events.fromJson(block, workspaceFantasy).run(true);
@@ -64,11 +74,15 @@ block content
         //- ========================================
 
         //- @ add event listener to the default workspace
+        var num = 0;
         workspaceFantasy.addChangeListener((event) => {
             if ( event.type == Blockly.Events.UI ) return;
 
             let block = {block: event.toJson()};
+            //- console.log(block);
             if ( block.block.type == 'finished_loading' ) return;
+            block.block.num = num++;
+            blocks.push(block.block);
             //- console.log(block.block);
 
             let xhr = new XMLHttpRequest();
