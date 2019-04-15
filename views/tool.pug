@@ -65,8 +65,8 @@ block content
         //- ========================================
 
         //- @ add event listener to the default workspace
-        workspaceFantasy.addChangeListener(copyEvent);
-        function copyEvent(event) {
+        workspaceFantasy.addChangeListener(changeEvent);
+        function changeEvent(event) {
             if ( event.type == Blockly.Events.UI ) return;
 
             let block = { block: event.toJson() };
