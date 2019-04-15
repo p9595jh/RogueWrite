@@ -41,7 +41,7 @@ router.get('/tool', function(req, res, next) {
     let blockId = req.query._id;
     if ( blockId ) {
         req.session.temp = blockId;
-        Temp.findOne({_id: blockId}, {block: 1}, (err, output) => {
+        Temp.findOne({_id: blockId}, {block: 1, _id: 1}, (err, output) => {
             if ( err | !output ) {
                 req.session.temp = undefined;
                 req.session.block = [];
@@ -53,7 +53,7 @@ router.get('/tool', function(req, res, next) {
                 req.session.block = output.block;
                 res.render('tool', {
                     title: 'TOOL',
-                    temp: JSON.stringify(output)
+                    temp: 'ヨルシカ - だから僕は音楽を辞めた (https://youtu.be/KTZ-y85Erus)'
                 });
             }
         });
@@ -254,13 +254,13 @@ router.get('/takeOnePost', function(req, res, next) {
 })
 
 router.get('/takeAllPosts', function(req, res, next) {
-    Game.find({}, {content: 0, game: 0, recommendby: 0}).sort({_id: -1}).exec(function(err, posts) {
+    Game.find({}, {content: 0, game: 0, block: 0, recommendby: 0}).sort({_id: -1}).exec(function(err, posts) {
         res.json({posts: posts});
     });
 });
 
 router.get('/takeRequestedPosts', function(req, res, next) {
-    Game.find({boardRequest: 1}, {content: 0, game: 0, comment: 0, hit: 0, recommendby: 0}, function(err, posts) {
+    Game.find({boardRequest: 1}, {content: 0, game: 0, block: 0, comment: 0, hit: 0, recommendby: 0}, function(err, posts) {
         res.json({posts: posts});
     });
 });
