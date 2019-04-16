@@ -1,0 +1,14 @@
+extends layout2
+
+block content
+    div#workspaceFantasy(style='height: 600px; width: 100%;')
+
+    script.
+        let workspaceFantasy = Blockly.inject('workspaceFantasy', {
+            //- media: '../resources/blockly/google-blockly-82871b3/media/',
+            readOnly: true
+        });
+        let blocks = !{JSON.stringify(block)};
+        for (let block of blocks) {
+            Blockly.Events.fromJson(block, workspaceFantasy).run(true);
+        }

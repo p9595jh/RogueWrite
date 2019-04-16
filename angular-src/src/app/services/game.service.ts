@@ -134,4 +134,13 @@ export class GameService {
       .pipe(map(res => res.json()));
   }
 
+  toMyTempList(num) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/games/toMyTempList', {num: num}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
 }

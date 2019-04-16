@@ -4,10 +4,19 @@ const config = require('../config/database');
 // Temp Schema
 const TempSchema = mongoose.Schema({
     // unique value is '_id'
-    user: String,   // '_id' of a user
-    block: Array,    // moves of the block
+    user: String,   // '_id' of the user
+    block: Array,    // moves of the blocks
     title: String,
-    savedate: String
+    savedate: String,
+    from: Object
+    /*
+        from: {
+            game: String,   // '_id' of the game
+            title: String,
+            userid: String,
+            nickname: String
+        }
+    */
 });
 
 const Temp = module.exports = mongoose.model('Temp', TempSchema);

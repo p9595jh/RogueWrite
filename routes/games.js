@@ -140,9 +140,9 @@ router.post('/tempSave', (req, res, next) => {
     }
 });
 
-router.get('/test', (req, res, next) => {
-    res.json(req.session.block);
-});
+// router.get('/test', (req, res, next) => {
+//     res.json(req.session.block);
+// });
 
 router.post('/save', function(req, res, next) {
     // title(string), stage(array), param(array), score(string)
@@ -220,12 +220,23 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
             } else {
                 if ( req.session.temp ) {
                     Temp.findOneAndDelete({_id: req.session.temp}, (err, output) => {
-                        req.session.destroy();
-                        res.clearCookie('sid');
-                        res.json({
-                            success: true,
-                            num: post._id
-                        });
+                        if ( output.from ) {
+                            Game.findOneAndUpdate({_id: post._id}, {from: output.from}, (err, game) => {
+                                req.session.destroy();
+                                res.clearCookie('sid');
+                                res.json({
+                                    success: true,
+                                    num: post._id
+                                });
+                            });
+                        } else {
+                            req.session.destroy();
+                            res.clearCookie('sid');
+                            res.json({
+                                success: true,
+                                num: post._id
+                            });
+                        }
                     });
                 } else {
                     req.session.destroy();
@@ -274,6 +285,28 @@ router.post('/takeOneTemp', passport.authenticate('jwt', {session: false}), func
     Temp.findOne({_id: req.body.num}, {block: 0}, (err, output) => {
         if ( err | !output | req.user._id != output.user ) res.json({success: false});
         else res.json({success: true, temp: output});
+    });
+});
+
+router.post('/toMyTempList', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+    const num = req.body.num;
+    Game.findOne({_id: num}, {title: 1, block: 1, userid: 1, nickname: 1}, (err, game) => {
+        const newTemp = new Temp({
+            user: req.user._id,
+            block: game.block,
+            title: game.title,
+            savedate: getNowDate(),
+            from: {
+                game: num,
+                title: game.title,
+                userid: game.userid,
+                nickname: game.nickname
+            }
+        });
+        Temp.add(newTemp, (err, output) => {
+            if ( err ) res.json({success: false, msg: err});
+            else res.json({success: true});
+        });
     });
 });
 

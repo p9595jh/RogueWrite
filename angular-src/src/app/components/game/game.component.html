@@ -52,6 +52,10 @@
       <br/><br/>
       <div>{{content?.content}}</div>
       <br/><br/>
+      <div *ngIf="content?.from" style="color: grey; font-size: 85%;">
+        이 게임은 <span style="cursor: pointer; font-weight: bold;" (click)="funcService.openInfoWindow(content?.from?.userid)">{{content.from.nickname}}</span> 님의 <a style="color: grey; font-weight: bold;" [routerLink]="['/game/' + content?.from?.game]">{{content.from.title}}</a> 으로부터 참조되었습니다.
+        <br/><br/>
+      </div>
 
       <!-- normal user -->
       <table class="recommends" *ngIf="user?.userid != content?.userid && user?.userid != 'admin'">
@@ -175,6 +179,12 @@
   <mat-menu #aboutPost>
     <button mat-menu-item *ngIf="content?.board && content?.board != ''" [routerLink]="['/board/' + content?.board + '/list']">
       <span>게시판으로 이동</span>
+    </button>
+    <button mat-menu-item (click)="viewBlock()">
+      <span>블록 보기</span>
+    </button>
+    <button mat-menu-item *ngIf="authService.loggedIn()" (click)="toMyTempList()">
+      <span>내 임시저장으로 복사</span>
     </button>
     <button mat-menu-item *ngIf="content?.userid == user?.userid || user?.userid == 'admin'" (click)="onRemovePost()">
       <span>삭제</span>

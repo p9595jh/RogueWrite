@@ -5,6 +5,7 @@ const passport = require('passport');
 const formidable = require('formidable');
 const fs = require('fs-extra');
 const User = require('../models/user');
+const Game = require('../models/game');
 
 router.get('/', function(req, res) {
     res.send('');
@@ -98,6 +99,20 @@ router.get('/info', function(req, res) {
             res.render('./info', {
                 title: user.nickname,
                 user: user
+            });
+        }
+    });
+});
+
+// ==============================================
+
+router.get('/viewBlock', (req, res) => {
+    Game.findOne({_id: req.query.game}, {block: 1, title: 1}, (err, game) => {
+        if ( err || !game ) res.send('error');
+        else {
+            res.render('block', {
+                title: game.title,
+                block: game.block
             });
         }
     });

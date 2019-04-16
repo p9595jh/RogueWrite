@@ -194,6 +194,28 @@ export class GameComponent implements OnInit, OnDestroy {
     });
   }
 
+  viewBlock() {
+    this.funcService.popUp(this.funcService.ServerAddress + '/modals/viewBlock?game=' + this.num, 1000, 600);
+  }
+
+  toMyTempList() {
+    this.gameService.toMyTempList(this.num).subscribe(result => {
+      if ( result.success ) {
+        this.flashMessage.showFlashMessage({
+          messages: ['저장되었습니다.'], 
+          type: 'success', 
+          timeout: 2000
+        });
+      } else {
+        this.flashMessage.showFlashMessage({
+          messages: [result.msg], 
+          type: 'danger', 
+          timeout: 3000
+        });
+      }
+    })
+  }
+
   extractDate(date) {
     let writeDate = new Date(date);
     let today = new Date();

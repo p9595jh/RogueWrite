@@ -46,9 +46,15 @@ export class FuncService {
     return this.previousUrl;
   }
 
-  openWindow(url: string) {
-    const option = 'width=500, height=600, left=300, top=100, scrollbars=yes, toolbars=no, location=no';
+  popUp(url, width, height) {
+    const option = 'width=' + width + ', height=' + height + ', left=300, top=100, scrollbars=yes, toolbars=no, location=no';
     _window().open(url, '', option);
+  }
+
+  openWindow(url: string) {
+    // const option = 'width=500, height=600, left=300, top=100, scrollbars=yes, toolbars=no, location=no';
+    // _window().open(url, '', option);
+    this.popUp(url, 500, 600);
   }
 
   openInfoWindow(userid) {

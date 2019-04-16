@@ -17,7 +17,16 @@ const GameSchema = mongoose.Schema({
     recommend: Number,
     unrecommend: Number,
     recommendby: Array, // person who recommended or unrecommended
-    comment: Array
+    comment: Array,
+    from: Object
+    /*
+        from: {
+            game: String,   // '_id' of the game
+            title: String,
+            userid: String,
+            nickname: String
+        }
+    */
 });
 
 const Game = module.exports = mongoose.model('Game', GameSchema);
