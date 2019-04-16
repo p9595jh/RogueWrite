@@ -6,8 +6,8 @@ const TempSchema = mongoose.Schema({
     // unique value is '_id'
     user: String,   // '_id' of a user
     block: Array,    // moves of the block
-    content: String,
-    title: String
+    title: String,
+    savedate: String
 });
 
 const Temp = module.exports = mongoose.model('Temp', TempSchema);

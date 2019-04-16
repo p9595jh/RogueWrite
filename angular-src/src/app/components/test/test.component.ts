@@ -20,27 +20,7 @@ export class TestComponent implements OnInit {
     this.funcService.setTitle('TEST!!!!');
   }
 
-  ngOnInit() { 
-  }
-
-  success() {
-    this.flashMessage.showFlashMessage({
-      messages: ['SUCCESS', 'WHAT'],
-      type: 'success',
-      timeout: 3000
-    });
-  }
-
-  danger() {
-    this.flashMessage.showFlashMessage({
-      messages: ['DANGER'],
-      type: 'danger',
-      timeout: 3000
-    });
-  }
-
-  hello(content: HTMLTextAreaElement) {
-    console.log(content.value);
+  ngOnInit() {
   }
 
 }

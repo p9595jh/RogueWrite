@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2FwcC5jb21wb25lbnQuY3NzIn0= */"
 
 /***/ }),
 
@@ -41,7 +41,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ng-flash-message></ng-flash-message>\r\n\r\n<div class=\"mdl-demo mdl-base\">\r\n  <div class=\"mdl-layout mdl-js-layout mdl-layout--fixed-tabs\">\r\n\r\n    <!-- header for large display -->\r\n    <header class=\"mdl-layout__header mdl-layout__header--scroll mdl-color--primary\" style=\"background-color: rgb(143, 143, 226);\">\r\n            \r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n      \r\n      <!-- title -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\">\r\n        <!-- <h3 [routerLink]=\"['/']\" style=\"cursor: pointer; font-family: 'Ubuntu', sans-serif;\">{{siteName}}</h3> -->\r\n        <img src=\"/images/title.png\" [routerLink]=\"['/']\" style=\"cursor: pointer; width: 40%; height: auto;\" />\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" >\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"!authService.loggedIn()\" [routerLink]=\"['/login']\">LOGIN</a>\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"authService.loggedIn()\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"authService.loggedIn()\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n        </nav>\r\n      </div>\r\n      \r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n\r\n      <!-- nav bar -->\r\n      <nav mat-tab-nav-bar mat-stretch-tabs\r\n        mat-align-tabs=\"center\"\r\n        [color]=\"'primary'\"\r\n        [backgroundColor]=\"'accent'\"\r\n        style=\"border-bottom-color: black;\">\r\n        <a mat-tab-link *ngFor=\"let link of navLinks\"\r\n          (click)=\"activeLink = link.path\"\r\n          [routerLink]=\"[link.path]\"\r\n          [active]=\"activeLink == link.path\">{{link.label}}</a>\r\n      </nav>\r\n\r\n    </header>\r\n\r\n    <!-- header for mobile -->\r\n    <header class=\"mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <!-- <h3 class=\"mdl-navigation__link\" style=\"font-family: 'Ubuntu', sans-serif;\" [routerLink]=\"['/']\">{{siteName}}</h3> -->\r\n        <img src=\"/images/title.png\" style=\"height: 100%; width: auto;\" [routerLink]=\"['/']\" />\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\">\r\n          <a *ngIf=\"!authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/login']\">LOGIN</a>\r\n          <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n          <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    <div class=\"mdl-layout__drawer mdl-layout--small-screen-only\">\r\n      <span class=\"mdl-layout__title\" style=\"font-family: 'Ubuntu', sans-serif;\">{{siteName}}</span>\r\n      <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" *ngFor=\"let link of navLinks\"\r\n          [routerLink]=\"[link.path]\">{{link.label}}</a>\r\n      </nav>\r\n    </div>\r\n\r\n    <main class=\"mdl-layout__content\">\r\n      <div class=\"mdl-layout__tab-panel is-active\" id=\"overview\">\r\n        <router-outlet></router-outlet>\r\n        <br/><br/>\r\n      </div>\r\n\r\n      <!-- footer -->\r\n      <footer class=\"mdl-mega-footer\">\r\n        <div class=\"mdl-mega-footer--bottom-section\">\r\n          <div class=\"mdl-logo\">\r\n            powered by Project RogueWrite\r\n          </div>\r\n          <ul class=\"mdl-mega-footer--link-list\">\r\n            <li><a target=\"_blank\" href=\"https://getmdl.io/index.html\">MDL</a></li>\r\n            <li><a target=\"_blank\" href=\"https://material.angular.io/\">Angular Material</a></li>\r\n            <li><a target=\"_blank\" href=\"https://github.com/p9595jh/RogueWrite\">Github</a></li>\r\n          </ul>\r\n        </div>\r\n      </footer>\r\n      <!-- footer -->\r\n\r\n    </main>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<ng-flash-message></ng-flash-message>\r\n\r\n<div class=\"mdl-demo mdl-base\">\r\n  <div class=\"mdl-layout mdl-js-layout mdl-layout--fixed-tabs\">\r\n\r\n    <!-- header for large display -->\r\n    <header class=\"mdl-layout__header mdl-layout__header--scroll mdl-color--primary\" style=\"background-color: rgb(143, 143, 226);\">\r\n            \r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n      \r\n      <!-- title -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\">\r\n        <!-- <h3 [routerLink]=\"['/']\" style=\"cursor: pointer; font-family: 'Ubuntu', sans-serif;\">{{siteName}}</h3> -->\r\n        <img src=\"/images/title.png\" [routerLink]=\"['/']\" style=\"cursor: pointer; width: 40%; height: auto;\" />\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" >\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"!authService.loggedIn()\" [routerLink]=\"['/login']\">LOGIN</a>\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"authService.loggedIn()\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"authService.loggedIn()\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n        </nav>\r\n      </div>\r\n      \r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n\r\n      <!-- nav bar -->\r\n      <nav mat-tab-nav-bar mat-stretch-tabs\r\n        mat-align-tabs=\"center\"\r\n        [color]=\"'primary'\"\r\n        [backgroundColor]=\"'accent'\"\r\n        style=\"border-bottom-color: black;\">\r\n        <a mat-tab-link *ngFor=\"let link of navLinks\"\r\n          (click)=\"activeLink = link.path\"\r\n          [routerLink]=\"[link.path]\"\r\n          [active]=\"activeLink == link.path\">{{link.label}}</a>\r\n      </nav>\r\n\r\n    </header>\r\n\r\n    <!-- header for mobile -->\r\n    <header class=\"mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary\">\r\n      <div class=\"mdl-layout__header-row\">\r\n        <!-- // <h3 class=\"mdl-navigation__link\" style=\"font-family: 'Ubuntu', sans-serif;\" [routerLink]=\"['/']\">{{siteName}}</h3> -->\r\n        <img src=\"/images/title.png\" style=\"height: 100%; width: auto;\" [routerLink]=\"['/']\" />\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\">\r\n          <a *ngIf=\"!authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/login']\">LOGIN</a>\r\n          <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n          <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n        </nav>\r\n      </div>\r\n    </header>\r\n    <div class=\"mdl-layout__drawer mdl-layout--small-screen-only\">\r\n      <span class=\"mdl-layout__title\" style=\"font-family: 'Ubuntu', sans-serif;\">{{siteName}}</span>\r\n      <nav class=\"mdl-navigation\">\r\n        <a class=\"mdl-navigation__link\" *ngFor=\"let link of navLinks\"\r\n          [routerLink]=\"[link.path]\">{{link.label}}</a>\r\n      </nav>\r\n    </div>\r\n\r\n    <main class=\"mdl-layout__content\">\r\n      <div class=\"mdl-layout__tab-panel is-active\" id=\"overview\">\r\n        <router-outlet></router-outlet>\r\n        <br/><br/>\r\n      </div>\r\n\r\n      <!-- footer -->\r\n      <footer class=\"mdl-mega-footer\">\r\n        <div class=\"mdl-mega-footer--bottom-section\">\r\n          <div class=\"mdl-logo\">\r\n            powered by Project RogueWrite\r\n          </div>\r\n          <ul class=\"mdl-mega-footer--link-list\">\r\n            <li><a target=\"_blank\" href=\"https://getmdl.io/index.html\">MDL</a></li>\r\n            <li><a target=\"_blank\" href=\"https://material.angular.io/\">Angular Material</a></li>\r\n            <li><a target=\"_blank\" href=\"https://github.com/p9595jh/RogueWrite\">Github</a></li>\r\n          </ul>\r\n        </div>\r\n      </footer>\r\n      <!-- footer -->\r\n\r\n    </main>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -300,7 +300,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvYWRtaW4vYWRtaW4uY29tcG9uZW50LmNzcyJ9 */"
 
 /***/ }),
 
@@ -499,7 +499,7 @@ var AdminComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvYm9hcmQvYm9hcmQuY29tcG9uZW50LmNzcyJ9 */"
 
 /***/ }),
 
@@ -808,7 +808,7 @@ var BoardComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".recommends {\r\n    margin: auto;\r\n    text-align: center;\r\n}\r\n\r\n.recommends td {\r\n    padding: 5px;\r\n}\r\n"
+module.exports = ".recommends {\r\n    margin: auto;\r\n    text-align: center;\r\n}\r\n\r\n.recommends td {\r\n    padding: 5px;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9nYW1lL2dhbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFlBQVk7SUFDWixrQkFBa0I7QUFDdEI7O0FBRUE7SUFDSSxZQUFZO0FBQ2hCIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9nYW1lL2dhbWUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5yZWNvbW1lbmRzIHtcclxuICAgIG1hcmdpbjogYXV0bztcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxufVxyXG5cclxuLnJlY29tbWVuZHMgdGQge1xyXG4gICAgcGFkZGluZzogNXB4O1xyXG59XHJcbiJdfQ== */"
 
 /***/ }),
 
@@ -1091,7 +1091,7 @@ var GameComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/* .demo-card-wide .mdl-card {\r\n    width: 512px;\r\n} */\r\n.demo-card-wide > .mdl-card__title {\r\n    color: #fff;\r\n    height: 176px;\r\n    background: url('welcome_card.jpg') center / cover;\r\n}\r\n.demo-card-wide > .mdl-card__menu {\r\n    color: #fff;\r\n}\r\n"
+module.exports = "/* .demo-card-wide .mdl-card {\r\n    width: 512px;\r\n} */\r\n.demo-card-wide > .mdl-card__title {\r\n    color: #fff;\r\n    height: 176px;\r\n    background: url('welcome_card.jpg') center / cover;\r\n}\r\n.demo-card-wide > .mdl-card__menu {\r\n    color: #fff;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9ob21lL2hvbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7R0FFRztBQUNIO0lBQ0ksV0FBVztJQUNYLGFBQWE7SUFDYixrREFBb0Q7QUFDeEQ7QUFDQTtJQUNJLFdBQVc7QUFDZiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvaG9tZS9ob21lLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvKiAuZGVtby1jYXJkLXdpZGUgLm1kbC1jYXJkIHtcclxuICAgIHdpZHRoOiA1MTJweDtcclxufSAqL1xyXG4uZGVtby1jYXJkLXdpZGUgPiAubWRsLWNhcmRfX3RpdGxlIHtcclxuICAgIGNvbG9yOiAjZmZmO1xyXG4gICAgaGVpZ2h0OiAxNzZweDtcclxuICAgIGJhY2tncm91bmQ6IHVybCgnLi93ZWxjb21lX2NhcmQuanBnJykgY2VudGVyIC8gY292ZXI7XHJcbn1cclxuLmRlbW8tY2FyZC13aWRlID4gLm1kbC1jYXJkX19tZW51IHtcclxuICAgIGNvbG9yOiAjZmZmO1xyXG59XHJcbiJdfQ== */"
 
 /***/ }),
 
@@ -1170,7 +1170,7 @@ var HomeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbG9naW4vbG9naW4uY29tcG9uZW50LmNzcyJ9 */"
 
 /***/ }),
 
@@ -1281,7 +1281,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbW9kaWZ5L21vZGlmeS5jb21wb25lbnQuY3NzIn0= */"
 
 /***/ }),
 
@@ -1425,7 +1425,7 @@ var ModifyComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbm8tcGFnZS9uby1wYWdlLmNvbXBvbmVudC5jc3MifQ== */"
 
 /***/ }),
 
@@ -1436,7 +1436,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\n    <div class=\"mdl-card__supporting-text\">\n      <h4 style=\"display: inline;\">404 ERROR</h4>\n\n      <hr/>\n      <div class=\"posting\">\n        <img src=\"images/404.jpg\" style=\"width: 100%;\"><br/><br/>\n        페이지가 존재하지 않습니다.<br/><br/>\n        <a mat-raised-button color=\"primary\" [routerLink]=\"[this.funcService.getPreviousUrl()]\">이전 페이지로 돌아가기</a><br/><br/>\n      </div>\n      <br/><br/>\n\n    </div>\n  </div>\n</section>\n\n<section></section>\n"
+module.exports = "<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">404 ERROR</h4>\r\n\r\n      <hr/>\r\n      <div class=\"posting\">\r\n        <img src=\"images/404.jpg\" style=\"width: 100%;\"><br/><br/>\r\n        페이지가 존재하지 않습니다.<br/><br/>\r\n        <a mat-raised-button color=\"primary\" [routerLink]=\"[this.funcService.getPreviousUrl()]\">이전 페이지로 돌아가기</a><br/><br/>\r\n      </div>\r\n      <br/><br/>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -1492,7 +1492,7 @@ var NoPageComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcHJvZmlsZS9wcm9maWxlLmNvbXBvbmVudC5jc3MifQ== */"
 
 /***/ }),
 
@@ -1570,7 +1570,7 @@ var ProfileComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcmVnaXN0ZXIvcmVnaXN0ZXIuY29tcG9uZW50LmNzcyJ9 */"
 
 /***/ }),
 
@@ -1711,7 +1711,7 @@ var RegisterComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvc3ViL3N1Yi5jb21wb25lbnQuY3NzIn0= */"
 
 /***/ }),
 
@@ -1894,7 +1894,7 @@ var SubComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvdGVzdC90ZXN0LmNvbXBvbmVudC5jc3MifQ== */"
 
 /***/ }),
 
@@ -1905,7 +1905,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- <div *ngIf=\"temps?.length > 0\" style=\"float: right;\">\r\n  <button mat-button [matMenuTriggerFor]=\"menu\">임시저장 불러오기</button>\r\n  <mat-menu *ngFor=\"let temp of temps\" #menu=\"matMenu\">\r\n    <button mat-menu-item (click)=\"loadTemp(temp?._id, content, title)\">{{temp.title}}</button>\r\n  </mat-menu>\r\n</div> -->\r\n\r\n<div *ngIf=\"temps?.length > 0\">\r\n  <mat-accordion>\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>임시저장 불러오기</mat-panel-title>\r\n        <!-- <mat-panel-description>여기는 안써도 되는건가?</mat-panel-description> -->\r\n      </mat-expansion-panel-header>\r\n\r\n      <div *ngFor=\"let temp of temps\" style=\"text-align: center\">\r\n        <button mat-button style=\"width: 100%; text-align: left;\">{{temp.title}}</button>\r\n      </div>\r\n\r\n    </mat-expansion-panel>\r\n  </mat-accordion>\r\n  <br/><br/>\r\n</div>\r\n\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      \r\n      hi\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = ""
 
 /***/ }),
 
@@ -1949,23 +1949,6 @@ var TestComponent = /** @class */ (function () {
     }
     TestComponent.prototype.ngOnInit = function () {
     };
-    TestComponent.prototype.success = function () {
-        this.flashMessage.showFlashMessage({
-            messages: ['SUCCESS', 'WHAT'],
-            type: 'success',
-            timeout: 3000
-        });
-    };
-    TestComponent.prototype.danger = function () {
-        this.flashMessage.showFlashMessage({
-            messages: ['DANGER'],
-            type: 'danger',
-            timeout: 3000
-        });
-    };
-    TestComponent.prototype.hello = function (content) {
-        console.log(content.value);
-    };
     TestComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-test',
@@ -1991,7 +1974,7 @@ var TestComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".previewButton {\r\n    float: right;\r\n}"
+module.exports = ".previewButton {\r\n    float: right;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy90b29sL3Rvb2wuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFlBQVk7QUFDaEIiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3Rvb2wvdG9vbC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnByZXZpZXdCdXR0b24ge1xyXG4gICAgZmxvYXQ6IHJpZ2h0O1xyXG59Il19 */"
 
 /***/ }),
 
@@ -2002,7 +1985,7 @@ module.exports = ".previewButton {\r\n    float: right;\r\n}"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"temps?.length > 0\">\r\n  <mat-accordion>\r\n    <mat-expansion-panel>\r\n      <mat-expansion-panel-header>\r\n        <mat-panel-title>임시저장 불러오기</mat-panel-title>\r\n        <!-- <mat-panel-description>description here</mat-panel-description> -->\r\n      </mat-expansion-panel-header>\r\n\r\n      <div *ngFor=\"let temp of temps\" style=\"text-align: center\">\r\n        <button mat-button style=\"width: 100%; text-align: left;\" (click)=\"loadTemp(temp?._id, content, title)\">\r\n          {{temp.title}}\r\n        </button>\r\n      </div>\r\n\r\n    </mat-expansion-panel>\r\n  </mat-accordion>\r\n  <br/><br/>\r\n</div>\r\n\r\n<div [innerHTML]=\"iframe | safe\"></div>\r\n\r\n<!-- game preview section -->\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n\r\n      <h4 style=\"display: inline;\">미리보기</h4>\r\n      <button mat-button class=\"previewButton\"\r\n        (click)=\"gameOn()\"\r\n        matTooltip=\"게임 적용\"\r\n        [matTooltipPosition]=\"tooltipPosition\"\r\n        [matTooltipShowDelay]=\"showDelay\">\r\n        <mat-icon>play_circle_outline</mat-icon>\r\n      </button>\r\n      <button mat-button class=\"previewButton\" *ngIf=\"set\"\r\n        (click)=\"playService.replay()\"\r\n        matTooltip=\"리플레이\"\r\n        [matTooltipPosition]=\"tooltipPosition\"\r\n        [matTooltipShowDelay]=\"showDelay\">\r\n        <mat-icon>autorenew</mat-icon>\r\n      </button>\r\n      <hr/>\r\n\r\n      <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ENGINE (GAME) ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->\r\n      <div class=\"posting\" *ngIf=\"set\">\r\n\r\n        <!-- PHASE-CONTENT -->\r\n        <div class=\"stage-content\">{{playService?.phase?.content}}</div>\r\n\r\n        <!-- CHOICES -->\r\n        <table style=\"width: 100%;\" *ngIf=\"!playService.end\">\r\n          <tbody *ngFor=\"let choice of playService?.phase?.choice\">\r\n            <tr (click)=\"playService.select(choice?.set_param)\" style=\"height: 50px;\">\r\n              <td class=\"mdl-data-table__cell--non-numeric stage-choice\">{{choice?.content}}</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n\r\n        <!-- END -->\r\n        <table *ngIf=\"playService.end\" class=\"mdl-data-table mdl-js-data-table\" style=\"width: 100%;\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">THE END.</td>\r\n            <td>점수 : 얼마얼마</td>\r\n          </tr>\r\n          <tr>\r\n            <td colspan=\"2\">\r\n              <button mat-button (click)=\"playService.replay()\" style=\"float: right;\">다시하기</button>\r\n            </td>\r\n          </tr>\r\n        </table>\r\n\r\n        <!-- SHOW PARAMETERS -->\r\n        <div class=\"row align-items-center\" *ngFor=\"let arr of playService?.paramArr\">\r\n          <div class=\"col-sm grid-cell\" *ngFor=\"let val of arr\">\r\n            <span *ngIf=\"val?.value?.visible\">\r\n              {{val?.key}}<span>: </span>{{val?.value?.value}}\r\n            </span>\r\n          </div>\r\n        </div>\r\n\r\n      </div>\r\n      <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ENGINE (GAME) ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      \r\n      <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\r\n        <mat-label>주석</mat-label>\r\n        <textarea matInput placeholder=\"\" rows=\"3\" #content></textarea>\r\n      </mat-form-field>\r\n      <br/>\r\n      <table style=\"width: 100%;\">\r\n        <tr>\r\n          <td style=\"width: 50%;\">\r\n            <button mat-raised-button style=\"width: 100%;\"\r\n              (click)=\"onTempWriteGame(content, title)\" color=\"accent\">임시작성</button>\r\n          </td>\r\n          <td style=\"width: 50%;\">\r\n            <button mat-raised-button style=\"width: 100%;\"\r\n              (click)=\"onWriteGame(content)\">작성</button>\r\n          </td>\r\n        </tr>\r\n        <tr>\r\n          <td colspan=\"2\">\r\n            <mat-form-field appearance=\"fill\" style=\"width: 100%;\">\r\n              <mat-label>임시저장용 제목</mat-label>\r\n              <input matInput placeholder=\"임시저장 시에 작성해주세요.\" #title>\r\n            </mat-form-field>\r\n          </td>\r\n          <td></td>\r\n        </tr>\r\n      </table>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n"
+module.exports = "<div [innerHTML]=\"iframe | safe\"></div>\r\n\r\n<!-- game preview section -->\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n\r\n      <h4 style=\"display: inline;\">미리보기</h4>\r\n      <button mat-button class=\"previewButton\"\r\n        (click)=\"gameOn()\"\r\n        matTooltip=\"게임 적용\"\r\n        [matTooltipPosition]=\"tooltipPosition\"\r\n        [matTooltipShowDelay]=\"showDelay\">\r\n        <mat-icon>play_circle_outline</mat-icon>\r\n      </button>\r\n      <button mat-button class=\"previewButton\" *ngIf=\"set\"\r\n        (click)=\"playService.replay()\"\r\n        matTooltip=\"리플레이\"\r\n        [matTooltipPosition]=\"tooltipPosition\"\r\n        [matTooltipShowDelay]=\"showDelay\">\r\n        <mat-icon>autorenew</mat-icon>\r\n      </button>\r\n      <hr/>\r\n\r\n      <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ENGINE (GAME) ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->\r\n      <div class=\"posting\" *ngIf=\"set\">\r\n\r\n        <!-- PHASE-CONTENT -->\r\n        <div class=\"stage-content\">{{playService?.phase?.content}}</div>\r\n\r\n        <!-- CHOICES -->\r\n        <table style=\"width: 100%;\" *ngIf=\"!playService.end\">\r\n          <tbody *ngFor=\"let choice of playService?.phase?.choice\">\r\n            <tr (click)=\"playService.select(choice?.set_param)\" style=\"height: 50px;\">\r\n              <td class=\"mdl-data-table__cell--non-numeric stage-choice\">{{choice?.content}}</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n\r\n        <!-- END -->\r\n        <table *ngIf=\"playService.end\" class=\"mdl-data-table mdl-js-data-table\" style=\"width: 100%;\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">THE END.</td>\r\n            <td>점수 : 얼마얼마</td>\r\n          </tr>\r\n          <tr>\r\n            <td colspan=\"2\">\r\n              <button mat-button (click)=\"playService.replay()\" style=\"float: right;\">다시하기</button>\r\n            </td>\r\n          </tr>\r\n        </table>\r\n\r\n        <!-- SHOW PARAMETERS -->\r\n        <div class=\"row align-items-center\" *ngFor=\"let arr of playService?.paramArr\">\r\n          <div class=\"col-sm grid-cell\" *ngFor=\"let val of arr\">\r\n            <span *ngIf=\"val?.value?.visible\">\r\n              {{val?.key}}<span>: </span>{{val?.value?.value}}\r\n            </span>\r\n          </div>\r\n        </div>\r\n\r\n      </div>\r\n      <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ENGINE (GAME) ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      \r\n      <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\r\n        <mat-label>주석</mat-label>\r\n        <textarea matInput placeholder=\"\" rows=\"3\" #content></textarea>\r\n      </mat-form-field>\r\n      <button mat-raised-button color=\"primary\" style=\"width: 100%;\" (click)=\"onWriteGame(content)\">작성</button>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n"
 
 /***/ }),
 
@@ -2020,7 +2003,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
 /* harmony import */ var _services_game_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/game.service */ "./src/app/services/game.service.ts");
 /* harmony import */ var _services_play_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/play.service */ "./src/app/services/play.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2035,13 +2019,14 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var ToolComponent = /** @class */ (function () {
-    function ToolComponent(funcService, gameService, playService, router) {
+    function ToolComponent(funcService, gameService, playService, authService, router) {
         this.funcService = funcService;
         this.gameService = gameService;
         this.playService = playService;
+        this.authService = authService;
         this.router = router;
-        this.iframe = '<iframe src="' + this.funcService.ServerAddress + '/games/tool" style="width: 100%; height: 700px;"></iframe>';
         this.tooltipPosition = 'above';
         this.showDelay = 500;
         this.set = false;
@@ -2049,8 +2034,12 @@ var ToolComponent = /** @class */ (function () {
     }
     ToolComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.gameService.takeAllTemps().subscribe(function (data) {
-            _this.temps = data.temps;
+        this.authService.getProfile().subscribe(function (profile) {
+            _this.iframe = '<iframe src="'
+                + _this.funcService.ServerAddress
+                + '/games/tool?uid='
+                + profile.user._id
+                + '" style="width: 100%; height: 700px;"></iframe>';
         });
     };
     ToolComponent.prototype.gameOn = function () {
@@ -2078,33 +2067,6 @@ var ToolComponent = /** @class */ (function () {
             }
         });
     };
-    ToolComponent.prototype.onTempWriteGame = function (content, title) {
-        if (title.value.trim() == '') {
-            alert('임시저장 제목이 비어있습니다.');
-            title.focus();
-            return;
-        }
-        this.gameService.tempWriteGame(content.value, title.value).subscribe(function (data) {
-            if (data.success) {
-                alert('임시저장 되었습니다.');
-            }
-            else {
-                alert('임시저장 오류\n' + data.msg);
-            }
-        });
-    };
-    ToolComponent.prototype.loadTemp = function (_id, content, title) {
-        this.iframe = '<iframe src="' + this.funcService.ServerAddress + '/games/tool?_id=' + _id + '" style="width: 100%; height: 700px;"></iframe>';
-        this.gameService.takeOneTemp(_id).subscribe(function (result) {
-            if (result.success) {
-                content.value = result.temp.content;
-                title.value = result.temp.title;
-            }
-            else {
-                alert('불러올 수 없습니다.');
-            }
-        });
-    };
     ToolComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-tool',
@@ -2114,7 +2076,8 @@ var ToolComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_1__["FuncService"],
             _services_game_service__WEBPACK_IMPORTED_MODULE_2__["GameService"],
             _services_play_service__WEBPACK_IMPORTED_MODULE_3__["PlayService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
+            _services_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
     ], ToolComponent);
     return ToolComponent;
 }());
@@ -2130,7 +2093,7 @@ var ToolComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvd3JpdGUvd3JpdGUuY29tcG9uZW50LmNzcyJ9 */"
 
 /***/ }),
 
@@ -2715,24 +2678,10 @@ var GameService = /** @class */ (function () {
         return this.http.post(this.funcService.ServerAddress + '/games/write', { content: content }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
-    GameService.prototype.tempWriteGame = function (content, title) {
-        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
-        this.loadToken();
-        headers.append('Authorization', this.authToken);
-        headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/games/tempWrite', { content: content, title: title }, { headers: headers })
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
-    };
     GameService.prototype.getSessionGame = function () {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
         return this.http.get(this.funcService.ServerAddress + '/games/getSessionGame', { headers: headers })
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
-    };
-    GameService.prototype.deleteSessionGame = function () {
-        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
-        headers.append('Content-Type', 'application/json');
-        return this.http.get(this.funcService.ServerAddress + '/games/deleteSessionGame', { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService.prototype.takeOnePost = function (num) {
@@ -2760,14 +2709,6 @@ var GameService = /** @class */ (function () {
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
         return this.http.post(this.funcService.ServerAddress + '/games/takeOneTemp', { num: num }, { headers: headers })
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
-    };
-    GameService.prototype.takeAllTemps = function () {
-        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
-        this.loadToken();
-        headers.append('Authorization', this.authToken);
-        headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/games/takeAllTemps', {}, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService.prototype.writeComment = function (cmt) {
@@ -3159,7 +3100,7 @@ var SafeHtml = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\PJH\1494054\RogueWrite\angular-src\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\Hoon\PJH\others\web\rwrite\angular-src\src\main.ts */"./src/main.ts");
 
 
 /***/ })

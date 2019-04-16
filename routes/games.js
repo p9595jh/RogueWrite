@@ -38,31 +38,34 @@ router.get('/', function(req, res, next) {
 // for pug =============================================================
 
 router.get('/tool', function(req, res, next) {
-    let blockId = req.query._id;
+    const blockId = req.query._id;
+    const uid = req.query.uid;
     req.session.block = [];
     if ( blockId ) {
-        req.session.temp = blockId;
         Temp.findOne({_id: blockId}, {block: 1, _id: 1}, (err, output) => {
             if ( err | !output ) {
-                req.session.temp = undefined;
-                // req.session.block = [];
-                res.render('tool', {
-                    title: 'TOOL'
-                });
-            } else {
-                req.session.temp = output._id;
-                // req.session.block = output.block;
                 res.render('tool', {
                     title: 'TOOL',
-                    temp: output._id
+                    uid: uid
+                });
+            } else {    // load temp data
+                Temp.find({user: uid}, {block: 0}, (err, outputs) => {
+                    res.render('tool', {
+                        title: 'TOOL',
+                        temp: output._id,
+                        uid: uid,
+                        temps: outputs
+                    });
                 });
             }
         });
     } else {
-        req.session.temp = undefined;
-        // req.session.block = [];
-        res.render('tool', {
-            title: 'TOOL'
+        Temp.find({user: uid}, {block: 0}, (err, outputs) => {
+            res.render('tool', {
+                title: 'TOOL',
+                temps: outputs,
+                uid: uid
+            });
         });
     }
 });
@@ -112,13 +115,29 @@ router.post('/blockEvents', function(req, res, next) {
 });
 
 router.post('/temp', function(req, res, next) {
-    Temp.findOne({_id: req.session.temp}, {block: 1}, (err, output) => {
-        if ( err | !output ) res.json({block: req.session.block});
-        else {
-            req.session.block = [];
-            res.json({block: output.block});
-        }
+    Temp.findOne({_id: req.body._id}, {block: 1}, (err, output) => {
+        res.json({block: output.block});
     });
+});
+
+router.post('/tempSave', (req, res, next) => {
+    if ( req.body._id ) {
+        Temp.findOneAndUpdate({_id: req.body._id}, {block: req.body.block, savedate: getNowDate()}, (err, output) => {
+            if ( err | !output ) res.json({success: false});
+            else res.json({success: true});
+        });
+    } else {
+        const newTemp = new Temp({
+            user: req.body.uid,
+            block: req.body.block,
+            title: req.body.title,
+            savedate: getNowDate()
+        });
+        Temp.add(newTemp, (err, output) => {
+            if ( err ) res.json({success: false});
+            else res.json({success: true});
+        });
+    }
 });
 
 router.get('/test', (req, res, next) => {
@@ -152,6 +171,8 @@ router.post('/save', function(req, res, next) {
             }
         }
         req.session.data = data;
+        req.session.block = req.body.block;
+        req.session.temp = req.body._id;
         res.json({success: true});
     }
     
@@ -219,33 +240,6 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
     }
 });
 
-// temp writing =============================================================
-
-router.post('/tempWrite', passport.authenticate('jwt', {session: false}), function(req, res, next) {
-    const tempGame = new Temp({
-        user: req.user._id,
-        block: req.session.block,
-        content: req.body.content,
-        title: req.body.title
-    });
-
-    // 'req.session.temp' represents it is being fixed
-    if ( req.session.temp ) {
-        Temp.findOneAndUpdate({_id: req.session.temp}, {block: req.session.block}, function(err, output) {
-            if ( err ) res.json({success: false, msg: err});
-            else res.json({success: true});
-        });
-    } else {
-        Temp.add(tempGame, (err, output) => {
-            if ( err ) res.json({success: false, msg: err});
-            else {
-                req.session.temp = output._id;
-                res.json({success: true});
-            }
-        });
-    }
-});
-
 // take =============================================================
 
 router.get('/takeOnePost', function(req, res, next) {
@@ -273,12 +267,6 @@ router.get('/takeAllPosts', function(req, res, next) {
 router.get('/takeRequestedPosts', function(req, res, next) {
     Game.find({boardRequest: 1}, {content: 0, game: 0, block: 0, comment: 0, hit: 0, recommendby: 0}, function(err, posts) {
         res.json({posts: posts});
-    });
-});
-
-router.post('/takeAllTemps', passport.authenticate('jwt', {session: false}), function(req, res, next) {
-    Temp.find({user: req.user._id}, (err, temps) => {
-        res.json({temps: temps});
     });
 });
 

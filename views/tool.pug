@@ -13,7 +13,16 @@ block content
         span &nbsp;&nbsp;&nbsp;
         button#save(class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored", style='width: 100px; height: 30px;', onclick='save()') 저장
         span &nbsp;&nbsp;&nbsp;
-        button#save(class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent", style='width: 100px; height: 30px;', onclick='test()') TEST
+        button#test(class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent", style='width: 100px; height: 30px;', onclick='tsave()') 임시저장
+        - if ( temps != undefined && temps.length > 0 )
+            span &nbsp;&nbsp;&nbsp;
+            button#load(class="mdl-button mdl-js-button mdl-js-ripple-effect", style='width: 100px; height: 30px;') 불러오기
+            ul(class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect", for='load')
+                each val in temps
+                    li(class="mdl-menu__item")
+                        a(href='./tool?uid=' + uid + '&_id=' + val._id, style="color: black; text-decoration: none;")= val.title + ' (' + val.savedate + ')'
+                        pre 	X
+
     
     xml#toolbox(style='display: none')
         category(name='big_one')
@@ -30,6 +39,7 @@ block content
         block(type="game", inline="false", x="20", y="20")
 
     div#tempData(style="display: none;") #{temp}
+    div#uid(style="display: none;") #{uid}
 
     script.
         //- @ set default workspace (workspaceFantasy)
@@ -49,46 +59,78 @@ block content
         }
         //- ========================================
 
-        //- @ test function
+        //- @ temp save function
         var blocks = [];
-        function test() {
-            console.log(blocks);
+        function tsave() {
+            //- for (let block of blocks) console.log(block);
+
+            if ( document.getElementById('tempData').innerHTML != '' ) {    // when working with temp data
+                let xhr = new XMLHttpRequest();
+                xhr.open('POST', './tempSave');
+                xhr.setRequestHeader('Content-type', 'application/json');
+                xhr.send(JSON.stringify({
+                    block: blocks,
+                    _id: document.getElementById('tempData').innerHTML,
+                    uid: document.getElementById('uid').innerHTML
+                }));
+
+                xhr.addEventListener('load', () => {
+                    let result = JSON.parse(xhr.responseText);
+                    if ( result.success ) alert('임시저장 되었습니다');
+                    else alert('임시저장 오류');
+                });
+            } else {
+                let title = prompt('임시저장용 제목을 입력해주세요.');
+                if ( title == null ) return;
+
+                let xhr = new XMLHttpRequest();
+                xhr.open('POST', './tempSave');
+                xhr.setRequestHeader('Content-type', 'application/json');
+                xhr.send(JSON.stringify({
+                    block: blocks,
+                    title: title,
+                    _id: document.getElementById('tempData').innerHTML,
+                    uid: document.getElementById('uid').innerHTML
+                }));
+
+                xhr.addEventListener('load', () => {
+                    let result = JSON.parse(xhr.responseText);
+                    if ( result.success ) alert('임시저장 되었습니다');
+                    else alert('임시저장 오류');
+                });
+            }
         }
         //- ========================================
 
         //- @ set blocks from temp data to the default workspace
         if ( document.getElementById('tempData').innerHTML != '' ) {
             workspaceFantasy.clear();
+            blocks = [];
+
             let xhr = new XMLHttpRequest();
             xhr.open('POST', './temp');
             xhr.setRequestHeader('Content-type', 'application/json');
-            xhr.send('');
+            xhr.send(JSON.stringify({_id: document.getElementById('tempData').innerHTML}));
 
             xhr.addEventListener('load', () => {
                 let result = JSON.parse(xhr.responseText);
+                let i = 0;
                 for (let block of result.block) {
-                    Blockly.Events.fromJson(block, workspaceFantasy).run(true);
+                    setTimeout(() => {
+                        Blockly.Events.fromJson(block, workspaceFantasy).run(true);
+                    }, (i++) * 4);
+                    //- Blockly.Events.fromJson(block, workspaceFantasy).run(true);
                 }
             });
         }
         //- ========================================
 
         //- @ add event listener to the default workspace
-        var num = 0;
         workspaceFantasy.addChangeListener((event) => {
             if ( event.type == Blockly.Events.UI ) return;
-
             let block = {block: event.toJson()};
-            //- console.log(block);
             if ( block.block.type == 'finished_loading' ) return;
-            block.block.num = num++;
             blocks.push(block.block);
-            //- console.log(block.block);
-
-            let xhr = new XMLHttpRequest();
-            xhr.open('POST', './blockEvents');
-            xhr.setRequestHeader('Content-type', 'application/json');
-            xhr.send(JSON.stringify(block));
         });
         //- ========================================
 
@@ -99,6 +141,8 @@ block content
 
             try {
                 code = JSON.parse(code);
+                code.block = blocks;
+                code._id = document.getElementById('tempData').innerHTML;
                 code = JSON.stringify(code);
             } catch (e) {
                 setMessage("에러가 발생하였습니다: " + e, "red", 2000);

@@ -11,7 +11,7 @@ const GameSchema = mongoose.Schema({
     game: Object,   // game data
     block: Array,   // moves of the block
     boardRequest: Number,   // 0: normal, 1: requested, 2: accepted, 3: rejected
-    board: String,
+    board: String,  // url of own board
     hit: Number,
     writedate: String,
     recommend: Number,
