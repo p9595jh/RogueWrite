@@ -11,6 +11,10 @@ import { NgFlashMessageService } from 'ng-flash-messages';
 })
 export class TestComponent implements OnInit {
 
+  temp = [
+    1,2,3,4,4,5,6,7,45,6,4,4
+  ];
+
   constructor(
     private funcService: FuncService,
     private playService: PlayService,

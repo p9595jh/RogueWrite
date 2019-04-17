@@ -8,7 +8,7 @@ const TempSchema = mongoose.Schema({
     block: Array,    // moves of the blocks
     title: String,
     savedate: String,
-    from: Object
+    from: Object,
     /*
         from: {
             game: String,   // '_id' of the game
@@ -17,6 +17,7 @@ const TempSchema = mongoose.Schema({
             nickname: String
         }
     */
+   coworker: Array  // string array
 });
 
 const Temp = module.exports = mongoose.model('Temp', TempSchema);

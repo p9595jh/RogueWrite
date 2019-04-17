@@ -19,9 +19,7 @@ block content
             button#load(class="mdl-button mdl-js-button mdl-js-ripple-effect", style='width: 100px; height: 30px;') 불러오기
             ul(class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect", for='load')
                 each val in temps
-                    li(class="mdl-menu__item")
-                        a(href='./tool?uid=' + uid + '&_id=' + val._id, style="color: black; text-decoration: none;")= val.title + ' (' + val.savedate + ')'
-                        pre 	X
+                    li(class="mdl-menu__item", onclick='location.href="./tool?uid=' + uid + '&_id=' + val._id + '"')= val.title + ' (' + val.savedate + ')'
 
     
     xml#toolbox(style='display: none')
@@ -34,9 +32,11 @@ block content
             block(type='math_number')
             block(type='condition')
             block(type='parameter')
+            block(type='math_arithmetic')
+        category(name='variable', custom='VARIABLE')
     
     xml#startBlocks(style="display: none;")
-        block(type="game", inline="false", x="20", y="20")
+        block(type="game", inline="false", x="200", y="50")
 
     div#tempData(style="display: none;") #{temp}
     div#uid(style="display: none;") #{uid}
@@ -45,6 +45,15 @@ block content
         //- @ set default workspace (workspaceFantasy)
         var workspaceFantasy = Blockly.inject('workspaceFantasy', {
             media: '../resources/blockly/google-blockly-82871b3/media/',
+            comments : false,
+            zoom: {
+                controls: true,
+                wheel: true,
+                startScale: 1.0,
+                maxScale: 3,
+                minScale: 0.3,
+                scaleSpeed: 1.2
+            },
             toolbox: document.getElementById('toolbox')
         });
         Blockly.Xml.domToWorkspace(document.getElementById('startBlocks'), workspaceFantasy);
@@ -106,22 +115,14 @@ block content
         if ( document.getElementById('tempData').innerHTML != '' ) {
             workspaceFantasy.clear();
             blocks = [];
-
-            let xhr = new XMLHttpRequest();
-            xhr.open('POST', './temp');
-            xhr.setRequestHeader('Content-type', 'application/json');
-            xhr.send(JSON.stringify({_id: document.getElementById('tempData').innerHTML}));
-
-            xhr.addEventListener('load', () => {
-                let result = JSON.parse(xhr.responseText);
-                let i = 0;
-                for (let block of result.block) {
-                    setTimeout(() => {
-                        Blockly.Events.fromJson(block, workspaceFantasy).run(true);
-                    }, (i++) * 4);
-                    //- Blockly.Events.fromJson(block, workspaceFantasy).run(true);
-                }
-            });
+            let temp = !{JSON.stringify(block)};
+            let i = 0;
+            for (let block of temp) {
+                setTimeout(() => {
+                    Blockly.Events.fromJson(block, workspaceFantasy).run(true);
+                }, (i++) * 4);
+                //- Blockly.Events.fromJson(block, workspaceFantasy).run(true);
+            }
         }
         //- ========================================
 

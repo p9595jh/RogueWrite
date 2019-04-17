@@ -18,7 +18,7 @@ const GameSchema = mongoose.Schema({
     unrecommend: Number,
     recommendby: Array, // person who recommended or unrecommended
     comment: Array,
-    from: Object
+    from: Object,
     /*
         from: {
             game: String,   // '_id' of the game
@@ -27,6 +27,7 @@ const GameSchema = mongoose.Schema({
             nickname: String
         }
     */
+   coworker: Array
 });
 
 const Game = module.exports = mongoose.model('Game', GameSchema);

@@ -70,17 +70,16 @@ Blockly.Constants.Loops.CUSTOM_CONTEXT_MENU_CREATE_VARIABLES_GET_MIXIN={customCo
 Blockly.Extensions.registerMixin("contextMenu_newGetVariableBlock",Blockly.Constants.Loops.CUSTOM_CONTEXT_MENU_CREATE_VARIABLES_GET_MIXIN);Blockly.Extensions.register("controls_for_tooltip",Blockly.Extensions.buildTooltipWithFieldText("%{BKY_CONTROLS_FOR_TOOLTIP}","VAR"));Blockly.Extensions.register("controls_forEach_tooltip",Blockly.Extensions.buildTooltipWithFieldText("%{BKY_CONTROLS_FOREACH_TOOLTIP}","VAR"));
 Blockly.Constants.Loops.CONTROL_FLOW_IN_LOOP_CHECK_MIXIN={LOOP_TYPES:["controls_repeat","controls_repeat_ext","controls_forEach","controls_for","controls_whileUntil"],onchange:function(){if(this.workspace.isDragging&&!this.workspace.isDragging()){var a=!1,b=this;do{if(-1!=this.LOOP_TYPES.indexOf(b.type)){a=!0;break}b=b.getSurroundParent()}while(b);a?(this.setWarningText(null),this.isInFlyout||this.setDisabled(!1)):(this.setWarningText(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING),this.isInFlyout||
 this.getInheritedDisabled()||this.setDisabled(!0))}}};Blockly.Extensions.registerMixin("controls_flow_in_loop_check",Blockly.Constants.Loops.CONTROL_FLOW_IN_LOOP_CHECK_MIXIN);Blockly.Blocks.math={};Blockly.Constants.Math={};Blockly.Constants.Math.HUE=230;
-Blockly.defineBlocksWithJsonArray([{type:"math_number",message0:"%1",args0:[{type:"field_number",name:"NUM",value:0}],output:"Number",helpUrl:"%{BKY_MATH_NUMBER_HELPURL}",style:"math_blocks",tooltip:"%{BKY_MATH_NUMBER_TOOLTIP}",extensions:["parent_tooltip_when_inline"]},{type:"math_arithmetic",message0:"%1 %2 %3",args0:[{type:"input_value",name:"A",check:"Number"},{type:"field_dropdown",name:"OP",options:[["%{BKY_MATH_ADDITION_SYMBOL}","ADD"],["%{BKY_MATH_SUBTRACTION_SYMBOL}","MINUS"],["%{BKY_MATH_MULTIPLICATION_SYMBOL}",
-"MULTIPLY"],["%{BKY_MATH_DIVISION_SYMBOL}","DIVIDE"],["%{BKY_MATH_POWER_SYMBOL}","POWER"]]},{type:"input_value",name:"B",check:"Number"}],inputsInline:!0,output:"Number",style:"math_blocks",helpUrl:"%{BKY_MATH_ARITHMETIC_HELPURL}",extensions:["math_op_tooltip"]},{type:"math_single",message0:"%1 %2",args0:[{type:"field_dropdown",name:"OP",options:[["%{BKY_MATH_SINGLE_OP_ROOT}","ROOT"],["%{BKY_MATH_SINGLE_OP_ABSOLUTE}","ABS"],["-","NEG"],["ln","LN"],["log10","LOG10"],["e^","EXP"],["10^","POW10"]]},
-{type:"input_value",name:"NUM",check:"Number"}],output:"Number",style:"math_blocks",helpUrl:"%{BKY_MATH_SINGLE_HELPURL}",extensions:["math_op_tooltip"]},{type:"math_trig",message0:"%1 %2",args0:[{type:"field_dropdown",name:"OP",options:[["%{BKY_MATH_TRIG_SIN}","SIN"],["%{BKY_MATH_TRIG_COS}","COS"],["%{BKY_MATH_TRIG_TAN}","TAN"],["%{BKY_MATH_TRIG_ASIN}","ASIN"],["%{BKY_MATH_TRIG_ACOS}","ACOS"],["%{BKY_MATH_TRIG_ATAN}","ATAN"]]},{type:"input_value",name:"NUM",check:"Number"}],output:"Number",style:"math_blocks",
-helpUrl:"%{BKY_MATH_TRIG_HELPURL}",extensions:["math_op_tooltip"]},{type:"math_constant",message0:"%1",args0:[{type:"field_dropdown",name:"CONSTANT",options:[["\u03c0","PI"],["e","E"],["\u03c6","GOLDEN_RATIO"],["sqrt(2)","SQRT2"],["sqrt(\u00bd)","SQRT1_2"],["\u221e","INFINITY"]]}],output:"Number",style:"math_blocks",tooltip:"%{BKY_MATH_CONSTANT_TOOLTIP}",helpUrl:"%{BKY_MATH_CONSTANT_HELPURL}"},{type:"math_number_property",message0:"%1 %2",args0:[{type:"input_value",name:"NUMBER_TO_CHECK",check:"Number"},
-{type:"field_dropdown",name:"PROPERTY",options:[["%{BKY_MATH_IS_EVEN}","EVEN"],["%{BKY_MATH_IS_ODD}","ODD"],["%{BKY_MATH_IS_PRIME}","PRIME"],["%{BKY_MATH_IS_WHOLE}","WHOLE"],["%{BKY_MATH_IS_POSITIVE}","POSITIVE"],["%{BKY_MATH_IS_NEGATIVE}","NEGATIVE"],["%{BKY_MATH_IS_DIVISIBLE_BY}","DIVISIBLE_BY"]]}],inputsInline:!0,output:"Boolean",style:"math_blocks",tooltip:"%{BKY_MATH_IS_TOOLTIP}",mutator:"math_is_divisibleby_mutator"},{type:"math_change",message0:"%{BKY_MATH_CHANGE_TITLE}",args0:[{type:"field_variable",
-name:"VAR",variable:"%{BKY_MATH_CHANGE_TITLE_ITEM}"},{type:"input_value",name:"DELTA",check:"Number"}],previousStatement:null,nextStatement:null,style:"variable_blocks",helpUrl:"%{BKY_MATH_CHANGE_HELPURL}",extensions:["math_change_tooltip"]},{type:"math_round",message0:"%1 %2",args0:[{type:"field_dropdown",name:"OP",options:[["%{BKY_MATH_ROUND_OPERATOR_ROUND}","ROUND"],["%{BKY_MATH_ROUND_OPERATOR_ROUNDUP}","ROUNDUP"],["%{BKY_MATH_ROUND_OPERATOR_ROUNDDOWN}","ROUNDDOWN"]]},{type:"input_value",name:"NUM",
-check:"Number"}],output:"Number",style:"math_blocks",helpUrl:"%{BKY_MATH_ROUND_HELPURL}",tooltip:"%{BKY_MATH_ROUND_TOOLTIP}"},{type:"math_on_list",message0:"%1 %2",args0:[{type:"field_dropdown",name:"OP",options:[["%{BKY_MATH_ONLIST_OPERATOR_SUM}","SUM"],["%{BKY_MATH_ONLIST_OPERATOR_MIN}","MIN"],["%{BKY_MATH_ONLIST_OPERATOR_MAX}","MAX"],["%{BKY_MATH_ONLIST_OPERATOR_AVERAGE}","AVERAGE"],["%{BKY_MATH_ONLIST_OPERATOR_MEDIAN}","MEDIAN"],["%{BKY_MATH_ONLIST_OPERATOR_MODE}","MODE"],["%{BKY_MATH_ONLIST_OPERATOR_STD_DEV}",
-"STD_DEV"],["%{BKY_MATH_ONLIST_OPERATOR_RANDOM}","RANDOM"]]},{type:"input_value",name:"LIST",check:"Array"}],output:"Number",style:"math_blocks",helpUrl:"%{BKY_MATH_ONLIST_HELPURL}",mutator:"math_modes_of_list_mutator",extensions:["math_op_tooltip"]},{type:"math_modulo",message0:"%{BKY_MATH_MODULO_TITLE}",args0:[{type:"input_value",name:"DIVIDEND",check:"Number"},{type:"input_value",name:"DIVISOR",check:"Number"}],inputsInline:!0,output:"Number",style:"math_blocks",tooltip:"%{BKY_MATH_MODULO_TOOLTIP}",
-helpUrl:"%{BKY_MATH_MODULO_HELPURL}"},{type:"math_constrain",message0:"%{BKY_MATH_CONSTRAIN_TITLE}",args0:[{type:"input_value",name:"VALUE",check:"Number"},{type:"input_value",name:"LOW",check:"Number"},{type:"input_value",name:"HIGH",check:"Number"}],inputsInline:!0,output:"Number",style:"math_blocks",tooltip:"%{BKY_MATH_CONSTRAIN_TOOLTIP}",helpUrl:"%{BKY_MATH_CONSTRAIN_HELPURL}"},{type:"math_random_int",message0:"%{BKY_MATH_RANDOM_INT_TITLE}",args0:[{type:"input_value",name:"FROM",check:"Number"},
-{type:"input_value",name:"TO",check:"Number"}],inputsInline:!0,output:"Number",style:"math_blocks",tooltip:"%{BKY_MATH_RANDOM_INT_TOOLTIP}",helpUrl:"%{BKY_MATH_RANDOM_INT_HELPURL}"},{type:"math_random_float",message0:"%{BKY_MATH_RANDOM_FLOAT_TITLE_RANDOM}",output:"Number",style:"math_blocks",tooltip:"%{BKY_MATH_RANDOM_FLOAT_TOOLTIP}",helpUrl:"%{BKY_MATH_RANDOM_FLOAT_HELPURL}"},{type:"math_atan2",message0:"%{BKY_MATH_ATAN2_TITLE}",args0:[{type:"input_value",name:"X",check:"Number"},{type:"input_value",
-name:"Y",check:"Number"}],inputsInline:!0,output:"Number",style:"math_blocks",tooltip:"%{BKY_MATH_ATAN2_TOOLTIP}",helpUrl:"%{BKY_MATH_ATAN2_HELPURL}"}]);
+Blockly.defineBlocksWithJsonArray([{type:"math_number",message0:"%1",args0:[{type:"field_number",name:"NUM",value:0}],output:"Number",helpUrl:"%{BKY_MATH_NUMBER_HELPURL}",style:"math_blocks",tooltip:"%{BKY_MATH_NUMBER_TOOLTIP}",extensions:["parent_tooltip_when_inline"]},{type:"math_arithmetic",message0:"%1 %2 %3",args0:[{type:"input_value",name:"A",check:["myparam","Number","mystring"]},{type:"field_dropdown",name:"OP",options:[["%{BKY_MATH_ADDITION_SYMBOL}","ADD"],["%{BKY_MATH_SUBTRACTION_SYMBOL}",
+"MINUS"],["%{BKY_MATH_MULTIPLICATION_SYMBOL}","MULTIPLY"],["%{BKY_MATH_DIVISION_SYMBOL}","DIVIDE"]]},{type:"input_value",name:"B",check:["myparam","Number","mystring"]}],inputsInline:!0,output:"mystring",style:"math_blocks",helpUrl:"%{BKY_MATH_ARITHMETIC_HELPURL}",extensions:["math_op_tooltip"]},{type:"math_single",message0:"%1 %2",args0:[{type:"field_dropdown",name:"OP",options:[["%{BKY_MATH_SINGLE_OP_ROOT}","ROOT"],["%{BKY_MATH_SINGLE_OP_ABSOLUTE}","ABS"],["-","NEG"],["ln","LN"],["log10","LOG10"],
+["e^","EXP"],["10^","POW10"]]},{type:"input_value",name:"NUM",check:"Number"}],output:"Number",style:"math_blocks",helpUrl:"%{BKY_MATH_SINGLE_HELPURL}",extensions:["math_op_tooltip"]},{type:"math_trig",message0:"%1 %2",args0:[{type:"field_dropdown",name:"OP",options:[["%{BKY_MATH_TRIG_SIN}","SIN"],["%{BKY_MATH_TRIG_COS}","COS"],["%{BKY_MATH_TRIG_TAN}","TAN"],["%{BKY_MATH_TRIG_ASIN}","ASIN"],["%{BKY_MATH_TRIG_ACOS}","ACOS"],["%{BKY_MATH_TRIG_ATAN}","ATAN"]]},{type:"input_value",name:"NUM",check:"Number"}],
+output:"Number",style:"math_blocks",helpUrl:"%{BKY_MATH_TRIG_HELPURL}",extensions:["math_op_tooltip"]},{type:"math_constant",message0:"%1",args0:[{type:"field_dropdown",name:"CONSTANT",options:[["\u03c0","PI"],["e","E"],["\u03c6","GOLDEN_RATIO"],["sqrt(2)","SQRT2"],["sqrt(\u00bd)","SQRT1_2"],["\u221e","INFINITY"]]}],output:"Number",style:"math_blocks",tooltip:"%{BKY_MATH_CONSTANT_TOOLTIP}",helpUrl:"%{BKY_MATH_CONSTANT_HELPURL}"},{type:"math_number_property",message0:"%1 %2",args0:[{type:"input_value",
+name:"NUMBER_TO_CHECK",check:"Number"},{type:"field_dropdown",name:"PROPERTY",options:[["%{BKY_MATH_IS_EVEN}","EVEN"],["%{BKY_MATH_IS_ODD}","ODD"],["%{BKY_MATH_IS_PRIME}","PRIME"],["%{BKY_MATH_IS_WHOLE}","WHOLE"],["%{BKY_MATH_IS_POSITIVE}","POSITIVE"],["%{BKY_MATH_IS_NEGATIVE}","NEGATIVE"],["%{BKY_MATH_IS_DIVISIBLE_BY}","DIVISIBLE_BY"]]}],inputsInline:!0,output:"Boolean",style:"math_blocks",tooltip:"%{BKY_MATH_IS_TOOLTIP}",mutator:"math_is_divisibleby_mutator"},{type:"math_round",message0:"%1 %2",
+args0:[{type:"field_dropdown",name:"OP",options:[["%{BKY_MATH_ROUND_OPERATOR_ROUND}","ROUND"],["%{BKY_MATH_ROUND_OPERATOR_ROUNDUP}","ROUNDUP"],["%{BKY_MATH_ROUND_OPERATOR_ROUNDDOWN}","ROUNDDOWN"]]},{type:"input_value",name:"NUM",check:"Number"}],output:"Number",style:"math_blocks",helpUrl:"%{BKY_MATH_ROUND_HELPURL}",tooltip:"%{BKY_MATH_ROUND_TOOLTIP}"},{type:"math_on_list",message0:"%1 %2",args0:[{type:"field_dropdown",name:"OP",options:[["%{BKY_MATH_ONLIST_OPERATOR_SUM}","SUM"],["%{BKY_MATH_ONLIST_OPERATOR_MIN}",
+"MIN"],["%{BKY_MATH_ONLIST_OPERATOR_MAX}","MAX"],["%{BKY_MATH_ONLIST_OPERATOR_AVERAGE}","AVERAGE"],["%{BKY_MATH_ONLIST_OPERATOR_MEDIAN}","MEDIAN"],["%{BKY_MATH_ONLIST_OPERATOR_MODE}","MODE"],["%{BKY_MATH_ONLIST_OPERATOR_STD_DEV}","STD_DEV"],["%{BKY_MATH_ONLIST_OPERATOR_RANDOM}","RANDOM"]]},{type:"input_value",name:"LIST",check:"Array"}],output:"Number",style:"math_blocks",helpUrl:"%{BKY_MATH_ONLIST_HELPURL}",mutator:"math_modes_of_list_mutator",extensions:["math_op_tooltip"]},{type:"math_modulo",
+message0:"%{BKY_MATH_MODULO_TITLE}",args0:[{type:"input_value",name:"DIVIDEND",check:"Number"},{type:"input_value",name:"DIVISOR",check:"Number"}],inputsInline:!0,output:"Number",style:"math_blocks",tooltip:"%{BKY_MATH_MODULO_TOOLTIP}",helpUrl:"%{BKY_MATH_MODULO_HELPURL}"},{type:"math_constrain",message0:"%{BKY_MATH_CONSTRAIN_TITLE}",args0:[{type:"input_value",name:"VALUE",check:"Number"},{type:"input_value",name:"LOW",check:"Number"},{type:"input_value",name:"HIGH",check:"Number"}],inputsInline:!0,
+output:"Number",style:"math_blocks",tooltip:"%{BKY_MATH_CONSTRAIN_TOOLTIP}",helpUrl:"%{BKY_MATH_CONSTRAIN_HELPURL}"},{type:"math_random_int",message0:"%{BKY_MATH_RANDOM_INT_TITLE}",args0:[{type:"input_value",name:"FROM",check:"Number"},{type:"input_value",name:"TO",check:"Number"}],inputsInline:!0,output:"Number",style:"math_blocks",tooltip:"%{BKY_MATH_RANDOM_INT_TOOLTIP}",helpUrl:"%{BKY_MATH_RANDOM_INT_HELPURL}"},{type:"math_random_float",message0:"%{BKY_MATH_RANDOM_FLOAT_TITLE_RANDOM}",output:"Number",
+style:"math_blocks",tooltip:"%{BKY_MATH_RANDOM_FLOAT_TOOLTIP}",helpUrl:"%{BKY_MATH_RANDOM_FLOAT_HELPURL}"},{type:"math_atan2",message0:"%{BKY_MATH_ATAN2_TITLE}",args0:[{type:"input_value",name:"X",check:"Number"},{type:"input_value",name:"Y",check:"Number"}],inputsInline:!0,output:"Number",style:"math_blocks",tooltip:"%{BKY_MATH_ATAN2_TOOLTIP}",helpUrl:"%{BKY_MATH_ATAN2_HELPURL}"}]);
 Blockly.Constants.Math.TOOLTIPS_BY_OP={ADD:"%{BKY_MATH_ARITHMETIC_TOOLTIP_ADD}",MINUS:"%{BKY_MATH_ARITHMETIC_TOOLTIP_MINUS}",MULTIPLY:"%{BKY_MATH_ARITHMETIC_TOOLTIP_MULTIPLY}",DIVIDE:"%{BKY_MATH_ARITHMETIC_TOOLTIP_DIVIDE}",POWER:"%{BKY_MATH_ARITHMETIC_TOOLTIP_POWER}",ROOT:"%{BKY_MATH_SINGLE_TOOLTIP_ROOT}",ABS:"%{BKY_MATH_SINGLE_TOOLTIP_ABS}",NEG:"%{BKY_MATH_SINGLE_TOOLTIP_NEG}",LN:"%{BKY_MATH_SINGLE_TOOLTIP_LN}",LOG10:"%{BKY_MATH_SINGLE_TOOLTIP_LOG10}",EXP:"%{BKY_MATH_SINGLE_TOOLTIP_EXP}",POW10:"%{BKY_MATH_SINGLE_TOOLTIP_POW10}",
 SIN:"%{BKY_MATH_TRIG_TOOLTIP_SIN}",COS:"%{BKY_MATH_TRIG_TOOLTIP_COS}",TAN:"%{BKY_MATH_TRIG_TOOLTIP_TAN}",ASIN:"%{BKY_MATH_TRIG_TOOLTIP_ASIN}",ACOS:"%{BKY_MATH_TRIG_TOOLTIP_ACOS}",ATAN:"%{BKY_MATH_TRIG_TOOLTIP_ATAN}",SUM:"%{BKY_MATH_ONLIST_TOOLTIP_SUM}",MIN:"%{BKY_MATH_ONLIST_TOOLTIP_MIN}",MAX:"%{BKY_MATH_ONLIST_TOOLTIP_MAX}",AVERAGE:"%{BKY_MATH_ONLIST_TOOLTIP_AVERAGE}",MEDIAN:"%{BKY_MATH_ONLIST_TOOLTIP_MEDIAN}",MODE:"%{BKY_MATH_ONLIST_TOOLTIP_MODE}",STD_DEV:"%{BKY_MATH_ONLIST_TOOLTIP_STD_DEV}",RANDOM:"%{BKY_MATH_ONLIST_TOOLTIP_RANDOM}"};
 Blockly.Extensions.register("math_op_tooltip",Blockly.Extensions.buildTooltipForDropdown("OP",Blockly.Constants.Math.TOOLTIPS_BY_OP));
@@ -156,203 +155,185 @@ Blockly.Constants.Text.TEXT_CHARAT_MUTATOR_MIXIN={mutationToDom:function(){var a
 (this.removeInput("TAIL",!0),this.appendDummyInput("TAIL").appendField(Blockly.Msg.TEXT_CHARAT_TAIL));this.isAt_=a}};
 Blockly.Constants.Text.TEXT_CHARAT_EXTENSION=function(){this.getField("WHERE").setValidator(function(a){var b="FROM_START"==a||"FROM_END"==a;if(b!=this.isAt_){var d=this.sourceBlock_;d.updateAt_(b);d.setFieldValue(a,"WHERE");return null}});this.updateAt_(!0);var a=this;this.setTooltip(function(){var b=a.getFieldValue("WHERE"),c=Blockly.Msg.TEXT_CHARAT_TOOLTIP;("FROM_START"==b||"FROM_END"==b)&&(b="FROM_START"==b?Blockly.Msg.LISTS_INDEX_FROM_START_TOOLTIP:Blockly.Msg.LISTS_INDEX_FROM_END_TOOLTIP)&&
 (c+="  "+b.replace("%1",a.workspace.options.oneBasedIndex?"#1":"#0"));return c})};Blockly.Extensions.register("text_indexOf_tooltip",Blockly.Constants.Text.TEXT_INDEXOF_TOOLTIP_EXTENSION);Blockly.Extensions.register("text_quotes",Blockly.Constants.Text.TEXT_QUOTES_EXTENSION);Blockly.Extensions.registerMutator("text_join_mutator",Blockly.Constants.Text.TEXT_JOIN_MUTATOR_MIXIN,Blockly.Constants.Text.TEXT_JOIN_EXTENSION);
-Blockly.Extensions.registerMutator("text_charAt_mutator",Blockly.Constants.Text.TEXT_CHARAT_MUTATOR_MIXIN,Blockly.Constants.Text.TEXT_CHARAT_EXTENSION);Blockly.Blocks.variables={};Blockly.Constants.Variables={};Blockly.Constants.Variables.HUE=330;
-Blockly.defineBlocksWithJsonArray([{type:"variables_get",message0:"%1",args0:[{type:"field_variable",name:"VAR",variable:"%{BKY_VARIABLES_DEFAULT_NAME}"}],output:null,style:"variable_blocks",helpUrl:"%{BKY_VARIABLES_GET_HELPURL}",tooltip:"%{BKY_VARIABLES_GET_TOOLTIP}",extensions:["contextMenu_variableSetterGetter"]},{type:"variables_set",message0:"%{BKY_VARIABLES_SET}",args0:[{type:"field_variable",name:"VAR",variable:"%{BKY_VARIABLES_DEFAULT_NAME}"},{type:"input_value",name:"VALUE"}],previousStatement:null,
-nextStatement:null,style:"variable_blocks",tooltip:"%{BKY_VARIABLES_SET_TOOLTIP}",helpUrl:"%{BKY_VARIABLES_SET_HELPURL}",extensions:["contextMenu_variableSetterGetter"]}]);
+Blockly.Extensions.registerMutator("text_charAt_mutator",Blockly.Constants.Text.TEXT_CHARAT_MUTATOR_MIXIN,Blockly.Constants.Text.TEXT_CHARAT_EXTENSION);Blockly.Blocks.variables={};Blockly.Constants.Variables={};Blockly.Constants.Variables.HUE=330;Blockly.defineBlocksWithJsonArray([{type:"variables_get",message0:"%1",args0:[{type:"field_variable",name:"VAR",variable:"%{BKY_VARIABLES_DEFAULT_NAME}"}],output:"myparam",style:"variable_blocks",helpUrl:"%{BKY_VARIABLES_GET_HELPURL}",tooltip:"%{BKY_VARIABLES_GET_TOOLTIP}",extensions:["contextMenu_variableSetterGetter"]}]);
 Blockly.Constants.Variables.CUSTOM_CONTEXT_MENU_VARIABLE_GETTER_SETTER_MIXIN={customContextMenu:function(a){if(!this.isInFlyout){if("variables_get"==this.type)var b="variables_set",c=Blockly.Msg.VARIABLES_GET_CREATE_SET;else b="variables_get",c=Blockly.Msg.VARIABLES_SET_CREATE_GET;var d={enabled:0<this.workspace.remainingCapacity()},e=this.getField("VAR").getText();d.text=c.replace("%1",e);c=document.createElement("field");c.setAttribute("name","VAR");c.appendChild(document.createTextNode(e));e=document.createElement("block");
 e.setAttribute("type",b);e.appendChild(c);d.callback=Blockly.ContextMenu.callbackFactory(this,e);a.push(d)}else if("variables_get"==this.type||"variables_get_reporter"==this.type)b={text:Blockly.Msg.RENAME_VARIABLE,enabled:!0,callback:Blockly.Constants.Variables.RENAME_OPTION_CALLBACK_FACTORY(this)},e=this.getField("VAR").getText(),d={text:Blockly.Msg.DELETE_VARIABLE.replace("%1",e),enabled:!0,callback:Blockly.Constants.Variables.DELETE_OPTION_CALLBACK_FACTORY(this)},a.unshift(b),a.unshift(d)}};
 Blockly.Constants.Variables.RENAME_OPTION_CALLBACK_FACTORY=function(a){return function(){var b=a.workspace,c=a.getField("VAR").getVariable();Blockly.Variables.renameVariable(b,c)}};Blockly.Constants.Variables.DELETE_OPTION_CALLBACK_FACTORY=function(a){return function(){var b=a.workspace,c=a.getField("VAR").getVariable();b.deleteVariableById(c.getId());b.refreshToolboxSelection()}};Blockly.Extensions.registerMixin("contextMenu_variableSetterGetter",Blockly.Constants.Variables.CUSTOM_CONTEXT_MENU_VARIABLE_GETTER_SETTER_MIXIN);
-Blockly.Constants.VariablesDynamic={};Blockly.Constants.VariablesDynamic.HUE=310;
-Blockly.defineBlocksWithJsonArray([{type:"variables_get_dynamic",message0:"%1",args0:[{type:"field_variable",name:"VAR",variable:"%{BKY_VARIABLES_DEFAULT_NAME}"}],output:null,style:"variable_dynamic_blocks",helpUrl:"%{BKY_VARIABLES_GET_HELPURL}",tooltip:"%{BKY_VARIABLES_GET_TOOLTIP}",extensions:["contextMenu_variableDynamicSetterGetter"]},{type:"variables_set_dynamic",message0:"%{BKY_VARIABLES_SET}",args0:[{type:"field_variable",name:"VAR",variable:"%{BKY_VARIABLES_DEFAULT_NAME}"},{type:"input_value",
-name:"VALUE"}],previousStatement:null,nextStatement:null,style:"variable_dynamic_blocks",tooltip:"%{BKY_VARIABLES_SET_TOOLTIP}",helpUrl:"%{BKY_VARIABLES_SET_HELPURL}",extensions:["contextMenu_variableDynamicSetterGetter"]}]);
+Blockly.Constants.VariablesDynamic={};Blockly.Constants.VariablesDynamic.HUE=310;Blockly.defineBlocksWithJsonArray([{type:"variables_get_dynamic",message0:"%1",args0:[{type:"field_variable",name:"VAR",variable:"%{BKY_VARIABLES_DEFAULT_NAME}"}],output:"myparam",style:"variable_dynamic_blocks",helpUrl:"%{BKY_VARIABLES_GET_HELPURL}",tooltip:"%{BKY_VARIABLES_GET_TOOLTIP}",extensions:["contextMenu_variableDynamicSetterGetter"]}]);
 Blockly.Constants.VariablesDynamic.CUSTOM_CONTEXT_MENU_VARIABLE_GETTER_SETTER_MIXIN={customContextMenu:function(a){if(!this.isInFlyout){var b=this.getFieldValue("VAR");var c=this.workspace.getVariableById(b).type;if("variables_get_dynamic"==this.type){b="variables_set_dynamic";var d=Blockly.Msg.VARIABLES_GET_CREATE_SET}else b="variables_get_dynamic",d=Blockly.Msg.VARIABLES_SET_CREATE_GET;var e={enabled:0<this.workspace.remainingCapacity()},f=this.getField("VAR").getText();e.text=d.replace("%1",f);
 d=document.createElement("field");d.setAttribute("name","VAR");d.setAttribute("variabletype",c);d.appendChild(document.createTextNode(f));f=document.createElement("block");f.setAttribute("type",b);f.appendChild(d);e.callback=Blockly.ContextMenu.callbackFactory(this,f);a.push(e)}else if("variables_get_dynamic"==this.type||"variables_get_reporter_dynamic"==this.type)b={text:Blockly.Msg.RENAME_VARIABLE,enabled:!0,callback:Blockly.Constants.Variables.RENAME_OPTION_CALLBACK_FACTORY(this)},f=this.getField("VAR").getText(),
 e={text:Blockly.Msg.DELETE_VARIABLE.replace("%1",f),enabled:!0,callback:Blockly.Constants.Variables.DELETE_OPTION_CALLBACK_FACTORY(this)},a.unshift(b),a.unshift(e)},onchange:function(){var a=this.getFieldValue("VAR");a=this.workspace.getVariableById(a);"variables_get_dynamic"==this.type?this.outputConnection.setCheck(a.type):this.getInput("VALUE").connection.setCheck(a.type)}};
 Blockly.Constants.VariablesDynamic.RENAME_OPTION_CALLBACK_FACTORY=function(a){return function(){var b=a.workspace,c=a.getField("VAR").getVariable();Blockly.Variables.renameVariable(b,c)}};Blockly.Constants.VariablesDynamic.DELETE_OPTION_CALLBACK_FACTORY=function(a){return function(){var b=a.workspace,c=a.getField("VAR").getVariable();b.deleteVariableById(c.getId());b.refreshToolboxSelection()}};Blockly.Extensions.registerMixin("contextMenu_variableDynamicSetterGetter",Blockly.Constants.VariablesDynamic.CUSTOM_CONTEXT_MENU_VARIABLE_GETTER_SETTER_MIXIN);
 
 Blockly.defineBlocksWithJsonArray([
-  {
-    "type": "game",
-    "message0": "제목 %1 스테이지 %2 변수 %3 점수 %4",
-    "args0": [
-      {
-        "type": "input_value",
-        "name": "title",
-        "check": "String"
-      },
-      {
-        "type": "input_statement",
-        "name": "stage",
-        "check": "stage"
-      },
-      {
-        "type": "input_statement",
-        "name": "param",
-        "check": "parameter"
-      },
-      {
-        "type": "input_value",
-        "name": "score",
-        "check": "String"
-      }
-    ],
-    "inputsInline": false
-  },
+    {
+        "type": "game",
+        "message0": "제목 %1 스테이지 %2 변수 %3 점수 %4",
+        "args0": [
+            {
+                "type": "input_value",
+                "name": "title",
+                "check": "String"
+            },
+            {
+                "type": "input_statement",
+                "name": "stage",
+                "check": "stage"
+            },
+            {
+                "type": "input_statement",
+                "name": "param",
+                "check": "parameter"
+            },
+            {
+                "type": "input_value",
+                "name": "score",
+                "check": "mystring"
+            }
+        ],
+        "inputsInline": false,
+        "setDeletable": false
+    },
     {
         "type": "stage",
         "message0": "스테이지 번호 %1 페이즈 %2",
         "args0": [
-          {
-            "type": "input_value",
-            "name": "stage_num",
-            "check": "Number"
-          },
-          {
-            "type": "input_statement",
-            "name": "phase",
-            "check": "phase"
-          }
+            {
+                "type": "input_value",
+                "name": "stage_num",
+                "check": "Number"
+            },
+            {
+                "type": "input_statement",
+                "name": "phase",
+                "check": "phase"
+            }
         ],
         "inputsInline": false,
         "previousStatement": "stage",
         "nextStatement": "stage",
         "colour": 20
-      },
-      // stage design block
-      {
+    },
+    {
         "type": "phase",
-  "message0": "페이즈 번호 %1 내용 %2 조건 %3 선택 %4",
-  "args0": [
-    {
-      "type": "input_value",
-      "name": "phase_num",
-      "check": "Number"
+        "message0": "페이즈 번호 %1 내용 %2 조건 %3 선택 %4",
+        "args0": [
+            {
+                "type": "input_value",
+                "name": "phase_num",
+                "check": "Number"
+            },
+            {
+                "type": "input_value",
+                "name": "content",
+                "check": "String"
+            },
+            {
+                "type": "input_statement",
+                "name": "condition",
+                "check": "condition"
+            },
+            {
+                "type": "input_statement",
+                "name": "choice",
+                "check": "choice"
+            }
+        ],
+        "inputsInline": false,
+        "previousStatement": "phase",
+        "nextStatement": "phase",
+        "colour": 65
     },
     {
-      "type": "input_value",
-      "name": "content",
-      "check": "String"
-    },
-    {
-      "type": "input_statement",
-      "name": "condition",
-      "check": "condition"
-    },
-    {
-      "type": "input_statement",
-      "name": "choice",
-      "check": "choice"
-    }
-  ],
-  "inputsInline": false,
-  "previousStatement": "phase",
-  "nextStatement": "phase",
-  "colour": 65
-      },
-      //phase design block
-      {
         "type": "choice",
-  "message0": "조건 번호 %1 내용 %2 변수 변화 %3",
-  "args0": [
-    {
-      "type": "input_value",
-      "name": "choice_num",
-      "check": "Number"
-    },
-    {
-      "type": "input_value",
-      "name": "content",
-      "check": "String"
-    },
-    {
-      "type": "input_statement",
-      "name": "set_param",
-      "check": "condition"
-    }
-  ],
+        "message0": "조건 번호 %1 내용 %2 변수 변화 %3",
+        "args0": [
+            {
+                "type": "input_value",
+                "name": "choice_num",
+                "check": "Number"
+            },
+            {
+                "type": "input_value",
+                "name": "content",
+                "check": "String"
+            },
+            {
+                "type": "input_statement",
+                "name": "set_param",
+                "check": "condition"
+            }
+        ],
         "inputsInline": false,
         "previousStatement": "choice",
         "nextStatement": "choice",
         "colour": 120
-      },
-      // phase design block
-      {
+    },
+    {
         "type": "condition",
         "message0": "변수 %1 이상 : %2 이하 : %3",
         "args0": [
-          {
-            "type": "input_value",
-            "name": "param",
-            "check": "String"
-          },
-          {
-            "type": "input_value",
-            "name": "above",
-            "check": "Number"
-          },
-          {
-            "type": "input_value",
-            "name": "below",
-            "check": "Number"
-          }
+            {
+                "type": "input_value",
+                "name": "param",
+                "check": "myparam"
+            },
+            {
+                "type": "input_value",
+                "name": "above",
+                "check": [
+                    "myparam",
+                    "Number",
+                    "mystring"
+                ]
+            },
+            {
+                "type": "input_value",
+                "name": "below",
+                "check": [
+                    "myparam",
+                    "Number",
+                    "mystring"
+                ]
+            }
         ],
         "inputsInline": true,
         "previousStatement": "condition",
-        "nextStatement": "condition", 
+        "nextStatement": "condition",
         "colour": 210
-      },
-      // {
-      //   "type": "set_param",
-      //   "message0": "param %1 add %2",
-      //   "args0": [
-      //     {
-      //       "type": "input_value",
-      //       "name": "param",
-      //       "check": "param"
-      //     },
-      //     {
-      //       "type": "input_value",
-      //       "name": "add",
-      //       "check": "Number"
-      //     }
-      //   ],
-      //   "inputsInline": true,
-      //   "previousStatement": "set_param",
-      //   "nextStatement": "set_param",
-      //   "colour": 210
-      // },
-      {
+    },
+    {
         "type": "parameter",
-  "message0": "변수 이름 %1 기본값 %2 가시성 %3",
-  "args0": [
-    {
-      "type": "input_value",
-      "name": "param_name",
-      "check": "String"
-    },
-    {
-      "type": "input_value",
-      "name": "default",
-      "check": "Number"
-    },
-    {
-      "type": "field_dropdown",
-      "name": "visible",
-      "options": [
-        [
-          "true",
-          "true"
+        "message0": "변수 이름 %1 기본값 %2 가시성 %3",
+        "args0": [
+            {
+                "type": "input_value",
+                "name": "param_name",
+                "check": "myparam"
+            },
+            {
+                "type": "input_value",
+                "name": "default",
+                "check": "Number"
+            },
+            {
+                "type": "field_dropdown",
+                "name": "visible",
+                "options": [
+                    [
+                        "true",
+                        "true"
+                    ],
+                    [
+                        "false",
+                        "false"
+                    ]
+                ]
+            }
         ],
-        [
-          "false",
-          "false"
-        ]
-      ]
+        "inputsInline": true,
+        "previousStatement": "parameter",
+        "nextStatement": "parameter",
+        "colour": 290
     }
-  ],
-  "inputsInline": true,
-  "previousStatement": "parameter",
-  "nextStatement": "parameter",
-  "colour": 290
-      }
 ]); 

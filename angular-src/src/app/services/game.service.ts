@@ -69,6 +69,15 @@ export class GameService {
       .pipe(map(res => res.json()));
   }
 
+  takeMyOneTemp(num) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/games/takeMyOneTemp', {num: num}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
   writeComment(cmt) {
     let headers = new Headers();
     this.loadToken();
@@ -140,6 +149,22 @@ export class GameService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
     return this.http.post(this.funcService.ServerAddress + '/games/toMyTempList', {num: num}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  takeMyTemps() {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/games/takeMyTemps', {}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  removeTemp(_id) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/games/removeTemp', {_id: _id}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 

@@ -3,7 +3,7 @@ html
   head
     title= title
     meta(name='viewport', content='width=device-width, initial-scale=1.0, minimum-scale=1.0')
-    //- link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/resources/stylesheets/mdl.css')
 
     //- bootstrap
     link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css', integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T', crossorigin='anonymous')
@@ -29,5 +29,4 @@ html
     div(class="mdl-layout mdl-js-layout mdl-layout--fixed-header", style="padding: 5%;")
       main(class="mdl-layout__content")
         div(class="mdl-layout__tab-panel is-active" id="overview")
-          br
           block content

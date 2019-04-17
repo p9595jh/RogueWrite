@@ -53,7 +53,7 @@
       <div>{{content?.content}}</div>
       <br/><br/>
       <div *ngIf="content?.from" style="color: grey; font-size: 85%;">
-        이 게임은 <span style="cursor: pointer; font-weight: bold;" (click)="funcService.openInfoWindow(content?.from?.userid)">{{content.from.nickname}}</span> 님의 <a style="color: grey; font-weight: bold;" [routerLink]="['/game/' + content?.from?.game]">{{content.from.title}}</a> 으로부터 참조되었습니다.
+        - 이 게임은 <span style="cursor: pointer; font-weight: bold;" (click)="funcService.openInfoWindow(content?.from?.userid)">{{content.from.nickname}}</span> 님의 <a style="color: grey; font-weight: bold;" [routerLink]="['/game/' + content?.from?.game]">{{content.from.title}}</a> 으로부터 참조되었습니다.
         <br/><br/>
       </div>
 

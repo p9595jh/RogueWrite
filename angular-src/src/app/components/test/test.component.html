@@ -1,0 +1,28 @@
+<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+    <div class="mdl-card mdl-cell mdl-cell--12-col">
+      <div class="mdl-card__supporting-text">
+        <h4>HELLO</h4>
+        <hr/>
+        
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let block of temp">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                SAVE-DATE
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+  
+            <p><b>ASDF</b> 님에 의해 수정됨.</p>
+            <button mat-button (click)="viewBlock(i)">블록 보기</button>
+            <button mat-button color="primary" (click)="getBack(i)">되돌리기</button>
+  
+          </mat-expansion-panel>
+          
+        </mat-accordion>
+  
+      </div>
+    </div>
+  </section>
+  
+  <section></section>
+  

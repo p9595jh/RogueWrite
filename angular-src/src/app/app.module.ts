@@ -53,6 +53,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { ToolComponent } from './components/tool/tool.component';
 import { GameComponent } from './components/game/game.component';
 import { SubComponent } from './components/sub/sub.component';
+import { TempComponent } from './components/temp/temp.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -67,9 +68,10 @@ const appRoutes: Routes = [
   { path: 'game/:num', component: GameComponent },
   { path: 'tool', component: ToolComponent, canActivate: [AuthGuard] },
   { path: 'sub', component: SubComponent },
+  { path: 'temp', component: TempComponent/*, canActivate: [AuthGuard]*/ },
   { path: 'no-page', component: NoPageComponent },
   { path: '**', component: NoPageComponent }
-]
+];
 
 @NgModule({
   declarations: [
@@ -88,7 +90,8 @@ const appRoutes: Routes = [
     AdminComponent,
     ToolComponent,
     GameComponent,
-    SubComponent
+    SubComponent,
+    TempComponent
   ],
   imports: [
     ReactiveFormsModule,
