@@ -1,26 +1,95 @@
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
-      <h4>{{temp.title}}</h4>
-      <hr/>
-
-      여기에 최종 세이브날짜랑 전체 작업자들이랑 메인 작업자 보여줘야됨
+      <h4 style="display: inline;">{{temp?.title}}</h4>
+      <span style="float: right; text-align: right; font-size: 80%;">
+        제작자 : <span class="toProfile" (click)="funcService.openInfoWindow(creator?.userid)">{{creator?.nickname}}</span><br/>
+        <span *ngIf="coworkers?.length > 0">
+          공동제작자 :
+          <span *ngFor="let coworker of coworkers" class="toProfile" (click)="funcService.openInfoWindow(coworker?.userid)"> {{coworker?.nickname}}</span>
+        </span>
+        <span *ngIf="coworkers?.length == 0">{{temp?.savedate}}</span>
+      </span>
+      <hr/><br/><br/>
       
-      <!-- <mat-accordion>
-        <mat-expansion-panel *ngFor="let block of temp.block | i=index">
+      <mat-accordion>
+        <mat-expansion-panel style="width: 95%; margin: auto;" *ngFor="let block of history">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{block.savedate}}
+              {{block?.savedate}}
             </mat-panel-title>
+            <mat-panel-description>
+              {{block?.changed}}개의 행동 추가됨
+            </mat-panel-description>
           </mat-expansion-panel-header>
 
-          <p><b>{{coworkerMap.get(block.saveby)}}</b> 님에 의해 수정됨.</p>
-          <button mat-button (click)="viewBlock(i)">블록 보기</button>
-          <button mat-button color="primary" (click)="getBack(i)">되돌리기</button>
+          <p *ngIf="coworkerMap?.get(block?.saveby)?.userid">
+            <b style="cursor: pointer;" (click)="funcService.openInfoWindow(coworkerMap?.get(block?.saveby)?.userid)">{{coworkerMap?.get(block?.saveby)?.nickname}}</b> 님에 의해 수정됨.
+          </p>
+          <p *ngIf="!coworkerMap?.get(block?.saveby)?.userid" style="color: grey;">
+            이전 사용자 기록입니다.
+          </p>
+          <button mat-button (click)="viewBlock(block?.num)">블록 보기</button>
+          <button mat-button color="primary" (click)="versionRollBack(block?.num)">되돌리기</button>
 
         </mat-expansion-panel>
         
-      </mat-accordion> -->
+      </mat-accordion>
+      <br/><br/>
+      <div *ngIf="temp?.from" style="color: grey; font-size: 85%;">
+        - 이 게임은 <span style="cursor: pointer; font-weight: bold;" (click)="funcService.openInfoWindow(temp?.from?.userid)">{{temp?.from?.nickname}}</span> 님의 <a style="color: grey; font-weight: bold;" [routerLink]="['/game/' + temp?.from?.game]">{{temp?.from?.title}}</a> 으로부터 참조되었습니다.
+        <br/><br/>
+      </div>
+
+    </div>
+  </div>
+  <button mat-icon-button [matMenuTriggerFor]="about">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #about>
+    <button mat-menu-item *ngIf="user?._id == creator?._id" (click)="remove()">
+      <span>삭제</span>
+    </button>
+  </mat-menu>
+</section>
+
+<section *ngIf="user?._id == creator?._id" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+    <div class="mdl-card__supporting-text">
+      <h4 style="display: inline;">공동제작자 추가</h4>
+      <hr/><br/><br/>
+      
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>검색</mat-label>
+        <input matInput placeholder="아이디 혹은 닉네임을 입력해주세요." (input)="onSearchChange($event.target.value)">
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      <br/><br/>
+
+      <table class="mdl-data-table mdl-js-data-table" style="margin: auto; width: 98%;">
+        <thead>
+          <tr>
+            <th class="mdl-data-table__cell--non-numeric">아이디</th>
+            <th class="mdl-data-table__cell--non-numeric">닉네임</th>
+            <th>요청</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let val of users | slice:pagingFrom:pagingTo; index as i">
+            <td class="mdl-data-table__cell--non-numeric">
+              <span class="toProfile" (click)="funcService.openInfoWindow(val?.userid)">{{val?.userid}}</span>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">{{val?.nickname}}</td>
+            <td>
+              <button mat-button color="primary" (click)="sendRequest(val?._id, i)">요청 보내기</button>
+            </td>
+          </tr>
+        </tbody>
+      </table><br/>
+
+      <mat-paginator [length]="temps?.length" [pageSize]="pagingSize" (page)="paging($event)">
+      </mat-paginator>
 
     </div>
   </div>

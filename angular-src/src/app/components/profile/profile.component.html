@@ -37,6 +37,43 @@
   </div>
 </section>
 
+<section *ngIf="user?.coworkRequest?.length > 0" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+    <div class="mdl-card__supporting-text">
+      <h4>공동작업 요청</h4>
+      <hr/>
+      
+      <table class="mdl-data-table mdl-js-data-table" style="margin: auto; width: 98%;">
+        <thead>
+          <tr>
+            <th class="mdl-data-table__cell--non-numeric">제목</th>
+            <th class="mdl-data-table__cell--non-numeric">요청자</th>
+            <th class="mdl-data-table__cell--non-numeric">요청일시</th>
+            <th>처리</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let val of user?.coworkRequest | slice:reqPagingFrom:reqPagingTo;">
+            <td class="mdl-data-table__cell--non-numeric">{{val?.title}}</td>
+            <td class="mdl-data-table__cell--non-numeric">
+              <span class="toProfile" (click)="funcService.openInfoWindow(val?.from?.userid)">{{val?.from?.nickname}}</span>
+            </td>
+            <td class="mdl-data-table__cell--non-numeric">{{val?.requestdate}}</td>
+            <td>
+              <button mat-button color="primary" (click)="acceptReq(val)">수락</button>
+              <button mat-button color="warn" (click)="rejectReq(val)">거절</button>
+            </td>
+          </tr>
+        </tbody>
+      </table><br/>
+
+      <mat-paginator [length]="user?.coworkRequest?.length" [pageSize]="pagingSize" (page)="reqPaging($event)">
+      </mat-paginator>
+
+    </div>
+  </div>
+</section>
+
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
@@ -51,8 +88,8 @@
             <th>관리</th>
           </tr>
         </thead>
-        <tbody *ngFor="let val of temps | slice:tempPagingFrom:tempPagingTo;">
-          <tr>
+        <tbody>
+          <tr *ngFor="let val of temps | slice:tempPagingFrom:tempPagingTo;">
             <td class="mdl-data-table__cell--non-numeric">
               <a [routerLink]="['/temp/' + val?._id]"
                 style="color: black; text-decoration: none; font-weight: 400;">{{val.title}}</a>
@@ -85,8 +122,8 @@
             <th>저장날짜</th>
           </tr>
         </thead>
-        <tbody *ngFor="let val of coworks | slice:coworkPagingFrom:coworkPagingTo;">
-          <tr>
+        <tbody>
+          <tr *ngFor="let val of coworks | slice:coworkPagingFrom:coworkPagingTo;">
             <td class="mdl-data-table__cell--non-numeric">
               <a [routerLink]="['/temp/' + val?._id]"
                 style="color: black; text-decoration: none; font-weight: 400;">{{val.title}}</a>

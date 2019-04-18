@@ -103,8 +103,8 @@
             <th>추천</th>
           </tr>
         </thead>
-        <tbody *ngFor="let val of contents | slice:pagingFrom:pagingTo; let i=index">
-          <tr>
+        <tbody>
+          <tr *ngFor="let val of contents | slice:pagingFrom:pagingTo; let i=index">
             <td class="mdl-data-table__cell--non-numeric">{{extractDate(val.writedate)}}</td>
             <td class="mdl-data-table__cell--non-numeric">
               <a [routerLink]="['/board/'+type+'/'+val?._id]"
@@ -123,8 +123,8 @@
 
       <!-- for small display -->
       <table class="mdl-data-table mdl-js-data-table mdl-layout--small-screen-only" style="margin: auto; width: 98%;">
-        <tbody *ngFor="let val of contents | slice:pagingFrom:pagingTo; let i=index">
-          <tr>
+        <tbody>
+          <tr *ngFor="let val of contents | slice:pagingFrom:pagingTo; let i=index">
             <td class="mdl-data-table__cell--non-numeric"
               [routerLink]="['/board/'+type+'/'+val?._id]" (click)="scrollToPost(postLocation)">
               <div>

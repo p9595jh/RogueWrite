@@ -19,9 +19,9 @@
 
         <!-- CHOICES -->
         <table style="width: 100%;" *ngIf="!playService.end">
-          <tbody *ngFor="let choice of playService?.phase?.choice">
-            <tr (click)="playService.select(choice?.set_param)" style="height: 50px;">
-              <td class="mdl-data-table__cell--non-numeric stage-choice">{{choice?.content}}</td>
+          <tbody>
+            <tr *ngFor="let choice of playService?.phase?.choice" (click)="playService.select(choice?.set_param)" style="height: 50px;">
+              <td class="stage-choice">{{choice?.content}}</td>
             </tr>
           </tbody>
         </table>
@@ -38,6 +38,7 @@
         </table>
 
         <!-- SHOW PARAMETERS -->
+        <hr/>
         <div class="row align-items-center" *ngFor="let arr of playService?.paramArr">
           <div class="col-sm grid-cell" *ngFor="let val of arr">
             <span *ngIf="val?.value?.visible">
@@ -210,8 +211,8 @@
             <th>추천</th>
           </tr>
         </thead>
-        <tbody *ngFor="let val of contents | slice:pagingFrom:pagingTo; let i=index">
-          <tr>
+        <tbody>
+          <tr *ngFor="let val of contents | slice:pagingFrom:pagingTo; let i=index">
             <td class="mdl-data-table__cell--non-numeric">{{extractDate(val.writedate)}}</td>
             <td class="mdl-data-table__cell--non-numeric">
               <a [routerLink]="['/game/' + val?._id]"
@@ -230,8 +231,8 @@
 
       <!-- for small display -->
       <table class="mdl-data-table mdl-js-data-table mdl-layout--small-screen-only" style="margin: auto; width: 98%;">
-        <tbody *ngFor="let val of contents | slice:pagingFrom:pagingTo; let i=index">
-          <tr>
+        <tbody>
+          <tr *ngFor="let val of contents | slice:pagingFrom:pagingTo; let i=index">
             <td class="mdl-data-table__cell--non-numeric"
               [routerLink]="['/board/' + val?._id]" (click)="scrollToPost(postLocation)">
               <div>

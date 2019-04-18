@@ -17,7 +17,8 @@ const TempSchema = mongoose.Schema({
             nickname: String
         }
     */
-   coworker: Array  // string array
+   coworker: Array,  // string array
+   requested: Array
 });
 
 const Temp = module.exports = mongoose.model('Temp', TempSchema);

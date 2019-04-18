@@ -209,7 +209,7 @@ var appRoutes = [
     { path: 'game/:num', component: _components_game_game_component__WEBPACK_IMPORTED_MODULE_28__["GameComponent"] },
     { path: 'tool', component: _components_tool_tool_component__WEBPACK_IMPORTED_MODULE_27__["ToolComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
     { path: 'sub', component: _components_sub_sub_component__WEBPACK_IMPORTED_MODULE_29__["SubComponent"] },
-    { path: 'temp', component: _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_30__["TempComponent"] /*, canActivate: [AuthGuard]*/ },
+    { path: 'temp/:num', component: _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_30__["TempComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
     { path: 'no-page', component: _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_25__["NoPageComponent"] },
     { path: '**', component: _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_25__["NoPageComponent"] }
 ];
@@ -315,7 +315,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>회원 관리</h4>\r\n      <hr/>\r\n      \r\n      <table class=\"mdl-data-table mdl-js-data-table\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">아이디</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">닉네임</th>\r\n            <th>상태</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody *ngFor=\"let val of users | slice:memberPagingFrom:memberPagingTo;\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <span (click)=\"funcService.openInfoWindow(val?.userid)\" style=\"cursor: pointer;\">{{val.userid}}</span>\r\n            </td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{val.nickname}}</td>\r\n            <td *ngIf=\"val?.clean\">\r\n              <button mat-button color=\"primary\" (click)=\"administrate(val?._id, val?.clean)\">정상</button>\r\n            </td>\r\n            <td *ngIf=\"!val?.clean\">\r\n              <button mat-button color=\"warn\" (click)=\"administrate(val?._id, val?.clean)\">정지</button>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"users?.length\" [pageSize]=\"pagingSize\" (page)=\"memberPaging($event)\">\r\n      </mat-paginator>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>게시판 생성 요청 관리</h4>\r\n      <hr/>\r\n      \r\n      <table class=\"mdl-data-table mdl-js-data-table\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">요청자</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">요청 게임</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">추천 비율</th>\r\n            <th>처리</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody *ngFor=\"let val of games | slice:reqPagingFrom:reqPagingTo;\">\r\n          <tr *ngIf=\"val?.userid != 'admin'\">\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <span (click)=\"funcService.openInfoWindow(val?.userid)\" style=\"cursor: pointer;\">{{val.nickname}} ({{val.userid}})</span>\r\n            </td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/game/' + val?._id]\" target=\"_blank\" style=\"color: black;\">{{val.title}}</a>\r\n            </td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{val.recommend}}/{{val.unrecommend}}</td>\r\n            <td>\r\n              <button mat-button color=\"primary\" [attr.id]=\"'accept-'+val?._id\"\r\n                (click)=\"acceptRequest(val?._id, val?.title, val?.userid, true)\">수락</button>\r\n              <button mat-button color=\"warn\" [attr.id]=\"'reject-'+val?._id\"\r\n                (click)=\"acceptRequest(val?._id, null, null, false)\">거절</button>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"users?.length\" [pageSize]=\"pagingSize\" (page)=\"reqPaging($event)\">\r\n      </mat-paginator>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>회원 관리</h4>\r\n      <hr/>\r\n      \r\n      <table class=\"mdl-data-table mdl-js-data-table\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">아이디</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">닉네임</th>\r\n            <th>상태</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let val of users | slice:memberPagingFrom:memberPagingTo;\">\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <span (click)=\"funcService.openInfoWindow(val?.userid)\" style=\"cursor: pointer;\">{{val.userid}}</span>\r\n            </td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{val.nickname}}</td>\r\n            <td *ngIf=\"val?.clean\">\r\n              <button mat-button color=\"primary\" (click)=\"administrate(val?._id, val?.clean)\">정상</button>\r\n            </td>\r\n            <td *ngIf=\"!val?.clean\">\r\n              <button mat-button color=\"warn\" (click)=\"administrate(val?._id, val?.clean)\">정지</button>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"users?.length\" [pageSize]=\"pagingSize\" (page)=\"memberPaging($event)\">\r\n      </mat-paginator>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>게시판 생성 요청 관리</h4>\r\n      <hr/>\r\n      \r\n      <table class=\"mdl-data-table mdl-js-data-table\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">요청자</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">요청 게임</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">추천 비율</th>\r\n            <th>처리</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <!-- <tr *ngIf=\"val?.userid != 'admin'\"> -->\r\n          <tr *ngFor=\"let val of games | slice:reqPagingFrom:reqPagingTo;\">\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <span (click)=\"funcService.openInfoWindow(val?.userid)\" style=\"cursor: pointer;\">{{val.nickname}} ({{val.userid}})</span>\r\n            </td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/game/' + val?._id]\" target=\"_blank\" style=\"color: black;\">{{val.title}}</a>\r\n            </td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{val.recommend}}/{{val.unrecommend}}</td>\r\n            <td>\r\n              <button mat-button color=\"primary\" [attr.id]=\"'accept-'+val?._id\"\r\n                (click)=\"acceptRequest(val?._id, val?.title, val?.userid, true)\">수락</button>\r\n              <button mat-button color=\"warn\" [attr.id]=\"'reject-'+val?._id\"\r\n                (click)=\"acceptRequest(val?._id, null, null, false)\">거절</button>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"users?.length\" [pageSize]=\"pagingSize\" (page)=\"reqPaging($event)\">\r\n      </mat-paginator>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -514,7 +514,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- element for representing the location of the post to be scrolled -->\r\n<span style=\"display: hidden;\" #postLocation></span>\r\n\r\n<!-- section for a post -->\r\n<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">{{content?.title}}</h4>\r\n\r\n      <span style=\"float: right; text-align: right; font-size: 80%;\">\r\n        <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(content?.userid)\">{{content?.nickname}}</span><br/>{{content?.writedate}}\r\n      </span>\r\n      <hr/>\r\n      <div class=\"posting content\" [innerHtml]=\"content?.content | safe\"></div>\r\n      <br/><br/>\r\n      <div style=\"text-align: center;\">\r\n        <button mat-raised-button color=\"primary\" (click)=\"onRecommend()\">\r\n          추천 {{content?.recommend?.length}}\r\n        </button>\r\n      </div>\r\n      <br/><hr/>\r\n\r\n      <!-- ############### table for comments ############### -->\r\n      <table style=\"width: 96%; margin: auto;\">\r\n        <tbody *ngFor=\"let comment of content?.comment\">\r\n          <tr>\r\n            <td style=\"width: 15%;\">\r\n              <img [attr.src]=\"'images/profile/' + comment.userid\" class=\"profileImage\" />\r\n            </td>\r\n            <td>\r\n              <span style=\"font-size: 80%;\">\r\n                <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(comment?.userid)\">\r\n                  {{comment?.nickname}}</span> &nbsp;|&nbsp; {{comment?.writedate}}\r\n                <span *ngIf=\"comment?.userid == user?.userid || user?.userid == 'admin'\"> &nbsp;|&nbsp; \r\n                  <span style=\"cursor: pointer;\" (click)=\"onRemoveComment(comment.num)\">삭제</span>\r\n                </span>\r\n              </span>\r\n              <pre class=\"content writerText\" *ngIf=\"comment?.userid == content?.userid\" [innerHTML]=\"comment?.comment\"></pre>\r\n              <pre class=\"content\" *ngIf=\"comment?.userid != content?.userid\" [innerHTML]=\"comment?.comment\"></pre>\r\n              <br/>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n      <!-- ############### table for comments ############### -->\r\n\r\n      <!-- ############### writing area ############### -->\r\n      <form *ngIf=\"authService.loggedIn()\" (submit)=\"onWriteComment()\"><hr *ngIf=\"content?.comment?.length > 0\" />\r\n        <table style=\"width: 96%; margin: auto;\">\r\n          <tr style=\"text-align: center;\">\r\n\r\n            <td rowspan=\"2\" style=\"width: 85%;\">\r\n              <mat-form-field appearance=\"outline\" style=\"width: 100%; height: 100%;\">\r\n                <mat-label>댓글을 작성해주세요.</mat-label>\r\n                <textarea matInput placeholder=\"\" rows=\"3\" name=\"cmtWrite\"\r\n                [formControl]=\"cmtWrite\" [matAutocomplete]=\"auto\"></textarea>\r\n                <mat-autocomplete #auto>\r\n                  <!-- <mat-option *ngFor=\"let ct of filteredOptions | async\" [value]=\"'TO::' + ct?.nickname\" (onclick)=\"setCmtTo(ct)\">\r\n                    {{ct.nickname}} [{{ct.userid}}]\r\n                  </mat-option> -->\r\n                </mat-autocomplete>\r\n              </mat-form-field>\r\n            </td>\r\n\r\n            <td style=\"text-align: center; padding-bottom: 3%;\">\r\n              <button mat-raised-button type=\"submit\" style=\"width: 60%;\">작성</button>\r\n            </td>\r\n\r\n          </tr>\r\n        </table>\r\n      </form>\r\n      <!-- ############### writing area ############### -->\r\n\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"aboutPost\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #aboutPost>\r\n    <button mat-menu-item *ngIf=\"content?.userid == user?.userid || user?.userid == 'admin'\" (click)=\"onRemovePost()\">\r\n      <span>삭제</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<!-- section for a board -->\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 *ngIf=\"type == 'free'\">자유게시판</h4>\r\n      <h4 *ngIf=\"type == 'notice'\">공지게시판</h4>\r\n      <h4 *ngIf=\"type != 'free' && type != 'notice'\">{{sub?.title}} 게시판</h4>\r\n      <hr/>\r\n      \r\n      <!-- for large display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--large-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">날짜</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\r\n            <th>글쓴이</th>\r\n            <th>조회수</th>\r\n            <th>추천</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{extractDate(val.writedate)}}</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/board/'+type+'/'+val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\r\n                (click)=\"scrollToPost(postLocation)\">{{val.title}}</a>&nbsp;\r\n              <span *ngIf=\"val.comment.length > 0\" style=\"font-size: 85%; color: grey;\">[{{val.comment.length}}]</span>\r\n            </td>\r\n            <td>\r\n              <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(val?.userid)\">{{val.nickname}}</span>\r\n            </td>\r\n            <td>{{val.hit}}</td>\r\n            <td>{{val.recommend.length}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <!-- for small display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--small-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <tbody *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\"\r\n              [routerLink]=\"['/board/'+type+'/'+val?._id]\" (click)=\"scrollToPost(postLocation)\">\r\n              <div>\r\n                {{val.title}}\r\n                <span *ngIf=\"val.comment.length > 0\" style=\"color: grey;\">[{{val.comment.length}}]</span>\r\n              </div>\r\n              <div style=\"font-size: 85%; margin-top: 1%;\">\r\n                <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>추천 {{val.recommend.length}}</span>\r\n              </div>\r\n            </td>\r\n            <td>{{extractDate(val.writedate)}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"contents?.length\" [pageSize]=\"pagingSize\" (page)=\"paging($event)\"></mat-paginator>\r\n\r\n      <div *ngIf=\"(type != 'notice' && authService.loggedIn()) || (type == 'notice' && user?.userid == 'admin')\" style=\"float: right;\">\r\n        <a mat-raised-button [routerLink]=\"['/write/' + type]\">글쓰기</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"board\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #board>\r\n    <button mat-menu-item *ngIf=\"authService.loggedIn()\" (click)=\"bookmark()\">\r\n      <span>즐겨찾는 게시판 설정</span>\r\n    </button>\r\n    <button mat-menu-item *ngIf=\"type != 'free' && type != 'notice'\" [routerLink]=\"['/game/' + sub?.gameid]\">\r\n      <span>게임으로 이동</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<!-- element for representing the location of the post to be scrolled -->\r\n<span style=\"display: hidden;\" #postLocation></span>\r\n\r\n<!-- section for a post -->\r\n<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">{{content?.title}}</h4>\r\n\r\n      <span style=\"float: right; text-align: right; font-size: 80%;\">\r\n        <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(content?.userid)\">{{content?.nickname}}</span><br/>{{content?.writedate}}\r\n      </span>\r\n      <hr/>\r\n      <div class=\"posting content\" [innerHtml]=\"content?.content | safe\"></div>\r\n      <br/><br/>\r\n      <div style=\"text-align: center;\">\r\n        <button mat-raised-button color=\"primary\" (click)=\"onRecommend()\">\r\n          추천 {{content?.recommend?.length}}\r\n        </button>\r\n      </div>\r\n      <br/><hr/>\r\n\r\n      <!-- ############### table for comments ############### -->\r\n      <table style=\"width: 96%; margin: auto;\">\r\n        <tbody *ngFor=\"let comment of content?.comment\">\r\n          <tr>\r\n            <td style=\"width: 15%;\">\r\n              <img [attr.src]=\"'images/profile/' + comment.userid\" class=\"profileImage\" />\r\n            </td>\r\n            <td>\r\n              <span style=\"font-size: 80%;\">\r\n                <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(comment?.userid)\">\r\n                  {{comment?.nickname}}</span> &nbsp;|&nbsp; {{comment?.writedate}}\r\n                <span *ngIf=\"comment?.userid == user?.userid || user?.userid == 'admin'\"> &nbsp;|&nbsp; \r\n                  <span style=\"cursor: pointer;\" (click)=\"onRemoveComment(comment.num)\">삭제</span>\r\n                </span>\r\n              </span>\r\n              <pre class=\"content writerText\" *ngIf=\"comment?.userid == content?.userid\" [innerHTML]=\"comment?.comment\"></pre>\r\n              <pre class=\"content\" *ngIf=\"comment?.userid != content?.userid\" [innerHTML]=\"comment?.comment\"></pre>\r\n              <br/>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n      <!-- ############### table for comments ############### -->\r\n\r\n      <!-- ############### writing area ############### -->\r\n      <form *ngIf=\"authService.loggedIn()\" (submit)=\"onWriteComment()\"><hr *ngIf=\"content?.comment?.length > 0\" />\r\n        <table style=\"width: 96%; margin: auto;\">\r\n          <tr style=\"text-align: center;\">\r\n\r\n            <td rowspan=\"2\" style=\"width: 85%;\">\r\n              <mat-form-field appearance=\"outline\" style=\"width: 100%; height: 100%;\">\r\n                <mat-label>댓글을 작성해주세요.</mat-label>\r\n                <textarea matInput placeholder=\"\" rows=\"3\" name=\"cmtWrite\"\r\n                [formControl]=\"cmtWrite\" [matAutocomplete]=\"auto\"></textarea>\r\n                <mat-autocomplete #auto>\r\n                  <!-- <mat-option *ngFor=\"let ct of filteredOptions | async\" [value]=\"'TO::' + ct?.nickname\" (onclick)=\"setCmtTo(ct)\">\r\n                    {{ct.nickname}} [{{ct.userid}}]\r\n                  </mat-option> -->\r\n                </mat-autocomplete>\r\n              </mat-form-field>\r\n            </td>\r\n\r\n            <td style=\"text-align: center; padding-bottom: 3%;\">\r\n              <button mat-raised-button type=\"submit\" style=\"width: 60%;\">작성</button>\r\n            </td>\r\n\r\n          </tr>\r\n        </table>\r\n      </form>\r\n      <!-- ############### writing area ############### -->\r\n\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"aboutPost\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #aboutPost>\r\n    <button mat-menu-item *ngIf=\"content?.userid == user?.userid || user?.userid == 'admin'\" (click)=\"onRemovePost()\">\r\n      <span>삭제</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<!-- section for a board -->\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 *ngIf=\"type == 'free'\">자유게시판</h4>\r\n      <h4 *ngIf=\"type == 'notice'\">공지게시판</h4>\r\n      <h4 *ngIf=\"type != 'free' && type != 'notice'\">{{sub?.title}} 게시판</h4>\r\n      <hr/>\r\n      \r\n      <!-- for large display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--large-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">날짜</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\r\n            <th>글쓴이</th>\r\n            <th>조회수</th>\r\n            <th>추천</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{extractDate(val.writedate)}}</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/board/'+type+'/'+val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\r\n                (click)=\"scrollToPost(postLocation)\">{{val.title}}</a>&nbsp;\r\n              <span *ngIf=\"val.comment.length > 0\" style=\"font-size: 85%; color: grey;\">[{{val.comment.length}}]</span>\r\n            </td>\r\n            <td>\r\n              <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(val?.userid)\">{{val.nickname}}</span>\r\n            </td>\r\n            <td>{{val.hit}}</td>\r\n            <td>{{val.recommend.length}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <!-- for small display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--small-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <tbody>\r\n          <tr *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n            <td class=\"mdl-data-table__cell--non-numeric\"\r\n              [routerLink]=\"['/board/'+type+'/'+val?._id]\" (click)=\"scrollToPost(postLocation)\">\r\n              <div>\r\n                {{val.title}}\r\n                <span *ngIf=\"val.comment.length > 0\" style=\"color: grey;\">[{{val.comment.length}}]</span>\r\n              </div>\r\n              <div style=\"font-size: 85%; margin-top: 1%;\">\r\n                <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>추천 {{val.recommend.length}}</span>\r\n              </div>\r\n            </td>\r\n            <td>{{extractDate(val.writedate)}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"contents?.length\" [pageSize]=\"pagingSize\" (page)=\"paging($event)\"></mat-paginator>\r\n\r\n      <div *ngIf=\"(type != 'notice' && authService.loggedIn()) || (type == 'notice' && user?.userid == 'admin')\" style=\"float: right;\">\r\n        <a mat-raised-button [routerLink]=\"['/write/' + type]\">글쓰기</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"board\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #board>\r\n    <button mat-menu-item *ngIf=\"authService.loggedIn()\" (click)=\"bookmark()\">\r\n      <span>즐겨찾는 게시판 설정</span>\r\n    </button>\r\n    <button mat-menu-item *ngIf=\"type != 'free' && type != 'notice'\" [routerLink]=\"['/game/' + sub?.gameid]\">\r\n      <span>게임으로 이동</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -823,7 +823,7 @@ module.exports = ".recommends {\r\n    margin: auto;\r\n    text-align: center;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- element for representing the location of the post to be scrolled -->\r\n<span style=\"display: hidden;\" #postLocation></span>\r\n\r\n<!-- section for a post -->\r\n<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">{{content?.title}}</h4>\r\n      <span style=\"float: right; text-align: right; font-size: 80%;\">\r\n        <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(content?.userid)\">{{content?.nickname}}</span><br/>{{content?.writedate}}\r\n      </span>\r\n      <hr/>\r\n\r\n      <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ENGINE (GAME) ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->\r\n      <div class=\"engine-layout\">\r\n\r\n        <!-- PHASE-CONTENT -->\r\n        <div class=\"stage-content\" [innerHTML]=\"playService?.phase?.content | safe\"></div>\r\n\r\n        <!-- CHOICES -->\r\n        <table style=\"width: 100%;\" *ngIf=\"!playService.end\">\r\n          <tbody *ngFor=\"let choice of playService?.phase?.choice\">\r\n            <tr (click)=\"playService.select(choice?.set_param)\" style=\"height: 50px;\">\r\n              <td class=\"mdl-data-table__cell--non-numeric stage-choice\">{{choice?.content}}</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n\r\n        <!-- END -->\r\n        <table *ngIf=\"playService.end\" class=\"mdl-data-table mdl-js-data-table\" style=\"width: 100%;\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">THE END.</td>\r\n            <td>점수 : 얼마얼마</td>\r\n          </tr>\r\n          <tr>\r\n            <td colspan=\"2\"><button mat-button (click)=\"playService.replay()\" style=\"float: right;\">다시하기</button></td>\r\n          </tr>\r\n        </table>\r\n\r\n        <!-- SHOW PARAMETERS -->\r\n        <div class=\"row align-items-center\" *ngFor=\"let arr of playService?.paramArr\">\r\n          <div class=\"col-sm grid-cell\" *ngFor=\"let val of arr\">\r\n            <span *ngIf=\"val?.value?.visible\">\r\n              {{val?.key}}<span>: </span>{{val?.value?.value}}\r\n            </span>\r\n          </div>\r\n        </div>\r\n\r\n      </div>\r\n      <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ENGINE (GAME) ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->\r\n\r\n      <br/><br/>\r\n      <div>{{content?.content}}</div>\r\n      <br/><br/>\r\n      <div *ngIf=\"content?.from\" style=\"color: grey; font-size: 85%;\">\r\n        - 이 게임은 <span style=\"cursor: pointer; font-weight: bold;\" (click)=\"funcService.openInfoWindow(content?.from?.userid)\">{{content.from.nickname}}</span> 님의 <a style=\"color: grey; font-weight: bold;\" [routerLink]=\"['/game/' + content?.from?.game]\">{{content.from.title}}</a> 으로부터 참조되었습니다.\r\n        <br/><br/>\r\n      </div>\r\n\r\n      <!-- normal user -->\r\n      <table class=\"recommends\" *ngIf=\"user?.userid != content?.userid && user?.userid != 'admin'\">\r\n        <tr>\r\n          <td>\r\n            <button mat-raised-button color=\"primary\" (click)=\"onRecommend(true)\">\r\n              추천 {{content?.recommend}}\r\n            </button>\r\n          </td>\r\n          <td>\r\n            <button mat-raised-button color=\"accent\" (click)=\"onRecommend(false)\">\r\n              비추천 {{content?.unrecommend}}\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </table>\r\n\r\n      <!-- writer -->\r\n      <table class=\"recommends\" *ngIf=\"authService.loggedIn() && user?.userid == content?.userid && user?.userid != 'admin'\">\r\n        <tr>\r\n          <td>\r\n            <button mat-raised-button color=\"primary\" (click)=\"onRecommend(true)\">\r\n              추천 {{content?.recommend}}\r\n            </button>\r\n          </td>\r\n          <td>\r\n            <button mat-raised-button color=\"accent\" (click)=\"onRecommend(false)\">\r\n              비추천 {{content?.unrecommend}}\r\n            </button>\r\n          </td>\r\n          <td>\r\n            <button mat-raised-button\r\n              *ngIf=\"content?.boardRequest == 0 && (content?.recommend - content?.unrecommend) >= 1\"\r\n              (click)=\"requestBoard()\">\r\n              게시판 생성 요청\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </table>\r\n\r\n      <!-- admin -->\r\n      <table class=\"recommends\" *ngIf=\"authService.loggedIn() && user?.userid == 'admin'\">\r\n        <tr>\r\n          <td>\r\n            <button mat-raised-button color=\"primary\" (click)=\"onRecommend(true)\">\r\n              추천 {{content?.recommend}}\r\n            </button>\r\n          </td>\r\n          <td>\r\n            <button mat-raised-button color=\"accent\" (click)=\"onRecommend(false)\">\r\n              비추천 {{content?.unrecommend}}\r\n            </button>\r\n          </td>\r\n          <td>\r\n            <button mat-raised-button\r\n              *ngIf=\"content?.boardRequest == 1\" (click)=\"acceptBoard()\">\r\n              게시판 생성 요청 수락\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </table>\r\n\r\n      <br/><hr/>\r\n\r\n      <!-- ############### table for comments ############### -->\r\n      <table style=\"width: 96%; margin: auto;\">\r\n        <tbody *ngFor=\"let comment of content?.comment\">\r\n          <tr>\r\n            <td style=\"width: 15%;\">\r\n              <img [attr.src]=\"'images/profile/' + comment.userid\" class=\"profileImage\" />\r\n            </td>\r\n            <td>\r\n              <span style=\"font-size: 80%;\">\r\n                <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(comment?.userid)\">{{comment?.nickname}}</span> &nbsp;|&nbsp; \r\n                {{comment?.writedate}}\r\n                <span *ngIf=\"comment?.userid == user?.userid || user?.userid == 'admin'\"> &nbsp;|&nbsp; \r\n                  <span style=\"cursor: pointer;\" (click)=\"onRemoveComment(comment.num)\">삭제</span>\r\n                </span>\r\n              </span>\r\n              <pre class=\"content writerText\" *ngIf=\"comment?.userid == content?.userid\" [innerHTML]=\"comment?.comment\"></pre>\r\n              <pre class=\"content\" *ngIf=\"comment?.userid != content?.userid\" [innerHTML]=\"comment?.comment\"></pre>\r\n              <br/>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n      <!-- ############### table for comments ############### -->\r\n\r\n      <!-- ############### writing area ############### -->\r\n      <form *ngIf=\"authService.loggedIn()\" (submit)=\"onWriteComment()\"><hr *ngIf=\"content?.comment?.length > 0\" />\r\n        <table style=\"width: 96%; margin: auto;\">\r\n          <tr style=\"text-align: center;\">\r\n\r\n            <td rowspan=\"2\" style=\"width: 85%;\">\r\n              <mat-form-field appearance=\"outline\" style=\"width: 100%; height: 100%;\">\r\n                <mat-label>댓글을 작성해주세요.</mat-label>\r\n                <textarea matInput placeholder=\"\" rows=\"3\" name=\"cmtWrite\"\r\n                  [formControl]=\"cmtWrite\" [matAutocomplete]=\"auto\"></textarea>\r\n                <mat-autocomplete #auto>\r\n                  <!-- <mat-option *ngFor=\"let ct of filteredOptions | async\" [value]=\"'TO::' + ct?.nickname\" (onclick)=\"setCmtTo(ct)\">\r\n                    {{ct.nickname}} [{{ct.userid}}]\r\n                  </mat-option> -->\r\n                </mat-autocomplete>\r\n              </mat-form-field>\r\n            </td>\r\n\r\n            <td style=\"text-align: center; padding-bottom: 3%;\">\r\n              <button mat-raised-button type=\"submit\" style=\"width: 60%;\">작성</button>\r\n            </td>\r\n\r\n          </tr>\r\n        </table>\r\n      </form>\r\n      <!-- ############### writing area ############### -->\r\n\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"aboutPost\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #aboutPost>\r\n    <button mat-menu-item *ngIf=\"content?.board && content?.board != ''\" [routerLink]=\"['/board/' + content?.board + '/list']\">\r\n      <span>게시판으로 이동</span>\r\n    </button>\r\n    <button mat-menu-item (click)=\"viewBlock()\">\r\n      <span>블록 보기</span>\r\n    </button>\r\n    <button mat-menu-item *ngIf=\"authService.loggedIn()\" (click)=\"toMyTempList()\">\r\n      <span>내 임시저장으로 복사</span>\r\n    </button>\r\n    <button mat-menu-item *ngIf=\"content?.userid == user?.userid || user?.userid == 'admin'\" (click)=\"onRemovePost()\">\r\n      <span>삭제</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<!-- section for a board -->\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>게임게시판</h4>\r\n      <hr/>\r\n      \r\n      <!-- for large display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--large-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">날짜</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\r\n            <th>글쓴이</th>\r\n            <th>조회수</th>\r\n            <th>추천</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{extractDate(val.writedate)}}</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/game/' + val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\r\n                (click)=\"scrollToPost(postLocation)\">{{val.title}}</a>&nbsp;\r\n              <span *ngIf=\"val.comment.length > 0\" style=\"font-size: 85%; color: grey;\">[{{val.comment.length}}]</span>\r\n            </td>\r\n            <td>\r\n              <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(val?.userid)\">{{val.nickname}}</span>\r\n            </td>\r\n            <td>{{val.hit}}</td>\r\n            <td>{{val.recommend}}<span>/</span>{{val.unrecommend}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <!-- for small display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--small-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <tbody *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\"\r\n              [routerLink]=\"['/board/' + val?._id]\" (click)=\"scrollToPost(postLocation)\">\r\n              <div>\r\n                {{val.title}}\r\n                <span *ngIf=\"val.comment.length > 0\" style=\"color: grey;\">[{{val.comment.length}}]</span>\r\n              </div>\r\n              <div style=\"font-size: 85%; margin-top: 1%;\">\r\n                <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>추천 {{val.recommend}}<span>/</span>{{val.unrecommend}}</span>\r\n              </div>\r\n            </td>\r\n            <td>{{extractDate(val.writedate)}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"contents?.length\" [pageSize]=\"pagingSize\" (page)=\"paging($event)\">\r\n      </mat-paginator>\r\n\r\n      <div *ngIf=\"authService.loggedIn()\" style=\"float: right;\">\r\n        <a mat-raised-button [routerLink]=\"['/tool']\">작성</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"board\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #board>\r\n    <button mat-menu-item *ngIf=\"authService.loggedIn()\">\r\n      <span>즐겨찾는 게시판 설정</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<!-- element for representing the location of the post to be scrolled -->\r\n<span style=\"display: hidden;\" #postLocation></span>\r\n\r\n<!-- section for a post -->\r\n<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">{{content?.title}}</h4>\r\n      <span style=\"float: right; text-align: right; font-size: 80%;\">\r\n        <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(content?.userid)\">{{content?.nickname}}</span><br/>{{content?.writedate}}\r\n      </span>\r\n      <hr/>\r\n\r\n      <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ENGINE (GAME) ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->\r\n      <div class=\"engine-layout\">\r\n\r\n        <!-- PHASE-CONTENT -->\r\n        <div class=\"stage-content\" [innerHTML]=\"playService?.phase?.content | safe\"></div>\r\n\r\n        <!-- CHOICES -->\r\n        <table style=\"width: 100%;\" *ngIf=\"!playService.end\">\r\n          <tbody>\r\n            <tr *ngFor=\"let choice of playService?.phase?.choice\" (click)=\"playService.select(choice?.set_param)\" style=\"height: 50px;\">\r\n              <td class=\"stage-choice\">{{choice?.content}}</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n\r\n        <!-- END -->\r\n        <table *ngIf=\"playService.end\" class=\"mdl-data-table mdl-js-data-table\" style=\"width: 100%;\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">THE END.</td>\r\n            <td>점수 : 얼마얼마</td>\r\n          </tr>\r\n          <tr>\r\n            <td colspan=\"2\"><button mat-button (click)=\"playService.replay()\" style=\"float: right;\">다시하기</button></td>\r\n          </tr>\r\n        </table>\r\n\r\n        <!-- SHOW PARAMETERS -->\r\n        <hr/>\r\n        <div class=\"row align-items-center\" *ngFor=\"let arr of playService?.paramArr\">\r\n          <div class=\"col-sm grid-cell\" *ngFor=\"let val of arr\">\r\n            <span *ngIf=\"val?.value?.visible\">\r\n              {{val?.key}}<span>: </span>{{val?.value?.value}}\r\n            </span>\r\n          </div>\r\n        </div>\r\n\r\n      </div>\r\n      <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ENGINE (GAME) ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->\r\n\r\n      <br/><br/>\r\n      <div>{{content?.content}}</div>\r\n      <br/><br/>\r\n      <div *ngIf=\"content?.from\" style=\"color: grey; font-size: 85%;\">\r\n        - 이 게임은 <span style=\"cursor: pointer; font-weight: bold;\" (click)=\"funcService.openInfoWindow(content?.from?.userid)\">{{content.from.nickname}}</span> 님의 <a style=\"color: grey; font-weight: bold;\" [routerLink]=\"['/game/' + content?.from?.game]\">{{content.from.title}}</a> 으로부터 참조되었습니다.\r\n        <br/><br/>\r\n      </div>\r\n\r\n      <!-- normal user -->\r\n      <table class=\"recommends\" *ngIf=\"user?.userid != content?.userid && user?.userid != 'admin'\">\r\n        <tr>\r\n          <td>\r\n            <button mat-raised-button color=\"primary\" (click)=\"onRecommend(true)\">\r\n              추천 {{content?.recommend}}\r\n            </button>\r\n          </td>\r\n          <td>\r\n            <button mat-raised-button color=\"accent\" (click)=\"onRecommend(false)\">\r\n              비추천 {{content?.unrecommend}}\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </table>\r\n\r\n      <!-- writer -->\r\n      <table class=\"recommends\" *ngIf=\"authService.loggedIn() && user?.userid == content?.userid && user?.userid != 'admin'\">\r\n        <tr>\r\n          <td>\r\n            <button mat-raised-button color=\"primary\" (click)=\"onRecommend(true)\">\r\n              추천 {{content?.recommend}}\r\n            </button>\r\n          </td>\r\n          <td>\r\n            <button mat-raised-button color=\"accent\" (click)=\"onRecommend(false)\">\r\n              비추천 {{content?.unrecommend}}\r\n            </button>\r\n          </td>\r\n          <td>\r\n            <button mat-raised-button\r\n              *ngIf=\"content?.boardRequest == 0 && (content?.recommend - content?.unrecommend) >= 1\"\r\n              (click)=\"requestBoard()\">\r\n              게시판 생성 요청\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </table>\r\n\r\n      <!-- admin -->\r\n      <table class=\"recommends\" *ngIf=\"authService.loggedIn() && user?.userid == 'admin'\">\r\n        <tr>\r\n          <td>\r\n            <button mat-raised-button color=\"primary\" (click)=\"onRecommend(true)\">\r\n              추천 {{content?.recommend}}\r\n            </button>\r\n          </td>\r\n          <td>\r\n            <button mat-raised-button color=\"accent\" (click)=\"onRecommend(false)\">\r\n              비추천 {{content?.unrecommend}}\r\n            </button>\r\n          </td>\r\n          <td>\r\n            <button mat-raised-button\r\n              *ngIf=\"content?.boardRequest == 1\" (click)=\"acceptBoard()\">\r\n              게시판 생성 요청 수락\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </table>\r\n\r\n      <br/><hr/>\r\n\r\n      <!-- ############### table for comments ############### -->\r\n      <table style=\"width: 96%; margin: auto;\">\r\n        <tbody *ngFor=\"let comment of content?.comment\">\r\n          <tr>\r\n            <td style=\"width: 15%;\">\r\n              <img [attr.src]=\"'images/profile/' + comment.userid\" class=\"profileImage\" />\r\n            </td>\r\n            <td>\r\n              <span style=\"font-size: 80%;\">\r\n                <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(comment?.userid)\">{{comment?.nickname}}</span> &nbsp;|&nbsp; \r\n                {{comment?.writedate}}\r\n                <span *ngIf=\"comment?.userid == user?.userid || user?.userid == 'admin'\"> &nbsp;|&nbsp; \r\n                  <span style=\"cursor: pointer;\" (click)=\"onRemoveComment(comment.num)\">삭제</span>\r\n                </span>\r\n              </span>\r\n              <pre class=\"content writerText\" *ngIf=\"comment?.userid == content?.userid\" [innerHTML]=\"comment?.comment\"></pre>\r\n              <pre class=\"content\" *ngIf=\"comment?.userid != content?.userid\" [innerHTML]=\"comment?.comment\"></pre>\r\n              <br/>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n      <!-- ############### table for comments ############### -->\r\n\r\n      <!-- ############### writing area ############### -->\r\n      <form *ngIf=\"authService.loggedIn()\" (submit)=\"onWriteComment()\"><hr *ngIf=\"content?.comment?.length > 0\" />\r\n        <table style=\"width: 96%; margin: auto;\">\r\n          <tr style=\"text-align: center;\">\r\n\r\n            <td rowspan=\"2\" style=\"width: 85%;\">\r\n              <mat-form-field appearance=\"outline\" style=\"width: 100%; height: 100%;\">\r\n                <mat-label>댓글을 작성해주세요.</mat-label>\r\n                <textarea matInput placeholder=\"\" rows=\"3\" name=\"cmtWrite\"\r\n                  [formControl]=\"cmtWrite\" [matAutocomplete]=\"auto\"></textarea>\r\n                <mat-autocomplete #auto>\r\n                  <!-- <mat-option *ngFor=\"let ct of filteredOptions | async\" [value]=\"'TO::' + ct?.nickname\" (onclick)=\"setCmtTo(ct)\">\r\n                    {{ct.nickname}} [{{ct.userid}}]\r\n                  </mat-option> -->\r\n                </mat-autocomplete>\r\n              </mat-form-field>\r\n            </td>\r\n\r\n            <td style=\"text-align: center; padding-bottom: 3%;\">\r\n              <button mat-raised-button type=\"submit\" style=\"width: 60%;\">작성</button>\r\n            </td>\r\n\r\n          </tr>\r\n        </table>\r\n      </form>\r\n      <!-- ############### writing area ############### -->\r\n\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"aboutPost\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #aboutPost>\r\n    <button mat-menu-item *ngIf=\"content?.board && content?.board != ''\" [routerLink]=\"['/board/' + content?.board + '/list']\">\r\n      <span>게시판으로 이동</span>\r\n    </button>\r\n    <button mat-menu-item (click)=\"viewBlock()\">\r\n      <span>블록 보기</span>\r\n    </button>\r\n    <button mat-menu-item *ngIf=\"authService.loggedIn()\" (click)=\"toMyTempList()\">\r\n      <span>내 임시저장으로 복사</span>\r\n    </button>\r\n    <button mat-menu-item *ngIf=\"content?.userid == user?.userid || user?.userid == 'admin'\" (click)=\"onRemovePost()\">\r\n      <span>삭제</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<!-- section for a board -->\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>게임게시판</h4>\r\n      <hr/>\r\n      \r\n      <!-- for large display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--large-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">날짜</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\r\n            <th>글쓴이</th>\r\n            <th>조회수</th>\r\n            <th>추천</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{extractDate(val.writedate)}}</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/game/' + val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\r\n                (click)=\"scrollToPost(postLocation)\">{{val.title}}</a>&nbsp;\r\n              <span *ngIf=\"val.comment.length > 0\" style=\"font-size: 85%; color: grey;\">[{{val.comment.length}}]</span>\r\n            </td>\r\n            <td>\r\n              <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(val?.userid)\">{{val.nickname}}</span>\r\n            </td>\r\n            <td>{{val.hit}}</td>\r\n            <td>{{val.recommend}}<span>/</span>{{val.unrecommend}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <!-- for small display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--small-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <tbody>\r\n          <tr *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n            <td class=\"mdl-data-table__cell--non-numeric\"\r\n              [routerLink]=\"['/board/' + val?._id]\" (click)=\"scrollToPost(postLocation)\">\r\n              <div>\r\n                {{val.title}}\r\n                <span *ngIf=\"val.comment.length > 0\" style=\"color: grey;\">[{{val.comment.length}}]</span>\r\n              </div>\r\n              <div style=\"font-size: 85%; margin-top: 1%;\">\r\n                <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>추천 {{val.recommend}}<span>/</span>{{val.unrecommend}}</span>\r\n              </div>\r\n            </td>\r\n            <td>{{extractDate(val.writedate)}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"contents?.length\" [pageSize]=\"pagingSize\" (page)=\"paging($event)\">\r\n      </mat-paginator>\r\n\r\n      <div *ngIf=\"authService.loggedIn()\" style=\"float: right;\">\r\n        <a mat-raised-button [routerLink]=\"['/tool']\">작성</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"board\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #board>\r\n    <button mat-menu-item *ngIf=\"authService.loggedIn()\">\r\n      <span>즐겨찾는 게시판 설정</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -1270,7 +1270,10 @@ var LoginComponent = /** @class */ (function () {
             this.authService.authenticateUser(user).subscribe(function (data) {
                 if (data.success) {
                     _this.authService.storeUserData(data.token, data.user);
-                    _this.router.navigate([_this.funcService.getPreviousUrl()]);
+                    if (_this.funcService.getPreviousUrl().toLowerCase().includes('login'))
+                        _this.router.navigate(['/']);
+                    else
+                        _this.router.navigate([_this.funcService.getPreviousUrl()]);
                 }
                 else {
                     _this.flashMessage.showFlashMessage({
@@ -1529,7 +1532,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section *ngIf=\"user\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">PROFILE &nbsp;-&nbsp; <span (click)=\"funcService.openInfoWindow(user.userid)\" style=\"cursor: pointer;\">{{user.userid}}</span></h4>\r\n      <span style=\"float: right\"><img [attr.src]=\"'images/profile/' + user.userid\" class=\"profileImage\"></span>\r\n      <hr/><br/><br/>\r\n      \r\n      <table class=\"mdl-data-table mdl-js-data-table\" style=\"margin: auto; width: 80%;\">\r\n        <tbody>\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">아이디</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{user.userid}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">닉네임</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{user.nickname}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">이메일</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{user.email}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">한 줄 소개</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{user.introduction}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">가입일</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{user.registerdate}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <br/><br/>\r\n\r\n      <a mat-raised-button [routerLink]=\"['/modify']\" style=\"float: right;\">회원정보수정</a>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>내 작업 목록</h4>\r\n      <hr/>\r\n      \r\n      <table class=\"mdl-data-table mdl-js-data-table\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">저장날짜</th>\r\n            <th>관리</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody *ngFor=\"let val of temps | slice:tempPagingFrom:tempPagingTo;\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/temp/' + val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\">{{val.title}}</a>\r\n            </td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{val.savedate}}</td>\r\n            <td>\r\n              <button mat-button color=\"warn\" (click)=\"removeTemp(val?._id)\">삭제</button>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"temps?.length\" [pageSize]=\"pagingSize\" (page)=\"tempPaging($event)\">\r\n      </mat-paginator>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>공동작업 목록</h4>\r\n      <hr/>\r\n      \r\n      <table class=\"mdl-data-table mdl-js-data-table\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\r\n            <th>저장날짜</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody *ngFor=\"let val of coworks | slice:coworkPagingFrom:coworkPagingTo;\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/temp/' + val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\">{{val.title}}</a>\r\n            </td>\r\n            <td>{{val.savedate}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"coworks?.length\" [pageSize]=\"pagingSize\" (page)=\"coworkPaging($event)\">\r\n      </mat-paginator>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<section *ngIf=\"user\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">PROFILE &nbsp;-&nbsp; <span (click)=\"funcService.openInfoWindow(user.userid)\" style=\"cursor: pointer;\">{{user.userid}}</span></h4>\r\n      <span style=\"float: right\"><img [attr.src]=\"'images/profile/' + user.userid\" class=\"profileImage\"></span>\r\n      <hr/><br/><br/>\r\n      \r\n      <table class=\"mdl-data-table mdl-js-data-table\" style=\"margin: auto; width: 80%;\">\r\n        <tbody>\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">아이디</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{user.userid}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">닉네임</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{user.nickname}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">이메일</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{user.email}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">한 줄 소개</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{user.introduction}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">가입일</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{user.registerdate}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n      <br/><br/>\r\n\r\n      <a mat-raised-button [routerLink]=\"['/modify']\" style=\"float: right;\">회원정보수정</a>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section *ngIf=\"user?.coworkRequest?.length > 0\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>공동작업 요청</h4>\r\n      <hr/>\r\n      \r\n      <table class=\"mdl-data-table mdl-js-data-table\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">요청자</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">요청일시</th>\r\n            <th>처리</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let val of user?.coworkRequest | slice:reqPagingFrom:reqPagingTo;\">\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{val?.title}}</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(val?.from?.userid)\">{{val?.from?.nickname}}</span>\r\n            </td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{val?.requestdate}}</td>\r\n            <td>\r\n              <button mat-button color=\"primary\" (click)=\"acceptReq(val)\">수락</button>\r\n              <button mat-button color=\"warn\" (click)=\"rejectReq(val)\">거절</button>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"user?.coworkRequest?.length\" [pageSize]=\"pagingSize\" (page)=\"reqPaging($event)\">\r\n      </mat-paginator>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>내 작업 목록</h4>\r\n      <hr/>\r\n      \r\n      <table class=\"mdl-data-table mdl-js-data-table\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">저장날짜</th>\r\n            <th>관리</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let val of temps | slice:tempPagingFrom:tempPagingTo;\">\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/temp/' + val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\">{{val.title}}</a>\r\n            </td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{val.savedate}}</td>\r\n            <td>\r\n              <button mat-button color=\"warn\" (click)=\"removeTemp(val?._id)\">삭제</button>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"temps?.length\" [pageSize]=\"pagingSize\" (page)=\"tempPaging($event)\">\r\n      </mat-paginator>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>공동작업 목록</h4>\r\n      <hr/>\r\n      \r\n      <table class=\"mdl-data-table mdl-js-data-table\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\r\n            <th>저장날짜</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let val of coworks | slice:coworkPagingFrom:coworkPagingTo;\">\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/temp/' + val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\">{{val.title}}</a>\r\n            </td>\r\n            <td>{{val.savedate}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"coworks?.length\" [pageSize]=\"pagingSize\" (page)=\"coworkPaging($event)\">\r\n      </mat-paginator>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -1574,6 +1577,8 @@ var ProfileComponent = /** @class */ (function () {
         this.router = router;
         this.flashMessage = flashMessage;
         this.pagingSize = 25;
+        this.reqPagingFrom = 0;
+        this.reqPagingTo = this.pagingSize;
         this.tempPagingFrom = 0;
         this.tempPagingTo = this.pagingSize;
         this.coworkPagingFrom = 0;
@@ -1603,6 +1608,11 @@ var ProfileComponent = /** @class */ (function () {
             this.navigationSubscription.unsubscribe();
         }
     };
+    ProfileComponent.prototype.reqPaging = function (pageEvent) {
+        this.reqPagingFrom = pageEvent.pageIndex * this.pagingSize;
+        this.reqPagingTo = (pageEvent.pageIndex + 1) * this.pagingSize;
+        this.router.navigate(['/profile']);
+    };
     ProfileComponent.prototype.tempPaging = function (pageEvent) {
         this.tempPagingFrom = pageEvent.pageIndex * this.pagingSize;
         this.tempPagingTo = (pageEvent.pageIndex + 1) * this.pagingSize;
@@ -1612,6 +1622,50 @@ var ProfileComponent = /** @class */ (function () {
         this.coworkPagingFrom = pageEvent.pageIndex * this.pagingSize;
         this.coworkPagingTo = (pageEvent.pageIndex + 1) * this.pagingSize;
         this.router.navigate(['/profile']);
+    };
+    ProfileComponent.prototype.acceptReq = function (cr) {
+        var _this = this;
+        if (!confirm('수락하시겠습니까?'))
+            return;
+        this.gameService.acceptCoWorkReq(cr, true).subscribe(function (result) {
+            if (result.success) {
+                _this.flashMessage.showFlashMessage({
+                    messages: ['수락되었습니다.'],
+                    type: 'success',
+                    timeout: 2000
+                });
+                _this.router.navigate(['/profile']);
+            }
+            else {
+                _this.flashMessage.showFlashMessage({
+                    messages: [result.msg],
+                    type: 'danger',
+                    timeout: 3000
+                });
+            }
+        });
+    };
+    ProfileComponent.prototype.rejectReq = function (cr) {
+        var _this = this;
+        if (!confirm('거절하시겠습니까?'))
+            return;
+        this.gameService.acceptCoWorkReq(cr, false).subscribe(function (result) {
+            if (result.success) {
+                _this.flashMessage.showFlashMessage({
+                    messages: ['거절되었습니다.'],
+                    type: 'success',
+                    timeout: 2000
+                });
+                _this.router.navigate(['/profile']);
+            }
+            else {
+                _this.flashMessage.showFlashMessage({
+                    messages: [result.msg],
+                    type: 'danger',
+                    timeout: 3000
+                });
+            }
+        });
     };
     ProfileComponent.prototype.removeTemp = function (_id) {
         var _this = this;
@@ -1996,7 +2050,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\n    <div class=\"mdl-card__supporting-text\">\n      <h4>{{temp.title}}</h4>\n      <hr/>\n\n      여기에 최종 세이브날짜랑 전체 작업자들이랑 메인 작업자 보여줘야됨\n      \n      <!-- <mat-accordion>\n        <mat-expansion-panel *ngFor=\"let block of temp.block | i=index\">\n          <mat-expansion-panel-header>\n            <mat-panel-title>\n              {{block.savedate}}\n            </mat-panel-title>\n          </mat-expansion-panel-header>\n\n          <p><b>{{coworkerMap.get(block.saveby)}}</b> 님에 의해 수정됨.</p>\n          <button mat-button (click)=\"viewBlock(i)\">블록 보기</button>\n          <button mat-button color=\"primary\" (click)=\"getBack(i)\">되돌리기</button>\n\n        </mat-expansion-panel>\n        \n      </mat-accordion> -->\n\n    </div>\n  </div>\n</section>\n\n<section></section>\n"
+module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\n    <div class=\"mdl-card__supporting-text\">\n      <h4 style=\"display: inline;\">{{temp?.title}}</h4>\n      <span style=\"float: right; text-align: right; font-size: 80%;\">\n        제작자 : <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(creator?.userid)\">{{creator?.nickname}}</span><br/>\n        <span *ngIf=\"coworkers?.length > 0\">\n          공동제작자 :\n          <span *ngFor=\"let coworker of coworkers\" class=\"toProfile\" (click)=\"funcService.openInfoWindow(coworker?.userid)\"> {{coworker?.nickname}}</span>\n        </span>\n        <span *ngIf=\"coworkers?.length == 0\">{{temp?.savedate}}</span>\n      </span>\n      <hr/><br/><br/>\n      \n      <mat-accordion>\n        <mat-expansion-panel style=\"width: 95%; margin: auto;\" *ngFor=\"let block of history\">\n          <mat-expansion-panel-header>\n            <mat-panel-title>\n              {{block?.savedate}}\n            </mat-panel-title>\n            <mat-panel-description>\n              {{block?.changed}}개의 행동 추가됨\n            </mat-panel-description>\n          </mat-expansion-panel-header>\n\n          <p *ngIf=\"coworkerMap?.get(block?.saveby)?.userid\">\n            <b style=\"cursor: pointer;\" (click)=\"funcService.openInfoWindow(coworkerMap?.get(block?.saveby)?.userid)\">{{coworkerMap?.get(block?.saveby)?.nickname}}</b> 님에 의해 수정됨.\n          </p>\n          <p *ngIf=\"!coworkerMap?.get(block?.saveby)?.userid\" style=\"color: grey;\">\n            이전 사용자 기록입니다.\n          </p>\n          <button mat-button (click)=\"viewBlock(block?.num)\">블록 보기</button>\n          <button mat-button color=\"primary\" (click)=\"versionRollBack(block?.num)\">되돌리기</button>\n\n        </mat-expansion-panel>\n        \n      </mat-accordion>\n      <br/><br/>\n      <div *ngIf=\"temp?.from\" style=\"color: grey; font-size: 85%;\">\n        - 이 게임은 <span style=\"cursor: pointer; font-weight: bold;\" (click)=\"funcService.openInfoWindow(temp?.from?.userid)\">{{temp?.from?.nickname}}</span> 님의 <a style=\"color: grey; font-weight: bold;\" [routerLink]=\"['/game/' + temp?.from?.game]\">{{temp?.from?.title}}</a> 으로부터 참조되었습니다.\n        <br/><br/>\n      </div>\n\n    </div>\n  </div>\n  <button mat-icon-button [matMenuTriggerFor]=\"about\">\n    <mat-icon>more_vert</mat-icon>\n  </button>\n  <mat-menu #about>\n    <button mat-menu-item *ngIf=\"user?._id == creator?._id\" (click)=\"remove()\">\n      <span>삭제</span>\n    </button>\n  </mat-menu>\n</section>\n\n<section *ngIf=\"user?._id == creator?._id\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\n    <div class=\"mdl-card__supporting-text\">\n      <h4 style=\"display: inline;\">공동제작자 추가</h4>\n      <hr/><br/><br/>\n      \n      <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\n        <mat-label>검색</mat-label>\n        <input matInput placeholder=\"아이디 혹은 닉네임을 입력해주세요.\" (input)=\"onSearchChange($event.target.value)\">\n        <mat-icon matSuffix>search</mat-icon>\n      </mat-form-field>\n\n      <br/><br/>\n\n      <table class=\"mdl-data-table mdl-js-data-table\" style=\"margin: auto; width: 98%;\">\n        <thead>\n          <tr>\n            <th class=\"mdl-data-table__cell--non-numeric\">아이디</th>\n            <th class=\"mdl-data-table__cell--non-numeric\">닉네임</th>\n            <th>요청</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let val of users | slice:pagingFrom:pagingTo; index as i\">\n            <td class=\"mdl-data-table__cell--non-numeric\">\n              <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(val?.userid)\">{{val?.userid}}</span>\n            </td>\n            <td class=\"mdl-data-table__cell--non-numeric\">{{val?.nickname}}</td>\n            <td>\n              <button mat-button color=\"primary\" (click)=\"sendRequest(val?._id, i)\">요청 보내기</button>\n            </td>\n          </tr>\n        </tbody>\n      </table><br/>\n\n      <mat-paginator [length]=\"temps?.length\" [pageSize]=\"pagingSize\" (page)=\"paging($event)\">\n      </mat-paginator>\n\n    </div>\n  </div>\n</section>\n\n<section></section>\n"
 
 /***/ }),
 
@@ -2013,7 +2067,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
 /* harmony import */ var _services_game_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/game.service */ "./src/app/services/game.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ng-flash-messages */ "./node_modules/ng-flash-messages/ng-flash-messages.umd.js");
+/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(ng_flash_messages__WEBPACK_IMPORTED_MODULE_5__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2027,30 +2084,139 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var TempComponent = /** @class */ (function () {
-    function TempComponent(funcService, gameService, route, router) {
+    function TempComponent(funcService, gameService, authService, route, router, flashMessage) {
         this.funcService = funcService;
         this.gameService = gameService;
+        this.authService = authService;
         this.route = route;
         this.router = router;
+        this.flashMessage = flashMessage;
+        this.count = 0;
+        this.users = [];
+        this.pagingSize = 25;
+        this.pagingFrom = 0;
+        this.pagingTo = this.pagingSize;
     }
     TempComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.num = this.route.snapshot.paramMap.get('num');
-        this.coworkerMap = new Map();
-        this.gameService.takeOneTemp(this.num).subscribe(function (result) {
-            if (result.fail) {
+        this.gameService.takeMyOneTemp(this.num).subscribe(function (result) {
+            if (result.deny) {
                 _this.router.navigate(['/no-page']);
             }
             else {
                 _this.temp = result.temp;
-                for (var _i = 0, _a = result.coworker; _i < _a.length; _i++) {
+                _this.creator = result.creator;
+                _this.coworkers = result.coworkers;
+                _this.coworkerMap = new Map();
+                _this.history = [];
+                _this.coworkerMap.set(_this.creator._id, _this.creator);
+                for (var _i = 0, _a = _this.coworkers; _i < _a.length; _i++) {
                     var coworker = _a[_i];
                     _this.coworkerMap.set(coworker._id, coworker);
                 }
+                for (var i = 0; i < _this.temp.block.length; i++) {
+                    var block = _this.temp.block[i];
+                    if (block.saveby) {
+                        block.num = i + 1;
+                        block.changed = _this.changed(i);
+                        _this.history.push(block);
+                    }
+                }
+                _this.history.reverse();
                 _this.funcService.setTitle(_this.temp.title + ' :: 작업중');
+                _this.authService.getProfile().subscribe(function (profile) {
+                    _this.user = profile.user;
+                });
             }
         });
+    };
+    TempComponent.prototype.changed = function (i) {
+        var c = i - this.count;
+        this.count = i;
+        return c;
+    };
+    TempComponent.prototype.viewBlock = function (i) {
+        this.funcService.popUp(this.funcService.ServerAddress + '/modals/viewTempBlock?game=' + this.num + '&recent=' + i, 1000, 600);
+    };
+    TempComponent.prototype.versionRollBack = function (i) {
+        var _this = this;
+        if (!confirm('이 버전으로 되돌리시겠습니까?'))
+            return;
+        this.gameService.versionRollBack(this.num, i).subscribe(function (result) {
+            if (result.success) {
+                _this.flashMessage.showFlashMessage({
+                    messages: ['롤백되었습니다.'],
+                    type: 'success',
+                    timeout: 2000
+                });
+                _this.ngOnInit();
+            }
+            else {
+                _this.flashMessage.showFlashMessage({
+                    messages: [result.msg],
+                    type: 'danger',
+                    timeout: 3000
+                });
+            }
+        });
+    };
+    TempComponent.prototype.remove = function () {
+        var _this = this;
+        if (confirm('삭제하시겠습니까?')) {
+            this.gameService.removeTemp(this.temp._id).subscribe(function (result) {
+                if (result.success) {
+                    _this.flashMessage.showFlashMessage({
+                        messages: ['삭제되었습니다.'],
+                        type: 'success',
+                        timeout: 2000
+                    });
+                    _this.router.navigate(['/profile']);
+                }
+                else {
+                    _this.flashMessage.showFlashMessage({
+                        messages: [result.msg],
+                        type: 'danger',
+                        timeout: 3000
+                    });
+                }
+            });
+        }
+    };
+    TempComponent.prototype.onSearchChange = function (text) {
+        var _this = this;
+        if (text == '')
+            return;
+        this.authService.findUserByIdOrNickname(text, this.temp._id).subscribe(function (data) {
+            _this.users = data.users;
+        });
+    };
+    TempComponent.prototype.sendRequest = function (_id, idx) {
+        var _this = this;
+        this.authService.sendRequest(_id, this.temp.title, this.temp._id).subscribe(function (result) {
+            if (result.success) {
+                _this.flashMessage.showFlashMessage({
+                    messages: ['요청되었습니다.'],
+                    type: 'success',
+                    timeout: 2000
+                });
+                _this.users.splice(idx, 1);
+            }
+            else {
+                _this.flashMessage.showFlashMessage({
+                    messages: [result.msg],
+                    type: 'danger',
+                    timeout: 3000
+                });
+            }
+        });
+    };
+    TempComponent.prototype.paging = function (pageEvent) {
+        this.pagingFrom = pageEvent.pageIndex * this.pagingSize;
+        this.pagingTo = (pageEvent.pageIndex + 1) * this.pagingSize;
     };
     TempComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -2060,8 +2226,10 @@ var TempComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_1__["FuncService"],
             _services_game_service__WEBPACK_IMPORTED_MODULE_2__["GameService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+            _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+            ng_flash_messages__WEBPACK_IMPORTED_MODULE_5__["NgFlashMessageService"]])
     ], TempComponent);
     return TempComponent;
 }());
@@ -2088,7 +2256,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n    <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n      <div class=\"mdl-card__supporting-text\">\r\n        <h4>HELLO</h4>\r\n        <hr/>\r\n        \r\n        <mat-accordion>\r\n          <mat-expansion-panel style=\"width: 95%; margin: auto;\" *ngFor=\"let block of temp\">\r\n            <mat-expansion-panel-header>\r\n              <mat-panel-title>\r\n                SAVE-DATE\r\n              </mat-panel-title>\r\n            </mat-expansion-panel-header>\r\n  \r\n            <p><b>ASDF</b> 님에 의해 수정됨.</p>\r\n            <button mat-button (click)=\"viewBlock(i)\">블록 보기</button>\r\n            <button mat-button color=\"primary\" (click)=\"getBack(i)\">되돌리기</button>\r\n  \r\n          </mat-expansion-panel>\r\n          \r\n        </mat-accordion>\r\n  \r\n      </div>\r\n    </div>\r\n  </section>\r\n  \r\n  <section></section>\r\n  "
 
 /***/ }),
 
@@ -2128,6 +2296,9 @@ var TestComponent = /** @class */ (function () {
         this.playService = playService;
         this.router = router;
         this.flashMessage = flashMessage;
+        this.temp = [
+            1, 2, 3, 4, 4, 5, 6, 7, 45, 6, 4, 4
+        ];
         this.funcService.setTitle('TEST!!!!');
     }
     TestComponent.prototype.ngOnInit = function () {
@@ -2246,7 +2417,7 @@ var ToolComponent = /** @class */ (function () {
                 _this.router.navigate(['/game/' + data.num]);
             }
             else {
-                alert('게임 생성 오류');
+                alert('게임 생성 오류\n' + data.msg);
             }
         });
     };
@@ -2568,6 +2739,27 @@ var AuthService = /** @class */ (function () {
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
         return this.http.post(this.funcService.ServerAddress + '/users/getAllUsers', {}, { headers: headers })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
+    };
+    AuthService.prototype.sendRequest = function (_id, title, tempId) {
+        var formData = {
+            _id: _id,
+            title: title,
+            tempId: tempId
+        };
+        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(this.funcService.ServerAddress + '/users/sendRequest', formData, { headers: headers })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
+    };
+    AuthService.prototype.findUserByIdOrNickname = function (text, tempId) {
+        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(this.funcService.ServerAddress + '/users/findUserByIdOrNickname', { text: text, tempId: tempId }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     AuthService = __decorate([
@@ -2987,6 +3179,20 @@ var GameService = /** @class */ (function () {
         return this.http.post(this.funcService.ServerAddress + '/games/removeTemp', { _id: _id }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
+    GameService.prototype.versionRollBack = function (num, length) {
+        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(this.funcService.ServerAddress + '/games/versionRollBack', { num: num, length: length }, { headers: headers })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
+    };
+    GameService.prototype.acceptCoWorkReq = function (coworkRequest, accept) {
+        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(this.funcService.ServerAddress + '/games/acceptCoWorkReq', { accept: accept, coworkRequest: coworkRequest }, { headers: headers })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
+    };
     GameService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
@@ -3049,11 +3255,22 @@ var PlayService = /** @class */ (function () {
     PlayService.prototype.replay = function () {
         this.gameSet(this.data);
     };
+    PlayService.prototype.substituteParams = function (text) {
+        // console.log(this.paramMap);
+        // this.paramMap.forEach((value, key) => {
+        //   let regex = new RegExp('/' + key + '/gi');
+        //   console.log(key + ' : ' + value.value);
+        //   text.replace(regex, 'this.paramMap.get("' + key + '").value');
+        // });
+        // console.log(text);
+        // return eval(text);
+        return text;
+    };
     PlayService.prototype.checkNextStageCondition = function (condition) {
         for (var _i = 0, condition_1 = condition; _i < condition_1.length; _i++) {
             var c = condition_1[_i];
             var value = this.paramMap.get(c.param).value;
-            if (!(c.above <= value && value <= c.below))
+            if (!(this.substituteParams(c.above) <= value && value <= this.substituteParams(c.below)))
                 return false;
         }
         return true;
@@ -3068,12 +3285,13 @@ var PlayService = /** @class */ (function () {
         console.log('[[NO MATCHED CONDITION]]');
     };
     PlayService.prototype.select = function (condition) {
+        this.showParams();
         this.stageNum++;
         for (var _i = 0, condition_2 = condition; _i < condition_2.length; _i++) {
             var val = condition_2[_i];
             var pv = this.paramMap.get(val.param);
             this.paramMap.delete(val.param);
-            pv.value += Math.floor(Math.random() * (val.below - val.above + 1)) + val.above;
+            pv.value += Math.floor(Math.random() * (this.substituteParams(val.below) - this.substituteParams(val.above) + 1)) + this.substituteParams(val.above);
             this.paramMap.set(val.param, pv);
         }
         // this is the end of the game
@@ -3092,7 +3310,7 @@ var PlayService = /** @class */ (function () {
                         return true;
                     }
                 }
-                // in this part, there is no condition to be fit to param
+                // in this part, there is no condition to be fit to an any param
                 this.noCondition();
                 return false;
             }

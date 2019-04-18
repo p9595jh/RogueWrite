@@ -120,9 +120,14 @@ block content
             for (let block of temp) {
                 setTimeout(() => {
                     Blockly.Events.fromJson(block, workspaceFantasy).run(true);
+                    if ( block.saveby ) {
+                        blocks[blocks.length-1].saveby = block.saveby;
+                        blocks[blocks.length-1].savedate = block.savedate;
+                    }
                 }, (i++) * 4);
                 //- Blockly.Events.fromJson(block, workspaceFantasy).run(true);
             }
+            //- blocks = temp;
         }
         //- ========================================
 

@@ -123,6 +123,13 @@ function addDoubleQuote(s) {
     }
 
 }
+function replaceDoubleQuote(s) {
+    var value;
+
+    value = s.split('"').join('\\"');
+
+    return value;
+}
 
 Blockly.JavaScript['game'] = function (block) {
     var value_title = Blockly.JavaScript.valueToCode(block, 'title', Blockly.JavaScript.ORDER_ATOMIC);
@@ -130,7 +137,7 @@ Blockly.JavaScript['game'] = function (block) {
     var statements_param = Blockly.JavaScript.statementToCode(block, 'param');
     var value_score = Blockly.JavaScript.valueToCode(block, 'score', Blockly.JavaScript.ORDER_ATOMIC);
 
-    var code = '{ "title": "' + removeSingleQuote(value_title) + '", "stage": [ ' + removeComma(statements_stage);
+    var code = '{ "title": "' + replaceDoubleQuote(removeSingleQuote(value_title)) + '", "stage": [ ' + removeComma(statements_stage);
     code = code + ' ], "param": [ ' + removeComma(statements_param);
     code = code + ' ], "score": "' + removeSingleQuote(value_score) + '" }';
 
@@ -153,7 +160,7 @@ Blockly.JavaScript['phase'] = function (block) {
     var statements_condition = Blockly.JavaScript.statementToCode(block, 'condition');
     var statements_choice = Blockly.JavaScript.statementToCode(block, 'choice');
 
-    var code = '{ "phase_num" : ' + removeMinus(value_phase_num) + ', "content": "' + removeSingleQuote(value_content) + '", "condition": [ ' + removeComma(statements_condition);
+    var code = '{ "phase_num" : ' + removeMinus(value_phase_num) + ', "content": "' + replaceDoubleQuote(removeSingleQuote(value_content)) + '", "condition": [ ' + removeComma(statements_condition);
     code = code + ' ], "choice": [ ' + removeComma(statements_choice);
     code = code + ' ] }, ';
 
@@ -165,7 +172,7 @@ Blockly.JavaScript['choice'] = function (block) {
     var value_content = Blockly.JavaScript.valueToCode(block, 'content', Blockly.JavaScript.ORDER_ATOMIC);
     var statements_set_param = Blockly.JavaScript.statementToCode(block, 'set_param');
 
-    var code = '{ "choice_num": ' + removeMinus(value_choice_num) + ', "content": "' + removeSingleQuote(value_content) + '", "set_param": [ ' + removeComma(statements_set_param);
+    var code = '{ "choice_num": ' + removeMinus(value_choice_num) + ', "content": "' + replaceDoubleQuote(removeSingleQuote(value_content)) + '", "set_param": [ ' + removeComma(statements_set_param);
     code = code + ' ] }, ';
 
     return code;

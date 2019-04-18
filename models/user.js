@@ -30,6 +30,19 @@ const UserSchema = mongoose.Schema({
   },
   bookmark: {
     type: Array
+  },
+  coworkRequest: {
+    type: Array
+    /*
+      from: {
+        userid: String,
+        nickname: String,
+        _id: _id of the user who requested
+      },
+      title: String,
+      temp: String (_id of temp),
+      requestdate: String (date)
+    */
   }
 });
 

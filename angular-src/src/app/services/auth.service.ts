@@ -88,4 +88,27 @@ export class AuthService {
       .pipe(map(res => res.json()));
   }
 
+  sendRequest(_id, title, tempId) {
+    const formData = {
+      _id: _id,
+      title: title,
+      tempId: tempId
+    };
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/users/sendRequest', formData, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  findUserByIdOrNickname(text, tempId) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/users/findUserByIdOrNickname', {text: text, tempId: tempId}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
 }

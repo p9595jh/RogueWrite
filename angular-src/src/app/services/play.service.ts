@@ -39,10 +39,22 @@ export class PlayService {
     this.gameSet(this.data);
   }
 
+  private substituteParams(text): number {
+    // console.log(this.paramMap);
+    // this.paramMap.forEach((value, key) => {
+    //   let regex = new RegExp('/' + key + '/gi');
+    //   console.log(key + ' : ' + value.value);
+    //   text.replace(regex, 'this.paramMap.get("' + key + '").value');
+    // });
+    // console.log(text);
+    // return eval(text);
+    return text;
+  }
+
   private checkNextStageCondition(condition): boolean {
     for (let c of condition) {
       let value: number = this.paramMap.get(c.param).value;
-      if ( !(c.above <= value && value <= c.below) ) return false;
+      if ( !(this.substituteParams(c.above) <= value && value <= this.substituteParams(c.below)) ) return false;
     }
     return true;
   }
@@ -59,11 +71,12 @@ export class PlayService {
   }
 
   select(condition: any) {
+    this.showParams();
     this.stageNum++;
     for (let val of condition) {
       let pv: any = this.paramMap.get(val.param);
       this.paramMap.delete(val.param);
-      pv.value += Math.floor(Math.random() * (val.below - val.above + 1)) + val.above;
+      pv.value += Math.floor(Math.random() * (this.substituteParams(val.below) - this.substituteParams(val.above) + 1)) + this.substituteParams(val.above);
       this.paramMap.set(val.param, pv);
     }
 
@@ -82,7 +95,7 @@ export class PlayService {
             return true;
           }
         }
-        // in this part, there is no condition to be fit to param
+        // in this part, there is no condition to be fit to an any param
         this.noCondition();
         return false;
       }

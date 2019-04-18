@@ -168,4 +168,20 @@ export class GameService {
       .pipe(map(res => res.json()));
   }
 
+  versionRollBack(num, length) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/games/versionRollBack', {num: num, length: length}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  acceptCoWorkReq(coworkRequest, accept: boolean) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/games/acceptCoWorkReq', {accept: accept, coworkRequest: coworkRequest}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
 }

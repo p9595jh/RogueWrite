@@ -55,7 +55,7 @@ export class ToolComponent implements OnInit {
       if ( data.success ) {
         this.router.navigate(['/game/' + data.num]);
       } else {
-        alert('게임 생성 오류');
+        alert('게임 생성 오류\n' + data.msg);
       }
     });
   }

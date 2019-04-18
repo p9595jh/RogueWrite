@@ -19,6 +19,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   coworks: Array<any>;
 
   pagingSize = 25;
+  reqPagingFrom: Number = 0;
+  reqPagingTo: Number = this.pagingSize;
   tempPagingFrom: Number = 0;
   tempPagingTo: Number = this.pagingSize;
   coworkPagingFrom: Number = 0;
@@ -59,6 +61,12 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
   }
 
+  reqPaging(pageEvent: PageEvent) {
+    this.reqPagingFrom = pageEvent.pageIndex * this.pagingSize;
+    this.reqPagingTo = (pageEvent.pageIndex + 1) * this.pagingSize;
+    this.router.navigate(['/profile']);
+  }
+
   tempPaging(pageEvent: PageEvent) {
     this.tempPagingFrom = pageEvent.pageIndex * this.pagingSize;
     this.tempPagingTo = (pageEvent.pageIndex + 1) * this.pagingSize;
@@ -69,6 +77,46 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.coworkPagingFrom = pageEvent.pageIndex * this.pagingSize;
     this.coworkPagingTo = (pageEvent.pageIndex + 1) * this.pagingSize;
     this.router.navigate(['/profile']);
+  }
+
+  acceptReq(cr: any) {
+    if ( !confirm('수락하시겠습니까?') ) return;
+    this.gameService.acceptCoWorkReq(cr, true).subscribe(result => {
+      if ( result.success ) {
+        this.flashMessage.showFlashMessage({
+          messages: ['수락되었습니다.'], 
+          type: 'success', 
+          timeout: 2000
+        });
+        this.router.navigate(['/profile']);
+      } else {
+        this.flashMessage.showFlashMessage({
+          messages: [result.msg],
+          type: 'danger',
+          timeout: 3000
+        });
+      }
+    });
+  }
+
+  rejectReq(cr: any) {
+    if ( !confirm('거절하시겠습니까?') ) return;
+    this.gameService.acceptCoWorkReq(cr, false).subscribe(result => {
+      if ( result.success ) {
+        this.flashMessage.showFlashMessage({
+          messages: ['거절되었습니다.'], 
+          type: 'success', 
+          timeout: 2000
+        });
+        this.router.navigate(['/profile']);
+      } else {
+        this.flashMessage.showFlashMessage({
+          messages: [result.msg],
+          type: 'danger',
+          timeout: 3000
+        });
+      }
+    });
   }
 
   removeTemp(_id) {

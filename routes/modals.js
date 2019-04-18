@@ -6,6 +6,7 @@ const formidable = require('formidable');
 const fs = require('fs-extra');
 const User = require('../models/user');
 const Game = require('../models/game');
+const Temp = require('../models/temp');
 
 router.get('/', function(req, res) {
     res.send('');
@@ -110,6 +111,19 @@ router.get('/viewBlock', (req, res) => {
     Game.findOne({_id: req.query.game}, {block: 1, title: 1}, (err, game) => {
         if ( err || !game ) res.send('error');
         else {
+            res.render('block', {
+                title: game.title,
+                block: game.block
+            });
+        }
+    });
+});
+
+router.get('/viewTempBlock', (req, res) => {
+    Temp.findOne({_id: req.query.game}, {block: 1, title: 1}, (err, game) => {
+        if ( err || !game ) res.send('error');
+        else {
+            if ( req.query.recent ) game.block.length = req.query.recent;
             res.render('block', {
                 title: game.title,
                 block: game.block

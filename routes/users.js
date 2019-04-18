@@ -7,6 +7,7 @@ const config = require('../config/database');
 const bcrypt = require('bcryptjs');
 const fs = require('fs-extra');
 const User = require('../models/user');
+const Temp = require('../models/temp');
 
 function set2LetterFormat(num) {
   num = num >= 10 ? num : '0' + num;
@@ -32,7 +33,8 @@ router.post('/register', function(req, res, next) {
     introduction: req.body.introduction,
     registerdate: getNowDate(),
     clean: true,
-    bookmark: []
+    bookmark: [],
+    coworkRequest: []
   });
 
   User.findOne({userid: newUser.userid}, {_id: 1}, function(err1, output1) {
@@ -186,6 +188,47 @@ router.post('/getAllUsers', passport.authenticate('jwt', {session: false}), func
 
 router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res, next) => {
   res.json({user: req.user});
+});
+
+//==================================================>
+
+router.post('/sendRequest', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+  const request = {
+    from: {
+      userid: req.user.userid,
+      nickname: req.user.nickname,
+      _id: req.user._id.toString()
+    },
+    title: req.body.title,
+    temp: req.body.tempId,
+    requestdate: getNowDate()
+  };
+  User.findOneAndUpdate({_id: req.body._id}, {$push: {coworkRequest: request}}, (err, user) => {
+    Temp.findOneAndUpdate({_id: req.body.tempId}, {$push: {requested: req.body._id}}, (err, temp) => {
+      if ( err ) res.json({success: false, msg: err});
+      else res.json({success: true});
+    });
+  });
+});
+
+router.post('/findUserByIdOrNickname', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+  const text = req.body.text;
+  const tempId = req.body.tempId;
+  User.find(
+    {$or: [{userid: {$regex: text, $options: 'i'}}, {nickname: {$regex: text, $options: 'i'}}], _id: {$ne: req.user._id}},
+    {userid: 1, nickname: 1, _id: 1, coworkRequest: 1},
+    (err, users) => {
+      let arr = [];
+      outerLoop: for (let user of users) {
+        for (let coworkRequest of user.coworkRequest) {
+          if ( coworkRequest.temp == tempId ) {
+            continue outerLoop;
+          }
+        }
+        arr.push(user);
+      }
+      res.json({users: arr});
+  });
 });
 
 //==================================================>

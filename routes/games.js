@@ -50,7 +50,7 @@ router.get('/tool', function(req, res, next) {
                     block: ''
                 });
             } else {    // load temp data
-                Temp.find({user: uid}, {block: 0, coworker: 0}, (err, outputs) => {
+                Temp.find({$or: [{user: uid}, {coworker: {$in: [uid]}}]}, {block: 0, coworker: 0}, (err, outputs) => {
                     res.render('tool', {
                         title: 'TOOL',
                         temp: output._id,
@@ -62,7 +62,7 @@ router.get('/tool', function(req, res, next) {
             }
         });
     } else {
-        Temp.find({user: uid}, {block: 0}, (err, outputs) => {
+        Temp.find({$or: [{user: uid}, {coworker: {$in: [uid]}}]}, {block: 0}, (err, outputs) => {
             res.render('tool', {
                 title: 'TOOL',
                 temps: outputs,
@@ -113,9 +113,9 @@ function scoreCheck(s) {
 }
 
 router.post('/tempSave', (req, res, next) => {
+    req.body.block[req.body.block.length-1].saveby = req.body.uid;
+    req.body.block[req.body.block.length-1].savedate = getNowDate();
     if ( req.body._id ) {
-        req.body.block[req.body.block.length-1].saveby = req.body.uid;
-        req.body.block[req.body.block.length-1].savedate = getNowDate();
         Temp.findOneAndUpdate({_id: req.body._id}, {block: req.body.block, savedate: getNowDate()}, (err, output) => {
             if ( err | !output ) res.json({success: false});
             else res.json({success: true});
@@ -126,7 +126,8 @@ router.post('/tempSave', (req, res, next) => {
             block: req.body.block,
             title: req.body.title,
             savedate: getNowDate(),
-            coworker: []
+            coworker: [],
+            requested: []
         });
         Temp.add(newTemp, (err, output) => {
             if ( err ) res.json({success: false});
@@ -189,76 +190,71 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
     if ( !req.session.data ) {
         res.json({success: false, msg: '먼저 저장을 해야 합니다.'});
     } else {
-        const newGame = new Game({
-            userid: req.user.userid,
-            nickname: req.user.nickname,
-            title: req.session.data.title,
-            content: req.body.content,
-            game: req.session.data,
-            block: req.session.block,
-            boardRequest: 0,
-            board: '',
-            hit: 0,
-            recommend: 0,
-            unrecommend: 0,
-            recommendby: [],
-            comment: [],
-            writedate: getNowDate()
-        });
-        Game.addPost(newGame, (err, post) => {
-            if ( err ) {
-                res.json({success: false});
+        Temp.findOne({_id: req.session.temp}, {user: 1}, (err, t) => {
+            if ( t.user != req.user._id.toString() ) {
+                res.json({success: false, msg: '메인 제작자가 작성해야 합니다.'});
             } else {
-                if ( req.session.temp ) {
-                    Temp.findOneAndDelete({_id: req.session.temp}, (err, output) => {
-                        // if ( output.from ) {
-                        //     Game.findOneAndUpdate({_id: post._id}, {from: output.from}, (err, game) => {
-                        //         req.session.destroy();
-                        //         res.clearCookie('sid');
-                        //         res.json({
-                        //             success: true,
-                        //             num: post._id
-                        //         });
-                        //     });
-                        // } else {
-                        //     req.session.destroy();
-                        //     res.clearCookie('sid');
-                        //     res.json({
-                        //         success: true,
-                        //         num: post._id
-                        //     });
-                        // }
-                        if ( output.from && output.coworker.length > 0 ) {
-                            User.find({_id: {$in: output.coworker}}, {userid: 1, nickname: 1}, (err, users) => {
-                                Game.findOneAndUpdate({_id: post._id}, {coworker: users, from: output.from}, (err, game) => {
+                const newGame = new Game({
+                    userid: req.user.userid,
+                    nickname: req.user.nickname,
+                    title: req.session.data.title,
+                    content: req.body.content,
+                    game: req.session.data,
+                    block: req.session.block,
+                    boardRequest: 0,
+                    board: '',
+                    hit: 0,
+                    recommend: 0,
+                    unrecommend: 0,
+                    recommendby: [],
+                    comment: [],
+                    writedate: getNowDate()
+                });
+                Game.addPost(newGame, (err, post) => {
+                    if ( err ) {
+                        res.json({success: false});
+                    } else {
+                        if ( req.session.temp ) {
+                            Temp.findOneAndDelete({_id: req.session.temp}, (err, output) => {
+                                if ( output.from && output.coworker.length > 0 ) {
+                                    User.find({_id: {$in: output.coworker}}, {userid: 1, nickname: 1}, (err, users) => {
+                                        Game.findOneAndUpdate({_id: post._id}, {coworker: users, from: output.from}, (err, game) => {
+                                            req.session.destroy();
+                                            res.clearCookie('sid');
+                                            res.json({
+                                                success: true,
+                                                num: post._id
+                                            });
+                                        });
+                                    });
+                                } else if ( output.from ) {
+                                    Game.findOneAndUpdate({_id: post._id}, {from: output.from}, (err, game) => {
+                                        req.session.destroy();
+                                        res.clearCookie('sid');
+                                        res.json({
+                                            success: true,
+                                            num: post._id
+                                        });
+                                    });
+                                } else if ( output.coworker.length > 0 ) {
+                                    User.find({_id: {$in: output.coworker}}, {userid: 1, nickname: 1}, (err, users) => {
+                                        Game.findOneAndUpdate({_id: post._id}, {coworker: users}, (err, game) => {
+                                            req.session.destroy();
+                                            res.clearCookie('sid');
+                                            res.json({
+                                                success: true,
+                                                num: post._id
+                                            });
+                                        });
+                                    });
+                                } else {
                                     req.session.destroy();
                                     res.clearCookie('sid');
                                     res.json({
                                         success: true,
                                         num: post._id
                                     });
-                                });
-                            });
-                        } else if ( output.from ) {
-                            Game.findOneAndUpdate({_id: post._id}, {from: output.from}, (err, game) => {
-                                req.session.destroy();
-                                res.clearCookie('sid');
-                                res.json({
-                                    success: true,
-                                    num: post._id
-                                });
-                            });
-                        } else if ( output.coworker.length > 0 ) {
-                            // {_id: {$in: ids}}
-                            User.find({_id: {$in: output.coworker}}, {userid: 1, nickname: 1}, (err, users) => {
-                                Game.findOneAndUpdate({_id: post._id}, {coworker: users}, (err, game) => {
-                                    req.session.destroy();
-                                    res.clearCookie('sid');
-                                    res.json({
-                                        success: true,
-                                        num: post._id
-                                    });
-                                });
+                                }
                             });
                         } else {
                             req.session.destroy();
@@ -268,15 +264,8 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
                                 num: post._id
                             });
                         }
-                    });
-                } else {
-                    req.session.destroy();
-                    res.clearCookie('sid');
-                    res.json({
-                        success: true,
-                        num: post._id
-                    });
-                }
+                    }
+                });
             }
         });
     }
@@ -321,12 +310,15 @@ router.post('/takeOneTemp', passport.authenticate('jwt', {session: false}), func
 
 router.post('/takeMyOneTemp', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     Temp.findOne({_id: req.body.num}, (err, temp) => {
-        if ( temp.user == req.user._id || temp.coworker.includes(req.user._id) ) {
+        if ( temp.user == req.user._id || temp.coworker.includes(req.user._id.toString()) ) {
             User.find({_id: {$in: temp.coworker}}, {nickname: 1, userid: 1, _id: 1}, (err, users) => {
-                res.json({
-                    temp: temp,
-                    coworkers: users
-                });
+                User.findOne({_id: temp.user}, {nickname: 1, userid: 1, _id: 1}, (err, user) => {
+                    res.json({
+                        temp: temp,
+                        coworkers: users,
+                        creator: user
+                    });
+                })
             });
         } else res.json({deny: true});
     })
@@ -335,6 +327,8 @@ router.post('/takeMyOneTemp', passport.authenticate('jwt', {session: false}), fu
 router.post('/toMyTempList', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     const num = req.body.num;
     Game.findOne({_id: num}, {title: 1, block: 1, userid: 1, nickname: 1}, (err, game) => {
+        game.block[game.block.length-1].saveby = req.user._id;
+        game.block[game.block.length-1].savedate = getNowDate();
         const newTemp = new Temp({
             user: req.user._id,
             block: game.block,
@@ -356,13 +350,42 @@ router.post('/toMyTempList', passport.authenticate('jwt', {session: false}), fun
 
 router.post('/takeMyTemps', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     Temp.find({user: req.user._id}, {_id: 1, title: 1, savedate: 1}, (err, temps) => {
-        // res.json({temps: temps});
-        Temp.find({_id: {$in: req.user._id}}, {_id: 1, title: 1, savedate: 1}, (err, outputs) => {
+        Temp.find({coworker: {$in: [req.user._id.toString()]}}, {_id: 1, title: 1, savedate: 1}, (err, outputs) => {
+            console.log(err);
             res.json({
                 temps: temps,
                 coworking: outputs
             });
         });
+    });
+});
+
+router.post('/versionRollBack', function(req, res, next) {
+    const num = req.body.num;
+    Temp.findOne({_id: num}, {block: 1}, (err, temp) => {
+        temp.block.length = req.body.length;
+        Temp.findOneAndUpdate({_id: num}, {block: temp.block}, (err, output) => {
+            if ( err ) res.json({success: false, msg: err});
+            else res.json({success: true});
+        });
+    });
+});
+
+router.post('/acceptCoWorkReq', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+    const accept = req.body.accept;
+    const coworkRequest = req.body.coworkRequest;
+    User.findOneAndUpdate({_id: req.user._id}, {$pullAll: {coworkRequest: [coworkRequest]}}, (err, user) => {
+        if ( accept ) {
+            Temp.findOneAndUpdate({_id: coworkRequest.temp}, {$pullAll: {requested: [req.user._id.toString()]}, $push: {coworker: req.user._id.toString()}}, (err, temp) => {
+                if ( err ) res.json({success: false, msg: err});
+                else res.json({success: true});
+            });
+        } else {
+            Temp.findOneAndUpdate({_id: coworkRequest.temp}, {$pullAll: {requested: [req.user._id]}}, (err, temp) => {
+                if ( err ) res.json({success: false, msg: err});
+                else res.json({success: true});
+            });
+        }
     });
 });
 

@@ -12,8 +12,8 @@
             <th>상태</th>
           </tr>
         </thead>
-        <tbody *ngFor="let val of users | slice:memberPagingFrom:memberPagingTo;">
-          <tr>
+        <tbody>
+          <tr *ngFor="let val of users | slice:memberPagingFrom:memberPagingTo;">
             <td class="mdl-data-table__cell--non-numeric">
               <span (click)="funcService.openInfoWindow(val?.userid)" style="cursor: pointer;">{{val.userid}}</span>
             </td>
@@ -50,8 +50,9 @@
             <th>처리</th>
           </tr>
         </thead>
-        <tbody *ngFor="let val of games | slice:reqPagingFrom:reqPagingTo;">
-          <tr *ngIf="val?.userid != 'admin'">
+        <tbody>
+          <!-- <tr *ngIf="val?.userid != 'admin'"> -->
+          <tr *ngFor="let val of games | slice:reqPagingFrom:reqPagingTo;">
             <td class="mdl-data-table__cell--non-numeric">
               <span (click)="funcService.openInfoWindow(val?.userid)" style="cursor: pointer;">{{val.nickname}} ({{val.userid}})</span>
             </td>

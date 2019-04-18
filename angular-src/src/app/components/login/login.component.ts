@@ -44,7 +44,8 @@ export class LoginComponent implements OnInit {
       this.authService.authenticateUser(user).subscribe(data => {
         if( data.success ) {
           this.authService.storeUserData(data.token, data.user);
-          this.router.navigate([this.funcService.getPreviousUrl()]);
+          if ( this.funcService.getPreviousUrl().toLowerCase().includes('login') ) this.router.navigate(['/']);
+          else this.router.navigate([this.funcService.getPreviousUrl()]);
         } else {
           this.flashMessage.showFlashMessage({
             messages: [data.msg], 
