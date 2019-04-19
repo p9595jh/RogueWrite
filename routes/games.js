@@ -39,38 +39,43 @@ router.get('/', function(req, res, next) {
 // for pug =============================================================
 
 router.get('/tool', function(req, res, next) {
-    const blockId = req.query._id;
-    const uid = req.query.uid;
-    if ( blockId ) {
-        Temp.findOne({_id: blockId}, {block: 1, _id: 1}, (err, output) => {
-            if ( err | !output ) {
-                res.render('tool', {
-                    title: 'TOOL',
-                    uid: uid,
-                    block: ''
-                });
-            } else {    // load temp data
-                Temp.find({$or: [{user: uid}, {coworker: {$in: [uid]}}]}, {block: 0, coworker: 0}, (err, outputs) => {
+    if ( req.session.code && req.session.code == req.query.c ) {
+        const blockId = req.query._id;
+        const uid = req.query.uid;
+        if ( blockId ) {
+            Temp.findOne({_id: blockId}, {block: 1, _id: 1}, (err, output) => {
+                if ( err | !output ) {
                     res.render('tool', {
                         title: 'TOOL',
-                        temp: output._id,
                         uid: uid,
-                        temps: outputs,
-                        block: output.block
+                        block: '',
+                        c: req.session.code
                     });
-                });
-            }
-        });
-    } else {
-        Temp.find({$or: [{user: uid}, {coworker: {$in: [uid]}}]}, {block: 0}, (err, outputs) => {
-            res.render('tool', {
-                title: 'TOOL',
-                temps: outputs,
-                uid: uid,
-                block: ''
+                } else {    // load temp data
+                    Temp.find({$or: [{user: uid}, {coworker: {$in: [uid]}}]}, {block: 0, coworker: 0}, (err, outputs) => {
+                        res.render('tool', {
+                            title: 'TOOL',
+                            temp: output._id,
+                            uid: uid,
+                            temps: outputs,
+                            block: output.block,
+                            c: req.session.code
+                        });
+                    });
+                }
             });
-        });
-    }
+        } else {
+            Temp.find({$or: [{user: uid}, {coworker: {$in: [uid]}}]}, {block: 0}, (err, outputs) => {
+                res.render('tool', {
+                    title: 'TOOL',
+                    temps: outputs,
+                    uid: uid,
+                    block: '',
+                    c: req.session.code
+                });
+            });
+        }
+    } else res.redirect('https://www.youtube.com/');
 });
 
 router.get('/editor', function(req, res, next) {
@@ -131,7 +136,7 @@ router.post('/tempSave', (req, res, next) => {
         });
         Temp.add(newTemp, (err, output) => {
             if ( err ) res.json({success: false});
-            else res.json({success: true});
+            else res.json({success: true, _id: output._id.toString()});
         });
     }
 });
@@ -154,20 +159,11 @@ router.post('/save', function(req, res, next) {
     } else if ( isNotValid(data.score) ) {
         return res.json({success: false, msg: '점수계산이 비어있습니다.'});
     } else {
-        const pattern = /^[a-zA-Z0-9]*$/;
-        for (let i=0; i<data.score.length; i++) {
-            if ( !pattern.test(data.score.substring(i, i+1)) ) {
-                if ( !scoreCheck(data.score.substring(i, i+1)) ) {
-                    return res.json({success: false, msg: '점수계산이 잘못되었습니다.'});
-                }
-            }
-        }
         req.session.data = data;
         req.session.block = req.body.block;
         req.session.temp = req.body._id;
         res.json({success: true});
     }
-    
 });
 
 router.get('/getSessionGame', function(req, res, next) {
@@ -351,7 +347,6 @@ router.post('/toMyTempList', passport.authenticate('jwt', {session: false}), fun
 router.post('/takeMyTemps', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     Temp.find({user: req.user._id}, {_id: 1, title: 1, savedate: 1}, (err, temps) => {
         Temp.find({coworker: {$in: [req.user._id.toString()]}}, {_id: 1, title: 1, savedate: 1}, (err, outputs) => {
-            console.log(err);
             res.json({
                 temps: temps,
                 coworking: outputs

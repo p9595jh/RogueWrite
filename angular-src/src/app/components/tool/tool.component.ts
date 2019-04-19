@@ -30,11 +30,15 @@ export class ToolComponent implements OnInit {
 
   ngOnInit() {
     this.authService.getProfile().subscribe(profile => {
-      this.iframe = '<iframe src="'
-        + this.funcService.ServerAddress
-        + '/games/tool?uid='
-        + profile.user._id
-        + '" style="width: 100%; height: 700px;"></iframe>';
+      this.authService.getCode(profile.user.userid).subscribe(data => {
+        this.iframe = '<iframe src="'
+          + this.funcService.ServerAddress
+          + '/games/tool?uid='
+          + profile.user._id
+          + '&c='
+          + data.code
+          + '" style="width: 100%; height: 700px;"></iframe>';
+      });
     });
   }
 

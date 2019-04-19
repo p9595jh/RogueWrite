@@ -30,7 +30,7 @@
         <table *ngIf="playService.end" class="mdl-data-table mdl-js-data-table" style="width: 100%;">
           <tr>
             <td class="mdl-data-table__cell--non-numeric">THE END.</td>
-            <td>점수 : 얼마얼마</td>
+            <td>최종점수 : {{playService?.score}}</td>
           </tr>
           <tr>
             <td colspan="2"><button mat-button (click)="playService.replay()" style="float: right;">다시하기</button></td>
@@ -258,14 +258,14 @@
       </div>
     </div>
   </div>
-  <button mat-icon-button [matMenuTriggerFor]="board">
+  <!-- <button mat-icon-button [matMenuTriggerFor]="board">
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #board>
     <button mat-menu-item *ngIf="authService.loggedIn()">
       <span>즐겨찾는 게시판 설정</span>
     </button>
-  </mat-menu>
+  </mat-menu> -->
 </section>
 
 <section></section>

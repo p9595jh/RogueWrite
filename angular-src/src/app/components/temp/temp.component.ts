@@ -122,7 +122,10 @@ export class TempComponent implements OnInit {
   }
 
   onSearchChange(text: string) {
-    if ( text == '' ) return;
+    if ( text == '' ) {
+      this.users = [];
+      return;
+    }
     this.authService.findUserByIdOrNickname(text, this.temp._id).subscribe(data => {
       this.users = data.users;
     });

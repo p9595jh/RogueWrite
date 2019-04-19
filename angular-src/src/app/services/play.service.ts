@@ -12,6 +12,7 @@ export class PlayService {
   phaseNum: number;
   end: boolean;
   paramArr: Array<any[]>;
+  score: number;
 
   constructor() {}
 
@@ -40,15 +41,11 @@ export class PlayService {
   }
 
   private substituteParams(text): number {
-    // console.log(this.paramMap);
-    // this.paramMap.forEach((value, key) => {
-    //   let regex = new RegExp('/' + key + '/gi');
-    //   console.log(key + ' : ' + value.value);
-    //   text.replace(regex, 'this.paramMap.get("' + key + '").value');
-    // });
-    // console.log(text);
-    // return eval(text);
-    return text;
+    if ( typeof text == 'number' ) return text;
+    this.paramMap.forEach((value, key) => {
+      text = text.split(key).join('this.paramMap.get("' + key + '").value');
+    });
+    return eval(text);
   }
 
   private checkNextStageCondition(condition): boolean {
@@ -59,24 +56,28 @@ export class PlayService {
     return true;
   }
 
-  private ending() {
+  private getDone() {
     this.end = true;
+    this.score = this.substituteParams(this.data.score);
+  }
+
+  private ending() {
+    this.getDone();
     console.log('[[END]]');
     console.log('[[SELECTED ENDING: ' + (this.stageNum-1) + '-' + this.phaseNum + ']]');
   }
 
   private noCondition() {
-    this.end = true;
+    this.getDone();
     console.log('[[NO MATCHED CONDITION]]');
   }
 
   select(condition: any) {
-    this.showParams();
     this.stageNum++;
     for (let val of condition) {
       let pv: any = this.paramMap.get(val.param);
-      this.paramMap.delete(val.param);
       pv.value += Math.floor(Math.random() * (this.substituteParams(val.below) - this.substituteParams(val.above) + 1)) + this.substituteParams(val.above);
+      this.paramMap.delete(val.param);
       this.paramMap.set(val.param, pv);
     }
 

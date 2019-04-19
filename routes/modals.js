@@ -25,9 +25,7 @@ router.post('/getCode', passport.authenticate('jwt', {session: false}), function
         }
         req.session.code = randomstring;
         req.session.userid = req.body.userid;
-        res.json({
-            code: randomstring
-        });
+        res.json({code: randomstring});
     } else res.json({code: 'お疲れ様です'});
 });
 
