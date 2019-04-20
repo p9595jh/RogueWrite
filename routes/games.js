@@ -39,7 +39,7 @@ router.get('/', function(req, res, next) {
 // for pug =============================================================
 
 router.get('/tool', function(req, res, next) {
-    if ( req.session.code && req.session.code == req.query.c ) {
+    if ( req.session.code && req.session.code == req.query.c && req.session.uid == req.query.uid ) {
         const blockId = req.query._id;
         const uid = req.query.uid;
         if ( blockId ) {

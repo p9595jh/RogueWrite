@@ -25,6 +25,7 @@ router.post('/getCode', passport.authenticate('jwt', {session: false}), function
         }
         req.session.code = randomstring;
         req.session.userid = req.body.userid;
+        req.session.uid = req.user._id.toString();
         res.json({code: randomstring});
     } else res.json({code: 'お疲れ様です'});
 });
@@ -91,7 +92,7 @@ router.post('/setProfileImage', function(req, res) {
 // ==============================================
 
 router.get('/info', function(req, res) {
-    User.findOne({userid: req.query.userid}, {pw: 0}, function(err, user) {
+    User.findOne({userid: req.query.userid}, {userid: 1, email: 1, nickname: 1, introduction: 1, clean: 1, registerdate: 1}, function(err, user) {
         if ( err || !user ) {
             res.send('사용자를 찾을 수 없습니다.');
         } else {
