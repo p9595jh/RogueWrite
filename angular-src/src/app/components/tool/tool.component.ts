@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./tool.component.css']
 })
 export class ToolComponent implements OnInit {
-  iframe: string /*= '<iframe src="' + this.funcService.ServerAddress + '/games/tool" style="width: 100%; height: 700px;"></iframe>';*/
+  iframe: string;
   temps: Array<any>;
 
   tooltipPosition = 'above';
@@ -37,7 +37,7 @@ export class ToolComponent implements OnInit {
           + profile.user._id
           + '&c='
           + data.code
-          + '" style="width: 100%; height: 700px;"></iframe>';
+          + '" style="width: 100%; height: 700px;">loading...</iframe>';
       });
     });
   }
@@ -53,9 +53,14 @@ export class ToolComponent implements OnInit {
     });
   }
 
-  onWriteGame(content: HTMLTextAreaElement) {
+  onWriteGame(content: HTMLTextAreaElement, version: HTMLInputElement) {
+    if ( version.value == undefined || version.value == '' ) {
+      alert('버전을 입력해주세요.');
+      version.focus();
+      return;
+    }
     if ( !confirm('저장하시겠습니까?') ) return;
-    this.gameService.writeGame(content.value).subscribe(data => {
+    this.gameService.writeGame(content.value, version.value).subscribe(data => {
       if ( data.success ) {
         this.router.navigate(['/game/' + data.num]);
       } else {

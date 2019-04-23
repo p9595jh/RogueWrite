@@ -249,11 +249,12 @@ router.post('/bookmark', passport.authenticate('jwt', {session: false}), (req, r
 
         if ( type == 'free' || type == 'notice' ) {
             const title = type == 'free' ? '자유게시판' : '공지게시판';
-            User.findOneAndUpdate({_id: req.user._id}, {$push: {bookmark: {url: type, title: title}}}, (err, output) => {
+            const bookmarkData = {url: type, title: title};
+            User.findOneAndUpdate({_id: req.user._id}, {$push: {bookmark: bookmarkData}}, (err, output) => {
                 if ( err ) {
                     res.json({success: false, msg: err});
                 } else {
-                    res.json({success: true});
+                    res.json({success: true, bookmark: bookmarkData});
                 }
             });
         } else {
@@ -261,11 +262,12 @@ router.post('/bookmark', passport.authenticate('jwt', {session: false}), (req, r
                 if ( err || !sub ) {
                     res.json({success: false, msg: 'ERROR'});
                 } else {
-                    User.findOneAndUpdate({_id: req.user._id}, {$push: {bookmark: {url: type, title: sub.title}}}, (err, output) => {
+                    const bookmarkData = {url: type, title: sub.title};
+                    User.findOneAndUpdate({_id: req.user._id}, {$push: {bookmark: bookmarkData}}, (err, output) => {
                         if ( err ) {
                             res.json({success: false, msg: err});
                         } else {
-                            res.json({success: true});
+                            res.json({success: true, bookmark: bookmarkData});
                         }
                     });
                 }

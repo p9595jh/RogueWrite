@@ -87,9 +87,11 @@
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
-      <h4 *ngIf="type == 'free'">자유게시판</h4>
-      <h4 *ngIf="type == 'notice'">공지게시판</h4>
-      <h4 *ngIf="type != 'free' && type != 'notice'">{{sub?.title}} 게시판</h4>
+      <h4 class="boardTitle" *ngIf="type == 'free'">자유게시판</h4>
+      <h4 class="boardTitle" *ngIf="type == 'notice'">공지게시판</h4>
+      <h4 class="boardTitle" *ngIf="type != 'free' && type != 'notice'">{{sub?.title}} 게시판</h4>&nbsp;
+      <h5 class="boardTitle" *ngIf="authService.loggedIn() && !isMyBookmark" style="cursor: pointer;" (click)="bookmark()">☆</h5>
+      <h5 class="boardTitle" *ngIf="authService.loggedIn() && isMyBookmark" style="cursor: pointer;" (click)="unbookmark()">★</h5>
       <hr/>
       
       <!-- for large display -->
@@ -153,9 +155,6 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #board>
-    <button mat-menu-item *ngIf="authService.loggedIn()" (click)="bookmark()">
-      <span>즐겨찾는 게시판 설정</span>
-    </button>
     <button mat-menu-item *ngIf="type != 'free' && type != 'notice'" [routerLink]="['/game/' + sub?.gameid]">
       <span>게임으로 이동</span>
     </button>

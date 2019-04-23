@@ -15,7 +15,7 @@ export class SubComponent implements OnInit, OnDestroy {
 
   subs: Map<string, any[][]>;
   user: any;
-  bkMap: Map<string, any[][]>;
+  bkMap: Map<string, any[][]> = undefined;
 
   constructor(
     private funcService: FuncService,
@@ -81,6 +81,15 @@ export class SubComponent implements OnInit, OnDestroy {
     }
   }
 
+  isInMyBookmark(url): boolean {
+    for (let bookmark of this.user.bookmark) {
+      if ( url == bookmark.url ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   initialiseInvites() {
     this.ngOnInit();
   }
@@ -92,19 +101,19 @@ export class SubComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    if ( this.authService.loggedIn() ) {
+      this.authService.getProfile().subscribe(profile => {
+        this.user = profile.user;
+        this.bkMap = new Map<string, any[][]>();
+        for (let bk of this.user.bookmark) {
+          this.mapInput(bk, this.bkMap);
+        }
+      });
+    }
     this.boardService.takeAllBoards().subscribe(data => {
       this.subs = new Map<string, any[][]>();
       for (let s of data.subs) {
         this.mapInput(s, this.subs);
-      }
-      if ( this.authService.loggedIn() ) {
-        this.authService.getProfile().subscribe(profile => {
-          this.bkMap = new Map<string, any[][]>();
-          this.user = profile.user;
-          for (let bk of this.user.bookmark) {
-            this.mapInput(bk, this.bkMap);
-          }
-        });
       }
     });
   }
@@ -127,6 +136,25 @@ export class SubComponent implements OnInit, OnDestroy {
         });
       }
     })
+  }
+
+  add(type) {
+    this.boardService.bookmark(type).subscribe(result => {
+      if ( result.success ) {
+        this.flashMessage.showFlashMessage({
+          messages: ['등록되었습니다.'], 
+          type: 'success', 
+          timeout: 2000
+        });
+        this.router.navigate(['/sub']);
+      } else {
+        this.flashMessage.showFlashMessage({
+          messages: [result.msg], 
+          type: 'danger', 
+          timeout: 3000
+        });
+      }
+    });
   }
 
 }

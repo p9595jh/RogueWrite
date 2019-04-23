@@ -74,7 +74,20 @@
         <mat-label>주석</mat-label>
         <textarea matInput placeholder="" rows="3" #content></textarea>
       </mat-form-field>
-      <button mat-raised-button color="primary" style="width: 100%;" (click)="onWriteGame(content)">작성</button>
+      <table style="width: 100%;">
+        <tr>
+          <td style="width: 30%;">
+            <mat-form-field style="width: 80%;" appearance="legacy">
+              <mat-label>버전</mat-label>
+              <input matInput #version>
+              <mat-hint>형식: 1.0, 2.3, 0.1-beta 등</mat-hint>
+            </mat-form-field>
+          </td>
+          <td style="width: 70%;">
+            <button mat-raised-button color="primary" style="width: 100%;" (click)="onWriteGame(content, version)">작성</button>
+          </td>
+        </tr>
+      </table>
 
     </div>
   </div>

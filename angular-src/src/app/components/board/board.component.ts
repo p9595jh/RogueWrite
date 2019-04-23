@@ -25,8 +25,11 @@ export class BoardComponent implements OnInit, OnDestroy {
   content: any;
   contents: Object[];
   cmtWrite = new FormControl();
+
   user: any;
   sub: any;
+  isMyBookmark: boolean;
+  bk: any = undefined;
   
   pagingSize = 25;
   pagingFrom: Number = 0;
@@ -116,6 +119,14 @@ export class BoardComponent implements OnInit, OnDestroy {
               if ( this.authService.loggedIn() ) {
                 this.authService.getProfile().subscribe(profile => {
                   this.user = profile.user;
+                  this.isMyBookmark = false;
+                  for (let bookmark of this.user.bookmark) {
+                    if ( bookmark.url == this.type ) {
+                      this.isMyBookmark = true;
+                      this.bk = bookmark;
+                      break;
+                    }
+                  }
                 });
               }
             }
@@ -238,11 +249,23 @@ export class BoardComponent implements OnInit, OnDestroy {
   bookmark() {
     this.boardService.bookmark(this.type).subscribe(result => {
       if ( result.success ) {
+        this.isMyBookmark = true;
+        this.bk = result.bookmark;
+      } else {
         this.flashMessage.showFlashMessage({
-          messages: ['등록되었습니다.'], 
-          type: 'success', 
-          timeout: 2000
+          messages: [result.msg], 
+          type: 'danger', 
+          timeout: 3000
         });
+      }
+    });
+  }
+
+  unbookmark() {
+    this.boardService.removeBookmark(this.bk).subscribe(result => {
+      if ( result.success ) {
+        this.isMyBookmark = false;
+        this.bk = undefined;
       } else {
         this.flashMessage.showFlashMessage({
           messages: [result.msg], 

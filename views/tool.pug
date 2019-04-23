@@ -21,6 +21,13 @@ block content
                 each val in temps
                     li(class="mdl-menu__item", onclick='location.href="./tool?uid=' + uid + '&_id=' + val._id + '&c=' + c + '"')= val.title + ' (' + val.savedate + ')'
 
+        - if ( temps != undefined && temps.length > 0 && temp )
+            span &nbsp;&nbsp;&nbsp;
+            button#adding(class="mdl-button mdl-js-button mdl-js-ripple-effect", style='width: 100px; height: 30px;') 덧붙이기
+            ul(class="mdl-menu mdl-menu--top-right mdl-js-menu mdl-js-ripple-effect", for='adding')
+                each val in temps
+                    li(class="mdl-menu__item", onclick='adds("' + val._id + '")')= val.title + ' (' + val.savedate + ')'
+
     
     xml#toolbox(style='display: none')
         category(name='big_one')
@@ -65,6 +72,28 @@ block content
             msg.innerHTML = text;
             msg.style.color = color;
             setTimeout(() => {msg.innerHTML = ''}, time);
+        }
+        //- ========================================
+
+        //- @ function for adding another block
+        function adds(addId) {
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', './addBlock');
+            xhr.setRequestHeader('Content-type', 'application/json');
+            xhr.send(JSON.stringify({addId: addId}));
+
+            xhr.addEventListener('load', () => {
+                let result = JSON.parse(xhr.responseText);
+                if ( result.fail ) alert('불러오기 오류');
+                else {
+                    for (let i=0; i<result.block.length; i++) {
+                        setTimeout(() => {
+                            Blockly.Events.fromJson(result.block[i], workspaceFantasy).run(true);
+                        }, (i++) * 500);
+                        //- Blockly.Events.fromJson(result.block[i], workspaceFantasy).run(true);
+                    }
+                }
+            });
         }
         //- ========================================
 

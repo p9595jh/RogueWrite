@@ -141,6 +141,13 @@ router.post('/tempSave', (req, res, next) => {
     }
 });
 
+router.post('/addBlock', (req, res, next) => {
+    Temp.findOne({_id: req.body.addId}, {block: 1}, (err, temp) => {
+        if ( err || !temp ) res.json({fail: true});
+        else res.json({block: temp.block});
+    });
+});
+
 router.post('/save', function(req, res, next) {
     // title(string), stage(array), param(array), score(string)
     const data = {
@@ -184,17 +191,18 @@ router.get('/getSessionGame', function(req, res, next) {
 
 router.post('/write', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     if ( !req.session.data ) {
-        res.json({success: false, msg: '먼저 저장을 해야 합니다.'});
+        return res.json({success: false, msg: '먼저 저장을 해야 합니다.'});
     } else {
-        Temp.findOne({_id: req.session.temp}, {user: 1}, (err, t) => {
-            if ( t.user != req.user._id.toString() ) {
-                res.json({success: false, msg: '메인 제작자가 작성해야 합니다.'});
+        Temp.findOne({_id: req.session.temp}, (err, output) => {
+            if ( output.user != req.user._id.toString() ) {
+                return res.json({success: false, msg: '메인 제작자가 작성해야 합니다.'});
             } else {
                 const newGame = new Game({
                     userid: req.user.userid,
                     nickname: req.user.nickname,
                     title: req.session.data.title,
                     content: req.body.content,
+                    version: req.body.version,
                     game: req.session.data,
                     block: req.session.block,
                     boardRequest: 0,
@@ -211,20 +219,10 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
                         res.json({success: false});
                     } else {
                         if ( req.session.temp ) {
-                            Temp.findOneAndDelete({_id: req.session.temp}, (err, output) => {
-                                if ( output.from && output.coworker.length > 0 ) {
-                                    User.find({_id: {$in: output.coworker}}, {userid: 1, nickname: 1}, (err, users) => {
-                                        Game.findOneAndUpdate({_id: post._id}, {coworker: users, from: output.from}, (err, game) => {
-                                            req.session.destroy();
-                                            res.clearCookie('sid');
-                                            res.json({
-                                                success: true,
-                                                num: post._id
-                                            });
-                                        });
-                                    });
-                                } else if ( output.from ) {
-                                    Game.findOneAndUpdate({_id: post._id}, {from: output.from}, (err, game) => {
+                            // Temp.findOneAndDelete({_id: req.session.temp}, (err, output) => {
+                            if ( output.from && output.coworker.length > 0 ) {
+                                User.find({_id: {$in: output.coworker}}, {userid: 1, nickname: 1}, (err, users) => {
+                                    Game.findOneAndUpdate({_id: post._id}, {coworker: users, from: output.from}, (err, game) => {
                                         req.session.destroy();
                                         res.clearCookie('sid');
                                         res.json({
@@ -232,26 +230,36 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
                                             num: post._id
                                         });
                                     });
-                                } else if ( output.coworker.length > 0 ) {
-                                    User.find({_id: {$in: output.coworker}}, {userid: 1, nickname: 1}, (err, users) => {
-                                        Game.findOneAndUpdate({_id: post._id}, {coworker: users}, (err, game) => {
-                                            req.session.destroy();
-                                            res.clearCookie('sid');
-                                            res.json({
-                                                success: true,
-                                                num: post._id
-                                            });
-                                        });
-                                    });
-                                } else {
+                                });
+                            } else if ( output.from ) {
+                                Game.findOneAndUpdate({_id: post._id}, {from: output.from}, (err, game) => {
                                     req.session.destroy();
                                     res.clearCookie('sid');
                                     res.json({
                                         success: true,
                                         num: post._id
                                     });
-                                }
-                            });
+                                });
+                            } else if ( output.coworker.length > 0 ) {
+                                User.find({_id: {$in: output.coworker}}, {userid: 1, nickname: 1}, (err, users) => {
+                                    Game.findOneAndUpdate({_id: post._id}, {coworker: users}, (err, game) => {
+                                        req.session.destroy();
+                                        res.clearCookie('sid');
+                                        res.json({
+                                            success: true,
+                                            num: post._id
+                                        });
+                                    });
+                                });
+                            } else {
+                                req.session.destroy();
+                                res.clearCookie('sid');
+                                res.json({
+                                    success: true,
+                                    num: post._id
+                                });
+                            }
+                            // });
                         } else {
                             req.session.destroy();
                             res.clearCookie('sid');

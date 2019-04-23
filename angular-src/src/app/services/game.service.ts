@@ -22,12 +22,12 @@ export class GameService {
     this.authToken = token;
   }
 
-  writeGame(content) {
+  writeGame(content, version) {
     let headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/games/write', {content: content}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/games/write', {content: content, version: version}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
