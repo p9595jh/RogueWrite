@@ -57,7 +57,6 @@ export class TempComponent implements OnInit {
           let block = this.temp.block[i];
           if ( block.saveby ) {
             block.num = i + 1;
-            block.changed = this.changed(i);
             this.history.push(block);
           }
         }
@@ -68,12 +67,6 @@ export class TempComponent implements OnInit {
         });
       }
     });
-  }
-
-  changed(i): number {
-    const c = i - this.count;
-    this.count = i;
-    return c;
   }
 
   viewBlock(i) {
@@ -123,6 +116,9 @@ export class TempComponent implements OnInit {
 
   onSearchChange(text: string) {
     if ( text == '' ) {
+      this.users = [];
+      return;
+    } else if ( text.indexOf(' ') != -1 ) {
       this.users = [];
       return;
     }

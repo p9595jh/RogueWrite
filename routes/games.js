@@ -48,7 +48,7 @@ router.get('/tool', function(req, res, next) {
                     res.render('tool', {
                         title: 'TOOL',
                         uid: uid,
-                        block: '',
+                        block: false,
                         c: req.session.code
                     });
                 } else {    // load temp data
@@ -58,7 +58,7 @@ router.get('/tool', function(req, res, next) {
                             temp: output._id,
                             uid: uid,
                             temps: outputs,
-                            block: output.block,
+                            block: output.block[output.block.length-1].xml,
                             c: req.session.code
                         });
                     });
@@ -70,7 +70,7 @@ router.get('/tool', function(req, res, next) {
                     title: 'TOOL',
                     temps: outputs,
                     uid: uid,
-                    block: '',
+                    block: false,
                     c: req.session.code
                 });
             });
@@ -111,24 +111,27 @@ function isNotValid(s) {
     return s == undefined || s == '';
 }
 
-function scoreCheck(s) {
-    const arr = [ '+', '-', '*', '/', '(', ')', ' ' ];
-    for (let l of arr) if ( s == l ) return true;
-    return false;
-}
-
 router.post('/tempSave', (req, res, next) => {
-    req.body.block[req.body.block.length-1].saveby = req.body.uid;
-    req.body.block[req.body.block.length-1].savedate = getNowDate();
     if ( req.body._id ) {
-        Temp.findOneAndUpdate({_id: req.body._id}, {block: req.body.block, savedate: getNowDate()}, (err, output) => {
+        const blockData = {
+            xml: req.body.block,
+            moves: req.body.moves,
+            saveby: req.body.uid,
+            savedate: getNowDate()
+        };
+        Temp.findOneAndUpdate({_id: req.body._id}, {$push: {block: blockData}, savedate: getNowDate()}, (err, output) => {
             if ( err | !output ) res.json({success: false});
             else res.json({success: true});
         });
     } else {
         const newTemp = new Temp({
             user: req.body.uid,
-            block: req.body.block,
+            block: [{
+                xml: req.body.block,
+                moves: req.body.moves,
+                saveby: req.body.uid,
+                savedate: getNowDate()
+            }],
             title: req.body.title,
             savedate: getNowDate(),
             coworker: [],
@@ -144,7 +147,7 @@ router.post('/tempSave', (req, res, next) => {
 router.post('/addBlock', (req, res, next) => {
     Temp.findOne({_id: req.body.addId}, {block: 1}, (err, temp) => {
         if ( err || !temp ) res.json({fail: true});
-        else res.json({block: temp.block});
+        else res.json({block: temp.block[temp.block.length-1].xml});
     });
 });
 
@@ -167,7 +170,6 @@ router.post('/save', function(req, res, next) {
         return res.json({success: false, msg: '점수계산이 비어있습니다.'});
     } else {
         req.session.data = data;
-        req.session.block = req.body.block;
         req.session.temp = req.body._id;
         res.json({success: true});
     }
@@ -204,7 +206,7 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
                     content: req.body.content,
                     version: req.body.version,
                     game: req.session.data,
-                    block: req.session.block,
+                    block: output.block[output.block.length-1],
                     boardRequest: 0,
                     board: '',
                     hit: 0,
@@ -219,7 +221,6 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
                         res.json({success: false});
                     } else {
                         if ( req.session.temp ) {
-                            // Temp.findOneAndDelete({_id: req.session.temp}, (err, output) => {
                             if ( output.from && output.coworker.length > 0 ) {
                                 User.find({_id: {$in: output.coworker}}, {userid: 1, nickname: 1}, (err, users) => {
                                     Game.findOneAndUpdate({_id: post._id}, {coworker: users, from: output.from}, (err, game) => {
@@ -259,7 +260,6 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
                                     num: post._id
                                 });
                             }
-                            // });
                         } else {
                             req.session.destroy();
                             res.clearCookie('sid');
@@ -322,7 +322,7 @@ router.post('/takeMyOneTemp', passport.authenticate('jwt', {session: false}), fu
                         coworkers: users,
                         creator: user
                     });
-                })
+                });
             });
         } else res.json({deny: true});
     })
@@ -330,14 +330,18 @@ router.post('/takeMyOneTemp', passport.authenticate('jwt', {session: false}), fu
 
 router.post('/toMyTempList', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     const num = req.body.num;
+    const nowDate = getNowDate();
     Game.findOne({_id: num}, {title: 1, block: 1, userid: 1, nickname: 1}, (err, game) => {
-        game.block[game.block.length-1].saveby = req.user._id;
-        game.block[game.block.length-1].savedate = getNowDate();
         const newTemp = new Temp({
             user: req.user._id,
-            block: game.block,
+            block: [{
+                xml: game.block.xml,
+                moves: 0,
+                saveby: req.user._id.toString(),
+                savedate: nowDate
+            }],
             title: game.title,
-            savedate: getNowDate(),
+            savedate: nowDate,
             from: {
                 game: num,
                 title: game.title,

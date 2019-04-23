@@ -50,6 +50,7 @@ block content
 
     script.
         //- @ set default workspace (workspaceFantasy)
+        var moves = 0;
         var workspaceFantasy = Blockly.inject('workspaceFantasy', {
             media: '../resources/blockly/google-blockly-82871b3/media/',
             comments : false,
@@ -86,28 +87,25 @@ block content
                 let result = JSON.parse(xhr.responseText);
                 if ( result.fail ) alert('불러오기 오류');
                 else {
-                    for (let i=0; i<result.block.length; i++) {
-                        setTimeout(() => {
-                            Blockly.Events.fromJson(result.block[i], workspaceFantasy).run(true);
-                        }, (i++) * 500);
-                        //- Blockly.Events.fromJson(result.block[i], workspaceFantasy).run(true);
-                    }
+                    let xml = Blockly.Xml.textToDom(result.block);
+                    Blockly.Xml.domToWorkspace(xml, workspaceFantasy);
                 }
             });
         }
         //- ========================================
 
         //- @ temp save function
-        var blocks = [];
         function tsave() {
-            //- for (let block of blocks) console.log(block);
-
             if ( document.getElementById('tempData').innerHTML != '' ) {    // when working with temp data
+                let xml = Blockly.Xml.workspaceToDom(workspaceFantasy);
+                let xml_text = Blockly.Xml.domToText(xml);
+
                 let xhr = new XMLHttpRequest();
                 xhr.open('POST', './tempSave');
                 xhr.setRequestHeader('Content-type', 'application/json');
                 xhr.send(JSON.stringify({
-                    block: blocks,
+                    block: xml_text,
+                    moves: moves,
                     _id: document.getElementById('tempData').innerHTML,
                     uid: document.getElementById('uid').innerHTML
                 }));
@@ -121,11 +119,15 @@ block content
                 let title = prompt('임시저장용 제목을 입력해주세요.');
                 if ( title == null ) return;
 
+                let xml = Blockly.Xml.workspaceToDom(workspaceFantasy);
+                let xml_text = Blockly.Xml.domToText(xml);
+
                 let xhr = new XMLHttpRequest();
                 xhr.open('POST', './tempSave');
                 xhr.setRequestHeader('Content-type', 'application/json');
                 xhr.send(JSON.stringify({
-                    block: blocks,
+                    block: xml_text,
+                    moves: moves,
                     title: title,
                     uid: document.getElementById('uid').innerHTML
                 }));
@@ -145,29 +147,16 @@ block content
         //- @ set blocks from temp data to the default workspace
         if ( document.getElementById('tempData').innerHTML != '' ) {
             workspaceFantasy.clear();
-            blocks = [];
             let temp = !{JSON.stringify(block)};
-            let i = 0;
-            for (let block of temp) {
-                setTimeout(() => {
-                    Blockly.Events.fromJson(block, workspaceFantasy).run(true);
-                    if ( block.saveby ) {
-                        blocks[blocks.length-1].saveby = block.saveby;
-                        blocks[blocks.length-1].savedate = block.savedate;
-                    }
-                }, (i++) * 4);
-                //- Blockly.Events.fromJson(block, workspaceFantasy).run(true);
-            }
-            //- blocks = temp;
+            let xml = Blockly.Xml.textToDom(temp);
+            Blockly.Xml.domToWorkspace(xml, workspaceFantasy);
+            moves = 0;
         }
         //- ========================================
 
         //- @ add event listener to the default workspace
-        workspaceFantasy.addChangeListener((event) => {
-            if ( event.type == Blockly.Events.UI ) return;
-            let block = {block: event.toJson()};
-            if ( block.block.type == 'finished_loading' ) return;
-            blocks.push(block.block);
+        workspaceFantasy.addChangeListener(event => {
+            if ( event.type != Blockly.Events.UI ) moves++;
         });
         //- ========================================
 
@@ -178,7 +167,6 @@ block content
 
             try {
                 code = JSON.parse(code);
-                code.block = blocks;
                 code._id = document.getElementById('tempData').innerHTML;
                 code = JSON.stringify(code);
             } catch (e) {

@@ -8,7 +8,6 @@ block content
             scrollbars: true,
             readOnly: true
         });
-        let blocks = !{JSON.stringify(block)};
-        for (let block of blocks) {
-            Blockly.Events.fromJson(block, workspaceFantasy).run(true);
-        }
+        let block = !{JSON.stringify(block)};
+        let xml = Blockly.Xml.textToDom(block);
+        Blockly.Xml.domToWorkspace(xml, workspaceFantasy);

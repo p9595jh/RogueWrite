@@ -39,47 +39,52 @@
     </header>
 
     <!-- header for mobile -->
-    <header class="mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary">
-      <div class="mdl-layout__header-row">
-        <!-- // <h3 class="mdl-navigation__link" style="font-family: 'Ubuntu', sans-serif;" [routerLink]="['/']">{{siteName}}</h3> -->
-        <img src="/images/title.png" style="height: 100%; width: auto;" [routerLink]="['/']" />
-        <div class="mdl-layout-spacer"></div>
-        <nav class="mdl-navigation">
-          <a *ngIf="!authService.loggedIn()" class="mdl-navigation__link" [routerLink]="['/login']">LOGIN</a>
-          <a *ngIf="authService.loggedIn()" class="mdl-navigation__link" [routerLink]="['/profile']">PROFILE</a>
-          <a *ngIf="authService.loggedIn()" class="mdl-navigation__link" (click)="onLogoutClick()" href="#">LOGOUT</a>
-        </nav>
-      </div>
-    </header>
-    <div class="mdl-layout__drawer mdl-layout--small-screen-only">
-      <span class="mdl-layout__title" style="font-family: 'Ubuntu', sans-serif;">{{siteName}}</span>
-      <nav class="mdl-navigation">
-        <a class="mdl-navigation__link" *ngFor="let link of navLinks"
+    <mat-sidenav-container class="mdl-layout__content">
+      <mat-sidenav #sidenav mode="push" style="width: 49%; padding-top: 30px; background-color: rgb(233, 233, 233);">
+        <h4 style="font-family: 'Ubuntu', sans-serif; margin: 20px;" [routerLink]="['/']" (click)="sidenav.toggle()">
+          {{siteName}}
+        </h4><br/>
+        <a class="nav-link" (click)="sidenav.toggle()" *ngFor="let link of navLinks"
           [routerLink]="[link.path]">{{link.label}}</a>
-      </nav>
-    </div>
-
-    <main class="mdl-layout__content">
-      <div class="mdl-layout__tab-panel is-active" id="overview">
-        <router-outlet></router-outlet>
-        <br/><br/>
-      </div>
-
-      <!-- footer -->
-      <footer class="mdl-mega-footer">
-        <div class="mdl-mega-footer--bottom-section">
-          <div class="mdl-logo">
-            powered by Project RogueWrite
+      </mat-sidenav>
+      <mat-sidenav-content>
+        <header class="mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary">
+          <div style="padding-left: 20px;" class="mdl-layout__header-row">
+            <mat-icon (click)="sidenav.toggle()">view_headline</mat-icon>
+            <img src="/images/title.png" style="height: 100%; width: auto;" [routerLink]="['/']" />
+            <div class="mdl-layout-spacer"></div>
+            <nav class="mdl-navigation">
+              <a *ngIf="!authService.loggedIn()" class="mdl-navigation__link" [routerLink]="['/login']">LOGIN</a>
+              <a *ngIf="authService.loggedIn()" class="mdl-navigation__link" [routerLink]="['/profile']">PROFILE</a>
+              <a *ngIf="authService.loggedIn()" class="mdl-navigation__link" (click)="onLogoutClick()" href="#">LOGOUT</a>
+            </nav>
           </div>
-          <ul class="mdl-mega-footer--link-list">
-            <li><a target="_blank" href="https://getmdl.io/index.html">MDL</a></li>
-            <li><a target="_blank" href="https://material.angular.io/">Angular Material</a></li>
-            <li><a target="_blank" href="https://github.com/p9595jh/RogueWrite">Github</a></li>
-          </ul>
-        </div>
-      </footer>
-      <!-- footer -->
+        </header>
 
-    </main>
+        <!-- <main class="mdl-layout__content"> -->
+          <div class="mdl-layout__tab-panel is-active" id="overview">
+            <br/><br/>
+            <router-outlet></router-outlet>
+            <br/><br/>
+          </div>
+
+          <!-- footer -->
+          <footer class="mdl-mega-footer">
+            <div class="mdl-mega-footer--bottom-section">
+              <div class="mdl-logo">
+                powered by Project RogueWrite
+              </div>
+              <ul class="mdl-mega-footer--link-list">
+                <li><a target="_blank" href="https://getmdl.io/index.html">MDL</a></li>
+                <li><a target="_blank" href="https://material.angular.io/">Angular Material</a></li>
+                <li><a target="_blank" href="https://github.com/p9595jh/RogueWrite">Github</a></li>
+              </ul>
+            </div>
+          </footer>
+          <!-- footer -->
+
+        <!-- </main> -->
+      </mat-sidenav-content>
+    </mat-sidenav-container>
   </div>
 </div>

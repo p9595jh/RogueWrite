@@ -19,19 +19,15 @@
               {{block?.savedate}}
             </mat-panel-title>
             <mat-panel-description>
-              {{block?.changed}}개의 행동 추가됨
+              {{block?.moves}}개의 행동 추가됨
             </mat-panel-description>
           </mat-expansion-panel-header>
 
-          <p *ngIf="coworkerMap?.get(block?.saveby)?.userid">
+          <p>
             <b style="cursor: pointer;" (click)="funcService.openInfoWindow(coworkerMap?.get(block?.saveby)?.userid)">{{coworkerMap?.get(block?.saveby)?.nickname}}</b> 님에 의해 수정됨.
-          </p>
-          <p *ngIf="!coworkerMap?.get(block?.saveby)?.userid" style="color: grey;">
-            이전 사용자 기록입니다.
           </p>
           <button mat-button (click)="viewBlock(block?.num)">블록 보기</button>
           <button mat-button color="primary" (click)="versionRollBack(block?.num)">되돌리기</button>
-
         </mat-expansion-panel>
         
       </mat-accordion>

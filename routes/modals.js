@@ -112,7 +112,7 @@ router.get('/viewBlock', (req, res) => {
         else {
             res.render('block', {
                 title: game.title,
-                block: game.block
+                block: game.block.xml
             });
         }
     });
@@ -122,11 +122,18 @@ router.get('/viewTempBlock', (req, res) => {
     Temp.findOne({_id: req.query.game}, {block: 1, title: 1}, (err, game) => {
         if ( err || !game ) res.send('error');
         else {
-            if ( req.query.recent ) game.block.length = req.query.recent;
-            res.render('block', {
-                title: game.title,
-                block: game.block
-            });
+            // if ( req.query.recent ) game.block.length = req.query.recent;
+            if ( req.query.recent ) {
+                res.render('block', {
+                    title: game.title,
+                    block: game.block[req.query.recent-1].xml
+                });
+            } else {
+                res.render('block', {
+                    title: game.title,
+                    block: game.block[game.block.length-1].xml
+                });
+            }
         }
     });
 });

@@ -53,8 +53,16 @@
       <br/><br/>
       <div>{{content?.content}}</div>
       <br/><br/>
-      <div *ngIf="content?.from" style="color: grey; font-size: 85%;">
-        - 이 게임은 <span style="cursor: pointer; font-weight: bold;" (click)="funcService.openInfoWindow(content?.from?.userid)">{{content.from.nickname}}</span> 님의 <a style="color: grey; font-weight: bold;" [routerLink]="['/game/' + content?.from?.game]">{{content.from.title}}</a> 으로부터 참조되었습니다.
+
+      <div *ngIf="content?.from || content?.coworker?.length > 0" style="width: 100%;">
+        <div style="border: 1px solid black; width: 100%; padding: 1%; display: inline-block;">
+          <p *ngIf="content?.from">
+              이 게임은 <span style="cursor: pointer; font-weight: bold;" (click)="funcService.openInfoWindow(content?.from?.userid)">{{content.from.nickname}}</span> 님의 <a style="color: grey; font-weight: bold;" [routerLink]="['/game/' + content?.from?.game]">{{content.from.title}}</a> 으로부터 참조되었습니다.
+          </p>
+          <p *ngIf="content?.coworker?.length > 0">
+            공동제작자 :<span *ngFor="let coworker of content?.coworker" (click)="funcService.openInfoWindow(coworker?.userid)"> {{coworker?.nickname}}</span>
+          </p>
+        </div>
         <br/><br/>
       </div>
 
