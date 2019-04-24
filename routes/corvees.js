@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
-//=======================================<
-const Board = require('../models/board');
-const Sub = require('../models/sub');
-const User = require('../models/user');
+// ==============================================
 const passport = require('passport');
+const Corvee = require('../models/corvee');
+const Temp = require('../models/temp');
 const fs = require('fs-extra');
 const formidable = require('formidable');
 
@@ -32,43 +31,42 @@ function taggingUrl(url) {
     return url;
 }
 
+router.get('/', function(req, res) {
+    res.send('');
+});
+
+// take ==============================================
+
 router.get('/takeOnePost', function(req, res, next) {
     var num = req.query.num;
     var loggedIn = req.query.loggedIn;
-    Board.findOne({_id: num}, function(err, post) {
+    Corvee.findOne({_id: num}, function(err, post) {
         if ( !post ) {
             res.json({
                 fail: true
             });
         } else if ( loggedIn == 'yes' ) {
-            Board.findOneAndUpdate({_id: num}, {hit: post.hit + 1}, function(err, output) {
+            Corvee.findOneAndUpdate({_id: num}, {hit: post.hit + 1}, function(err, output) {
                 res.json({post: output});
             });
         } else res.json({post: post});
     });
-})
-
-router.get('/takeAllPosts', function(req, res, next) {
-    var type = req.query.type;
-    Board.find({type: type}, {content: 0}).sort({_id: -1}).exec(function(err, posts) {
-        res.json({posts: posts});
-    });
 });
 
-router.get('/takeAllBoards', function(req, res, next) {
-    Sub.find({}, function(err, subs) {
-        res.json({subs: subs});
+router.get('/takeAllPosts', function(req, res, next) {
+    Corvee.find({}, {content: 0}).sort({_id: -1}).exec(function(err, posts) {
+        res.json({posts: posts});
     });
 });
 
 router.get('/takeSearchedPosts', (req, res, next) => {
     const category = req.query.category;
     if ( category == 'title' ) {
-        Board.find({type: req.query.type, title: {$regex: req.query.text, $options: 'i'}}, {content: 0}).exec((err, posts) => {
+        Corvee.find({title: {$regex: req.query.text, $options: 'i'}}, {content: 0}).exec((err, posts) => {
             res.json({posts: posts});
         });
     } else if ( category == 'nickname' ) {
-        Board.find({type: req.query.type, nickname: {$regex: req.query.text, $options: 'i'}}, {content: 0}).exec((err, posts) => {
+        Corvee.find({nickname: {$regex: req.query.text, $options: 'i'}}, {content: 0}).exec((err, posts) => {
             res.json({posts: posts});
         });
     } else {
@@ -76,31 +74,38 @@ router.get('/takeSearchedPosts', (req, res, next) => {
     }
 });
 
+router.post('/takeMyTemps', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+    Temp.find({user: req.user._id.toString()}, (err, temps) => {
+        res.json({temps: temps});
+    });
+});
+
+// write ==============================================
+
 router.post('/images', function(req, res) {
     var form = formidable.IncomingForm();
     form.parse(req, function(err, fields, files) {
         const filePath = files.image.path;
         const ext = files.image.name.substring(files.image.name.lastIndexOf('.')).toLowerCase();
         const name = new Date().getTime() + ext;
-        fs.copy(filePath, 'public/images/board/' + name, function(err) {
+        fs.copy(filePath, 'public/images/corvee/' + name, function(err) {
             if ( err ) {
                 console.log(err);
                 res.json({});
             } else {
-                fs.copy(filePath, 'angular-src/src/images/board/' + name, function(err) {
+                fs.copy(filePath, 'angular-src/src/images/corvee/' + name, function(err) {
                     if ( err ) {
                         console.log(err);
                         res.json({});
-                    } else res.json({link: 'images/board/' + name});
+                    } else res.json({link: 'images/corvee/' + name});
                 });
             }
         });
     });
-})
+});
 
 router.post('/write', passport.authenticate('jwt', {session: false}), function(req, res, next) {
-    const newPost = new Board({
-        type: req.body.type,
+    const newPost = new Corvee({
         userid: req.user.userid,
         nickname: req.user.nickname,
         title: req.body.title,
@@ -110,7 +115,7 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
         comment: [],
         writedate: getNowDate()
     });
-    Board.addPost(newPost, (err, post) => {
+    Corvee.addPost(newPost, (err, post) => {
         if ( err ) {
             res.json({
                 success: false
@@ -123,7 +128,7 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
         }
     });
 
-})
+});
 
 router.post('/writeComment', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     let comment = req.body.comment.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
@@ -144,7 +149,7 @@ router.post('/writeComment', passport.authenticate('jwt', {session: false}), fun
         nickname: req.user.nickname,
         comment: comment
     };
-    Board.findOneAndUpdate({_id: req.body._id}, {$push: {comment: cmtData}}, function(err, output) {
+    Corvee.findOneAndUpdate({_id: req.body._id}, {$push: {comment: cmtData}}, function(err, output) {
         if ( err ) {
             res.json({
                 success: false
@@ -157,11 +162,13 @@ router.post('/writeComment', passport.authenticate('jwt', {session: false}), fun
         }
     });
     
-})
+});
+
+// remove ==============================================
 
 router.post('/removePost', function(req, res, next) {
     const num = req.body.num;
-    Board.findOneAndDelete({_id: num}, function(err, output) {
+    Corvee.findOneAndDelete({_id: num}, function(err, output) {
         if ( err ) {
             res.json({
                 success: false
@@ -169,15 +176,15 @@ router.post('/removePost', function(req, res, next) {
         } else {
             res.json({
                 success: true
-            })
+            });
         }
-    })
-})
+    });
+});
 
 router.post('/removeComment', function(req, res, next) {
     const postNum = req.body.postNum;
     const cmtNum = req.body.cmtNum;
-    Board.findOne({_id: postNum}, (err, post) => {
+    Corvee.findOne({_id: postNum}, (err, post) => {
         if ( err || !post ) res.json({success: false});
         else {
             let c;
@@ -188,7 +195,7 @@ router.post('/removeComment', function(req, res, next) {
                 }
             }
             console.log(c);
-            Board.findOneAndUpdate({_id: postNum}, {$pullAll: {comment: [c]}}, (err, output) => {
+            Corvee.findOneAndUpdate({_id: postNum}, {$pullAll: {comment: [c]}}, (err, output) => {
                 if ( err ) res.json({success: false});
                 else res.json({
                     success: true,
@@ -196,12 +203,14 @@ router.post('/removeComment', function(req, res, next) {
                 });
             });
         }
-    })
-})
+    });
+});
+
+// recommend ==============================================
 
 router.post('/recommend', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     const num = req.body.num;
-    Board.findOne({_id: num}, function(err, post) {
+    Corvee.findOne({_id: num}, function(err, post) {
         let flag = true;
         for (let val of post.recommend) {
             if ( val == req.user.userid ) {
@@ -215,7 +224,7 @@ router.post('/recommend', passport.authenticate('jwt', {session: false}), functi
                 msg: '이미 추천하셨습니다.'
             });
         } else {
-            Board.findOneAndUpdate({_id: num}, {$push: {recommend: req.user.userid}}, function(err, output) {
+            Corvee.findOneAndUpdate({_id: num}, {$push: {recommend: req.user.userid}}, function(err, output) {
                 if ( err ) {
                     res.json({
                         success: false,
@@ -231,88 +240,6 @@ router.post('/recommend', passport.authenticate('jwt', {session: false}), functi
     
 });
 
-router.get('/checkBoardExists', function(req, res, next) {
-    const type = req.query.type;
-    if ( type == 'free' || type == 'notice' ) {
-        res.json({exist: true});
-    } else {
-        Sub.findOne({url: type}, function(err, post) {
-            if ( err | !post ) {
-                res.json({exist: false});
-            } else {
-                res.json({exist: true});
-            }
-        });
-    }
-});
-
-router.get('/sub', function(req, res, next) {
-    const url = req.query.url;
-    Sub.findOne({url: url}, function(err, sub) {
-        res.json({sub: sub});
-    });
-});
-
-router.post('/bookmark', passport.authenticate('jwt', {session: false}), (req, res, next) => {
-    const type = req.body.type;
-    User.findOne({_id: req.user._id}, {bookmark: 1}, (err, bk) => {
-        for (let bookmark of bk.bookmark) {
-            if ( type == bookmark.url ) {
-                return res.json({success: false, msg: '이미 설정되어 있습니다.'});
-            }
-        }
-
-        if ( type == 'free' || type == 'notice' ) {
-            const title = type == 'free' ? '자유게시판' : '공지게시판';
-            const bookmarkData = {url: type, title: title};
-            User.findOneAndUpdate({_id: req.user._id}, {$push: {bookmark: bookmarkData}}, (err, output) => {
-                if ( err ) {
-                    res.json({success: false, msg: err});
-                } else {
-                    res.json({success: true, bookmark: bookmarkData});
-                }
-            });
-        } else {
-            Sub.findOne({url: type}, {title: 1}, (err, sub) => {
-                if ( err || !sub ) {
-                    res.json({success: false, msg: 'ERROR'});
-                } else {
-                    const bookmarkData = {url: type, title: sub.title};
-                    User.findOneAndUpdate({_id: req.user._id}, {$push: {bookmark: bookmarkData}}, (err, output) => {
-                        if ( err ) {
-                            res.json({success: false, msg: err});
-                        } else {
-                            res.json({success: true, bookmark: bookmarkData});
-                        }
-                    });
-                }
-            });
-        }
-        
-    })
-});
-
-router.post('/removeBookmark', passport.authenticate('jwt', {session: false}), (req, res, next) => {
-    const bookmark = {
-        url: req.body.url,
-        title: req.body.title
-    };
-    User.findOneAndUpdate({_id: req.user._id}, {$pullAll: {bookmark: [bookmark]}}, (err, user) => {
-        if ( err ) {
-            res.json({success: false, msg: err});
-        } else {
-            res.json({success: true, bookmark: user.bookmark});
-        }
-    });
-});
-
-//==================================================
-
-/* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
-
-//==================================================
+// ==============================================
 
 module.exports = router;

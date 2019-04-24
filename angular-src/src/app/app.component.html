@@ -43,7 +43,7 @@
       <mat-sidenav #sidenav mode="push" style="width: 49%; padding-top: 30px; background-color: rgb(233, 233, 233);">
         <h4 style="font-family: 'Ubuntu', sans-serif; margin: 20px;" [routerLink]="['/']" (click)="sidenav.toggle()">
           {{siteName}}
-        </h4><br/>
+        </h4><hr/><br/>
         <a class="nav-link" (click)="sidenav.toggle()" *ngFor="let link of navLinks"
           [routerLink]="[link.path]">{{link.label}}</a>
       </mat-sidenav>

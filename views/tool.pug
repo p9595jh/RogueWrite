@@ -204,6 +204,7 @@ block content
             let xml_text = Blockly.Xml.domToText(xml);
 
             try {
+                console.log(code);
                 code = JSON.parse(code);
                 code._id = document.getElementById('tempData').innerHTML;
                 code.block = {

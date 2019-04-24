@@ -78,6 +78,13 @@ export class GameService {
       .pipe(map(res => res.json()));
   }
 
+  takeSearchedPosts(category, text) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(this.funcService.ServerAddress + '/games/takeSearchedPosts?category=' + category + '&text=' + text, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
   writeComment(cmt) {
     let headers = new Headers();
     this.loadToken();

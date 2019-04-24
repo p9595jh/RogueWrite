@@ -5,31 +5,27 @@ import { Router, NavigationEnd } from '@angular/router';
 
 import { FuncService } from '../../services/func.service';
 import { AuthService } from '../../services/auth.service';
-import { BoardService } from '../../services/board.service';
+import { CorveeService } from '../../services/corvee.service';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material';
 
 @Component({
-  selector: 'app-board',
-  templateUrl: './board.component.html',
-  styleUrls: ['./board.component.css']
+  selector: 'app-corvee',
+  templateUrl: './corvee.component.html',
+  styleUrls: ['./corvee.component.css']
 })
-export class BoardComponent implements OnInit, OnDestroy {
+export class CorveeComponent implements OnInit, OnDestroy {
   navigationSubscription;
   filteredOptions: Observable<string[]>;  // not using for now; a function for commenting
 
-  type: String;
   num: String;
   content: any;
   contents: Object[];
   cmtWrite = new FormControl();
 
   user: any;
-  sub: any;
-  isMyBookmark: boolean;
-  bk: any = undefined;
   
   pagingSize = 25;
   pagingFrom: Number = 0;
@@ -41,7 +37,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private funcService: FuncService,
     private authService: AuthService,
-    private boardService: BoardService,
+    private corveeService: CorveeService,
     private router: Router,
     private flashMessage: NgFlashMessageService
   ) {
@@ -78,62 +74,30 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.type = this.route.snapshot.paramMap.get('type');
     this.num = this.route.snapshot.paramMap.get('num');
-    this.boardService.checkBoardExists(this.type).subscribe(result => {
-      if ( result.exist ) {
-        this.boardService.getSub(this.type).subscribe(data => {
-          this.sub = data.sub;
-          this.setFilteredOptions();
-          this.boardService.takeAllPosts(this.type).subscribe(data => {
-            this.contents = data.posts;
-            if ( this.num != 'list' ) {
-              this.boardService.takeOnePost(this.num).subscribe(result => {
-                if ( result.fail ) {
-                  this.router.navigate(['/no-page']);
-                  return false;
-                }
-                this.content = result.post;
-
-                if ( this.type == 'free' ) {
-                  this.funcService.setTitle(this.content.title + ' :: 자유게시판');
-                } else if ( this.type == 'notice' ) {
-                  this.funcService.setTitle(this.content.title + ' :: 공지게시판');
-                } else {
-                  this.funcService.setTitle(this.content.title + ' :: ' + this.sub.title + ' 게시판');
-                }
-                if ( this.authService.loggedIn() ) {
-                  this.authService.getProfile().subscribe(profile => {
-                    this.user = profile.user;
-                  });
-                }
-              });
-            } else {
-              if ( this.type == 'free' ) {
-                this.funcService.setTitle('자유게시판');
-              } else if ( this.type == 'notice' ) {
-                this.funcService.setTitle('공지게시판');
-              } else {
-                this.funcService.setTitle(this.sub.title + ' 게시판');
-              }
-              if ( this.authService.loggedIn() ) {
-                this.authService.getProfile().subscribe(profile => {
-                  this.user = profile.user;
-                  this.isMyBookmark = false;
-                  for (let bookmark of this.user.bookmark) {
-                    if ( bookmark.url == this.type ) {
-                      this.isMyBookmark = true;
-                      this.bk = bookmark;
-                      break;
-                    }
-                  }
-                });
-              }
-            }
-          });
+    this.corveeService.takeAllPosts().subscribe(data => {
+      this.contents = data.posts;
+      if ( this.num != 'list' ) {
+        this.corveeService.takeOnePost(this.num).subscribe(result => {
+          if ( result.fail ) {
+            this.router.navigate(['/no-page']);
+            return false;
+          }
+          this.content = result.post;
+          this.funcService.setTitle(this.content.title + ' :: 아직안정함');
+          if ( this.authService.loggedIn() ) {
+            this.authService.getProfile().subscribe(profile => {
+              this.user = profile.user;
+            });
+          }
         });
       } else {
-        this.router.navigate(['/no-page']);
+        this.funcService.setTitle('아직안정함');
+        if ( this.authService.loggedIn() ) {
+          this.authService.getProfile().subscribe(profile => {
+            this.user = profile.user;
+          });
+        }
       }
     });
 
@@ -178,9 +142,9 @@ export class BoardComponent implements OnInit, OnDestroy {
       comment: this.cmtWrite.value,
       _id: this.num
     };
-    this.boardService.writeComment(formData).subscribe(data => {
+    this.corveeService.writeComment(formData).subscribe(data => {
       if ( data.success ) {
-        this.router.navigate(['/board/' + this.type + '/' + this.num]);
+        this.router.navigate(['/corvee/' + this.num]);
       } else {
         this.flashMessage.showFlashMessage({
           messages: ['댓글 작성 오류'], 
@@ -193,9 +157,9 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   onRemovePost() {
     if ( confirm('삭제하시겠습니까?') ) {
-      this.boardService.removePost(this.num).subscribe(result => {
+      this.corveeService.removePost(this.num).subscribe(result => {
         if ( result.success ) {
-          this.router.navigate(['/board/' + this.type + '/list']);
+          this.router.navigate(['/corvee/list']);
         } else {
           this.flashMessage.showFlashMessage({
             messages: ['삭제 오류'], 
@@ -209,9 +173,9 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   onRemoveComment(cmtNum) {
     if ( confirm('삭제하시겠습니까?') ) {
-      this.boardService.removeComment(this.num, cmtNum).subscribe(result => {
+      this.corveeService.removeComment(this.num, cmtNum).subscribe(result => {
         if ( result.success ) {
-          this.router.navigate(['/board/' + this.type + '/' + this.num]);
+          this.router.navigate(['/corvee/' + this.num]);
         } else {
           this.flashMessage.showFlashMessage({
             messages: ['삭제 오류'], 
@@ -231,9 +195,9 @@ export class BoardComponent implements OnInit, OnDestroy {
         timeout: 3000
       });
     } else {
-      this.boardService.recommend(this.num).subscribe(result => {
+      this.corveeService.recommend(this.num).subscribe(result => {
         if ( result.success ) {
-          this.router.navigate(['/board/' + this.type + '/' + this.num]);
+          this.router.navigate(['/corvee/' + this.num]);
         } else {
           this.flashMessage.showFlashMessage({
             messages: [result.msg], 
@@ -246,43 +210,13 @@ export class BoardComponent implements OnInit, OnDestroy {
     
   }
 
-  bookmark() {
-    this.boardService.bookmark(this.type).subscribe(result => {
-      if ( result.success ) {
-        this.isMyBookmark = true;
-        this.bk = result.bookmark;
-      } else {
-        this.flashMessage.showFlashMessage({
-          messages: [result.msg], 
-          type: 'danger', 
-          timeout: 3000
-        });
-      }
-    });
-  }
-
-  unbookmark() {
-    this.boardService.removeBookmark(this.bk).subscribe(result => {
-      if ( result.success ) {
-        this.isMyBookmark = false;
-        this.bk = undefined;
-      } else {
-        this.flashMessage.showFlashMessage({
-          messages: [result.msg], 
-          type: 'danger', 
-          timeout: 3000
-        });
-      }
-    });
-  }
-
   onSearch(category, text) {
     if ( text == '' ) {
-      this.boardService.takeAllPosts(this.type).subscribe(data => {
+      this.corveeService.takeAllPosts().subscribe(data => {
         this.contents = data.posts;
       });
     } else {
-      this.boardService.takeSearchedPosts(category, this.type, text).subscribe(data => {
+      this.corveeService.takeSearchedPosts(category, text).subscribe(data => {
         this.contents = data.posts;
       });
     }
@@ -291,7 +225,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   paging(pageEvent: PageEvent) {
     this.pagingFrom = pageEvent.pageIndex * this.pagingSize;
     this.pagingTo = (pageEvent.pageIndex + 1) * this.pagingSize;
-    this.router.navigate(['/board/' + this.type + '/' + this.num]);
+    this.router.navigate(['/corvee/' + this.num]);
   }
 
 }

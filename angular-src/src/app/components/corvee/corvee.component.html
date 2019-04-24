@@ -87,11 +87,7 @@
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
-      <h4 class="boardTitle" *ngIf="type == 'free'">자유게시판</h4>
-      <h4 class="boardTitle" *ngIf="type == 'notice'">공지게시판</h4>
-      <h4 class="boardTitle" *ngIf="type != 'free' && type != 'notice'">{{sub?.title}} 게시판</h4>&nbsp;
-      <h5 class="boardTitle" *ngIf="authService.loggedIn() && !isMyBookmark" style="cursor: pointer;" (click)="bookmark()">☆</h5>
-      <h5 class="boardTitle" *ngIf="authService.loggedIn() && isMyBookmark" style="cursor: pointer;" (click)="unbookmark()">★</h5>
+      <h4>임시베스트저장소</h4>
       <hr/>
       
       <!-- for large display -->
@@ -159,20 +155,12 @@
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
       </div>
-      <div *ngIf="(type != 'notice' && authService.loggedIn()) || (type == 'notice' && user?.userid == 'admin')" style="float: right;">
-        <a mat-raised-button [routerLink]="['/write/' + type]">글쓰기</a>
+      <div *ngIf="authService.loggedIn()" style="float: right;">
+        <a mat-raised-button [routerLink]="['/cwrite']">작성</a>
       </div>
     </div>
   </div>
 
-  <button mat-icon-button [matMenuTriggerFor]="board">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #board>
-    <button mat-menu-item *ngIf="type != 'free' && type != 'notice'" [routerLink]="['/game/' + sub?.gameid]">
-      <span>게임으로 이동</span>
-    </button>
-  </mat-menu>
 </section>
 
 <section></section>

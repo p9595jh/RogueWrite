@@ -336,6 +336,34 @@ router.post('/takeMyOneTemp', passport.authenticate('jwt', {session: false}), fu
     })
 });
 
+router.post('/takeMyTemps', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+    Temp.find({user: req.user._id}, {_id: 1, title: 1, savedate: 1}, (err, temps) => {
+        Temp.find({coworker: {$in: [req.user._id.toString()]}}, {_id: 1, title: 1, savedate: 1}, (err, outputs) => {
+            res.json({
+                temps: temps,
+                coworking: outputs
+            });
+        });
+    });
+});
+
+router.get('/takeSearchedPosts', (req, res, next) => {
+    const category = req.query.category;
+    if ( category == 'title' ) {
+        Game.find({title: {$regex: req.query.text, $options: 'i'}}, {content: 0}).exec((err, posts) => {
+            res.json({posts: posts});
+        });
+    } else if ( category == 'nickname' ) {
+        Game.find({nickname: {$regex: req.query.text, $options: 'i'}}, {content: 0}).exec((err, posts) => {
+            res.json({posts: posts});
+        });
+    } else {
+        res.json({posts: []});
+    }
+});
+
+// handle temps =============================================================
+
 router.post('/toMyTempList', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     const num = req.body.num;
     const nowDate = getNowDate();
@@ -363,17 +391,6 @@ router.post('/toMyTempList', passport.authenticate('jwt', {session: false}), fun
         Temp.add(newTemp, (err, output) => {
             if ( err ) res.json({success: false, msg: err});
             else res.json({success: true});
-        });
-    });
-});
-
-router.post('/takeMyTemps', passport.authenticate('jwt', {session: false}), function(req, res, next) {
-    Temp.find({user: req.user._id}, {_id: 1, title: 1, savedate: 1}, (err, temps) => {
-        Temp.find({coworker: {$in: [req.user._id.toString()]}}, {_id: 1, title: 1, savedate: 1}, (err, outputs) => {
-            res.json({
-                temps: temps,
-                coworking: outputs
-            });
         });
     });
 });

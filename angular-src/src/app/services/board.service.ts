@@ -44,6 +44,13 @@ export class BoardService {
       .pipe(map(res => res.json()));
   }
 
+  takeSearchedPosts(category, type, text) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(this.funcService.ServerAddress + '/boards/takeSearchedPosts?category=' + category + '&type=' + type + '&text=' + text, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
   writePost(post) {
     let headers = new Headers();
     this.loadToken();

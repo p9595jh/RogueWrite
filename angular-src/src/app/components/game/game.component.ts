@@ -216,6 +216,18 @@ export class GameComponent implements OnInit, OnDestroy {
     })
   }
 
+  onSearch(category, text) {
+    if ( text == '' ) {
+      this.gameService.takeAllPosts().subscribe(data => {
+        this.contents = data.posts;
+      });
+    } else {
+      this.gameService.takeSearchedPosts(category, text).subscribe(data => {
+        this.contents = data.posts;
+      });
+    }
+  }
+
   extractDate(date) {
     let writeDate = new Date(date);
     let today = new Date();

@@ -50,19 +50,19 @@
       </div>
       <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ENGINE (GAME) ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->
 
-      <br/><br/>
+      <br/><br/><br/><br/>
       <div>{{content?.content}}</div>
-      <br/><br/>
+      <br/><br/><br/><br/>
 
-      <div style="border: 1px solid black; width: 100%; padding: 1%; display: inline-block;">
+      <div style="border: 1px solid rgb(155, 155, 155); width: 100%; padding: 10px; display: inline-block;">
         <p>
           version. {{content?.version}}
         </p>
         <p *ngIf="content?.from">
-          이 게임은 <span style="cursor: pointer; font-weight: bold;" (click)="funcService.openInfoWindow(content?.from?.userid)">{{content.from.nickname}}</span> 님의 <a style="color: grey; font-weight: bold;" [routerLink]="['/game/' + content?.from?.game]">{{content.from.title}}</a> 으로부터 참조되었습니다.
+          이 게임은 <span style="cursor: pointer; font-weight: bold;" (click)="funcService.openInfoWindow(content?.from?.userid)">{{content.from.nickname}}</span> 님의 <a style="font-weight: bold;" [routerLink]="['/game/' + content?.from?.game]">{{content.from.title}}</a> 으로부터 참조되었습니다.
         </p>
         <p *ngIf="content?.coworker?.length > 0">
-          공동제작자 :<span *ngFor="let coworker of content?.coworker" (click)="funcService.openInfoWindow(coworker?.userid)"> {{coworker?.nickname}}</span>
+          공동제작자 :<span *ngFor="let coworker of content?.coworker" style="cursor: pointer;" (click)="funcService.openInfoWindow(coworker?.userid)"> {{coworker?.nickname}}</span>
         </p>
       </div>
       <br/><br/>
@@ -259,22 +259,26 @@
         </tbody>
       </table><br/>
 
-      <mat-paginator [length]="contents?.length" [pageSize]="pagingSize" (page)="paging($event)">
-      </mat-paginator>
+      <mat-paginator [length]="contents?.length" [pageSize]="pagingSize" (page)="paging($event)"></mat-paginator>
 
+      <div style="float: left;">
+        <mat-form-field style="width: 100px;">
+          <mat-select value="title" (selectionChange)="onSearch(searchSelect.value, searchInput.value)" #searchSelect>
+            <mat-option value="title">제목</mat-option>
+            <mat-option value="nickname">닉네임</mat-option>
+          </mat-select>
+        </mat-form-field>&nbsp;&nbsp;
+        <mat-form-field appearance="outline" style="width: 200px;">
+          <mat-label>검색</mat-label>
+          <input matInput (input)="onSearch(searchSelect.value, $event.target.value)" #searchInput>
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </div>
       <div *ngIf="authService.loggedIn()" style="float: right;">
         <a mat-raised-button [routerLink]="['/tool']">작성</a>
       </div>
     </div>
   </div>
-  <!-- <button mat-icon-button [matMenuTriggerFor]="board">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #board>
-    <button mat-menu-item *ngIf="authService.loggedIn()">
-      <span>즐겨찾는 게시판 설정</span>
-    </button>
-  </mat-menu> -->
 </section>
 
 <section></section>

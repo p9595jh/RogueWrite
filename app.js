@@ -30,6 +30,7 @@ var usersRouter = require('./routes/users');
 var boardsRouter = require('./routes/boards');
 var modalsRouter = require('./routes/modals');
 var gamesRouter = require('./routes/games');
+var corveesRouter = require('./routes/corvees');
 var testsRouter = require('./routes/test');
 
 var app = express();
@@ -69,6 +70,7 @@ app.use('/users', usersRouter);
 app.use('/boards', boardsRouter);
 app.use('/modals', modalsRouter);
 app.use('/games', gamesRouter);
+app.use('/corvees', corveesRouter);
 app.use('/tests', testsRouter);
 
 // catch 404 and forward to error handler
