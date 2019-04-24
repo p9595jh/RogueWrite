@@ -17,8 +17,8 @@ export class PlayService {
   constructor() {}
 
   gameSet(gameData) {
-    this.stageNum = 0;
-    this.phaseNum = 0;
+    this.stageNum = 1;
+    this.phaseNum = 1;
     this.end = false;
     this.paramMap = new Map<string, any>();
 
@@ -29,7 +29,7 @@ export class PlayService {
     }
     this.paramArr = this.formatAsDoubleDimension();
     for (let stage of this.data.stage) {
-      if ( stage.stage_num == 0 ) {
+      if ( stage.stage_num == 1 ) {
         this.phase = stage.phase[0];
         break;
       }
@@ -72,8 +72,11 @@ export class PlayService {
     console.log('[[NO MATCHED CONDITION]]');
   }
 
-  select(condition: any) {
-    this.stageNum++;
+  select(condition: any, stage_to: number) {
+    // this.stageNum++;
+    if ( stage_to == 0 ) this.stageNum++;
+    else this.stageNum = stage_to;
+
     for (let val of condition) {
       let pv: any = this.paramMap.get(val.param);
       pv.value += Math.floor(Math.random() * (this.substituteParams(val.below) - this.substituteParams(val.above) + 1)) + this.substituteParams(val.above);

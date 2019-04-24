@@ -43,7 +43,7 @@ router.get('/tool', function(req, res, next) {
         const blockId = req.query._id;
         const uid = req.query.uid;
         if ( blockId ) {
-            Temp.findOne({_id: blockId}, {block: 1, _id: 1}, (err, output) => {
+            Temp.findOne({_id: blockId}, {block: 1, _id: 1, added: 1}, (err, output) => {
                 if ( err | !output ) {
                     res.render('tool', {
                         title: 'TOOL',
@@ -59,6 +59,7 @@ router.get('/tool', function(req, res, next) {
                             uid: uid,
                             temps: outputs,
                             block: output.block[output.block.length-1].xml,
+                            added: output.added.length > 0 ? output.added : false,
                             c: req.session.code
                         });
                     });
@@ -71,6 +72,7 @@ router.get('/tool', function(req, res, next) {
                     temps: outputs,
                     uid: uid,
                     block: false,
+                    added: false,
                     c: req.session.code
                 });
             });
@@ -119,7 +121,7 @@ router.post('/tempSave', (req, res, next) => {
             saveby: req.body.uid,
             savedate: getNowDate()
         };
-        Temp.findOneAndUpdate({_id: req.body._id}, {$push: {block: blockData}, savedate: getNowDate()}, (err, output) => {
+        Temp.findOneAndUpdate({_id: req.body._id}, {$push: {block: blockData}, added: req.body.adds, savedate: getNowDate()}, (err, output) => {
             if ( err | !output ) res.json({success: false});
             else res.json({success: true});
         });
@@ -134,6 +136,7 @@ router.post('/tempSave', (req, res, next) => {
             }],
             title: req.body.title,
             savedate: getNowDate(),
+            added: req.body.adds,
             coworker: [],
             requested: []
         });
@@ -145,9 +148,12 @@ router.post('/tempSave', (req, res, next) => {
 });
 
 router.post('/addBlock', (req, res, next) => {
-    Temp.findOne({_id: req.body.addId}, {block: 1}, (err, temp) => {
+    Temp.findOne({_id: req.body.addId}, {block: 1, from: 1}, (err, temp) => {
         if ( err || !temp ) res.json({fail: true});
-        else res.json({block: temp.block[temp.block.length-1].xml});
+        else {
+            if ( temp.from ) res.json({block: temp.block[temp.block.length-1].xml, from: temp.from});
+            else res.json({block: temp.block[temp.block.length-1].xml, from: false});
+        }
     });
 });
 
@@ -170,7 +176,8 @@ router.post('/save', function(req, res, next) {
         return res.json({success: false, msg: '점수계산이 비어있습니다.'});
     } else {
         req.session.data = data;
-        req.session.temp = req.body._id;
+        if ( req.body._id && req.body._id != '' ) req.session.temp = req.body._id;
+        req.session.block = req.body.block;
         res.json({success: true});
     }
 });
@@ -195,83 +202,84 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
     if ( !req.session.data ) {
         return res.json({success: false, msg: '먼저 저장을 해야 합니다.'});
     } else {
-        Temp.findOne({_id: req.session.temp}, (err, output) => {
-            if ( output.user != req.user._id.toString() ) {
-                return res.json({success: false, msg: '메인 제작자가 작성해야 합니다.'});
-            } else {
-                const newGame = new Game({
-                    userid: req.user.userid,
-                    nickname: req.user.nickname,
-                    title: req.session.data.title,
-                    content: req.body.content,
-                    version: req.body.version,
-                    game: req.session.data,
-                    block: output.block[output.block.length-1],
-                    boardRequest: 0,
-                    board: '',
-                    hit: 0,
-                    recommend: 0,
-                    unrecommend: 0,
-                    recommendby: [],
-                    comment: [],
-                    writedate: getNowDate()
-                });
-                Game.addPost(newGame, (err, post) => {
-                    if ( err ) {
-                        res.json({success: false});
-                    } else {
-                        if ( req.session.temp ) {
-                            if ( output.from && output.coworker.length > 0 ) {
-                                User.find({_id: {$in: output.coworker}}, {userid: 1, nickname: 1}, (err, users) => {
-                                    Game.findOneAndUpdate({_id: post._id}, {coworker: users, from: output.from}, (err, game) => {
-                                        req.session.destroy();
-                                        res.clearCookie('sid');
-                                        res.json({
-                                            success: true,
-                                            num: post._id
+        const nowDate = getNowDate();
+        const blockData = {
+            xml: req.session.block.xml,
+            moves: req.session.block.moves,
+            saveby: req.user._id.toString(),
+            savedate: nowDate
+        };
+        const newGame = new Game({
+            userid: req.user.userid,
+            nickname: req.user.nickname,
+            title: req.session.data.title,
+            content: req.body.content,
+            version: req.body.version,
+            game: req.session.data,
+            block: blockData,
+            boardRequest: 0,
+            board: '',
+            hit: 0,
+            recommend: 0,
+            unrecommend: 0,
+            recommendby: [],
+            comment: [],
+            writedate: nowDate
+        });
+        if ( req.session.temp ) {
+            Temp.findOne({_id: req.session.temp}, (err, output) => {
+                if ( output.user != req.user._id.toString() ) {
+                    return res.json({success: false, msg: '메인 제작자가 작성해야 합니다.'});
+                } else {
+                    Game.addPost(newGame, (err, post) => {
+                        if ( err ) {
+                            res.json({success: false});
+                        } else {
+                            Temp.findOneAndUpdate({_id: req.session.temp}, {$push: {block: blockData}}, (err, tp) => {
+                                if ( output.from && output.coworker.length > 0 ) {
+                                    User.find({_id: {$in: output.coworker}}, {userid: 1, nickname: 1}, (err, users) => {
+                                        Game.findOneAndUpdate({_id: post._id}, {coworker: users, from: output.from}, (err, game) => {
+                                            req.session.destroy();
+                                            res.clearCookie('sid');
+                                            res.json({success: true, num: post._id});
                                         });
                                     });
-                                });
-                            } else if ( output.from ) {
-                                Game.findOneAndUpdate({_id: post._id}, {from: output.from}, (err, game) => {
+                                } else if ( output.from ) {
+                                    Game.findOneAndUpdate({_id: post._id}, {from: output.from}, (err, game) => {
+                                        req.session.destroy();
+                                        res.clearCookie('sid');
+                                        res.json({success: true, num: post._id});
+                                    });
+                                } else if ( output.coworker.length > 0 ) {
+                                    User.find({_id: {$in: output.coworker}}, {userid: 1, nickname: 1}, (err, users) => {
+                                        Game.findOneAndUpdate({_id: post._id}, {coworker: users}, (err, game) => {
+                                            req.session.destroy();
+                                            res.clearCookie('sid');
+                                            res.json({success: true, num: post._id});
+                                        });
+                                    });
+                                } else {
                                     req.session.destroy();
                                     res.clearCookie('sid');
-                                    res.json({
-                                        success: true,
-                                        num: post._id
-                                    });
-                                });
-                            } else if ( output.coworker.length > 0 ) {
-                                User.find({_id: {$in: output.coworker}}, {userid: 1, nickname: 1}, (err, users) => {
-                                    Game.findOneAndUpdate({_id: post._id}, {coworker: users}, (err, game) => {
-                                        req.session.destroy();
-                                        res.clearCookie('sid');
-                                        res.json({
-                                            success: true,
-                                            num: post._id
-                                        });
-                                    });
-                                });
-                            } else {
-                                req.session.destroy();
-                                res.clearCookie('sid');
-                                res.json({
-                                    success: true,
-                                    num: post._id
-                                });
-                            }
-                        } else {
-                            req.session.destroy();
-                            res.clearCookie('sid');
-                            res.json({
-                                success: true,
-                                num: post._id
+                                    res.json({success: true, num: post._id});
+                                }
                             });
                         }
-                    }
-                });
-            }
-        });
+                    });
+                }
+            });
+        } else {
+            Game.addPost(newGame, (err, post) => {
+                if ( err ) {
+                    res.json({success: false});
+                } else {
+                    req.session.destroy();
+                    res.clearCookie('sid');
+                    res.json({success: true, num: post._id});
+                }
+            });
+        }
+        
     }
 });
 
@@ -347,7 +355,10 @@ router.post('/toMyTempList', passport.authenticate('jwt', {session: false}), fun
                 title: game.title,
                 userid: game.userid,
                 nickname: game.nickname
-            }
+            },
+            added: [],
+            coworker: [],
+            requested: []
         });
         Temp.add(newTemp, (err, output) => {
             if ( err ) res.json({success: false, msg: err});

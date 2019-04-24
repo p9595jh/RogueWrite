@@ -17,6 +17,7 @@ const TempSchema = mongoose.Schema({
             nickname: String
         }
     */
+   added: Array,
    coworker: Array,  // string array
    requested: Array
 });

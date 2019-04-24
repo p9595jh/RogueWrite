@@ -28,12 +28,29 @@ block content
                 each val in temps
                     li(class="mdl-menu__item", onclick='adds("' + val._id + '")')= val.title + ' (' + val.savedate + ')'
 
-    
     xml#toolbox(style='display: none')
         category(name='big_one')
             block(type='stage')
+                value(name='stage_num')
+                    block(type='math_number')
+                        field(name='NUM') 1
             block(type='phase')
+                value(name='phase_num')
+                    block(type='math_number')
+                        field(name='NUM') 1
+                value(name='content')
+                    block(type='text')
+                        field(name='TEXT')
             block(type='choice')
+                value(name='choice_num')
+                    block(type='math_number')
+                        field(name='NUM') 1
+                value(name='stage_to')
+                    block(type='math_number')
+                        field(name='NUM') 0
+                value(name='content')
+                    block(type='text')
+                        field(name='TEXT')
         category(name='small_one')
             block(type='text')
             block(type='math_number')
@@ -47,10 +64,18 @@ block content
 
     div#tempData(style="display: none;") #{temp}
     div#uid(style="display: none;") #{uid}
+    div#adds(style="display: none;")
 
     script.
-        //- @ set default workspace (workspaceFantasy)
+        //- @ declair the global variables
         var moves = 0;
+        var from = [];
+        if ( !{added} ) {
+            from = !{added};
+        }
+        //- ========================================
+
+        //- @ set default workspace (workspaceFantasy)
         var workspaceFantasy = Blockly.inject('workspaceFantasy', {
             media: '../resources/blockly/google-blockly-82871b3/media/',
             comments : false,
@@ -89,6 +114,14 @@ block content
                 else {
                     let xml = Blockly.Xml.textToDom(result.block);
                     Blockly.Xml.domToWorkspace(xml, workspaceFantasy);
+                    if ( result.from ) {
+                        for (let f of from) {
+                            if ( f.game == result.from.game ) {
+                                return;
+                            }
+                        }
+                        from.push(result.from);
+                    }
                 }
             });
         }
@@ -107,7 +140,8 @@ block content
                     block: xml_text,
                     moves: moves,
                     _id: document.getElementById('tempData').innerHTML,
-                    uid: document.getElementById('uid').innerHTML
+                    uid: document.getElementById('uid').innerHTML,
+                    adds: from
                 }));
 
                 xhr.addEventListener('load', () => {
@@ -129,7 +163,8 @@ block content
                     block: xml_text,
                     moves: moves,
                     title: title,
-                    uid: document.getElementById('uid').innerHTML
+                    uid: document.getElementById('uid').innerHTML,
+                    adds: from
                 }));
 
                 xhr.addEventListener('load', () => {
@@ -165,9 +200,16 @@ block content
             let code = Blockly.JavaScript.workspaceToCode(workspaceFantasy);
             //- title(string), stage(array), param(array), score(string)
 
+            let xml = Blockly.Xml.workspaceToDom(workspaceFantasy);
+            let xml_text = Blockly.Xml.domToText(xml);
+
             try {
                 code = JSON.parse(code);
                 code._id = document.getElementById('tempData').innerHTML;
+                code.block = {
+                    xml: xml_text,
+                    moves: moves
+                };
                 code = JSON.stringify(code);
             } catch (e) {
                 setMessage("에러가 발생하였습니다: " + e, "red", 2000);

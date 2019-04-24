@@ -10,8 +10,7 @@ const GameSchema = mongoose.Schema({
     content: String,
     version: String,
     game: Object,   // game data
-    // block: Array,   // moves of the block
-    block: Object,  // latest shape of the block {xml: String, saveby: String, savedate: String}
+    block: Object,  // latest shape of the block {xml: String, moves: Number, saveby: String, savedate: String}
     boardRequest: Number,   // 0: normal, 1: requested, 2: accepted, 3: rejected
     board: String,  // url of own board
     hit: Number,

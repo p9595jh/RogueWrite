@@ -246,11 +246,16 @@ Blockly.defineBlocksWithJsonArray([
     },
     {
         "type": "choice",
-        "message0": "조건 번호 %1 내용 %2 변수 변화 %3",
+        "message0": "조건 번호 %1 이동 단계 %2 내용 %3 변수 변화 %4",
         "args0": [
             {
                 "type": "input_value",
                 "name": "choice_num",
+                "check": "Number"
+            },
+            {
+                "type": "input_value",
+                "name": "stage_to",
                 "check": "Number"
             },
             {
@@ -260,7 +265,7 @@ Blockly.defineBlocksWithJsonArray([
             },
             {
                 "type": "input_statement",
-                "name": "set_param",
+                "name": "condition",
                 "check": "condition"
             }
         ],

@@ -70,9 +70,6 @@ a:hover {
 }
 
 .stage-content {
-  /* background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%; */
   padding: 5%;
 
   border-style: solid;
@@ -83,41 +80,90 @@ a:hover {
   border-image: url('./images/engine/content_bg.png') 40 40 40 40 round round;
 }
 
+@-webkit-keyframes stripe-slide {
+  0% {
+    background-position: 0% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+@keyframes stripe-slide {
+  0% {
+    background-position: 0% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
 .stage-choice {
-  /* text-align: left;
-  padding-left: 5%;
-  padding-right: 5%;
-  padding-top: 2%;
-  padding-bottom: 2%; */
-
-  /* background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%; */
-
-  border-style: solid;
-  border-width: 10px 10px 10px 10px;
-  -moz-border-image: url('./images/engine/select_bg_default.png') 10 10 10 10 round round;
-  -webkit-border-image: url('./images/engine/select_bg_default.png') 10 10 10 10 round round;
-  -o-border-image: url('./images/engine/select_bg_default.png') 10 10 10 10 round round;
-  border-image: url('./images/engine/select_bg_default.png') 10 10 10 10 round round;
+  overflow: visible;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  line-height: normal;
+  cursor: pointer;
+  -moz-user-select: text;
+  display: block;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 16px 36px 22px;
+  background-color: #fff;
+  color: #666;
+  border: 2px solid #666;
+  border-radius: 6px;
+/*  margin-bottom: 16px;*/
+  transition: all .5s ease;
 }
 
-.stage-choice:hover {
-  border-style: solid;
-  border-width: 10px 10px 10px 10px;
-  -moz-border-image: url('./images/engine/select_bg_hover.png') 10 10 10 10 round round;
-  -webkit-border-image: url('./images/engine/select_bg_hover.png') 10 10 10 10 round round;
-  -o-border-image: url('./images/engine/select_bg_hover.png') 10 10 10 10 round round;
-  border-image: url('./images/engine/select_bg_hover.png') 10 10 10 10 round round;
+.stage-choice:-moz-focus-inner {
+  padding: 0;
+  border: 0;
 }
 
-.stage-choice:active {
-  border-style: solid;
-  border-width: 10px 10px 10px 10px;
-  -moz-border-image: url('./images/engine/select_bg_clicked.png') 10 10 10 10 round round;
-  -webkit-border-image: url('./images/engine/select_bg_clicked.png') 10 10 10 10 round round;
-  -o-border-image: url('./images/engine/select_bg_clicked.png') 10 10 10 10 round round;
-  border-image: url('./images/engine/select_bg_clicked.png') 10 10 10 10 round round;
+.btn--stripe {
+  overflow: hidden;
+  position: relative;
+}
+
+.btn--stripe:after {
+  content: '';
+  display: block;
+  height: 7px;
+  width: 100%;
+  background-image: repeating-linear-gradient(45deg, #666, #666 1px, transparent 2px, transparent 5px);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-top: 1px solid #666;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background-size: 7px 7px;
+}
+
+.btn--stripe:hover {
+  background-color: #666;
+  color: #fff;
+  border-color: #000;
+}
+
+.btn--stripe:hover:after {
+  background-image: repeating-linear-gradient(45deg, #fff, #fff 1px, transparent 2px, transparent 5px);
+  border-top: 1px solid #000;
+  -webkit-animation: stripe-slide 12s infinite linear forwards;
+          animation: stripe-slide 12s infinite linear forwards;
+}
+
+.btn--large {
+  width: 50%;
+}
+
+.btn--radius {
+  border-radius: 36px;
 }
 
 .grid-cell {
