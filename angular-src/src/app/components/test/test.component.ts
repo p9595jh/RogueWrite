@@ -12,8 +12,9 @@ import { NgFlashMessageService } from 'ng-flash-messages';
 export class TestComponent implements OnInit {
 
   temp = [
-    1,2,3,4,4,5,6,7,45,6,4,4
+    1,2,3,4,6
   ];
+  hirogatteru = false;
 
   constructor(
     private funcService: FuncService,
@@ -25,6 +26,10 @@ export class TestComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  hirogaru() {
+    this.hirogatteru = !this.hirogatteru;
   }
 
 }
