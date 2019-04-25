@@ -53,6 +53,15 @@ export class CorveeService {
       .pipe(map(res => res.json()));
   }
 
+  takeTempUsers(coworkers) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/corvees/takeTempUsers', {coworkers: coworkers}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
   writePost(post) {
     let headers = new Headers();
     this.loadToken();

@@ -75,8 +75,14 @@ router.get('/takeSearchedPosts', (req, res, next) => {
 });
 
 router.post('/takeMyTemps', passport.authenticate('jwt', {session: false}), function(req, res, next) {
-    Temp.find({user: req.user._id.toString()}, (err, temps) => {
-        res.json({temps: temps});
+    Temp.find({user: req.user._id.toString()}, {requested: 0}, (err, temps) => {
+        res.json({temps: temps, user: req.user});
+    });
+});
+
+router.post('/takeTempUsers', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+    User.find({_id: {$in: req.body.coworkers}}, {nickname: 1, userid: 1, _id: 1}, (err, users) => {
+        res.json({users: users});
     });
 });
 

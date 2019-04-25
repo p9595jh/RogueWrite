@@ -1,21 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FlatTreeControl } from '@angular/cdk/tree';
-import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
 
 import { FuncService } from '../../services/func.service';
 import { CorveeService } from '../../services/corvee.service';
 import { NgFlashMessageService } from 'ng-flash-messages';
 
-interface TempNode {
-  name: string,
-  children?: TempNode[];
-}
-
-interface FlatNode {
-  expandable: boolean,
-  name: string,
-  level: number
+interface Selected {
+  _id: string,
+  idx: number
 }
 
 @Component({
@@ -44,25 +36,11 @@ export class CwriteComponent implements OnInit {
 
   title: string;
   content: string;
+  temps: Array<any>;
+  selectedItem: Selected = undefined;
 
-  private transformer = (node: TempNode, level: number) => {
-    return {
-      expandable: !!node.children && node.children.length > 0,
-      name: node.name,
-      level: level
-    };
-  };
-  treeControl = new FlatTreeControl<FlatNode>(
-    node => node.level,
-    node => node.expandable
-  );
-  treeFlattener = new MatTreeFlattener(
-    this.transformer,
-    node => node.level,
-    node => node.expandable,
-    node => node.children
-  );
-  dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+  user: any;
+  coworkerMap: Map<string, any>;
 
   constructor(
     private funcService: FuncService,
@@ -72,8 +50,6 @@ export class CwriteComponent implements OnInit {
   ) {
     this.funcService.setTitle('노역장 작성');
   }
-
-  hasChild = (_: number, node: FlatNode) => node.expandable;
 
   ngOnInit() {
     this.corveeService.takeMyTemps().subscribe(data => {
@@ -85,20 +61,44 @@ export class CwriteComponent implements OnInit {
         });
         this.router.navigate([this.funcService.getPreviousUrl()]);
       } else {
-        let tree = [];
-        for (let temp of data.temps) {
-          let branch = {
-            name: temp.title,
-            children: []
-          };
-          for (let block of temp.block) {
-            branch.children.push({name: block.savedate});
+        this.temps = data.temps;
+        this.user = data.user;
+        this.coworkerMap = new Map<string, any>();
+        this.coworkerMap.set(this.user._id, {_id: this.user._id, userid: this.user.userid, nickname: this.user.nickname});
+        for(let temp of this.temps) {
+          temp.opened = false;
+          temp.history = [];
+          for (let i=0; i<temp.block.length; i++) {
+            let block = temp.block[i];
+            if ( block.saveby ) {
+              block.num = i + 1;
+              temp.history.push(block);
+            }
           }
-          tree.push(branch);
+          temp.history.reverse();
         }
-        this.dataSource.data = tree;
       }
     });
+  }
+
+  open(temp) {
+    this.corveeService.takeTempUsers(temp.coworker).subscribe(data => {
+      for (let user of data.users) {
+        if ( !this.coworkerMap.get(user._id) ) {
+          this.coworkerMap.set(user._id, user);
+        }
+      }
+      temp.opened = !temp.opened;
+    });
+  }
+
+  viewBlock(num, i) {
+    this.funcService.popUp(this.funcService.ServerAddress + '/modals/viewTempBlock?game=' + num + '&recent=' + i, 1000, 600);
+  }
+
+  selectBlock(num, i) {
+    this.selectedItem._id = num;
+    this.selectedItem.idx = i;
   }
 
   onWritePost() {
@@ -112,6 +112,13 @@ export class CwriteComponent implements OnInit {
     } else if ( this.content == '' || this.content == undefined ) {
       this.flashMessage.showFlashMessage({
         messages: ['내용이 비어있습니다.'], 
+        type: 'danger', 
+        timeout: 3000
+      });
+      return false;
+    } else if ( !this.selectedItem ) {
+      this.flashMessage.showFlashMessage({
+        messages: ['블록이 선택되지 않았습니다.'], 
         type: 'danger', 
         timeout: 3000
       });
