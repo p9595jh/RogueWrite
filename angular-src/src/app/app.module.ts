@@ -37,6 +37,7 @@ import { NgFlashMessagesModule } from 'ng-flash-messages';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { FileSelectDirective } from 'ng2-file-upload';
 import { AuthGuard } from './guards/auth.guard';
+import { DeactivateGuard } from './guards/deactivate.guard';
 import { SafeHtml } from '../pipes/safeHtml';
 
 import { AppComponent } from './app.component';
@@ -68,7 +69,7 @@ const appRoutes: Routes = [
   { path: 'test', component: TestComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: 'game/:num', component: GameComponent },
-  { path: 'tool', component: ToolComponent, canActivate: [AuthGuard] },
+  { path: 'tool', component: ToolComponent, canActivate: [AuthGuard/*, DeactivateGuard*/] },
   { path: 'sub', component: SubComponent },
   { path: 'temp/:num', component: TempComponent, canActivate: [AuthGuard] },
   { path: 'corvee/:num', component: CorveeComponent },
@@ -142,6 +143,7 @@ const appRoutes: Routes = [
     ValidateService,
     AuthService,
     AuthGuard,
+    DeactivateGuard,
     { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }
   ],
   bootstrap: [

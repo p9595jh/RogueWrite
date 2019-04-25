@@ -11,8 +11,24 @@
         <span class="toProfile" (click)="funcService.openInfoWindow(content?.userid)">{{content?.nickname}}</span><br/>{{content?.writedate}}
       </span>
       <hr/>
+
+      <div style="width: 100%;" [innerHTML]="iframe | safe"></div>
+
+      <br/><br/><br/><br/>
       <div class="posting content" [innerHtml]="content?.content | safe"></div>
+      <br/><br/><br/><br/>
+
+      <div style="border: 1px solid rgb(155, 155, 155); width: 100%; padding: 10px; display: inline-block;">
+        <p>{{writerIntro}}</p>
+        <p *ngIf="content?.from">
+          이 게임은 <span style="cursor: pointer; font-weight: bold;" (click)="funcService.openInfoWindow(content?.block?.from?.userid)">{{content.from.nickname}}</span> 님의 <a style="font-weight: bold;" [routerLink]="['/game/' + content?.from?.game]">{{content.from.title}}</a> 으로부터 참조되었습니다.
+        </p>
+        <p *ngIf="content?.block?.coworker?.length > 0">
+          공동제작자 :<span *ngFor="let coworker of content?.block?.coworker" style="cursor: pointer;" (click)="funcService.openInfoWindow(coworker?.userid)"> {{coworker?.nickname}}</span>
+        </p>
+      </div>
       <br/><br/>
+
       <div style="text-align: center;">
         <button mat-raised-button color="primary" (click)="onRecommend()">
           추천 {{content?.recommend?.length}}
@@ -22,8 +38,8 @@
 
       <!-- ############### table for comments ############### -->
       <table style="width: 96%; margin: auto;">
-        <tbody *ngFor="let comment of content?.comment">
-          <tr>
+        <tbody>
+          <tr *ngFor="let comment of content?.comment">
             <td style="width: 15%;">
               <img [attr.src]="'images/profile/' + comment.userid" class="profileImage" />
             </td>
@@ -38,6 +54,9 @@
               <pre class="content writerText" *ngIf="comment?.userid == content?.userid" [innerHTML]="comment?.comment"></pre>
               <pre class="content" *ngIf="comment?.userid != content?.userid" [innerHTML]="comment?.comment"></pre>
               <br/>
+            </td>
+            <td *ngIf="authService.loggedIn() && content?.userid != user?.userid && content?.userid != comment?.userid && sendable(comment?.userid)" style="width: 20%;">
+              <button mat-button color="primary" (click)="sendRequest(comment?.userid)" style="float: right;">작업요청 보내기</button>
             </td>
           </tr>
         </tbody>
@@ -87,7 +106,7 @@
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
-      <h4>임시베스트저장소</h4>
+      <h4>블록게시판</h4>
       <hr/>
       
       <!-- for large display -->
@@ -105,7 +124,7 @@
           <tr *ngFor="let val of contents | slice:pagingFrom:pagingTo; let i=index">
             <td class="mdl-data-table__cell--non-numeric">{{extractDate(val.writedate)}}</td>
             <td class="mdl-data-table__cell--non-numeric">
-              <a [routerLink]="['/board/'+type+'/'+val?._id]"
+              <a [routerLink]="['/corvee/' + val?._id]"
                 style="color: black; text-decoration: none; font-weight: 400;"
                 (click)="scrollToPost(postLocation)">{{val.title}}</a>&nbsp;
               <span *ngIf="val.comment.length > 0" style="font-size: 85%; color: grey;">[{{val.comment.length}}]</span>
@@ -124,7 +143,7 @@
         <tbody>
           <tr *ngFor="let val of contents | slice:pagingFrom:pagingTo; let i=index">
             <td class="mdl-data-table__cell--non-numeric"
-              [routerLink]="['/board/'+type+'/'+val?._id]" (click)="scrollToPost(postLocation)">
+              [routerLink]="['/corvee/' + val?._id]" (click)="scrollToPost(postLocation)">
               <div>
                 {{val.title}}
                 <span *ngIf="val.comment.length > 0" style="color: grey;">[{{val.comment.length}}]</span>

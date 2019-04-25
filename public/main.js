@@ -30,7 +30,7 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".nav-link {\r\n    color: black;\r\n    display: block;\r\n    width: 100%;\r\n    padding: 20px;\r\n    padding-left: 12%;\r\n}\r\n\r\n.nav-link:hover {\r\n    background-color: rgb(202, 202, 202);\r\n}\r\n"
+module.exports = ".nav-link {\r\n    color: black;\r\n    display: block;\r\n    width: 100%;\r\n    padding: 20px;\r\n    padding-left: 12%;\r\n}\r\n\r\n.nav-link:hover {\r\n    background-color: rgb(202, 202, 202);\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxZQUFZO0lBQ1osY0FBYztJQUNkLFdBQVc7SUFDWCxhQUFhO0lBQ2IsaUJBQWlCO0FBQ3JCOztBQUVBO0lBQ0ksb0NBQW9DO0FBQ3hDIiwiZmlsZSI6InNyYy9hcHAvYXBwLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubmF2LWxpbmsge1xyXG4gICAgY29sb3I6IGJsYWNrO1xyXG4gICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIHBhZGRpbmc6IDIwcHg7XHJcbiAgICBwYWRkaW5nLWxlZnQ6IDEyJTtcclxufVxyXG5cclxuLm5hdi1saW5rOmhvdmVyIHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYigyMDIsIDIwMiwgMjAyKTtcclxufVxyXG4iXX0= */"
 
 /***/ }),
 
@@ -83,7 +83,7 @@ var AppComponent = /** @class */ (function () {
             { label: '공지게시판', path: '/board/notice/list' },
             { label: '자유게시판', path: '/board/free/list' },
             { label: '게임게시판', path: '/game/list' },
-            { label: '노역시장', path: '/corvee/list' },
+            { label: '블록게시판', path: '/corvee/list' },
             { label: '서브게시판', path: '/sub' }
         ];
         this.activeLink = this.navLinks[0];
@@ -143,24 +143,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ng2_file_upload__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ng2-file-upload */ "./node_modules/ng2-file-upload/index.js");
 /* harmony import */ var ng2_file_upload__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(ng2_file_upload__WEBPACK_IMPORTED_MODULE_13__);
 /* harmony import */ var _guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./guards/auth.guard */ "./src/app/guards/auth.guard.ts");
-/* harmony import */ var _pipes_safeHtml__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../pipes/safeHtml */ "./src/pipes/safeHtml.ts");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/login/login.component */ "./src/app/components/login/login.component.ts");
-/* harmony import */ var _components_register_register_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/register/register.component */ "./src/app/components/register/register.component.ts");
-/* harmony import */ var _components_home_home_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/home/home.component */ "./src/app/components/home/home.component.ts");
-/* harmony import */ var _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/profile/profile.component */ "./src/app/components/profile/profile.component.ts");
-/* harmony import */ var _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/modify/modify.component */ "./src/app/components/modify/modify.component.ts");
-/* harmony import */ var _components_board_board_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/board/board.component */ "./src/app/components/board/board.component.ts");
-/* harmony import */ var _components_write_write_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/write/write.component */ "./src/app/components/write/write.component.ts");
-/* harmony import */ var _components_test_test_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/test/test.component */ "./src/app/components/test/test.component.ts");
-/* harmony import */ var _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/no-page/no-page.component */ "./src/app/components/no-page/no-page.component.ts");
-/* harmony import */ var _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/admin/admin.component */ "./src/app/components/admin/admin.component.ts");
-/* harmony import */ var _components_tool_tool_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/tool/tool.component */ "./src/app/components/tool/tool.component.ts");
-/* harmony import */ var _components_game_game_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/game/game.component */ "./src/app/components/game/game.component.ts");
-/* harmony import */ var _components_sub_sub_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/sub/sub.component */ "./src/app/components/sub/sub.component.ts");
-/* harmony import */ var _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/temp/temp.component */ "./src/app/components/temp/temp.component.ts");
-/* harmony import */ var _components_corvee_corvee_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./components/corvee/corvee.component */ "./src/app/components/corvee/corvee.component.ts");
-/* harmony import */ var _components_cwrite_cwrite_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./components/cwrite/cwrite.component */ "./src/app/components/cwrite/cwrite.component.ts");
+/* harmony import */ var _guards_deactivate_guard__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./guards/deactivate.guard */ "./src/app/guards/deactivate.guard.ts");
+/* harmony import */ var _pipes_safeHtml__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../pipes/safeHtml */ "./src/pipes/safeHtml.ts");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/login/login.component */ "./src/app/components/login/login.component.ts");
+/* harmony import */ var _components_register_register_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/register/register.component */ "./src/app/components/register/register.component.ts");
+/* harmony import */ var _components_home_home_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/home/home.component */ "./src/app/components/home/home.component.ts");
+/* harmony import */ var _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/profile/profile.component */ "./src/app/components/profile/profile.component.ts");
+/* harmony import */ var _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/modify/modify.component */ "./src/app/components/modify/modify.component.ts");
+/* harmony import */ var _components_board_board_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/board/board.component */ "./src/app/components/board/board.component.ts");
+/* harmony import */ var _components_write_write_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/write/write.component */ "./src/app/components/write/write.component.ts");
+/* harmony import */ var _components_test_test_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/test/test.component */ "./src/app/components/test/test.component.ts");
+/* harmony import */ var _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/no-page/no-page.component */ "./src/app/components/no-page/no-page.component.ts");
+/* harmony import */ var _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/admin/admin.component */ "./src/app/components/admin/admin.component.ts");
+/* harmony import */ var _components_tool_tool_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/tool/tool.component */ "./src/app/components/tool/tool.component.ts");
+/* harmony import */ var _components_game_game_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/game/game.component */ "./src/app/components/game/game.component.ts");
+/* harmony import */ var _components_sub_sub_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/sub/sub.component */ "./src/app/components/sub/sub.component.ts");
+/* harmony import */ var _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./components/temp/temp.component */ "./src/app/components/temp/temp.component.ts");
+/* harmony import */ var _components_corvee_corvee_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./components/corvee/corvee.component */ "./src/app/components/corvee/corvee.component.ts");
+/* harmony import */ var _components_cwrite_cwrite_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./components/cwrite/cwrite.component */ "./src/app/components/cwrite/cwrite.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -200,24 +201,25 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
 var appRoutes = [
-    { path: '', component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_19__["HomeComponent"] },
-    { path: 'register', component: _components_register_register_component__WEBPACK_IMPORTED_MODULE_18__["RegisterComponent"] },
-    { path: 'login', component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_17__["LoginComponent"] },
-    { path: 'profile', component: _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_20__["ProfileComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
-    { path: 'modify', component: _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_21__["ModifyComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
-    { path: 'board/:type/:num', component: _components_board_board_component__WEBPACK_IMPORTED_MODULE_22__["BoardComponent"] },
-    { path: 'write/:type', component: _components_write_write_component__WEBPACK_IMPORTED_MODULE_23__["WriteComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
-    { path: 'test', component: _components_test_test_component__WEBPACK_IMPORTED_MODULE_24__["TestComponent"] },
-    { path: 'admin', component: _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_26__["AdminComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
-    { path: 'game/:num', component: _components_game_game_component__WEBPACK_IMPORTED_MODULE_28__["GameComponent"] },
-    { path: 'tool', component: _components_tool_tool_component__WEBPACK_IMPORTED_MODULE_27__["ToolComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
-    { path: 'sub', component: _components_sub_sub_component__WEBPACK_IMPORTED_MODULE_29__["SubComponent"] },
-    { path: 'temp/:num', component: _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_30__["TempComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
-    { path: 'corvee/:num', component: _components_corvee_corvee_component__WEBPACK_IMPORTED_MODULE_31__["CorveeComponent"] },
-    { path: 'cwrite', component: _components_cwrite_cwrite_component__WEBPACK_IMPORTED_MODULE_32__["CwriteComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
-    { path: 'no-page', component: _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_25__["NoPageComponent"] },
-    { path: '**', component: _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_25__["NoPageComponent"] }
+    { path: '', component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_20__["HomeComponent"] },
+    { path: 'register', component: _components_register_register_component__WEBPACK_IMPORTED_MODULE_19__["RegisterComponent"] },
+    { path: 'login', component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_18__["LoginComponent"] },
+    { path: 'profile', component: _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_21__["ProfileComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
+    { path: 'modify', component: _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_22__["ModifyComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
+    { path: 'board/:type/:num', component: _components_board_board_component__WEBPACK_IMPORTED_MODULE_23__["BoardComponent"] },
+    { path: 'write/:type', component: _components_write_write_component__WEBPACK_IMPORTED_MODULE_24__["WriteComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
+    { path: 'test', component: _components_test_test_component__WEBPACK_IMPORTED_MODULE_25__["TestComponent"] },
+    { path: 'admin', component: _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_27__["AdminComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
+    { path: 'game/:num', component: _components_game_game_component__WEBPACK_IMPORTED_MODULE_29__["GameComponent"] },
+    { path: 'tool', component: _components_tool_tool_component__WEBPACK_IMPORTED_MODULE_28__["ToolComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"] /*, DeactivateGuard*/] },
+    { path: 'sub', component: _components_sub_sub_component__WEBPACK_IMPORTED_MODULE_30__["SubComponent"] },
+    { path: 'temp/:num', component: _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_31__["TempComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
+    { path: 'corvee/:num', component: _components_corvee_corvee_component__WEBPACK_IMPORTED_MODULE_32__["CorveeComponent"] },
+    { path: 'cwrite', component: _components_cwrite_cwrite_component__WEBPACK_IMPORTED_MODULE_33__["CwriteComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
+    { path: 'no-page', component: _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_26__["NoPageComponent"] },
+    { path: '**', component: _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_26__["NoPageComponent"] }
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -225,25 +227,25 @@ var AppModule = /** @class */ (function () {
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [
-                _pipes_safeHtml__WEBPACK_IMPORTED_MODULE_15__["SafeHtml"],
+                _pipes_safeHtml__WEBPACK_IMPORTED_MODULE_16__["SafeHtml"],
                 ng2_file_upload__WEBPACK_IMPORTED_MODULE_13__["FileSelectDirective"],
-                _app_component__WEBPACK_IMPORTED_MODULE_16__["AppComponent"],
-                _components_login_login_component__WEBPACK_IMPORTED_MODULE_17__["LoginComponent"],
-                _components_register_register_component__WEBPACK_IMPORTED_MODULE_18__["RegisterComponent"],
-                _components_home_home_component__WEBPACK_IMPORTED_MODULE_19__["HomeComponent"],
-                _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_20__["ProfileComponent"],
-                _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_21__["ModifyComponent"],
-                _components_board_board_component__WEBPACK_IMPORTED_MODULE_22__["BoardComponent"],
-                _components_write_write_component__WEBPACK_IMPORTED_MODULE_23__["WriteComponent"],
-                _components_test_test_component__WEBPACK_IMPORTED_MODULE_24__["TestComponent"],
-                _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_25__["NoPageComponent"],
-                _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_26__["AdminComponent"],
-                _components_tool_tool_component__WEBPACK_IMPORTED_MODULE_27__["ToolComponent"],
-                _components_game_game_component__WEBPACK_IMPORTED_MODULE_28__["GameComponent"],
-                _components_sub_sub_component__WEBPACK_IMPORTED_MODULE_29__["SubComponent"],
-                _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_30__["TempComponent"],
-                _components_corvee_corvee_component__WEBPACK_IMPORTED_MODULE_31__["CorveeComponent"],
-                _components_cwrite_cwrite_component__WEBPACK_IMPORTED_MODULE_32__["CwriteComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_17__["AppComponent"],
+                _components_login_login_component__WEBPACK_IMPORTED_MODULE_18__["LoginComponent"],
+                _components_register_register_component__WEBPACK_IMPORTED_MODULE_19__["RegisterComponent"],
+                _components_home_home_component__WEBPACK_IMPORTED_MODULE_20__["HomeComponent"],
+                _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_21__["ProfileComponent"],
+                _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_22__["ModifyComponent"],
+                _components_board_board_component__WEBPACK_IMPORTED_MODULE_23__["BoardComponent"],
+                _components_write_write_component__WEBPACK_IMPORTED_MODULE_24__["WriteComponent"],
+                _components_test_test_component__WEBPACK_IMPORTED_MODULE_25__["TestComponent"],
+                _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_26__["NoPageComponent"],
+                _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_27__["AdminComponent"],
+                _components_tool_tool_component__WEBPACK_IMPORTED_MODULE_28__["ToolComponent"],
+                _components_game_game_component__WEBPACK_IMPORTED_MODULE_29__["GameComponent"],
+                _components_sub_sub_component__WEBPACK_IMPORTED_MODULE_30__["SubComponent"],
+                _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_31__["TempComponent"],
+                _components_corvee_corvee_component__WEBPACK_IMPORTED_MODULE_32__["CorveeComponent"],
+                _components_cwrite_cwrite_component__WEBPACK_IMPORTED_MODULE_33__["CwriteComponent"]
             ],
             imports: [
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"],
@@ -287,10 +289,11 @@ var AppModule = /** @class */ (function () {
                 _services_validate_service__WEBPACK_IMPORTED_MODULE_9__["ValidateService"],
                 _services_auth_service__WEBPACK_IMPORTED_MODULE_10__["AuthService"],
                 _guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"],
+                _guards_deactivate_guard__WEBPACK_IMPORTED_MODULE_15__["DeactivateGuard"],
                 { provide: _angular_material__WEBPACK_IMPORTED_MODULE_8__["ErrorStateMatcher"], useClass: _angular_material__WEBPACK_IMPORTED_MODULE_8__["ShowOnDirtyErrorStateMatcher"] }
             ],
             bootstrap: [
-                _app_component__WEBPACK_IMPORTED_MODULE_16__["AppComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_17__["AppComponent"]
             ],
             schemas: [
                 _angular_core__WEBPACK_IMPORTED_MODULE_1__["NO_ERRORS_SCHEMA"],
@@ -312,7 +315,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvYWRtaW4vYWRtaW4uY29tcG9uZW50LmNzcyJ9 */"
 
 /***/ }),
 
@@ -511,7 +514,7 @@ var AdminComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".boardTitle {\r\n    display: inline;\r\n}\r\n"
+module.exports = ".boardTitle {\r\n    display: inline;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9ib2FyZC9ib2FyZC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksZUFBZTtBQUNuQiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvYm9hcmQvYm9hcmQuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5ib2FyZFRpdGxlIHtcclxuICAgIGRpc3BsYXk6IGlubGluZTtcclxufVxyXG4iXX0= */"
 
 /***/ }),
 
@@ -856,7 +859,7 @@ var BoardComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvY29ydmVlL2NvcnZlZS5jb21wb25lbnQuY3NzIn0= */"
 
 /***/ }),
 
@@ -867,7 +870,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- element for representing the location of the post to be scrolled -->\n<span style=\"display: hidden;\" #postLocation></span>\n\n<!-- section for a post -->\n<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\n    <div class=\"mdl-card__supporting-text\">\n      <h4 style=\"display: inline;\">{{content?.title}}</h4>\n\n      <span style=\"float: right; text-align: right; font-size: 80%;\">\n        <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(content?.userid)\">{{content?.nickname}}</span><br/>{{content?.writedate}}\n      </span>\n      <hr/>\n      <div class=\"posting content\" [innerHtml]=\"content?.content | safe\"></div>\n      <br/><br/>\n      <div style=\"text-align: center;\">\n        <button mat-raised-button color=\"primary\" (click)=\"onRecommend()\">\n          추천 {{content?.recommend?.length}}\n        </button>\n      </div>\n      <br/><hr/>\n\n      <!-- ############### table for comments ############### -->\n      <table style=\"width: 96%; margin: auto;\">\n        <tbody *ngFor=\"let comment of content?.comment\">\n          <tr>\n            <td style=\"width: 15%;\">\n              <img [attr.src]=\"'images/profile/' + comment.userid\" class=\"profileImage\" />\n            </td>\n            <td>\n              <span style=\"font-size: 80%;\">\n                <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(comment?.userid)\">\n                  {{comment?.nickname}}</span> &nbsp;|&nbsp; {{comment?.writedate}}\n                <span *ngIf=\"comment?.userid == user?.userid || user?.userid == 'admin'\"> &nbsp;|&nbsp; \n                  <span style=\"cursor: pointer;\" (click)=\"onRemoveComment(comment.num)\">삭제</span>\n                </span>\n              </span>\n              <pre class=\"content writerText\" *ngIf=\"comment?.userid == content?.userid\" [innerHTML]=\"comment?.comment\"></pre>\n              <pre class=\"content\" *ngIf=\"comment?.userid != content?.userid\" [innerHTML]=\"comment?.comment\"></pre>\n              <br/>\n            </td>\n          </tr>\n        </tbody>\n      </table><br/>\n      <!-- ############### table for comments ############### -->\n\n      <!-- ############### writing area ############### -->\n      <form *ngIf=\"authService.loggedIn()\" (submit)=\"onWriteComment()\"><hr *ngIf=\"content?.comment?.length > 0\" />\n        <table style=\"width: 96%; margin: auto;\">\n          <tr style=\"text-align: center;\">\n\n            <td rowspan=\"2\" style=\"width: 85%;\">\n              <mat-form-field appearance=\"outline\" style=\"width: 100%; height: 100%;\">\n                <mat-label>댓글을 작성해주세요.</mat-label>\n                <textarea matInput placeholder=\"\" rows=\"3\" name=\"cmtWrite\"\n                [formControl]=\"cmtWrite\" [matAutocomplete]=\"auto\"></textarea>\n                <mat-autocomplete #auto>\n                  <!-- <mat-option *ngFor=\"let ct of filteredOptions | async\" [value]=\"'TO::' + ct?.nickname\" (onclick)=\"setCmtTo(ct)\">\n                    {{ct.nickname}} [{{ct.userid}}]\n                  </mat-option> -->\n                </mat-autocomplete>\n              </mat-form-field>\n            </td>\n\n            <td style=\"text-align: center; padding-bottom: 3%;\">\n              <button mat-raised-button type=\"submit\" style=\"width: 60%;\">작성</button>\n            </td>\n\n          </tr>\n        </table>\n      </form>\n      <!-- ############### writing area ############### -->\n\n    </div>\n  </div>\n  <button mat-icon-button [matMenuTriggerFor]=\"aboutPost\">\n    <mat-icon>more_vert</mat-icon>\n  </button>\n  <mat-menu #aboutPost>\n    <button mat-menu-item *ngIf=\"content?.userid == user?.userid || user?.userid == 'admin'\" (click)=\"onRemovePost()\">\n      <span>삭제</span>\n    </button>\n  </mat-menu>\n</section>\n\n<!-- section for a board -->\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\n    <div class=\"mdl-card__supporting-text\">\n      <h4>임시베스트저장소</h4>\n      <hr/>\n      \n      <!-- for large display -->\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--large-screen-only\" style=\"margin: auto; width: 98%;\">\n        <thead>\n          <tr>\n            <th class=\"mdl-data-table__cell--non-numeric\">날짜</th>\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\n            <th>글쓴이</th>\n            <th>조회수</th>\n            <th>추천</th>\n          </tr>\n        </thead>\n        <tbody>\n          <tr *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\n            <td class=\"mdl-data-table__cell--non-numeric\">{{extractDate(val.writedate)}}</td>\n            <td class=\"mdl-data-table__cell--non-numeric\">\n              <a [routerLink]=\"['/board/'+type+'/'+val?._id]\"\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\n                (click)=\"scrollToPost(postLocation)\">{{val.title}}</a>&nbsp;\n              <span *ngIf=\"val.comment.length > 0\" style=\"font-size: 85%; color: grey;\">[{{val.comment.length}}]</span>\n            </td>\n            <td>\n              <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(val?.userid)\">{{val.nickname}}</span>\n            </td>\n            <td>{{val.hit}}</td>\n            <td>{{val.recommend.length}}</td>\n          </tr>\n        </tbody>\n      </table>\n\n      <!-- for small display -->\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--small-screen-only\" style=\"margin: auto; width: 98%;\">\n        <tbody>\n          <tr *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\n            <td class=\"mdl-data-table__cell--non-numeric\"\n              [routerLink]=\"['/board/'+type+'/'+val?._id]\" (click)=\"scrollToPost(postLocation)\">\n              <div>\n                {{val.title}}\n                <span *ngIf=\"val.comment.length > 0\" style=\"color: grey;\">[{{val.comment.length}}]</span>\n              </div>\n              <div style=\"font-size: 85%; margin-top: 1%;\">\n                <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;\n                <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;\n                <span>추천 {{val.recommend.length}}</span>\n              </div>\n            </td>\n            <td>{{extractDate(val.writedate)}}</td>\n          </tr>\n        </tbody>\n      </table><br/>\n\n      <mat-paginator [length]=\"contents?.length\" [pageSize]=\"pagingSize\" (page)=\"paging($event)\"></mat-paginator>\n\n      <div style=\"float: left;\">\n        <mat-form-field style=\"width: 100px;\">\n          <mat-select value=\"title\" (selectionChange)=\"onSearch(searchSelect.value, searchInput.value)\" #searchSelect>\n            <mat-option value=\"title\">제목</mat-option>\n            <mat-option value=\"nickname\">닉네임</mat-option>\n          </mat-select>\n        </mat-form-field>&nbsp;&nbsp;\n        <mat-form-field appearance=\"outline\" style=\"width: 200px;\">\n          <mat-label>검색</mat-label>\n          <input matInput (input)=\"onSearch(searchSelect.value, $event.target.value)\" #searchInput>\n          <mat-icon matSuffix>search</mat-icon>\n        </mat-form-field>\n      </div>\n      <div *ngIf=\"authService.loggedIn()\" style=\"float: right;\">\n        <a mat-raised-button [routerLink]=\"['/cwrite']\">작성</a>\n      </div>\n    </div>\n  </div>\n\n</section>\n\n<section></section>\n"
+module.exports = "<!-- element for representing the location of the post to be scrolled -->\r\n<span style=\"display: hidden;\" #postLocation></span>\r\n\r\n<!-- section for a post -->\r\n<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">{{content?.title}}</h4>\r\n\r\n      <span style=\"float: right; text-align: right; font-size: 80%;\">\r\n        <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(content?.userid)\">{{content?.nickname}}</span><br/>{{content?.writedate}}\r\n      </span>\r\n      <hr/>\r\n\r\n      <div style=\"width: 100%;\" [innerHTML]=\"iframe | safe\"></div>\r\n\r\n      <br/><br/><br/><br/>\r\n      <div class=\"posting content\" [innerHtml]=\"content?.content | safe\"></div>\r\n      <br/><br/><br/><br/>\r\n\r\n      <div style=\"border: 1px solid rgb(155, 155, 155); width: 100%; padding: 10px; display: inline-block;\">\r\n        <p>{{writerIntro}}</p>\r\n        <p *ngIf=\"content?.from\">\r\n          이 게임은 <span style=\"cursor: pointer; font-weight: bold;\" (click)=\"funcService.openInfoWindow(content?.block?.from?.userid)\">{{content.from.nickname}}</span> 님의 <a style=\"font-weight: bold;\" [routerLink]=\"['/game/' + content?.from?.game]\">{{content.from.title}}</a> 으로부터 참조되었습니다.\r\n        </p>\r\n        <p *ngIf=\"content?.block?.coworker?.length > 0\">\r\n          공동제작자 :<span *ngFor=\"let coworker of content?.block?.coworker\" style=\"cursor: pointer;\" (click)=\"funcService.openInfoWindow(coworker?.userid)\"> {{coworker?.nickname}}</span>\r\n        </p>\r\n      </div>\r\n      <br/><br/>\r\n\r\n      <div style=\"text-align: center;\">\r\n        <button mat-raised-button color=\"primary\" (click)=\"onRecommend()\">\r\n          추천 {{content?.recommend?.length}}\r\n        </button>\r\n      </div>\r\n      <br/><hr/>\r\n\r\n      <!-- ############### table for comments ############### -->\r\n      <table style=\"width: 96%; margin: auto;\">\r\n        <tbody>\r\n          <tr *ngFor=\"let comment of content?.comment\">\r\n            <td style=\"width: 15%;\">\r\n              <img [attr.src]=\"'images/profile/' + comment.userid\" class=\"profileImage\" />\r\n            </td>\r\n            <td>\r\n              <span style=\"font-size: 80%;\">\r\n                <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(comment?.userid)\">\r\n                  {{comment?.nickname}}</span> &nbsp;|&nbsp; {{comment?.writedate}}\r\n                <span *ngIf=\"comment?.userid == user?.userid || user?.userid == 'admin'\"> &nbsp;|&nbsp; \r\n                  <span style=\"cursor: pointer;\" (click)=\"onRemoveComment(comment.num)\">삭제</span>\r\n                </span>\r\n              </span>\r\n              <pre class=\"content writerText\" *ngIf=\"comment?.userid == content?.userid\" [innerHTML]=\"comment?.comment\"></pre>\r\n              <pre class=\"content\" *ngIf=\"comment?.userid != content?.userid\" [innerHTML]=\"comment?.comment\"></pre>\r\n              <br/>\r\n            </td>\r\n            <td *ngIf=\"authService.loggedIn() && content?.userid != user?.userid && content?.userid != comment?.userid && sendable(comment?.userid)\" style=\"width: 20%;\">\r\n              <button mat-button color=\"primary\" (click)=\"sendRequest(comment?.userid)\" style=\"float: right;\">작업요청 보내기</button>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n      <!-- ############### table for comments ############### -->\r\n\r\n      <!-- ############### writing area ############### -->\r\n      <form *ngIf=\"authService.loggedIn()\" (submit)=\"onWriteComment()\"><hr *ngIf=\"content?.comment?.length > 0\" />\r\n        <table style=\"width: 96%; margin: auto;\">\r\n          <tr style=\"text-align: center;\">\r\n\r\n            <td rowspan=\"2\" style=\"width: 85%;\">\r\n              <mat-form-field appearance=\"outline\" style=\"width: 100%; height: 100%;\">\r\n                <mat-label>댓글을 작성해주세요.</mat-label>\r\n                <textarea matInput placeholder=\"\" rows=\"3\" name=\"cmtWrite\"\r\n                [formControl]=\"cmtWrite\" [matAutocomplete]=\"auto\"></textarea>\r\n                <mat-autocomplete #auto>\r\n                  <!-- <mat-option *ngFor=\"let ct of filteredOptions | async\" [value]=\"'TO::' + ct?.nickname\" (onclick)=\"setCmtTo(ct)\">\r\n                    {{ct.nickname}} [{{ct.userid}}]\r\n                  </mat-option> -->\r\n                </mat-autocomplete>\r\n              </mat-form-field>\r\n            </td>\r\n\r\n            <td style=\"text-align: center; padding-bottom: 3%;\">\r\n              <button mat-raised-button type=\"submit\" style=\"width: 60%;\">작성</button>\r\n            </td>\r\n\r\n          </tr>\r\n        </table>\r\n      </form>\r\n      <!-- ############### writing area ############### -->\r\n\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"aboutPost\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #aboutPost>\r\n    <button mat-menu-item *ngIf=\"content?.userid == user?.userid || user?.userid == 'admin'\" (click)=\"onRemovePost()\">\r\n      <span>삭제</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<!-- section for a board -->\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>블록게시판</h4>\r\n      <hr/>\r\n      \r\n      <!-- for large display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--large-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">날짜</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\r\n            <th>글쓴이</th>\r\n            <th>조회수</th>\r\n            <th>추천</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{extractDate(val.writedate)}}</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/corvee/' + val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\r\n                (click)=\"scrollToPost(postLocation)\">{{val.title}}</a>&nbsp;\r\n              <span *ngIf=\"val.comment.length > 0\" style=\"font-size: 85%; color: grey;\">[{{val.comment.length}}]</span>\r\n            </td>\r\n            <td>\r\n              <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(val?.userid)\">{{val.nickname}}</span>\r\n            </td>\r\n            <td>{{val.hit}}</td>\r\n            <td>{{val.recommend.length}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <!-- for small display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--small-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <tbody>\r\n          <tr *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n            <td class=\"mdl-data-table__cell--non-numeric\"\r\n              [routerLink]=\"['/corvee/' + val?._id]\" (click)=\"scrollToPost(postLocation)\">\r\n              <div>\r\n                {{val.title}}\r\n                <span *ngIf=\"val.comment.length > 0\" style=\"color: grey;\">[{{val.comment.length}}]</span>\r\n              </div>\r\n              <div style=\"font-size: 85%; margin-top: 1%;\">\r\n                <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>추천 {{val.recommend.length}}</span>\r\n              </div>\r\n            </td>\r\n            <td>{{extractDate(val.writedate)}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"contents?.length\" [pageSize]=\"pagingSize\" (page)=\"paging($event)\"></mat-paginator>\r\n\r\n      <div style=\"float: left;\">\r\n        <mat-form-field style=\"width: 100px;\">\r\n          <mat-select value=\"title\" (selectionChange)=\"onSearch(searchSelect.value, searchInput.value)\" #searchSelect>\r\n            <mat-option value=\"title\">제목</mat-option>\r\n            <mat-option value=\"nickname\">닉네임</mat-option>\r\n          </mat-select>\r\n        </mat-form-field>&nbsp;&nbsp;\r\n        <mat-form-field appearance=\"outline\" style=\"width: 200px;\">\r\n          <mat-label>검색</mat-label>\r\n          <input matInput (input)=\"onSearch(searchSelect.value, $event.target.value)\" #searchInput>\r\n          <mat-icon matSuffix>search</mat-icon>\r\n        </mat-form-field>\r\n      </div>\r\n      <div *ngIf=\"authService.loggedIn()\" style=\"float: right;\">\r\n        <a mat-raised-button [routerLink]=\"['/cwrite']\">작성</a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -962,7 +965,13 @@ var CorveeComponent = /** @class */ (function () {
                         return false;
                     }
                     _this.content = result.post;
-                    _this.funcService.setTitle(_this.content.title + ' :: 아직안정함');
+                    _this.writerIntro = result.introduction;
+                    _this.iframe = '<iframe src="'
+                        + _this.funcService.ServerAddress
+                        + '/corvees/frame?_id='
+                        + _this.content._id
+                        + '" style="width: 100%; height: 500px;">loading...</iframe>';
+                    _this.funcService.setTitle(_this.content.title + ' :: 블록게시판');
                     if (_this.authService.loggedIn()) {
                         _this.authService.getProfile().subscribe(function (profile) {
                             _this.user = profile.user;
@@ -971,7 +980,7 @@ var CorveeComponent = /** @class */ (function () {
                 });
             }
             else {
-                _this.funcService.setTitle('아직안정함');
+                _this.funcService.setTitle('블록게시판');
                 if (_this.authService.loggedIn()) {
                     _this.authService.getProfile().subscribe(function (profile) {
                         _this.user = profile.user;
@@ -1086,6 +1095,53 @@ var CorveeComponent = /** @class */ (function () {
             });
         }
     };
+    CorveeComponent.prototype.sendable = function (userid) {
+        if (this.content.coworker) {
+            for (var _i = 0, _a = this.content.coworker; _i < _a.length; _i++) {
+                var coworker = _a[_i];
+                if (coworker.userid == userid) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    };
+    CorveeComponent.prototype.sendRequest = function (userid) {
+        var _this = this;
+        if (!confirm('요청을 보내시겠습니까?'))
+            return;
+        if (this.content.coworker) {
+            for (var _i = 0, _a = this.content.coworker; _i < _a.length; _i++) {
+                var coworker = _a[_i];
+                if (coworker.userid == userid) {
+                    this.flashMessage.showFlashMessage({
+                        messages: ['이미 등록된 작업자입니다.'],
+                        type: 'danger',
+                        timeout: 3000
+                    });
+                }
+            }
+        }
+        this.authService.getIdFromUserid(userid).subscribe(function (data) {
+            _this.authService.sendRequest(data._id, _this.content.title, _this.content._id).subscribe(function (result) {
+                if (result.success) {
+                    _this.flashMessage.showFlashMessage({
+                        messages: ['요청되었습니다.'],
+                        type: 'success',
+                        timeout: 2000
+                    });
+                    _this.router.navigate(['/corvee/' + _this.num]);
+                }
+                else {
+                    _this.flashMessage.showFlashMessage({
+                        messages: [result.msg],
+                        type: 'danger',
+                        timeout: 3000
+                    });
+                }
+            });
+        });
+    };
     CorveeComponent.prototype.onSearch = function (category, text) {
         var _this = this;
         if (text == '') {
@@ -1131,7 +1187,7 @@ var CorveeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".temp-tree {\r\n    width: 100%;\r\n    padding: 10px;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9jd3JpdGUvY3dyaXRlLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxXQUFXO0lBQ1gsYUFBYTtBQUNqQiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvY3dyaXRlL2N3cml0ZS5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnRlbXAtdHJlZSB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIHBhZGRpbmc6IDEwcHg7XHJcbn0iXX0= */"
 
 /***/ }),
 
@@ -1142,7 +1198,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\n    <div class=\"mdl-card__supporting-text\">\n      \n      <mat-tree [dataSource]=\"dataSource\" [treeControl]=\"treeControl\">\n        <mat-tree-node *matTreeNodeDef=\"let node\" matTreeNodePadding>\n          <button mat-icon-button disabled></button>\n          {{node.name}}\n        </mat-tree-node>\n        <mat-tree-node *matTreeNodeDef=\"let node; when: hasChild\" matTreeNodePadding>\n          <button mat-icon-button matTreeNodeToggle [attr.aria-label]=\"'toggle ' + node.name\">\n            <mat-icon class=\"mat-icon-rtl-mirror\">\n              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}\n            </mat-icon>\n          </button>\n          {{node.name}}\n        </mat-tree-node>\n      </mat-tree>\n\n    </div>\n  </div>\n</section>\n\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\n    <div class=\"mdl-card__supporting-text\">\n      <h4>글쓰기</h4><hr/>\n      <div style=\"width: 98%; margin: auto;\">\n        <form (submit)=\"onWritePost()\">\n          <mat-form-field style=\"width: 100%;\">\n            <input matInput placeholder=\"제목\" type=\"text\" name=\"title\" [(ngModel)]=\"title\">\n          </mat-form-field>\n          <textarea [froalaEditor]=\"options\" [(ngModel)]=\"content\" name=\"content\"></textarea>\n          <br/>\n          <button mat-raised-button type=\"submit\" style=\"float: right;\">작성</button>\n        </form><br/>\n      </div>\n    </div>\n  </div>\n</section>\n"
+module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      \r\n      <div class=\"temp-tree\" *ngFor=\"let temp of temps\">\r\n        <button mat-icon-button (click)=\"open(temp)\">\r\n          <mat-icon *ngIf=\"!temp?.opened\">keyboard_arrow_right</mat-icon>\r\n          <mat-icon *ngIf=\"temp?.opened\">keyboard_arrow_down</mat-icon>\r\n        </button>\r\n        {{temp?.title}}\r\n        <span style=\"float: right;\">{{temp?.savedate}}</span>\r\n        <div *ngIf=\"temp?.opened\" style=\"padding: 20px;\">\r\n          <mat-accordion>\r\n            <mat-expansion-panel style=\"width: 95%; margin: auto;\" *ngFor=\"let block of temp?.history\">\r\n              <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  {{block?.savedate}}\r\n                </mat-panel-title>\r\n                <mat-panel-description>\r\n                  {{block?.moves}}개의 행동 추가됨\r\n                </mat-panel-description>\r\n              </mat-expansion-panel-header>\r\n    \r\n              <p>\r\n                <b style=\"cursor: pointer;\" (click)=\"funcService.openInfoWindow(coworkerMap?.get(block?.saveby)?.userid)\">{{coworkerMap?.get(block?.saveby)?.nickname}}</b> 님에 의해 수정됨.\r\n              </p>\r\n              <button mat-button (click)=\"viewBlock(temp?._id, block?.num)\">블록 보기</button>\r\n              <button mat-button color=\"primary\" (click)=\"selectBlock(temp?._id, block?.num)\">선택</button>\r\n            </mat-expansion-panel>\r\n            \r\n          </mat-accordion>\r\n        </div>\r\n      </div>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>글쓰기</h4><hr/>\r\n      <div style=\"width: 98%; margin: auto;\">\r\n        <form (submit)=\"onWritePost()\">\r\n          <mat-form-field style=\"width: 100%;\">\r\n            <input matInput placeholder=\"제목\" type=\"text\" name=\"title\" [(ngModel)]=\"title\">\r\n          </mat-form-field>\r\n          <textarea [froalaEditor]=\"options\" [(ngModel)]=\"content\" name=\"content\"></textarea>\r\n          <br/>\r\n          <button mat-raised-button type=\"submit\" style=\"float: right;\">작성</button>\r\n        </form><br/>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</section>\r\n"
 
 /***/ }),
 
@@ -1158,12 +1214,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CwriteComponent", function() { return CwriteComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _angular_cdk_tree__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/cdk/tree */ "./node_modules/@angular/cdk/esm5/tree.es5.js");
-/* harmony import */ var _angular_material_tree__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material/tree */ "./node_modules/@angular/material/esm5/tree.es5.js");
-/* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
-/* harmony import */ var _services_corvee_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/corvee.service */ "./src/app/services/corvee.service.ts");
-/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ng-flash-messages */ "./node_modules/ng-flash-messages/ng-flash-messages.umd.js");
-/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(ng_flash_messages__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
+/* harmony import */ var _services_corvee_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/corvee.service */ "./src/app/services/corvee.service.ts");
+/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ng-flash-messages */ "./node_modules/ng-flash-messages/ng-flash-messages.umd.js");
+/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(ng_flash_messages__WEBPACK_IMPORTED_MODULE_4__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1173,8 +1227,6 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-
-
 
 
 
@@ -1201,18 +1253,8 @@ var CwriteComponent = /** @class */ (function () {
                 'insertImage', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript'
             ]
         };
-        this.transformer = function (node, level) {
-            return {
-                expandable: !!node.children && node.children.length > 0,
-                name: node.name,
-                level: level
-            };
-        };
-        this.treeControl = new _angular_cdk_tree__WEBPACK_IMPORTED_MODULE_2__["FlatTreeControl"](function (node) { return node.level; }, function (node) { return node.expandable; });
-        this.treeFlattener = new _angular_material_tree__WEBPACK_IMPORTED_MODULE_3__["MatTreeFlattener"](this.transformer, function (node) { return node.level; }, function (node) { return node.expandable; }, function (node) { return node.children; });
-        this.dataSource = new _angular_material_tree__WEBPACK_IMPORTED_MODULE_3__["MatTreeFlatDataSource"](this.treeControl, this.treeFlattener);
-        this.hasChild = function (_, node) { return node.expandable; };
-        this.funcService.setTitle('노역장 작성');
+        this.selectedItem = undefined;
+        this.funcService.setTitle('블록게시판 작성');
     }
     CwriteComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -1226,21 +1268,50 @@ var CwriteComponent = /** @class */ (function () {
                 _this.router.navigate([_this.funcService.getPreviousUrl()]);
             }
             else {
-                var tree = [];
-                for (var _i = 0, _a = data.temps; _i < _a.length; _i++) {
+                _this.temps = data.temps;
+                _this.user = data.user;
+                _this.coworkerMap = new Map();
+                _this.coworkerMap.set(_this.user._id, { _id: _this.user._id, userid: _this.user.userid, nickname: _this.user.nickname });
+                for (var _i = 0, _a = _this.temps; _i < _a.length; _i++) {
                     var temp = _a[_i];
-                    var branch = {
-                        name: temp.title,
-                        children: []
-                    };
-                    for (var _b = 0, _c = temp.block; _b < _c.length; _b++) {
-                        var block = _c[_b];
-                        branch.children.push({ name: block.savedate });
+                    temp.opened = false;
+                    temp.history = [];
+                    for (var i = 0; i < temp.block.length; i++) {
+                        var block = temp.block[i];
+                        if (block.saveby) {
+                            block.num = i + 1;
+                            temp.history.push(block);
+                        }
                     }
-                    tree.push(branch);
+                    temp.history.reverse();
                 }
-                _this.dataSource.data = tree;
             }
+        });
+    };
+    CwriteComponent.prototype.open = function (temp) {
+        var _this = this;
+        this.corveeService.takeTempUsers(temp.coworker).subscribe(function (data) {
+            for (var _i = 0, _a = data.users; _i < _a.length; _i++) {
+                var user = _a[_i];
+                if (!_this.coworkerMap.get(user._id)) {
+                    _this.coworkerMap.set(user._id, user);
+                }
+            }
+            temp.opened = !temp.opened;
+        });
+    };
+    CwriteComponent.prototype.viewBlock = function (num, i) {
+        this.funcService.popUp(this.funcService.ServerAddress + '/modals/viewTempBlock?game=' + num + '&recent=' + i, 1000, 600);
+    };
+    CwriteComponent.prototype.selectBlock = function (num, i) {
+        this.selectedItem = {
+            _id: num,
+            idx: i
+        };
+        this.flashMessage.showFlashMessage({
+            messages: ['선택되었습니다.'],
+            type: 'success',
+            timeout: 2000
         });
     };
     CwriteComponent.prototype.onWritePost = function () {
@@ -1261,10 +1332,19 @@ var CwriteComponent = /** @class */ (function () {
             });
             return false;
         }
+        else if (!this.selectedItem) {
+            this.flashMessage.showFlashMessage({
+                messages: ['블록이 선택되지 않았습니다.'],
+                type: 'danger',
+                timeout: 3000
+            });
+            return false;
+        }
         else {
             var formData = {
                 title: this.title,
-                content: this.content
+                content: this.content,
+                item: this.selectedItem
             };
             this.corveeService.writePost(formData).subscribe(function (data) {
                 if (data.success) {
@@ -1286,10 +1366,10 @@ var CwriteComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./cwrite.component.html */ "./src/app/components/cwrite/cwrite.component.html"),
             styles: [__webpack_require__(/*! ./cwrite.component.css */ "./src/app/components/cwrite/cwrite.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_4__["FuncService"],
-            ng_flash_messages__WEBPACK_IMPORTED_MODULE_6__["NgFlashMessageService"],
+        __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_2__["FuncService"],
+            ng_flash_messages__WEBPACK_IMPORTED_MODULE_4__["NgFlashMessageService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
-            _services_corvee_service__WEBPACK_IMPORTED_MODULE_5__["CorveeService"]])
+            _services_corvee_service__WEBPACK_IMPORTED_MODULE_3__["CorveeService"]])
     ], CwriteComponent);
     return CwriteComponent;
 }());
@@ -1305,7 +1385,7 @@ var CwriteComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".recommends {\r\n    margin: auto;\r\n    text-align: center;\r\n}\r\n\r\n.recommends td {\r\n    padding: 5px;\r\n}\r\n"
+module.exports = ".recommends {\r\n    margin: auto;\r\n    text-align: center;\r\n}\r\n\r\n.recommends td {\r\n    padding: 5px;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9nYW1lL2dhbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFlBQVk7SUFDWixrQkFBa0I7QUFDdEI7O0FBRUE7SUFDSSxZQUFZO0FBQ2hCIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9nYW1lL2dhbWUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5yZWNvbW1lbmRzIHtcclxuICAgIG1hcmdpbjogYXV0bztcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxufVxyXG5cclxuLnJlY29tbWVuZHMgdGQge1xyXG4gICAgcGFkZGluZzogNXB4O1xyXG59XHJcbiJdfQ== */"
 
 /***/ }),
 
@@ -1623,7 +1703,7 @@ var GameComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/* .demo-card-wide .mdl-card {\r\n    width: 512px;\r\n} */\r\n.demo-card-wide > .mdl-card__title {\r\n    color: #fff;\r\n    height: 176px;\r\n    background: url('welcome_card.jpg') center / cover;\r\n}\r\n.demo-card-wide > .mdl-card__menu {\r\n    color: #fff;\r\n}\r\n"
+module.exports = "/* .demo-card-wide .mdl-card {\r\n    width: 512px;\r\n} */\r\n.demo-card-wide > .mdl-card__title {\r\n    color: #fff;\r\n    height: 176px;\r\n    background: url('welcome_card.jpg') center / cover;\r\n}\r\n.demo-card-wide > .mdl-card__menu {\r\n    color: #fff;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9ob21lL2hvbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTs7R0FFRztBQUNIO0lBQ0ksV0FBVztJQUNYLGFBQWE7SUFDYixrREFBb0Q7QUFDeEQ7QUFDQTtJQUNJLFdBQVc7QUFDZiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvaG9tZS9ob21lLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvKiAuZGVtby1jYXJkLXdpZGUgLm1kbC1jYXJkIHtcclxuICAgIHdpZHRoOiA1MTJweDtcclxufSAqL1xyXG4uZGVtby1jYXJkLXdpZGUgPiAubWRsLWNhcmRfX3RpdGxlIHtcclxuICAgIGNvbG9yOiAjZmZmO1xyXG4gICAgaGVpZ2h0OiAxNzZweDtcclxuICAgIGJhY2tncm91bmQ6IHVybCgnLi93ZWxjb21lX2NhcmQuanBnJykgY2VudGVyIC8gY292ZXI7XHJcbn1cclxuLmRlbW8tY2FyZC13aWRlID4gLm1kbC1jYXJkX19tZW51IHtcclxuICAgIGNvbG9yOiAjZmZmO1xyXG59XHJcbiJdfQ== */"
 
 /***/ }),
 
@@ -1702,7 +1782,7 @@ var HomeComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbG9naW4vbG9naW4uY29tcG9uZW50LmNzcyJ9 */"
 
 /***/ }),
 
@@ -1816,7 +1896,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbW9kaWZ5L21vZGlmeS5jb21wb25lbnQuY3NzIn0= */"
 
 /***/ }),
 
@@ -1960,7 +2040,7 @@ var ModifyComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvbm8tcGFnZS9uby1wYWdlLmNvbXBvbmVudC5jc3MifQ== */"
 
 /***/ }),
 
@@ -1971,7 +2051,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\n    <div class=\"mdl-card__supporting-text\">\n      <h4 style=\"display: inline;\">404 ERROR</h4>\n\n      <hr/>\n      <div class=\"posting\">\n        <img src=\"images/404.jpg\" style=\"width: 100%;\"><br/><br/>\n        페이지가 존재하지 않습니다.<br/><br/>\n        <a mat-raised-button color=\"primary\" [routerLink]=\"[this.funcService.getPreviousUrl()]\">이전 페이지로 돌아가기</a><br/><br/>\n      </div>\n      <br/><br/>\n\n    </div>\n  </div>\n</section>\n\n<section></section>\n"
+module.exports = "<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">404 ERROR</h4>\r\n\r\n      <hr/>\r\n      <div class=\"posting\">\r\n        <img src=\"images/404.jpg\" style=\"width: 100%;\"><br/><br/>\r\n        페이지가 존재하지 않습니다.<br/><br/>\r\n        <a mat-raised-button color=\"primary\" [routerLink]=\"[this.funcService.getPreviousUrl()]\">이전 페이지로 돌아가기</a><br/><br/>\r\n      </div>\r\n      <br/><br/>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -2027,7 +2107,7 @@ var NoPageComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcHJvZmlsZS9wcm9maWxlLmNvbXBvbmVudC5jc3MifQ== */"
 
 /***/ }),
 
@@ -2221,7 +2301,7 @@ var ProfileComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcmVnaXN0ZXIvcmVnaXN0ZXIuY29tcG9uZW50LmNzcyJ9 */"
 
 /***/ }),
 
@@ -2362,7 +2442,7 @@ var RegisterComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvc3ViL3N1Yi5jb21wb25lbnQuY3NzIn0= */"
 
 /***/ }),
 
@@ -2575,7 +2655,7 @@ var SubComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvdGVtcC90ZW1wLmNvbXBvbmVudC5jc3MifQ== */"
 
 /***/ }),
 
@@ -2781,7 +2861,7 @@ var TempComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvdGVzdC90ZXN0LmNvbXBvbmVudC5jc3MifQ== */"
 
 /***/ }),
 
@@ -2792,7 +2872,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n    <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n      <div class=\"mdl-card__supporting-text\">\r\n        <h4>HELLO</h4>\r\n        <hr/>\r\n        \r\n        <mat-accordion>\r\n          <mat-expansion-panel style=\"width: 95%; margin: auto;\" *ngFor=\"let block of temp\">\r\n            <mat-expansion-panel-header>\r\n              <mat-panel-title>\r\n                SAVE-DATE\r\n              </mat-panel-title>\r\n            </mat-expansion-panel-header>\r\n  \r\n            <p><b>ASDF</b> 님에 의해 수정됨.</p>\r\n            <button mat-button (click)=\"viewBlock(i)\">블록 보기</button>\r\n            <button mat-button color=\"primary\" (click)=\"getBack(i)\">되돌리기</button>\r\n  \r\n          </mat-expansion-panel>\r\n          \r\n        </mat-accordion>\r\n  \r\n      </div>\r\n    </div>\r\n  </section>\r\n  \r\n  <section></section>\r\n  "
+module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      \r\n      <div style=\"width: 100%; padding: 10px;\">\r\n        <button mat-icon-button (click)=\"hirogaru()\">\r\n          <mat-icon *ngIf=\"!hirogatteru\">keyboard_arrow_right</mat-icon>\r\n          <mat-icon *ngIf=\"hirogatteru\">keyboard_arrow_down</mat-icon>\r\n        </button>\r\n        Fruit\r\n        <div *ngIf=\"hirogatteru\" style=\"padding: 20px;\">\r\n          <mat-accordion>\r\n            <mat-expansion-panel style=\"width: 95%; margin: auto;\" *ngFor=\"let block of temp\">\r\n              <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  SAVE-DATE\r\n                </mat-panel-title>\r\n              </mat-expansion-panel-header>\r\n    \r\n              <p><b>ASDF</b> 님에 의해 수정됨.</p>\r\n              <button mat-button>블록 보기</button>\r\n              <button mat-button color=\"primary\">되돌리기</button>\r\n    \r\n            </mat-expansion-panel>\r\n            \r\n          </mat-accordion>\r\n        </div>\r\n      </div>\r\n      <div style=\"width: 100%; padding: 10px;\">\r\n        <button mat-icon-button (click)=\"hirogaru()\">\r\n          <mat-icon *ngIf=\"!hirogatteru\">keyboard_arrow_right</mat-icon>\r\n          <mat-icon *ngIf=\"hirogatteru\">keyboard_arrow_down</mat-icon>\r\n        </button>\r\n        Hello\r\n        <div *ngIf=\"hirogatteru\" style=\"padding: 20px;\">\r\n          <mat-accordion>\r\n            <mat-expansion-panel style=\"width: 95%; margin: auto;\" *ngFor=\"let block of temp\">\r\n              <mat-expansion-panel-header>\r\n                <mat-panel-title>\r\n                  SAVE-DATE\r\n                </mat-panel-title>\r\n              </mat-expansion-panel-header>\r\n    \r\n              <p><b>ASDF</b> 님에 의해 수정됨.</p>\r\n              <button mat-button>블록 보기</button>\r\n              <button mat-button color=\"primary\">되돌리기</button>\r\n    \r\n            </mat-expansion-panel>\r\n            \r\n          </mat-accordion>\r\n        </div>\r\n      </div>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n    <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n      <div class=\"mdl-card__supporting-text\">\r\n        <h4>HELLO</h4>\r\n        <hr/>\r\n        \r\n        <mat-accordion>\r\n          <mat-expansion-panel style=\"width: 95%; margin: auto;\" *ngFor=\"let block of temp\">\r\n            <mat-expansion-panel-header>\r\n              <mat-panel-title>\r\n                SAVE-DATE\r\n              </mat-panel-title>\r\n            </mat-expansion-panel-header>\r\n  \r\n            <p><b>ASDF</b> 님에 의해 수정됨.</p>\r\n            <button mat-button (click)=\"viewBlock(i)\">블록 보기</button>\r\n            <button mat-button color=\"primary\" (click)=\"getBack(i)\">되돌리기</button>\r\n  \r\n          </mat-expansion-panel>\r\n          \r\n        </mat-accordion>\r\n  \r\n      </div>\r\n    </div>\r\n  </section>\r\n  \r\n  <section></section>\r\n  "
 
 /***/ }),
 
@@ -2833,11 +2913,15 @@ var TestComponent = /** @class */ (function () {
         this.router = router;
         this.flashMessage = flashMessage;
         this.temp = [
-            1, 2, 3, 4, 4, 5, 6, 7, 45, 6, 4, 4
+            1, 2, 3, 4, 6
         ];
+        this.hirogatteru = false;
         this.funcService.setTitle('TEST!!!!');
     }
     TestComponent.prototype.ngOnInit = function () {
+    };
+    TestComponent.prototype.hirogaru = function () {
+        this.hirogatteru = !this.hirogatteru;
     };
     TestComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -2864,7 +2948,7 @@ var TestComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".previewButton {\r\n    float: right;\r\n}"
+module.exports = ".previewButton {\r\n    float: right;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy90b29sL3Rvb2wuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFlBQVk7QUFDaEIiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3Rvb2wvdG9vbC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnByZXZpZXdCdXR0b24ge1xyXG4gICAgZmxvYXQ6IHJpZ2h0O1xyXG59Il19 */"
 
 /***/ }),
 
@@ -2992,7 +3076,7 @@ var ToolComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvd3JpdGUvd3JpdGUuY29tcG9uZW50LmNzcyJ9 */"
 
 /***/ }),
 
@@ -3189,6 +3273,50 @@ var AuthGuard = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/guards/deactivate.guard.ts":
+/*!********************************************!*\
+  !*** ./src/app/guards/deactivate.guard.ts ***!
+  \********************************************/
+/*! exports provided: DeactivateGuard */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeactivateGuard", function() { return DeactivateGuard; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+
+var DeactivateGuard = /** @class */ (function () {
+    function DeactivateGuard() {
+    }
+    DeactivateGuard.prototype.canDeactivate = function (component) {
+        if (!component.canDeactivate()) {
+            if (confirm('나가시겠습니까?')) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        return true;
+    };
+    DeactivateGuard = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        })
+    ], DeactivateGuard);
+    return DeactivateGuard;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/auth.service.ts":
 /*!******************************************!*\
   !*** ./src/app/services/auth.service.ts ***!
@@ -3305,6 +3433,14 @@ var AuthService = /** @class */ (function () {
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
         return this.http.post(this.funcService.ServerAddress + '/users/findUserByIdOrNickname', { text: text, tempId: tempId }, { headers: headers })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
+    };
+    AuthService.prototype.getIdFromUserid = function (userid) {
+        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(this.funcService.ServerAddress + '/users/getIdFromUserid', { userid: userid }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     AuthService.prototype.getCode = function (userid) {
@@ -3536,6 +3672,14 @@ var CorveeService = /** @class */ (function () {
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
         return this.http.post(this.funcService.ServerAddress + '/corvees/takeMyTemps', {}, { headers: headers })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
+    };
+    CorveeService.prototype.takeTempUsers = function (coworkers) {
+        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
+        this.loadToken();
+        headers.append('Authorization', this.authToken);
+        headers.append('Content-Type', 'application/json');
+        return this.http.post(this.funcService.ServerAddress + '/corvees/takeTempUsers', { coworkers: coworkers }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     CorveeService.prototype.writePost = function (post) {
@@ -4222,7 +4366,7 @@ var SafeHtml = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\PJH\1494054\RogueWrite\angular-src\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\Hoon\PJH\others\web\rwrite\angular-src\src\main.ts */"./src/main.ts");
 
 
 /***/ })

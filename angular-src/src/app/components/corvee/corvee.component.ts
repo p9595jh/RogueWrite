@@ -26,6 +26,8 @@ export class CorveeComponent implements OnInit, OnDestroy {
   cmtWrite = new FormControl();
 
   user: any;
+  writerIntro: string;
+  iframe: string;
   
   pagingSize = 25;
   pagingFrom: Number = 0;
@@ -84,7 +86,13 @@ export class CorveeComponent implements OnInit, OnDestroy {
             return false;
           }
           this.content = result.post;
-          this.funcService.setTitle(this.content.title + ' :: 아직안정함');
+          this.writerIntro = result.introduction;
+          this.iframe = '<iframe src="'
+            + this.funcService.ServerAddress
+            + '/corvees/frame?_id='
+            + this.content._id
+            + '" style="width: 100%; height: 500px;">loading...</iframe>';
+          this.funcService.setTitle(this.content.title + ' :: 블록게시판');
           if ( this.authService.loggedIn() ) {
             this.authService.getProfile().subscribe(profile => {
               this.user = profile.user;
@@ -92,7 +100,7 @@ export class CorveeComponent implements OnInit, OnDestroy {
           }
         });
       } else {
-        this.funcService.setTitle('아직안정함');
+        this.funcService.setTitle('블록게시판');
         if ( this.authService.loggedIn() ) {
           this.authService.getProfile().subscribe(profile => {
             this.user = profile.user;
@@ -208,6 +216,50 @@ export class CorveeComponent implements OnInit, OnDestroy {
       })
     }
     
+  }
+
+  sendable(userid): boolean {
+    if ( this.content.coworker ) {
+      for (let coworker of this.content.coworker) {
+        if ( coworker.userid == userid ) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  sendRequest(userid) {
+    if ( !confirm('요청을 보내시겠습니까?') ) return;
+    if ( this.content.coworker ) {
+      for (let coworker of this.content.coworker) {
+        if ( coworker.userid == userid ) {
+          this.flashMessage.showFlashMessage({
+            messages: ['이미 등록된 작업자입니다.'],
+            type: 'danger',
+            timeout: 3000
+          });
+        }
+      }
+    }
+    this.authService.getIdFromUserid(userid).subscribe(data => {
+      this.authService.sendRequest(data._id, this.content.title, this.content._id).subscribe(result => {
+        if ( result.success ) {
+          this.flashMessage.showFlashMessage({
+            messages: ['요청되었습니다.'], 
+            type: 'success', 
+            timeout: 2000
+          });
+          this.router.navigate(['/corvee/' + this.num]);
+        } else {
+          this.flashMessage.showFlashMessage({
+            messages: [result.msg],
+            type: 'danger',
+            timeout: 3000
+          });
+        }
+      });
+    });
   }
 
   onSearch(category, text) {

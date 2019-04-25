@@ -173,7 +173,7 @@ Blockly.JavaScript['choice'] = function (block) {
     var value_content = Blockly.JavaScript.valueToCode(block, 'content', Blockly.JavaScript.ORDER_ATOMIC);
     var statements_set_param = Blockly.JavaScript.statementToCode(block, 'set_param');
 
-    var code = '{ "choice_num": ' + removeMinus(value_choice_num) + ', "stage_to": "' + removeMinus(value_stage_to) + ', "content": "' + replaceDoubleQuote(removeSingleQuote(value_content)) + '", "set_param": [ ' + removeComma(statements_set_param);
+    var code = '{ "choice_num": ' + removeMinus(value_choice_num) + ', "stage_to": ' + removeMinus(value_stage_to) + ', "content": "' + replaceDoubleQuote(removeSingleQuote(value_content)) + '", "set_param": [ ' + removeComma(statements_set_param);
     code = code + ' ] }, ';
 
     return code;

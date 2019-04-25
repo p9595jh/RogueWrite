@@ -111,6 +111,15 @@ export class AuthService {
       .pipe(map(res => res.json()));
   }
 
+  getIdFromUserid(userid) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/users/getIdFromUserid', {userid: userid}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
   getCode(userid) {
     let headers = new Headers();
     this.loadToken();

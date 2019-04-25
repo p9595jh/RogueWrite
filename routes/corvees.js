@@ -4,6 +4,7 @@ const router = express.Router();
 const passport = require('passport');
 const Corvee = require('../models/corvee');
 const Temp = require('../models/temp');
+const User = require('../models/user');
 const fs = require('fs-extra');
 const formidable = require('formidable');
 
@@ -45,11 +46,15 @@ router.get('/takeOnePost', function(req, res, next) {
             res.json({
                 fail: true
             });
-        } else if ( loggedIn == 'yes' ) {
-            Corvee.findOneAndUpdate({_id: num}, {hit: post.hit + 1}, function(err, output) {
-                res.json({post: output});
-            });
-        } else res.json({post: post});
+        } else {
+            User.findOne({userid: post.userid}, {introduction: 1}, (err, user) => {
+                if ( loggedIn == 'yes' ) {
+                    Corvee.findOneAndUpdate({_id: num}, {hit: post.hit + 1}, function(err, output) {
+                        res.json({post: output, introduction: user.introduction});
+                    });
+                } else res.json({post: post, introduction: user.introduction});
+            })
+        }
     });
 });
 
@@ -111,29 +116,40 @@ router.post('/images', function(req, res) {
 });
 
 router.post('/write', passport.authenticate('jwt', {session: false}), function(req, res, next) {
-    const newPost = new Corvee({
-        userid: req.user.userid,
-        nickname: req.user.nickname,
-        title: req.body.title,
-        content: req.body.content,
-        hit: 0,
-        recommend: [],
-        comment: [],
-        writedate: getNowDate()
-    });
-    Corvee.addPost(newPost, (err, post) => {
-        if ( err ) {
-            res.json({
-                success: false
+    const item = req.body.item;
+    Temp.findOne({_id: item._id}, {block: 1, from: 1, added: 1, coworker: 1}, (err, temp) => {
+        User.find({_id: {$in: temp.coworker}}, {userid: 1, nickname: 1}, (err, users) => {
+            const block = {
+                xml: temp.block[item.idx - 1].xml,
+                from: temp.from,
+                added: temp.added,
+                coworker: users
+            };
+            const newCorvee = new Corvee({
+                userid: req.user.userid,
+                nickname: req.user.nickname,
+                title: req.body.title,
+                content: req.body.content,
+                block: block,
+                hit: 0,
+                recommend: [],
+                comment: [],
+                writedate: getNowDate()
             });
-        } else {
-            res.json({
-                success: true,
-                num: post._id
+            Corvee.addPost(newCorvee, (err, post) => {
+                if ( err ) {
+                    res.json({
+                        success: false
+                    });
+                } else {
+                    res.json({
+                        success: true,
+                        num: post._id
+                    });
+                }
             });
-        }
+        })
     });
-
 });
 
 router.post('/writeComment', passport.authenticate('jwt', {session: false}), function(req, res, next) {
@@ -244,6 +260,21 @@ router.post('/recommend', passport.authenticate('jwt', {session: false}), functi
         }
     })
     
+});
+
+// for iframe ==============================================
+
+router.get('/frame', (req, res, next) => {
+    Corvee.findOne({_id: req.query._id}, {block: 1}, (err, corvee) => {
+        if ( err || !corvee ) {
+            res.send('error');
+        } else {
+            res.render('block', {
+                title: 'BLOCK',
+                block: corvee.block.xml
+            });
+        }
+    });
 });
 
 // ==============================================

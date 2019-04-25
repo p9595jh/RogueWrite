@@ -8,6 +8,7 @@ const CorveeSchema = mongoose.Schema({
     nickname: String,
     title: String,
     content: String,
+    block: Object,  // {xml: string, from: any, added: array, coworker: array}
     hit: Number,
     writedate: String,
     recommend: Array,

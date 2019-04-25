@@ -265,7 +265,7 @@ Blockly.defineBlocksWithJsonArray([
             },
             {
                 "type": "input_statement",
-                "name": "condition",
+                "name": "set_param",
                 "check": "condition"
             }
         ],

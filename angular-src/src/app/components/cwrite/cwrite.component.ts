@@ -48,7 +48,7 @@ export class CwriteComponent implements OnInit {
     private router: Router,
     private corveeService: CorveeService,
   ) {
-    this.funcService.setTitle('노역장 작성');
+    this.funcService.setTitle('블록게시판 작성');
   }
 
   ngOnInit() {
@@ -97,8 +97,15 @@ export class CwriteComponent implements OnInit {
   }
 
   selectBlock(num, i) {
-    this.selectedItem._id = num;
-    this.selectedItem.idx = i;
+    this.selectedItem = {
+      _id: num,
+      idx: i
+    };
+    this.flashMessage.showFlashMessage({
+      messages: ['선택되었습니다.'], 
+      type: 'success', 
+      timeout: 2000
+    });
   }
 
   onWritePost() {
@@ -126,7 +133,8 @@ export class CwriteComponent implements OnInit {
     } else {
       const formData = {
         title: this.title,
-        content: this.content
+        content: this.content,
+        item: this.selectedItem
       };
       this.corveeService.writePost(formData).subscribe(data => {
         if ( data.success ) {

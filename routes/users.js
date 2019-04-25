@@ -192,6 +192,12 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res
 
 //==================================================>
 
+router.post('/getIdFromUserid', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+  User.findOne({userid: req.body.userid}, {_id: 1}, (err, user) => {
+    res.json({_id: user._id});
+  });
+});
+
 router.post('/sendRequest', passport.authenticate('jwt', {session: false}), function(req, res, next) {
   const request = {
     from: {

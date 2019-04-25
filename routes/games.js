@@ -416,7 +416,7 @@ router.post('/acceptCoWorkReq', passport.authenticate('jwt', {session: false}), 
                 else res.json({success: true});
             });
         } else {
-            Temp.findOneAndUpdate({_id: coworkRequest.temp}, {$pullAll: {requested: [req.user._id]}}, (err, temp) => {
+            Temp.findOneAndUpdate({_id: coworkRequest.temp}, {$pullAll: {requested: [req.user._id.toString()]}}, (err, temp) => {
                 if ( err ) res.json({success: false, msg: err});
                 else res.json({success: true});
             });

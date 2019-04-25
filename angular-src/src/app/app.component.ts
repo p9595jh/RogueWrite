@@ -14,7 +14,7 @@ export class AppComponent {
     { label: '공지게시판', path: '/board/notice/list' },
     { label: '자유게시판', path: '/board/free/list' },
     { label: '게임게시판', path: '/game/list' },
-    { label: '노역시장', path: '/corvee/list' },
+    { label: '블록게시판', path: '/corvee/list' },
     { label: '서브게시판', path: '/sub' }
   ];
   activeLink = this.navLinks[0];
