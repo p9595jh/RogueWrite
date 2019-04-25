@@ -7,8 +7,7 @@
           <mat-icon *ngIf="!temp?.opened">keyboard_arrow_right</mat-icon>
           <mat-icon *ngIf="temp?.opened">keyboard_arrow_down</mat-icon>
         </button>
-        {{temp?.title}}
-        <span style="float: right;">{{temp?.savedate}}</span>
+        {{temp?.title}} ({{temp?.savedate}})
         <div *ngIf="temp?.opened" style="padding: 20px;">
           <mat-accordion>
             <mat-expansion-panel style="width: 95%; margin: auto;" *ngFor="let block of temp?.history">

@@ -54,6 +54,13 @@ a:hover {
   text-decoration: none;
 }
 
+.cmtTable {
+  width: 96%;
+  margin: auto;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
 /* ENGINE ========================================================================== */
 
 .engine-layout {

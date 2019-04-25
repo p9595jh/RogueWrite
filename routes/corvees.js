@@ -47,13 +47,33 @@ router.get('/takeOnePost', function(req, res, next) {
                 fail: true
             });
         } else {
-            User.findOne({userid: post.userid}, {introduction: 1}, (err, user) => {
-                if ( loggedIn == 'yes' ) {
-                    Corvee.findOneAndUpdate({_id: num}, {hit: post.hit + 1}, function(err, output) {
-                        res.json({post: output, introduction: user.introduction});
-                    });
-                } else res.json({post: post, introduction: user.introduction});
-            })
+            Temp.findOne({_id: post.temp}, {coworker: 1, requested: 1}, (err, temp) => {
+                User.find({_id: {$in: temp.coworker}}, {nickname: 1, userid: 1}, (err, coworkers) => {
+                    User.find({_id: {$in: temp.requested}}, {nickname: 1, userid: 1}, (err, requesteds) => {
+                        const coworker = temp.coworker.length > 0 ? coworkers : undefined;
+                        const requested = temp.requested.length > 0 ? requesteds : undefined;
+                        User.findOne({userid: post.userid}, {introduction: 1}, (err, user) => {
+                            if ( loggedIn == 'yes' ) {
+                                Corvee.findOneAndUpdate({_id: num}, {hit: post.hit + 1}, function(err, output) {
+                                    res.json({
+                                        post: output,
+                                        introduction: user.introduction,
+                                        coworkers: coworker,
+                                        requesteds: requested
+                                    });
+                                });
+                            } else {
+                                res.json({
+                                    post: post,
+                                    introduction: user.introduction,
+                                    coworkers: coworker,
+                                    requesteds: requested
+                                });
+                            }
+                        });
+                    })
+                });
+            });
         }
     });
 });
@@ -117,38 +137,36 @@ router.post('/images', function(req, res) {
 
 router.post('/write', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     const item = req.body.item;
-    Temp.findOne({_id: item._id}, {block: 1, from: 1, added: 1, coworker: 1}, (err, temp) => {
-        User.find({_id: {$in: temp.coworker}}, {userid: 1, nickname: 1}, (err, users) => {
-            const block = {
-                xml: temp.block[item.idx - 1].xml,
-                from: temp.from,
-                added: temp.added,
-                coworker: users
-            };
-            const newCorvee = new Corvee({
-                userid: req.user.userid,
-                nickname: req.user.nickname,
-                title: req.body.title,
-                content: req.body.content,
-                block: block,
-                hit: 0,
-                recommend: [],
-                comment: [],
-                writedate: getNowDate()
-            });
-            Corvee.addPost(newCorvee, (err, post) => {
-                if ( err ) {
-                    res.json({
-                        success: false
-                    });
-                } else {
-                    res.json({
-                        success: true,
-                        num: post._id
-                    });
-                }
-            });
-        })
+    Temp.findOne({_id: item._id}, {_id: 1, block: 1, from: 1, added: 1}, (err, temp) => {
+        const block = {
+            xml: temp.block[item.idx - 1].xml,
+            from: temp.from,
+            added: temp.added
+        };
+        const newCorvee = new Corvee({
+            userid: req.user.userid,
+            nickname: req.user.nickname,
+            title: req.body.title,
+            content: req.body.content,
+            block: block,
+            temp: temp._id,
+            hit: 0,
+            recommend: [],
+            comment: [],
+            writedate: getNowDate()
+        });
+        Corvee.addPost(newCorvee, (err, post) => {
+            if ( err ) {
+                res.json({
+                    success: false
+                });
+            } else {
+                res.json({
+                    success: true,
+                    num: post._id
+                });
+            }
+        });
     });
 });
 

@@ -23,6 +23,9 @@
         <p *ngIf="content?.from">
           이 게임은 <span style="cursor: pointer; font-weight: bold;" (click)="funcService.openInfoWindow(content?.block?.from?.userid)">{{content.from.nickname}}</span> 님의 <a style="font-weight: bold;" [routerLink]="['/game/' + content?.from?.game]">{{content.from.title}}</a> 으로부터 참조되었습니다.
         </p>
+        <p *ngIf="content?.block?.added?.length > 0">
+          덧붙여진 게임 :<span *ngFor="let added of content?.block?.added"><a style="color: black;" [routerLink]="['/game/' + added?.game]"> {{added?.nickname}}</a> (<span style="cursor: pointer;" (click)="funcService.openInfoWindow(added?.userid)">{{added?.nickname}}</span>)</span>
+        </p>
         <p *ngIf="content?.block?.coworker?.length > 0">
           공동제작자 :<span *ngFor="let coworker of content?.block?.coworker" style="cursor: pointer;" (click)="funcService.openInfoWindow(coworker?.userid)"> {{coworker?.nickname}}</span>
         </p>
@@ -37,7 +40,7 @@
       <br/><hr/>
 
       <!-- ############### table for comments ############### -->
-      <table style="width: 96%; margin: auto;">
+      <table class="cmtTable">
         <tbody>
           <tr *ngFor="let comment of content?.comment">
             <td style="width: 15%;">
@@ -55,7 +58,7 @@
               <pre class="content" *ngIf="comment?.userid != content?.userid" [innerHTML]="comment?.comment"></pre>
               <br/>
             </td>
-            <td *ngIf="authService.loggedIn() && content?.userid != user?.userid && content?.userid != comment?.userid && sendable(comment?.userid)" style="width: 20%;">
+            <td *ngIf="authService.loggedIn() && content?.userid == user?.userid && content?.userid != comment?.userid && sendable(comment?.userid)" style="width: 20%;">
               <button mat-button color="primary" (click)="sendRequest(comment?.userid)" style="float: right;">작업요청 보내기</button>
             </td>
           </tr>
