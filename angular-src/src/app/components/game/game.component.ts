@@ -217,6 +217,11 @@ export class GameComponent implements OnInit, OnDestroy {
     })
   }
 
+  scrap() {
+    let s = '<iframe src="' + this.funcService.ServerAddress + '/#/play/' + this.num + '" style="width: 560px; height: 480px;"></iframe>'
+    prompt('아래 내용을 복사해주세요.', s);
+  }
+
   onSearch(category, text) {
     if ( text == '' ) {
       this.gameService.takeAllPosts().subscribe(data => {

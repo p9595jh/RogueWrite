@@ -1,14 +1,13 @@
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-    <div class="mdl-card mdl-cell mdl-cell--12-col">
-      <div class="mdl-card__supporting-text">
-        <h4>HELLO</h4>
-        <hr/>
-        
-        <iframe src="http://localhost:4200/#/play/1234" style="width: 100%; height: 500px;">loading...</iframe>
-  
-      </div>
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+    <div class="mdl-card__supporting-text">
+      <h4>HELLO</h4>
+      <hr/>
+      
+      <app-ngx-editor [placeholder]="placeholder" [(ngModel)]="content"></app-ngx-editor>
+
     </div>
-  </section>
-  
-  <section></section>
-  
+  </div>
+</section>
+
+<section></section>

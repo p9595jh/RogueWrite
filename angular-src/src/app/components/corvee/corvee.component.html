@@ -20,8 +20,8 @@
 
       <div style="border: 1px solid rgb(155, 155, 155); width: 100%; padding: 10px; display: inline-block;">
         <p>{{writerIntro}}</p>
-        <p *ngIf="content?.from">
-          이 게임은 <span style="cursor: pointer; font-weight: bold;" (click)="funcService.openInfoWindow(content?.block?.from?.userid)">{{content.from.nickname}}</span> 님의 <a style="font-weight: bold;" [routerLink]="['/game/' + content?.from?.game]">{{content.from.title}}</a> 으로부터 참조되었습니다.
+        <p *ngIf="content?.block?.from">
+          이 게임은 <span style="cursor: pointer; font-weight: bold;" (click)="funcService.openInfoWindow(content?.block?.from?.userid)">{{content?.block?.from?.nickname}}</span> 님의 <a style="font-weight: bold; color: black;" [routerLink]="['/game/' + content?.block?.from?.game]">{{content?.block?.from?.title}}</a> 으로부터 참조되었습니다.
         </p>
         <p *ngIf="content?.block?.added?.length > 0">
           덧붙여진 게임 :<span *ngFor="let added of content?.block?.added"><a style="color: black;" [routerLink]="['/game/' + added?.game]"> {{added?.nickname}}</a> (<span style="cursor: pointer;" (click)="funcService.openInfoWindow(added?.userid)">{{added?.nickname}}</span>)</span>

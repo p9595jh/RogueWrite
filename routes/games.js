@@ -59,7 +59,7 @@ router.get('/tool', function(req, res, next) {
                             uid: uid,
                             temps: outputs,
                             block: output.block[output.block.length-1].xml,
-                            added: output.added.length > 0 ? output.added : false,
+                            added: output.added.length > 0 ? JSON.stringify(output.added) : false,
                             c: req.session.code
                         });
                     });

@@ -35,8 +35,8 @@
       <div *ngIf="temp?.from" style="color: grey; font-size: 85%;">
         - 이 게임은 <span style="cursor: pointer; font-weight: bold;" (click)="funcService.openInfoWindow(temp?.from?.userid)">{{temp?.from?.nickname}}</span> 님의 <a style="color: grey; font-weight: bold;" [routerLink]="['/game/' + temp?.from?.game]">{{temp?.from?.title}}</a> 으로부터 참조되었습니다.
         <br/>
-        <p *ngIf="content?.added?.length > 0">
-          덧붙여진 게임 :<span *ngFor="let added of content?.added"><a style="color: black;" [routerLink]="['/game/' + added?.game]"> {{added?.nickname}}</a> (<span style="cursor: pointer;" (click)="funcService.openInfoWindow(added?.userid)">{{added?.nickname}}</span>)</span>
+        <p *ngIf="content?.added?.length > 0" style="color: grey;">
+          - 덧붙여진 게임 :<span *ngFor="let added of content?.added"><a [routerLink]="['/game/' + added?.game]"> {{added?.nickname}}</a> (<span style="cursor: pointer;" (click)="funcService.openInfoWindow(added?.userid)">{{added?.nickname}}</span>)</span>
         </p><br/>
       </div>
 

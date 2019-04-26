@@ -59,7 +59,7 @@
           version. {{content?.version}}
         </p>
         <p *ngIf="content?.from">
-          이 게임은 <span style="cursor: pointer; font-weight: bold;" (click)="funcService.openInfoWindow(content?.from?.userid)">{{content.from.nickname}}</span> 님의 <a style="font-weight: bold;" [routerLink]="['/game/' + content?.from?.game]">{{content.from.title}}</a> 으로부터 참조되었습니다.
+          이 게임은 <span style="cursor: pointer; font-weight: bold;" (click)="funcService.openInfoWindow(content?.from?.userid)">{{content.from.nickname}}</span> 님의 <a style="font-weight: bold; color: black;" [routerLink]="['/game/' + content?.from?.game]">{{content.from.title}}</a> 으로부터 참조되었습니다.
         </p>
         <p *ngIf="content?.added?.length > 0">
           덧붙여진 게임 :<span *ngFor="let added of content?.added"><a style="color: black;" [routerLink]="['/game/' + added?.game]"> {{added?.nickname}}</a> (<span style="cursor: pointer;" (click)="funcService.openInfoWindow(added?.userid)">{{added?.nickname}}</span>)</span>
@@ -190,6 +190,9 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #aboutPost>
+    <button mat-menu-item (click)="scrap()">
+      <span>퍼가기</span>
+    </button>
     <button mat-menu-item *ngIf="content?.board && content?.board != ''" [routerLink]="['/board/' + content?.board + '/list']">
       <span>게시판으로 이동</span>
     </button>

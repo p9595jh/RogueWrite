@@ -1,5 +1,10 @@
 <div class="engine-layout">
 
+  <a mat-button [href]="funcService.ServerAddress + '/#/game/' + num" target="_blank"
+    style="width: 100%; text-align: left; font-weight: normal; border: 1px solid grey;">
+    {{playService?.data?.title}}
+  </a>
+
   <!-- PHASE-CONTENT -->
   <div class="stage-content" [innerHTML]="playService?.phase?.content | safe"></div>
 
@@ -34,5 +39,3 @@
   </div>
 
 </div>
-
-<a mat-button [href]="funcService.ServerAddress + '/game/' + num" target="_blank" style="width: 100%;"></a>

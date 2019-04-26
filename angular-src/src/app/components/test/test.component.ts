@@ -10,11 +10,7 @@ import { NgFlashMessageService } from 'ng-flash-messages';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
-
-  temp = [
-    1,2,3,4,6
-  ];
-  hirogatteru = false;
+  content: string;
 
   constructor(
     private funcService: FuncService,
@@ -23,14 +19,9 @@ export class TestComponent implements OnInit {
     private flashMessage: NgFlashMessageService
   ) {
     this.funcService.setTitle('TEST!!!!');
-    console.log(this.router.url);
   }
 
   ngOnInit() {
-  }
-
-  hirogaru() {
-    this.hirogatteru = !this.hirogatteru;
   }
 
 }

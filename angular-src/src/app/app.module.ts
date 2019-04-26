@@ -39,6 +39,8 @@ import { FileSelectDirective } from 'ng2-file-upload';
 import { AuthGuard } from './guards/auth.guard';
 import { DeactivateGuard } from './guards/deactivate.guard';
 import { SafeHtml } from '../pipes/safeHtml';
+import { NgxEditorModule } from 'ngx-editor';
+import { TooltipModule } from 'ngx-bootstrap';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -118,6 +120,8 @@ const appRoutes: Routes = [
     CommonModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
+    NgxEditorModule,
+    TooltipModule.forRoot(),
 
     MatTableModule,
     MatInputModule,

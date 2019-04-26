@@ -8,7 +8,7 @@ import { FuncService } from './func.service';
 })
 export class PlayService {
 
-  private data: any;
+  data: any;
   paramMap: Map<string, any>;  // Map
   stageNum: number;
   phase: any;
