@@ -236,33 +236,35 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
                             res.json({success: false});
                         } else {
                             Temp.findOneAndUpdate({_id: req.session.temp}, {$push: {block: blockData}}, (err, tp) => {
-                                if ( output.from && output.coworker.length > 0 ) {
-                                    User.find({_id: {$in: output.coworker}}, {userid: 1, nickname: 1}, (err, users) => {
-                                        Game.findOneAndUpdate({_id: post._id}, {coworker: users, from: output.from}, (err, game) => {
+                                Game.findOneAndUpdate({_id: post._id}, {added: output.added}, (err, g) => {
+                                    if ( output.from && output.coworker.length > 0 ) {
+                                        User.find({_id: {$in: output.coworker}}, {userid: 1, nickname: 1}, (err, users) => {
+                                            Game.findOneAndUpdate({_id: post._id}, {coworker: users, from: output.from}, (err, game) => {
+                                                req.session.destroy();
+                                                res.clearCookie('sid');
+                                                res.json({success: true, num: post._id});
+                                            });
+                                        });
+                                    } else if ( output.from ) {
+                                        Game.findOneAndUpdate({_id: post._id}, {from: output.from}, (err, game) => {
                                             req.session.destroy();
                                             res.clearCookie('sid');
                                             res.json({success: true, num: post._id});
                                         });
-                                    });
-                                } else if ( output.from ) {
-                                    Game.findOneAndUpdate({_id: post._id}, {from: output.from}, (err, game) => {
+                                    } else if ( output.coworker.length > 0 ) {
+                                        User.find({_id: {$in: output.coworker}}, {userid: 1, nickname: 1}, (err, users) => {
+                                            Game.findOneAndUpdate({_id: post._id}, {coworker: users}, (err, game) => {
+                                                req.session.destroy();
+                                                res.clearCookie('sid');
+                                                res.json({success: true, num: post._id});
+                                            });
+                                        });
+                                    } else {
                                         req.session.destroy();
                                         res.clearCookie('sid');
                                         res.json({success: true, num: post._id});
-                                    });
-                                } else if ( output.coworker.length > 0 ) {
-                                    User.find({_id: {$in: output.coworker}}, {userid: 1, nickname: 1}, (err, users) => {
-                                        Game.findOneAndUpdate({_id: post._id}, {coworker: users}, (err, game) => {
-                                            req.session.destroy();
-                                            res.clearCookie('sid');
-                                            res.json({success: true, num: post._id});
-                                        });
-                                    });
-                                } else {
-                                    req.session.destroy();
-                                    res.clearCookie('sid');
-                                    res.json({success: true, num: post._id});
-                                }
+                                    }
+                                });
                             });
                         }
                     });
@@ -360,6 +362,13 @@ router.get('/takeSearchedPosts', (req, res, next) => {
     } else {
         res.json({posts: []});
     }
+});
+
+router.get('/takeOneGame', (req, res, next) => {
+    Game.findOne({_id: req.query.num}, {game: 1}, (err, game) => {
+        if ( err || !game ) res.json({game: undefined});
+        else res.json({game: game.game});
+    });
 });
 
 // handle temps =============================================================

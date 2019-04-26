@@ -112,7 +112,8 @@ router.get('/viewBlock', (req, res) => {
         else {
             res.render('block', {
                 title: game.title,
-                block: game.block.xml
+                block: game.block.xml,
+                readOnly: true
             });
         }
     });
@@ -128,13 +129,15 @@ router.get('/viewTempBlock', (req, res) => {
                 } else {
                     res.render('block', {
                         title: game.title,
-                        block: game.block[req.query.recent-1].xml
+                        block: game.block[req.query.recent-1].xml,
+                        readOnly: true
                     });
                 }
             } else {
                 res.render('block', {
                     title: game.title,
-                    block: game.block[game.block.length-1].xml
+                    block: game.block[game.block.length-1].xml,
+                    readOnly: true
                 });
             }
         }

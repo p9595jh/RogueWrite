@@ -82,13 +82,14 @@ export class GameComponent implements OnInit, OnDestroy {
     }
   }
 
-  onWriteComment() {
+  onWriteComment(field: HTMLTextAreaElement) {
     const formData = {
       comment: this.cmtWrite.value,
       _id: this.num
     };
     this.gameService.writeComment(formData).subscribe(data => {
       if ( data.success ) {
+        field.value = '';
         this.router.navigate(['/game/' + this.num]);
       } else {
         this.flashMessage.showFlashMessage({

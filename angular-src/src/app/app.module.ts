@@ -57,6 +57,7 @@ import { SubComponent } from './components/sub/sub.component';
 import { TempComponent } from './components/temp/temp.component';
 import { CorveeComponent } from './components/corvee/corvee.component';
 import { CwriteComponent } from './components/cwrite/cwrite.component';
+import { PlayComponent } from './components/play/play.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -74,6 +75,7 @@ const appRoutes: Routes = [
   { path: 'temp/:num', component: TempComponent, canActivate: [AuthGuard] },
   { path: 'corvee/:num', component: CorveeComponent },
   { path: 'cwrite', component: CwriteComponent, canActivate: [AuthGuard] },
+  { path: 'play/:num', component: PlayComponent },
   { path: 'no-page', component: NoPageComponent },
   { path: '**', component: NoPageComponent }
 ];
@@ -98,7 +100,8 @@ const appRoutes: Routes = [
     SubComponent,
     TempComponent,
     CorveeComponent,
-    CwriteComponent
+    CwriteComponent,
+    PlayComponent
   ],
   imports: [
     ReactiveFormsModule,

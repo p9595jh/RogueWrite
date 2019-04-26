@@ -3,10 +3,14 @@ extends layout2
 block content
     div#workspaceFantasy(style='height: 500px; width: 100%;')
 
+    xml#toolbox(style='display: none')
+        category(name='')
+
     script.
         let workspaceFantasy = Blockly.inject('workspaceFantasy', {
             scrollbars: true,
-            readOnly: true
+            readOnly: !{readOnly},
+            toolbox: document.getElementById('toolbox')
         });
         let block = !{JSON.stringify(block)};
         let xml = Blockly.Xml.textToDom(block);

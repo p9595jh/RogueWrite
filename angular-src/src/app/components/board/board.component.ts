@@ -173,13 +173,14 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.ct = ct;
   }
 
-  onWriteComment() {
+  onWriteComment(field: HTMLTextAreaElement) {
     const formData = {
       comment: this.cmtWrite.value,
       _id: this.num
     };
     this.boardService.writeComment(formData).subscribe(data => {
       if ( data.success ) {
+        field.value = '';
         this.router.navigate(['/board/' + this.type + '/' + this.num]);
       } else {
         this.flashMessage.showFlashMessage({

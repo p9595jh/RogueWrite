@@ -149,13 +149,14 @@ export class CorveeComponent implements OnInit, OnDestroy {
     this.ct = ct;
   }
 
-  onWriteComment() {
+  onWriteComment(field: HTMLTextAreaElement) {
     const formData = {
       comment: this.cmtWrite.value,
       _id: this.num
     };
     this.corveeService.writeComment(formData).subscribe(data => {
       if ( data.success ) {
+        field.value = '';
         this.router.navigate(['/corvee/' + this.num]);
       } else {
         this.flashMessage.showFlashMessage({

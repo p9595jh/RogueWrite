@@ -1,0 +1,38 @@
+<div class="engine-layout">
+
+  <!-- PHASE-CONTENT -->
+  <div class="stage-content" [innerHTML]="playService?.phase?.content | safe"></div>
+
+  <!-- CHOICES -->
+  <table style="width: 100%;" *ngIf="!playService.end">
+    <tbody>
+      <tr *ngFor="let choice of playService?.phase?.choice" (click)="playService.select(choice?.set_param, choice?.stage_to)" style="height: 50px;">
+        <td class="stage-choice btn--stripe">{{choice?.content}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- END -->
+  <table *ngIf="playService.end" class="mdl-data-table mdl-js-data-table" style="width: 100%;">
+    <tr>
+      <td class="mdl-data-table__cell--non-numeric">THE END.</td>
+      <td>최종점수 : {{playService?.score}}</td>
+    </tr>
+    <tr>
+      <td colspan="2"><button mat-button (click)="playService.replay()" style="float: right;">다시하기</button></td>
+    </tr>
+  </table>
+
+  <!-- SHOW PARAMETERS -->
+  <hr/>
+  <div class="row align-items-center" *ngFor="let arr of playService?.paramArr">
+    <div class="col-sm grid-cell" *ngFor="let val of arr">
+      <span *ngIf="val?.value?.visible">
+        {{val?.key}}<span>: </span>{{val?.value?.value}}
+      </span>
+    </div>
+  </div>
+
+</div>
+
+<a mat-button [href]="funcService.ServerAddress + '/game/' + num" target="_blank" style="width: 100%;"></a>

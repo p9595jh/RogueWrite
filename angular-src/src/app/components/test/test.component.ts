@@ -23,6 +23,7 @@ export class TestComponent implements OnInit {
     private flashMessage: NgFlashMessageService
   ) {
     this.funcService.setTitle('TEST!!!!');
+    console.log(this.router.url);
   }
 
   ngOnInit() {

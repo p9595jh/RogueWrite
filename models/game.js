@@ -28,6 +28,7 @@ const GameSchema = mongoose.Schema({
             nickname: String
         }
     */
+   added: Array,
    coworker: Array
 });
 

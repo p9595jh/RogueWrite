@@ -23,16 +23,16 @@
       <hr/>
 
       <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ENGINE (GAME) ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
-      <div class="posting" *ngIf="set">
+      <div class="engine-layout">
 
         <!-- PHASE-CONTENT -->
-        <div class="stage-content">{{playService?.phase?.content}}</div>
+        <div class="stage-content" [innerHTML]="playService?.phase?.content | safe"></div>
 
         <!-- CHOICES -->
         <table style="width: 100%;" *ngIf="!playService.end">
-          <tbody *ngFor="let choice of playService?.phase?.choice">
-            <tr (click)="playService.select(choice?.set_param)" style="height: 50px;">
-              <td class="mdl-data-table__cell--non-numeric stage-choice">{{choice?.content}}</td>
+          <tbody>
+            <tr *ngFor="let choice of playService?.phase?.choice" (click)="playService.select(choice?.set_param, choice?.stage_to)" style="height: 50px;">
+              <td class="stage-choice btn--stripe">{{choice?.content}}</td>
             </tr>
           </tbody>
         </table>
@@ -41,16 +41,15 @@
         <table *ngIf="playService.end" class="mdl-data-table mdl-js-data-table" style="width: 100%;">
           <tr>
             <td class="mdl-data-table__cell--non-numeric">THE END.</td>
-            <td>점수 : 얼마얼마</td>
+            <td>최종점수 : {{playService?.score}}</td>
           </tr>
           <tr>
-            <td colspan="2">
-              <button mat-button (click)="playService.replay()" style="float: right;">다시하기</button>
-            </td>
+            <td colspan="2"><button mat-button (click)="playService.replay()" style="float: right;">다시하기</button></td>
           </tr>
         </table>
 
         <!-- SHOW PARAMETERS -->
+        <hr/>
         <div class="row align-items-center" *ngFor="let arr of playService?.paramArr">
           <div class="col-sm grid-cell" *ngFor="let val of arr">
             <span *ngIf="val?.value?.visible">

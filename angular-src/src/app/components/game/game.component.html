@@ -61,6 +61,9 @@
         <p *ngIf="content?.from">
           이 게임은 <span style="cursor: pointer; font-weight: bold;" (click)="funcService.openInfoWindow(content?.from?.userid)">{{content.from.nickname}}</span> 님의 <a style="font-weight: bold;" [routerLink]="['/game/' + content?.from?.game]">{{content.from.title}}</a> 으로부터 참조되었습니다.
         </p>
+        <p *ngIf="content?.added?.length > 0">
+          덧붙여진 게임 :<span *ngFor="let added of content?.added"><a style="color: black;" [routerLink]="['/game/' + added?.game]"> {{added?.nickname}}</a> (<span style="cursor: pointer;" (click)="funcService.openInfoWindow(added?.userid)">{{added?.nickname}}</span>)</span>
+        </p>
         <p *ngIf="content?.coworker?.length > 0">
           공동제작자 :<span *ngFor="let coworker of content?.coworker" style="cursor: pointer;" (click)="funcService.openInfoWindow(coworker?.userid)"> {{coworker?.nickname}}</span>
         </p>
@@ -155,7 +158,7 @@
       <!-- ############### table for comments ############### -->
 
       <!-- ############### writing area ############### -->
-      <form *ngIf="authService.loggedIn()" (submit)="onWriteComment()"><hr *ngIf="content?.comment?.length > 0" />
+      <form *ngIf="authService.loggedIn()" (submit)="onWriteComment(field)"><hr *ngIf="content?.comment?.length > 0" />
         <table style="width: 96%; margin: auto;">
           <tr style="text-align: center;">
 
@@ -163,7 +166,7 @@
               <mat-form-field appearance="outline" style="width: 100%; height: 100%;">
                 <mat-label>댓글을 작성해주세요.</mat-label>
                 <textarea matInput placeholder="" rows="3" name="cmtWrite"
-                  [formControl]="cmtWrite" [matAutocomplete]="auto"></textarea>
+                  [formControl]="cmtWrite" [matAutocomplete]="auto" #field></textarea>
                 <mat-autocomplete #auto>
                   <!-- <mat-option *ngFor="let ct of filteredOptions | async" [value]="'TO::' + ct?.nickname" (onclick)="setCmtTo(ct)">
                     {{ct.nickname}} [{{ct.userid}}]
@@ -243,7 +246,7 @@
         <tbody>
           <tr *ngFor="let val of contents | slice:pagingFrom:pagingTo; let i=index">
             <td class="mdl-data-table__cell--non-numeric"
-              [routerLink]="['/board/' + val?._id]" (click)="scrollToPost(postLocation)">
+              [routerLink]="['/game/' + val?._id]" (click)="scrollToPost(postLocation)">
               <div>
                 {{val.title}}
                 <span *ngIf="val.comment.length > 0" style="color: grey;">[{{val.comment.length}}]</span>

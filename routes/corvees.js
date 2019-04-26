@@ -289,7 +289,8 @@ router.get('/frame', (req, res, next) => {
         } else {
             res.render('block', {
                 title: 'BLOCK',
-                block: corvee.block.xml
+                block: corvee.block.xml,
+                readOnly: false
             });
         }
     });

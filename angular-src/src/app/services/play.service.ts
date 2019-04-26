@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Http, Headers } from '@angular/http';
+import { map } from 'rxjs/operators';
+import { FuncService } from './func.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +17,10 @@ export class PlayService {
   paramArr: Array<any[]>;
   score: number;
 
-  constructor() {}
+  constructor(
+    private http: Http,
+    private funcService: FuncService
+  ) {}
 
   gameSet(gameData) {
     this.stageNum = 1;
@@ -125,6 +131,13 @@ export class PlayService {
     this.paramMap.forEach((value, key) => {
       console.log(key + ' : ' + value.value);
     });
+  }
+
+  takeOneGame(num) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(this.funcService.ServerAddress + '/games/takeOneGame?num=' + num, {headers: headers})
+      .pipe(map(res => res.json()));
   }
 
 }
