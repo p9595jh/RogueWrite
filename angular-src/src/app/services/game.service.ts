@@ -150,12 +150,12 @@ export class GameService {
       .pipe(map(res => res.json()));
   }
 
-  toMyTempList(num) {
+  toMyTempList(num, title) {
     let headers = new Headers();
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/games/toMyTempList', {num: num}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/games/toMyTempList', {num: num, title: title}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -188,6 +188,13 @@ export class GameService {
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
     return this.http.post(this.funcService.ServerAddress + '/games/acceptCoWorkReq', {accept: accept, coworkRequest: coworkRequest}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  modifyTitle(num, title) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/games/modifyTitle', {num: num, title: title}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 

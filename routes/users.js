@@ -103,7 +103,7 @@ router.post('/authenticate', function(req, res, next) {
   User.getUserByUsername(userid, (err, user) => {
     // if(err) throw err;
     if ( !user ) {
-      return res.json({success: false, msg: '사용자를 찾을 수 없습니다.'});
+      return res.json({success: false, msg: '아이디 혹은 비밀번호가 잘못되었습니다.'});
     }
     
     User.comparePassword(pw, user.pw, (err, isMatch) => {
@@ -123,7 +123,7 @@ router.post('/authenticate', function(req, res, next) {
           }
         });
       } else {
-        return res.json({success: false, msg: '비밀번호가 잘못되었습니다.'});
+        return res.json({success: false, msg: '아이디 혹은 비밀번호가 잘못되었습니다.'});
       }
     })
   })

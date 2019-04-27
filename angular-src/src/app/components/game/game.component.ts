@@ -1,11 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router, NavigationEnd } from '@angular/router';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { FuncService } from '../../services/func.service';
 import { AuthService } from '../../services/auth.service';
 import { GameService } from '../../services/game.service';
 import { PlayService } from '../../services/play.service';
+import { TempDialog } from '../temp/temp.component';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { FormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material';
@@ -35,7 +37,8 @@ export class GameComponent implements OnInit, OnDestroy {
     private gameService: GameService,
     private playService: PlayService,
     private router: Router,
-    private flashMessage: NgFlashMessageService
+    private flashMessage: NgFlashMessageService,
+    private dialog: MatDialog
   ) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       if ( e instanceof NavigationEnd ) {
@@ -200,26 +203,43 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   toMyTempList() {
-    this.gameService.toMyTempList(this.num).subscribe(result => {
-      if ( result.success ) {
-        this.flashMessage.showFlashMessage({
-          messages: ['저장되었습니다.'], 
-          type: 'success', 
-          timeout: 2000
-        });
-      } else {
-        this.flashMessage.showFlashMessage({
-          messages: [result.msg], 
-          type: 'danger', 
-          timeout: 3000
+    const dialogRef = this.dialog.open(TempDialog, {
+      width: '300px',
+      data: {
+        title: this.content.title,
+        text: this.content.title
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(data => {
+      if ( data ) {
+        this.gameService.toMyTempList(this.num, data).subscribe(result => {
+          if ( result.success ) {
+            this.flashMessage.showFlashMessage({
+              messages: ['저장되었습니다.'], 
+              type: 'success', 
+              timeout: 2000
+            });
+          } else {
+            this.flashMessage.showFlashMessage({
+              messages: [result.msg], 
+              type: 'danger', 
+              timeout: 3000
+            });
+          }
         });
       }
-    })
+    });
   }
 
-  scrap() {
-    let s = '<iframe src="' + this.funcService.ServerAddress + '/#/play/' + this.num + '" style="width: 560px; height: 480px;"></iframe>'
-    prompt('아래 내용을 복사해주세요.', s);
+  scrapDialog() {
+    this.dialog.open(ScrapDialog, {
+      width: '300px',
+      data: {
+        title: this.content.title,
+        text: '<iframe src="' + this.funcService.ServerAddress + '/#/play/' + this.num + '" style="width: 560px; height: 480px;"></iframe>'
+      }
+    });
   }
 
   onSearch(category, text) {
@@ -263,6 +283,33 @@ export class GameComponent implements OnInit, OnDestroy {
     this.pagingFrom = pageEvent.pageIndex * this.pagingSize;
     this.pagingTo = (pageEvent.pageIndex + 1) * this.pagingSize;
     this.router.navigate(['/game/' + this.num]);
+  }
+
+}
+
+export interface DialogData {
+  title: string,
+  text: string
+}
+
+@Component({
+  selector: 'app-game-dialog',
+  templateUrl: './game.component.dialog.html'
+})
+export class ScrapDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<ScrapDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) { }
+
+  onClose() {
+    this.dialogRef.close();
+  }
+
+  copyText(copy: HTMLInputElement) {
+    copy.select();
+    document.execCommand('copy');
   }
 
 }

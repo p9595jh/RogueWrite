@@ -47,7 +47,7 @@ pre {
 }
 
 .writerText {
-  color: red;
+  color: green;
 }
 
 a:hover {
@@ -59,6 +59,29 @@ a:hover {
   margin: auto;
   border-collapse: separate;
   border-spacing: 0 10px;
+}
+
+/* FROM & ADDED ========================================================================== */
+
+.original-section {
+  border: 1px solid rgb(155, 155, 155);
+  width: 100%;
+  padding: 10px;
+  display: inline-block;
+}
+
+.original-from-user {
+  cursor: pointer;
+}
+
+.original-from-title {
+  font-weight: bold;
+  color: black;
+}
+
+.original-added-title {
+  color: black;
+  font-weight: bold;
 }
 
 /* ENGINE ========================================================================== */

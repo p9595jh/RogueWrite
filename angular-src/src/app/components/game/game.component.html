@@ -54,18 +54,18 @@
       <div>{{content?.content}}</div>
       <br/><br/><br/><br/>
 
-      <div style="border: 1px solid rgb(155, 155, 155); width: 100%; padding: 10px; display: inline-block;">
+      <div class="original-section">
         <p>
           version. {{content?.version}}
         </p>
         <p *ngIf="content?.from">
-          이 게임은 <span style="cursor: pointer; font-weight: bold;" (click)="funcService.openInfoWindow(content?.from?.userid)">{{content.from.nickname}}</span> 님의 <a style="font-weight: bold; color: black;" [routerLink]="['/game/' + content?.from?.game]">{{content.from.title}}</a> 으로부터 참조되었습니다.
+          이 게임은 <span class="original-from-user" (click)="funcService.openInfoWindow(content?.from?.userid)">{{content.from.nickname}}</span> 님의 <a class="original-from-title" [routerLink]="['/game/' + content?.from?.game]">{{content.from.title}}</a> 으로부터 참조되었습니다.
         </p>
         <p *ngIf="content?.added?.length > 0">
-          덧붙여진 게임 :<span *ngFor="let added of content?.added"><a style="color: black;" [routerLink]="['/game/' + added?.game]"> {{added?.nickname}}</a> (<span style="cursor: pointer;" (click)="funcService.openInfoWindow(added?.userid)">{{added?.nickname}}</span>)</span>
+          덧붙여진 게임 :<span *ngFor="let added of content?.added"><a class="original-added-title" [routerLink]="['/game/' + added?.game]"> {{added?.title}}</a> (<span class="toProfile" (click)="funcService.openInfoWindow(added?.userid)">{{added?.nickname}}</span>)</span>
         </p>
         <p *ngIf="content?.coworker?.length > 0">
-          공동제작자 :<span *ngFor="let coworker of content?.coworker" style="cursor: pointer;" (click)="funcService.openInfoWindow(coworker?.userid)"> {{coworker?.nickname}}</span>
+          공동제작자 :<span *ngFor="let coworker of content?.coworker" class="toProfile" (click)="funcService.openInfoWindow(coworker?.userid)"> {{coworker?.nickname}}</span>
         </p>
       </div>
       <br/><br/>
@@ -137,13 +137,13 @@
       <table class="cmtTable">
         <tbody *ngFor="let comment of content?.comment">
           <tr>
-            <td style="width: 15%;">
+            <td style="width: 90px;">
               <img [attr.src]="'images/profile/' + comment.userid" class="profileImage" />
             </td>
             <td>
               <span style="font-size: 80%;">
-                <span class="toProfile" (click)="funcService.openInfoWindow(comment?.userid)">{{comment?.nickname}}</span> &nbsp;|&nbsp; 
-                {{comment?.writedate}}
+                <span class="toProfile" (click)="funcService.openInfoWindow(comment?.userid)">
+                  {{comment?.nickname}}</span> &nbsp;|&nbsp; {{comment?.writedate}}
                 <span *ngIf="comment?.userid == user?.userid || user?.userid == 'admin'"> &nbsp;|&nbsp; 
                   <span style="cursor: pointer;" (click)="onRemoveComment(comment.num)">삭제</span>
                 </span>
@@ -190,7 +190,7 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #aboutPost>
-    <button mat-menu-item (click)="scrap()">
+    <button mat-menu-item (click)="scrapDialog()">
       <span>퍼가기</span>
     </button>
     <button mat-menu-item *ngIf="content?.board && content?.board != ''" [routerLink]="['/board/' + content?.board + '/list']">
@@ -267,7 +267,10 @@
 
       <mat-paginator [length]="contents?.length" [pageSize]="pagingSize" (page)="paging($event)"></mat-paginator>
 
-      <div style="float: left;">
+      <div *ngIf="authService.loggedIn()" style="float: right;">
+        <a mat-raised-button [routerLink]="['/tool']">작성</a>
+      </div><br/>
+      <div style="text-align: center;">
         <mat-form-field style="width: 100px;">
           <mat-select value="title" (selectionChange)="onSearch(searchSelect.value, searchInput.value)" #searchSelect>
             <mat-option value="title">제목</mat-option>
@@ -279,9 +282,6 @@
           <input matInput (input)="onSearch(searchSelect.value, $event.target.value)" #searchInput>
           <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
-      </div>
-      <div *ngIf="authService.loggedIn()" style="float: right;">
-        <a mat-raised-button [routerLink]="['/tool']">작성</a>
       </div>
     </div>
   </div>

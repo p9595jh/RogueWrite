@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  아래 내용을 복사해주세요.<br/>
+  <mat-form-field style="width: 100%;">
+    <textarea matInput [(ngModel)]="data.text" rows="4" readonly #copy (click)="copyText(copy)"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">닫기</button>
+</div>

@@ -4,6 +4,10 @@ import { Router, NavigationEnd } from '@angular/router';
 import { PlayService } from '../../services/play.service';
 import { NgFlashMessageService } from 'ng-flash-messages';
 
+export interface DialogData {
+  text: string
+}
+
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
@@ -11,6 +15,8 @@ import { NgFlashMessageService } from 'ng-flash-messages';
 })
 export class TestComponent implements OnInit {
   content: string;
+
+  text: string;
 
   constructor(
     private funcService: FuncService,

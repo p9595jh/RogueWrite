@@ -28,7 +28,8 @@ import {  // angular-material modules
   MatSnackBarModule,
   MatTooltipModule,
   MatTreeModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatDialogModule
 } from '@angular/material';
 
 import { ValidateService } from './services/validate.service';
@@ -50,16 +51,16 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { ModifyComponent } from './components/modify/modify.component';
 import { BoardComponent } from './components/board/board.component';
 import { WriteComponent } from './components/write/write.component';
-import { TestComponent } from './components/test/test.component';
 import { NoPageComponent } from './components/no-page/no-page.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { ToolComponent } from './components/tool/tool.component';
-import { GameComponent } from './components/game/game.component';
+import { GameComponent, ScrapDialog } from './components/game/game.component';
 import { SubComponent } from './components/sub/sub.component';
-import { TempComponent } from './components/temp/temp.component';
+import { TempComponent, TempDialog } from './components/temp/temp.component';
 import { CorveeComponent } from './components/corvee/corvee.component';
 import { CwriteComponent } from './components/cwrite/cwrite.component';
 import { PlayComponent } from './components/play/play.component';
+import { TestComponent } from './components/test/test.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
@@ -94,16 +95,18 @@ const appRoutes: Routes = [
     ModifyComponent,
     BoardComponent,
     WriteComponent,
-    TestComponent,
     NoPageComponent,
     AdminComponent,
     ToolComponent,
     GameComponent,
+    ScrapDialog,
     SubComponent,
     TempComponent,
+    TempDialog,
     CorveeComponent,
     CwriteComponent,
-    PlayComponent
+    PlayComponent,
+    TestComponent
   ],
   imports: [
     ReactiveFormsModule,
@@ -141,10 +144,17 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     MatTooltipModule,
     MatTreeModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule
   ],
   exports: [
-    RouterModule
+    RouterModule,
+    ScrapDialog,
+    TempDialog
+  ],
+  entryComponents: [
+    ScrapDialog,
+    TempDialog
   ],
   providers: [
     ValidateService,

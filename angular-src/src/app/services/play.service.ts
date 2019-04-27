@@ -7,8 +7,9 @@ import { FuncService } from './func.service';
   providedIn: 'root'
 })
 export class PlayService {
-
   data: any;
+  count: number;  // entire number of the stage whose number is over 0
+
   paramMap: Map<string, any>;  // Map
   stageNum: number;
   phase: any;
@@ -23,6 +24,7 @@ export class PlayService {
   ) {}
 
   gameSet(gameData) {
+    this.count = 0;
     this.stageNum = 1;
     this.phaseNum = 1;
     this.end = false;
@@ -35,9 +37,9 @@ export class PlayService {
     }
     this.paramArr = this.formatAsDoubleDimension();
     for (let stage of this.data.stage) {
-      if ( stage.stage_num == 1 ) {
-        this.phase = stage.phase[0];
-        break;
+      if ( stage.stage_num > 0 ) {
+        this.count++;
+        if ( stage.stage_num == 1 ) this.phase = stage.phase[0];
       }
     }
   }
@@ -91,7 +93,7 @@ export class PlayService {
     }
 
     // this is the end of the game
-    if ( this.stageNum > this.data.stage.length ) {
+    if ( this.stageNum > this.count ) {
       this.ending();
       return true;
     }
@@ -102,6 +104,7 @@ export class PlayService {
           if ( this.checkNextStageCondition(phase.condition) ) {
             this.phase = phase;
             this.phaseNum = phase.phase_num;
+            if ( this.stageNum < 0 ) this.stageNum = this.count;
             return true;
           }
         }

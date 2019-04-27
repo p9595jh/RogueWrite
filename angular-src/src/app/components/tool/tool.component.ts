@@ -37,7 +37,7 @@ export class ToolComponent implements OnInit {
           + profile.user._id
           + '&c='
           + data.code
-          + '" style="width: 100%; height: 700px;">loading...</iframe>';
+          + '" style="width: 100%; height: 1000px;">loading...</iframe>';
       });
     });
   }

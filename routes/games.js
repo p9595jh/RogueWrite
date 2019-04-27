@@ -385,7 +385,7 @@ router.post('/toMyTempList', passport.authenticate('jwt', {session: false}), fun
                 saveby: req.user._id.toString(),
                 savedate: nowDate
             }],
-            title: game.title,
+            title: req.body.title,
             savedate: nowDate,
             from: {
                 game: num,
@@ -565,6 +565,13 @@ router.post('/recommend', passport.authenticate('jwt', {session: false}), functi
 router.post('/removeTemp', (req, res, next) => {
     Temp.findOneAndDelete({_id: req.body._id}, (err, temp) => {
         if ( err ) res.json({success: false, msg: err});
+        else res.json({success: true});
+    });
+});
+
+router.post('/modifyTitle', (req, res, next) => {
+    Temp.findOneAndUpdate({_id: req.body.num}, {title: req.body.title}, (err, temp) => {
+        if ( err || !temp ) res.json({success: false});
         else res.json({success: true});
     });
 });

@@ -96,7 +96,9 @@ Blockly.JavaScript.text_replace=function(a){var b=Blockly.JavaScript.valueToCode
 Blockly.JavaScript.variablesDynamic={};Blockly.JavaScript.variables_get_dynamic=Blockly.JavaScript.variables_get;Blockly.JavaScript.variables_set_dynamic=Blockly.JavaScript.variables_set;
 
 function removeSingleQuote(s) {
-    return s.substring(1, s.length - 1);
+    s = s.substring(1, s.length - 1);
+    s = s.split("\\'").join("'");
+    return s;
 }
 function removeComma(s) {
     return s.substring(0, s.length - 2);

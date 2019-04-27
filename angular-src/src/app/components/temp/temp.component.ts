@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FuncService } from '../../services/func.service';
 import { GameService } from '../../services/game.service';
 import { AuthService } from '../../services/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { PageEvent } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-temp',
@@ -34,7 +35,8 @@ export class TempComponent implements OnInit {
     private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
-    private flashMessage: NgFlashMessageService
+    private flashMessage: NgFlashMessageService,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -88,6 +90,37 @@ export class TempComponent implements OnInit {
           messages: [result.msg],
           type: 'danger',
           timeout: 3000
+        });
+      }
+    });
+  }
+
+  modifyTitle(title: HTMLElement) {
+    const dialogRef = this.dialog.open(TempDialog, {
+      width: '300px',
+      data: {
+        title: this.temp.title,
+        text: ''
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(data => {
+      if ( data ) {
+        this.gameService.modifyTitle(this.temp._id, data).subscribe(result => {
+          if ( result.success ) {
+            title.innerHTML = data;
+            this.flashMessage.showFlashMessage({
+              messages: ['수정되었습니다.'], 
+              type: 'success', 
+              timeout: 2000
+            });
+          } else {
+            this.flashMessage.showFlashMessage({
+              messages: ['수정 오류'],
+              type: 'danger',
+              timeout: 3000
+            });
+          }
         });
       }
     });
@@ -149,6 +182,27 @@ export class TempComponent implements OnInit {
   paging(pageEvent: PageEvent) {
     this.pagingFrom = pageEvent.pageIndex * this.pagingSize;
     this.pagingTo = (pageEvent.pageIndex + 1) * this.pagingSize;
+  }
+
+}
+
+export interface DialogData {
+  title: string,
+  text: string
+}
+
+@Component({
+  selector: 'app-temp-dialog',
+  templateUrl: './temp.component.dialog.html'
+})
+export class TempDialog {
+  constructor(
+    public dialogRef: MatDialogRef<TempDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) { }
+
+  onClose() {
+    this.dialogRef.close();
   }
 
 }
