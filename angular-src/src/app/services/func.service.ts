@@ -13,6 +13,7 @@ function _window() {
 })
 export class FuncService {
   public ServerAddress: String = "http://13.125.172.123:3000";
+  // public ServerAddress: String = "http://localhost:3000";
 
   private previousUrl: string = undefined;
   private currentUrl: string = undefined;

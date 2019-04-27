@@ -1439,7 +1439,7 @@ module.exports = ".recommends {\r\n    margin: auto;\r\n    text-align: center;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1 mat-dialog-title>{{data.title}}</h1>\r\n<div mat-dialog-content>\r\n  아래 내용을 복사해주세요.<br/>\r\n  <mat-form-field style=\"width: 100%;\">\r\n    <textarea matInput [(ngModel)]=\"data.text\" rows=\"4\" readonly #copy (click)=\"copyText(copy)\"></textarea>\r\n  </mat-form-field>\r\n</div>\r\n<div mat-dialog-actions>\r\n  <button mat-button (click)=\"onClose()\">닫기</button>\r\n</div>\r\n"
+module.exports = "<h1 mat-dialog-title>{{data.title}}</h1>\r\n<div mat-dialog-content>\r\n  아래 내용을 복사해주세요.<br/>\r\n  <mat-form-field style=\"width: 100%;\">\r\n    <textarea matInput [(ngModel)]=\"data.text\" rows=\"5\" readonly #copy (click)=\"copyText(copy)\"></textarea>\r\n  </mat-form-field>\r\n</div>\r\n<div mat-dialog-actions>\r\n  <button mat-button (click)=\"onClose()\">닫기</button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -4027,6 +4027,7 @@ var FuncService = /** @class */ (function () {
         this.router = router;
         this.http = http;
         this.ServerAddress = "http://13.125.172.123:3000";
+        // public ServerAddress: String = "http://localhost:3000";
         this.previousUrl = undefined;
         this.currentUrl = undefined;
         this.currentUrl = this.router.url;
