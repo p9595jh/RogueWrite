@@ -146,7 +146,10 @@ block content
 
                 xhr.addEventListener('load', () => {
                     let result = JSON.parse(xhr.responseText);
-                    if ( result.success ) alert('임시저장 되었습니다');
+                    if ( result.success ) {
+                        moves = 0;
+                        alert('임시저장 되었습니다');
+                    }
                     else alert('임시저장 오류');
                 });
             } else {
@@ -171,6 +174,7 @@ block content
                     let result = JSON.parse(xhr.responseText);
                     if ( result.success ) {
                         document.getElementById('tempData').innerHTML = result._id;
+                        moves = 0;
                         alert('임시저장 되었습니다');
                     }
                     else alert('임시저장 오류');

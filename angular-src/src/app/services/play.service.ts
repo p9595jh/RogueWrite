@@ -91,7 +91,7 @@ export class PlayService {
     }
 
     // this is the end of the game
-    if ( this.stageNum >= this.data.stage.length ) {
+    if ( this.stageNum > this.data.stage.length ) {
       this.ending();
       return true;
     }
