@@ -12,10 +12,11 @@ export class PlayService {
 
   paramMap: Map<string, any>;  // Map
   stageNum: number;
-  phase: any;
   phaseNum: number;
-  end: boolean;
+  phase: any;
   paramArr: Array<any[]>;
+
+  end: boolean;
   score: number;
 
   constructor(
@@ -67,12 +68,15 @@ export class PlayService {
   private getDone() {
     this.end = true;
     this.score = this.substituteParams(this.data.score);
+    if ( this.score == Infinity || this.score == -Infinity ) {
+      console.log('infinity');
+    }
   }
 
   private ending() {
     this.getDone();
     console.log('[[END]]');
-    console.log('[[SELECTED ENDING: ' + (this.stageNum-1) + '-' + this.phaseNum + ']]');
+    console.log('[[SELECTED ENDING: ' + this.stageNum + '-' + this.phaseNum + ']]');
   }
 
   private noCondition() {
@@ -80,14 +84,22 @@ export class PlayService {
     console.log('[[NO MATCHED CONDITION]]');
   }
 
+  private getRandomNumber(n1: number, n2: number): number {
+    if ( n1 < n2 ) {
+      return Math.floor(Math.random() * (n2 - n1 + 1)) + n1;
+    } else {
+      return Math.floor(Math.random() * (n1 - n2 + 1)) + n2;
+    }
+  }
+
   select(condition: any, stage_to: number) {
-    // this.stageNum++;
     if ( stage_to == 0 ) this.stageNum++;
     else this.stageNum = stage_to;
 
     for (let val of condition) {
       let pv: any = this.paramMap.get(val.param);
-      pv.value += Math.floor(Math.random() * (this.substituteParams(val.below) - this.substituteParams(val.above) + 1)) + this.substituteParams(val.above);
+      // pv.value += Math.floor(Math.random() * (this.substituteParams(val.below) - this.substituteParams(val.above) + 1)) + this.substituteParams(val.above);
+      pv.value += this.getRandomNumber(this.substituteParams(val.above), this.substituteParams(val.below));
       this.paramMap.delete(val.param);
       this.paramMap.set(val.param, pv);
     }

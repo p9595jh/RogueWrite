@@ -61,6 +61,14 @@ a:hover {
   border-spacing: 0 10px;
 }
 
+#header-sm-table td {
+  padding-right: 15px;
+}
+
+#header-sm-table a {
+  color: white;
+}
+
 /* FROM & ADDED ========================================================================== */
 
 .original-section {
