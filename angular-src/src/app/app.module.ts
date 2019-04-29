@@ -49,7 +49,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ModifyComponent } from './components/modify/modify.component';
-import { BoardComponent } from './components/board/board.component';
+import { BoardComponent, CommentDialog } from './components/board/board.component';
 import { WriteComponent } from './components/write/write.component';
 import { NoPageComponent } from './components/no-page/no-page.component';
 import { AdminComponent } from './components/admin/admin.component';
@@ -94,6 +94,7 @@ const appRoutes: Routes = [
     ProfileComponent,
     ModifyComponent,
     BoardComponent,
+    CommentDialog,
     WriteComponent,
     NoPageComponent,
     AdminComponent,
@@ -150,11 +151,13 @@ const appRoutes: Routes = [
   exports: [
     RouterModule,
     ScrapDialog,
-    TempDialog
+    TempDialog,
+    CommentDialog
   ],
   entryComponents: [
     ScrapDialog,
-    TempDialog
+    TempDialog,
+    CommentDialog
   ],
   providers: [
     ValidateService,

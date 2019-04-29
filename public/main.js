@@ -41,7 +41,7 @@ module.exports = ".nav-link {\r\n    color: black;\r\n    display: block;\r\n   
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ng-flash-message></ng-flash-message>\r\n\r\n<div class=\"mdl-demo mdl-base\">\r\n  <div class=\"mdl-layout mdl-js-layout mdl-layout--fixed-tabs\">\r\n\r\n    <!-- header for large display -->\r\n    <header class=\"mdl-layout__header mdl-layout__header--scroll mdl-color--primary\"\r\n      style=\"background-color: rgb(143, 143, 226);\" *ngIf=\"!router.url.startsWith('/play')\">\r\n\r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n      \r\n      <!-- title -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\">\r\n        <!-- <h3 [routerLink]=\"['/']\" style=\"cursor: pointer; font-family: 'Ubuntu', sans-serif;\">{{siteName}}</h3> -->\r\n        <img src=\"/images/title.png\" [routerLink]=\"['/']\" style=\"cursor: pointer; width: 40%; height: auto;\" />\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" >\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"!authService.loggedIn()\" [routerLink]=\"['/login']\">LOGIN</a>\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"authService.loggedIn()\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"authService.loggedIn()\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n        </nav>\r\n      </div>\r\n      \r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n\r\n      <!-- nav bar -->\r\n      <nav mat-tab-nav-bar mat-stretch-tabs\r\n        mat-align-tabs=\"center\"\r\n        [color]=\"'primary'\"\r\n        [backgroundColor]=\"'accent'\"\r\n        style=\"border-bottom-color: black;\">\r\n        <a mat-tab-link *ngFor=\"let link of navLinks\"\r\n          (click)=\"activeLink = link.path\"\r\n          [routerLink]=\"[link.path]\"\r\n          [active]=\"activeLink == link.path\">{{link.label}}</a>\r\n      </nav>\r\n\r\n    </header>\r\n\r\n    <!-- header for mobile -->\r\n    <!-- <mat-sidenav-container class=\"mdl-layout__content\" *ngIf=\"!router.url.startsWith('/play')\">\r\n      <mat-sidenav #sidenav mode=\"push\" style=\"width: 49%; padding-top: 30px; background-color: rgb(233, 233, 233);\">\r\n        <h4 style=\"font-family: 'Ubuntu', sans-serif; margin: 20px;\" [routerLink]=\"['/']\" (click)=\"sidenav.toggle()\">\r\n          {{siteName}}\r\n        </h4><hr/><br/>\r\n        <a class=\"nav-link\" (click)=\"sidenav.toggle()\" *ngFor=\"let link of navLinks\"\r\n          [routerLink]=\"[link.path]\">{{link.label}}</a>\r\n      </mat-sidenav>\r\n      <mat-sidenav-content> -->\r\n\r\n        <header class=\"mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary\">\r\n          <nav class=\"navbar navbar-expand-md navbar-dark fixed-top bg-dark\" style=\"padding-right: 20px;\">\r\n            <div>\r\n              <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarCollapse\" aria-controls=\"navbarCollapse\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n                <span class=\"navbar-toggler-icon\"></span>\r\n              </button>\r\n              <img src=\"/images/title.png\" style=\"height: 55px; width: auto;\" [routerLink]=\"['/']\" />\r\n            </div>\r\n            <div>\r\n              <a *ngIf=\"!authService.loggedIn()\" style=\"color: white;\" [routerLink]=\"['/login']\">LOGIN</a>\r\n              <a *ngIf=\"authService.loggedIn()\" style=\"color: white;\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n              <span *ngIf=\"authService.loggedIn()\">&nbsp;&nbsp;</span>\r\n              <a *ngIf=\"authService.loggedIn()\" style=\"color: white;\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n            </div>\r\n            <div class=\"collapse navbar-collapse\" id=\"navbarCollapse\">\r\n              <ul class=\"navbar-nav mr-auto\">\r\n                <li class=\"nav-item active\" *ngFor=\"let link of navLinks\">\r\n                  <a class=\"nav-link\" [routerLink]=\"[link.path]\">{{link.label}}</a>\r\n                </li>\r\n              </ul>\r\n            </div>\r\n          </nav>\r\n        </header>\r\n\r\n        <!-- <header class=\"mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary\">\r\n          <nav class=\"navbar navbar-expand-md navbar-dark fixed-top bg-secondary\">\r\n            <button mat-icon-button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarCollapse\" aria-controls=\"navbarCollapse\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n              <mat-icon>view_headline</mat-icon>\r\n            </button>\r\n            <img src=\"/images/title.png\" style=\"height: 50px; width: auto;\" [routerLink]=\"['/']\" />\r\n            <div class=\"collapse navbar-collapse\" id=\"navbarCollapse\">\r\n              <ul class=\"navbar-nav mr-auto\">\r\n                <li class=\"nav-item active\" *ngFor=\"let link of navLinks\">\r\n                  <a class=\"nav-link\" [routerLink]=\"[link.path]\">{{link.label}}</a>\r\n                </li>\r\n              </ul>\r\n            </div>\r\n            \r\n            <div class=\"mdl-layout-spacer\"></div>\r\n            <nav class=\"mdl-navigation\">\r\n              <a *ngIf=\"!authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/login']\">LOGIN</a>\r\n              <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n              <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n            </nav>\r\n          </nav>\r\n        </header> -->\r\n\r\n        <!-- <header class=\"mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary\">\r\n          <div style=\"padding-left: 20px;\" class=\"mdl-layout__header-row\">\r\n            <mat-icon (click)=\"sidenav.toggle()\">view_headline</mat-icon>\r\n            <img src=\"/images/title.png\" style=\"height: 100%; width: auto;\" [routerLink]=\"['/']\" />\r\n            <div class=\"mdl-layout-spacer\"></div>\r\n            <nav class=\"mdl-navigation\">\r\n              <a *ngIf=\"!authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/login']\">LOGIN</a>\r\n              <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n              <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n            </nav>\r\n          </div>\r\n        </header> -->\r\n\r\n        <main class=\"mdl-layout__content\">\r\n          <div class=\"mdl-layout__tab-panel is-active\" id=\"overview\">\r\n            <br/><br/>\r\n            <router-outlet></router-outlet>\r\n            <br/><br/>\r\n          </div>\r\n\r\n          <!-- footer -->\r\n          <footer class=\"mdl-mega-footer\">\r\n            <div class=\"mdl-mega-footer--bottom-section\">\r\n              <div class=\"mdl-logo\">\r\n                powered by Project RogueWrite\r\n              </div>\r\n              <ul class=\"mdl-mega-footer--link-list\">\r\n                <li><a target=\"_blank\" href=\"https://getmdl.io/index.html\">MDL</a></li>\r\n                <li><a target=\"_blank\" href=\"https://material.angular.io/\">Angular Material</a></li>\r\n                <li><a target=\"_blank\" href=\"https://github.com/p9595jh/RogueWrite\">Github</a></li>\r\n              </ul>\r\n            </div>\r\n          </footer>\r\n          <!-- footer -->\r\n\r\n        </main>\r\n      <!-- </mat-sidenav-content>\r\n    </mat-sidenav-container> -->\r\n    <div *ngIf=\"router.url.startsWith('/play')\" style=\"background-color: white;\">\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<ng-flash-message></ng-flash-message>\r\n\r\n<div class=\"mdl-demo mdl-base\">\r\n  <div class=\"mdl-layout mdl-js-layout mdl-layout--fixed-tabs\">\r\n\r\n    <!-- header for large display -->\r\n    <header class=\"mdl-layout__header mdl-layout__header--scroll mdl-color--primary\"\r\n      style=\"background-color: rgb(143, 143, 226);\" *ngIf=\"!router.url.startsWith('/play')\">\r\n\r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n      \r\n      <!-- title -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\">\r\n        <!-- <h3 [routerLink]=\"['/']\" style=\"cursor: pointer; font-family: 'Ubuntu', sans-serif;\">{{siteName}}</h3> -->\r\n        <img src=\"/images/title.png\" [routerLink]=\"['/']\" style=\"cursor: pointer; width: 40%; height: auto;\" />\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" >\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"!authService.loggedIn()\" [routerLink]=\"['/login']\">LOGIN</a>\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"authService.loggedIn()\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"authService.loggedIn()\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n        </nav>\r\n      </div>\r\n      \r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n\r\n      <!-- nav bar -->\r\n      <nav mat-tab-nav-bar mat-stretch-tabs\r\n        mat-align-tabs=\"center\"\r\n        [color]=\"'primary'\"\r\n        [backgroundColor]=\"'accent'\"\r\n        style=\"border-bottom-color: black;\">\r\n        <a mat-tab-link *ngFor=\"let link of navLinks\"\r\n          (click)=\"activeLink = link.path\"\r\n          [routerLink]=\"[link.path]\"\r\n          [active]=\"activeLink == link.path\">{{link.label}}</a>\r\n      </nav>\r\n\r\n    </header>\r\n\r\n    <!-- header for mobile -->\r\n    <!-- <mat-sidenav-container class=\"mdl-layout__content\" *ngIf=\"!router.url.startsWith('/play')\">\r\n      <mat-sidenav #sidenav mode=\"push\" style=\"width: 49%; padding-top: 30px; background-color: rgb(233, 233, 233);\">\r\n        <h4 style=\"font-family: 'Ubuntu', sans-serif; margin: 20px;\" [routerLink]=\"['/']\" (click)=\"sidenav.toggle()\">\r\n          {{siteName}}\r\n        </h4><hr/><br/>\r\n        <a class=\"nav-link\" (click)=\"sidenav.toggle()\" *ngFor=\"let link of navLinks\"\r\n          [routerLink]=\"[link.path]\">{{link.label}}</a>\r\n      </mat-sidenav>\r\n      <mat-sidenav-content> -->\r\n\r\n        <header class=\"mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary\">\r\n          <nav class=\"navbar navbar-dark fixed-top bg-dark\">\r\n            <div>\r\n              <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarCollapse\" aria-controls=\"navbarCollapse\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n                <span class=\"navbar-toggler-icon\"></span>\r\n              </button>\r\n              <img src=\"/images/title.png\" style=\"height: 55px; width: auto;\" [routerLink]=\"['/']\" />\r\n            </div>\r\n            <table id=\"header-sm-table\">\r\n              <tr>\r\n                <td *ngIf=\"!authService.loggedIn()\">\r\n                  <a [routerLink]=\"['/login']\" class=\"header-sm-link\" id=\"header-sm-login\">LOGIN</a>\r\n                </td>\r\n                <td *ngIf=\"authService.loggedIn()\">\r\n                  <a [routerLink]=\"['/profile']\" class=\"header-sm-link\">PROFILE</a>\r\n                </td>\r\n                <td *ngIf=\"authService.loggedIn()\">\r\n                  <a (click)=\"onLogoutClick()\" href=\"#\" class=\"header-sm-link\">LOGOUT</a>\r\n                </td>\r\n              </tr>\r\n            </table>\r\n            <div class=\"collapse navbar-collapse\" id=\"navbarCollapse\">\r\n              <ul class=\"navbar-nav mr-auto\">\r\n                <li class=\"nav-item active\" *ngFor=\"let link of navLinks\">\r\n                  <a class=\"nav-link header-sm-link\" [routerLink]=\"[link.path]\">{{link.label}}</a>\r\n                </li>\r\n              </ul>\r\n            </div>\r\n          </nav>\r\n        </header>\r\n\r\n        <!-- <header class=\"mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary\">\r\n          <nav class=\"navbar navbar-expand-md navbar-dark fixed-top bg-secondary\">\r\n            <button mat-icon-button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarCollapse\" aria-controls=\"navbarCollapse\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n              <mat-icon>view_headline</mat-icon>\r\n            </button>\r\n            <img src=\"/images/title.png\" style=\"height: 50px; width: auto;\" [routerLink]=\"['/']\" />\r\n            <div class=\"collapse navbar-collapse\" id=\"navbarCollapse\">\r\n              <ul class=\"navbar-nav mr-auto\">\r\n                <li class=\"nav-item active\" *ngFor=\"let link of navLinks\">\r\n                  <a class=\"nav-link\" [routerLink]=\"[link.path]\">{{link.label}}</a>\r\n                </li>\r\n              </ul>\r\n            </div>\r\n            \r\n            <div class=\"mdl-layout-spacer\"></div>\r\n            <nav class=\"mdl-navigation\">\r\n              <a *ngIf=\"!authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/login']\">LOGIN</a>\r\n              <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n              <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n            </nav>\r\n          </nav>\r\n        </header> -->\r\n\r\n        <!-- <header class=\"mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary\">\r\n          <div style=\"padding-left: 20px;\" class=\"mdl-layout__header-row\">\r\n            <mat-icon (click)=\"sidenav.toggle()\">view_headline</mat-icon>\r\n            <img src=\"/images/title.png\" style=\"height: 100%; width: auto;\" [routerLink]=\"['/']\" />\r\n            <div class=\"mdl-layout-spacer\"></div>\r\n            <nav class=\"mdl-navigation\">\r\n              <a *ngIf=\"!authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/login']\">LOGIN</a>\r\n              <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n              <a *ngIf=\"authService.loggedIn()\" class=\"mdl-navigation__link\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n            </nav>\r\n          </div>\r\n        </header> -->\r\n\r\n        <main class=\"mdl-layout__content\">\r\n          <div class=\"mdl-layout__tab-panel is-active\" id=\"overview\">\r\n            <br/><br/>\r\n            <router-outlet></router-outlet>\r\n            <br/><br/>\r\n          </div>\r\n\r\n          <!-- footer -->\r\n          <footer class=\"mdl-mega-footer\">\r\n            <div class=\"mdl-mega-footer--bottom-section\">\r\n              <div class=\"mdl-logo\">\r\n                powered by Project RogueWrite\r\n              </div>\r\n              <ul class=\"mdl-mega-footer--link-list\">\r\n                <li><a target=\"_blank\" href=\"https://getmdl.io/index.html\">MDL</a></li>\r\n                <li><a target=\"_blank\" href=\"https://material.angular.io/\">Angular Material</a></li>\r\n                <li><a target=\"_blank\" href=\"https://github.com/p9595jh/RogueWrite\">Github</a></li>\r\n              </ul>\r\n            </div>\r\n          </footer>\r\n          <!-- footer -->\r\n\r\n        </main>\r\n      <!-- </mat-sidenav-content>\r\n    </mat-sidenav-container> -->\r\n    <div *ngIf=\"router.url.startsWith('/play')\" style=\"background-color: white;\">\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -243,6 +243,7 @@ var AppModule = /** @class */ (function () {
                 _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_23__["ProfileComponent"],
                 _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_24__["ModifyComponent"],
                 _components_board_board_component__WEBPACK_IMPORTED_MODULE_25__["BoardComponent"],
+                _components_board_board_component__WEBPACK_IMPORTED_MODULE_25__["CommentDialog"],
                 _components_write_write_component__WEBPACK_IMPORTED_MODULE_26__["WriteComponent"],
                 _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_27__["NoPageComponent"],
                 _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_28__["AdminComponent"],
@@ -298,11 +299,13 @@ var AppModule = /** @class */ (function () {
             exports: [
                 _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"],
                 _components_game_game_component__WEBPACK_IMPORTED_MODULE_30__["ScrapDialog"],
-                _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_32__["TempDialog"]
+                _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_32__["TempDialog"],
+                _components_board_board_component__WEBPACK_IMPORTED_MODULE_25__["CommentDialog"]
             ],
             entryComponents: [
                 _components_game_game_component__WEBPACK_IMPORTED_MODULE_30__["ScrapDialog"],
-                _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_32__["TempDialog"]
+                _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_32__["TempDialog"],
+                _components_board_board_component__WEBPACK_IMPORTED_MODULE_25__["CommentDialog"]
             ],
             providers: [
                 _services_validate_service__WEBPACK_IMPORTED_MODULE_9__["ValidateService"],
@@ -537,6 +540,17 @@ module.exports = ".boardTitle {\r\n    display: inline;\r\n}\r\n\r\n/*# sourceMa
 
 /***/ }),
 
+/***/ "./src/app/components/board/board.component.dialog.html":
+/*!**************************************************************!*\
+  !*** ./src/app/components/board/board.component.dialog.html ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h1 mat-dialog-title>{{data.title}}</h1>\r\n<div mat-dialog-content>\r\n  <p>댓글을 쓸 상대를 골라주세요.</p>\r\n  <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\r\n    <mat-label>선택</mat-label>\r\n    <mat-select [(ngModel)]=\"data.user\">\r\n      <mat-option *ngFor=\"let comment of data.comment\" [value]=\"comment\">\r\n        {{comment.nickname}} ({{comment.userid}})\r\n      </mat-option>\r\n    </mat-select>\r\n  </mat-form-field>\r\n</div>\r\n<div mat-dialog-actions>\r\n  <button mat-button (click)=\"onClose()\">닫기</button>\r\n  <button mat-button [mat-dialog-close]=\"data.user\" cdkFocusInitial>확인</button>\r\n</div>\r\n"
+
+/***/ }),
+
 /***/ "./src/app/components/board/board.component.html":
 /*!*******************************************************!*\
   !*** ./src/app/components/board/board.component.html ***!
@@ -544,7 +558,7 @@ module.exports = ".boardTitle {\r\n    display: inline;\r\n}\r\n\r\n/*# sourceMa
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!-- element for representing the location of the post to be scrolled -->\r\n<span style=\"display: hidden;\" #postLocation></span>\r\n\r\n<!-- section for a post -->\r\n<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">{{content?.title}}</h4>\r\n\r\n      <span style=\"float: right; text-align: right; font-size: 80%;\">\r\n        <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(content?.userid)\">{{content?.nickname}}</span><br/>{{content?.writedate}}\r\n      </span>\r\n      <hr/>\r\n      <div class=\"posting content\" [innerHtml]=\"content?.content | safe\"></div>\r\n      <br/><br/>\r\n      <div style=\"text-align: center;\">\r\n        <button mat-raised-button color=\"primary\" (click)=\"onRecommend()\">\r\n          추천 {{content?.recommend?.length}}\r\n        </button>\r\n      </div>\r\n      <br/><hr/>\r\n\r\n      <!-- ############### table for comments ############### -->\r\n      <table class=\"cmtTable\">\r\n        <tbody *ngFor=\"let comment of content?.comment\">\r\n          <tr>\r\n            <td style=\"width: 90px;\">\r\n              <img [attr.src]=\"'images/profile/' + comment.userid\" class=\"profileImage\" />\r\n            </td>\r\n            <td>\r\n              <span style=\"font-size: 80%;\">\r\n                <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(comment?.userid)\">\r\n                  {{comment?.nickname}}</span> &nbsp;|&nbsp; {{comment?.writedate}}\r\n                <span *ngIf=\"comment?.userid == user?.userid || user?.userid == 'admin'\"> &nbsp;|&nbsp; \r\n                  <span style=\"cursor: pointer;\" (click)=\"onRemoveComment(comment.num)\">삭제</span>\r\n                </span>\r\n              </span>\r\n              <pre class=\"content writerText\" *ngIf=\"comment?.userid == content?.userid\" [innerHTML]=\"comment?.comment\"></pre>\r\n              <pre class=\"content\" *ngIf=\"comment?.userid != content?.userid\" [innerHTML]=\"comment?.comment\"></pre>\r\n              <br/>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n      <!-- ############### table for comments ############### -->\r\n\r\n      <!-- ############### writing area ############### -->\r\n      <form *ngIf=\"authService.loggedIn()\" (submit)=\"onWriteComment(field)\"><hr *ngIf=\"content?.comment?.length > 0\" />\r\n        <table style=\"width: 96%; margin: auto;\">\r\n          <tr style=\"text-align: center;\">\r\n\r\n            <td rowspan=\"2\" style=\"width: 85%;\">\r\n              <mat-form-field appearance=\"outline\" style=\"width: 100%; height: 100%;\">\r\n                <mat-label>댓글을 작성해주세요.</mat-label>\r\n                <textarea matInput placeholder=\"\" rows=\"3\" name=\"cmtWrite\"\r\n                  [formControl]=\"cmtWrite\" [matAutocomplete]=\"auto\" #field></textarea>\r\n                <mat-autocomplete #auto>\r\n                  <!-- <mat-option *ngFor=\"let ct of filteredOptions | async\" [value]=\"'TO::' + ct?.nickname\" (onclick)=\"setCmtTo(ct)\">\r\n                    {{ct.nickname}} [{{ct.userid}}]\r\n                  </mat-option> -->\r\n                </mat-autocomplete>\r\n              </mat-form-field>\r\n            </td>\r\n\r\n            <td style=\"text-align: center; padding-bottom: 3%;\">\r\n              <button mat-raised-button type=\"submit\" style=\"width: 60%;\">작성</button>\r\n            </td>\r\n\r\n          </tr>\r\n        </table>\r\n      </form>\r\n      <!-- ############### writing area ############### -->\r\n\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"aboutPost\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #aboutPost>\r\n    <button mat-menu-item *ngIf=\"content?.userid == user?.userid || user?.userid == 'admin'\" (click)=\"onRemovePost()\">\r\n      <span>삭제</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<!-- section for a board -->\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 class=\"boardTitle\" *ngIf=\"type == 'free'\">자유게시판</h4>\r\n      <h4 class=\"boardTitle\" *ngIf=\"type == 'notice'\">공지게시판</h4>\r\n      <h4 class=\"boardTitle\" *ngIf=\"type != 'free' && type != 'notice'\">{{sub?.title}} 게시판</h4>&nbsp;\r\n      <h5 class=\"boardTitle\" *ngIf=\"authService.loggedIn() && !isMyBookmark\" style=\"cursor: pointer;\" (click)=\"bookmark()\">☆</h5>\r\n      <h5 class=\"boardTitle\" *ngIf=\"authService.loggedIn() && isMyBookmark\" style=\"cursor: pointer;\" (click)=\"unbookmark()\">★</h5>\r\n      <hr/>\r\n      \r\n      <!-- for large display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--large-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">날짜</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\r\n            <th>글쓴이</th>\r\n            <th>조회수</th>\r\n            <th>추천</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{extractDate(val.writedate)}}</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/board/'+type+'/'+val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\r\n                (click)=\"scrollToPost(postLocation)\">{{val.title}}</a>&nbsp;\r\n              <span *ngIf=\"val.comment.length > 0\" style=\"font-size: 85%; color: grey;\">[{{val.comment.length}}]</span>\r\n            </td>\r\n            <td>\r\n              <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(val?.userid)\">{{val.nickname}}</span>\r\n            </td>\r\n            <td>{{val.hit}}</td>\r\n            <td>{{val.recommend.length}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <!-- for small display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--small-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <tbody>\r\n          <tr *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n            <td class=\"mdl-data-table__cell--non-numeric\"\r\n              [routerLink]=\"['/board/'+type+'/'+val?._id]\" (click)=\"scrollToPost(postLocation)\">\r\n              <div>\r\n                {{val.title}}\r\n                <span *ngIf=\"val.comment.length > 0\" style=\"color: grey;\">[{{val.comment.length}}]</span>\r\n              </div>\r\n              <div style=\"font-size: 85%; margin-top: 1%;\">\r\n                <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>추천 {{val.recommend.length}}</span>\r\n              </div>\r\n            </td>\r\n            <td>{{extractDate(val.writedate)}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"contents?.length\" [pageSize]=\"pagingSize\" (page)=\"paging($event)\"></mat-paginator>\r\n\r\n      <div *ngIf=\"(type != 'notice' && authService.loggedIn()) || (type == 'notice' && user?.userid == 'admin')\" style=\"float: right;\">\r\n        <a mat-raised-button [routerLink]=\"['/write/' + type]\">글쓰기</a>\r\n      </div><br/>\r\n      <div style=\"text-align: center;\">\r\n        <mat-form-field style=\"width: 100px;\">\r\n          <mat-select value=\"title\" (selectionChange)=\"onSearch(searchSelect.value, searchInput.value)\" #searchSelect>\r\n            <mat-option value=\"title\">제목</mat-option>\r\n            <mat-option value=\"nickname\">닉네임</mat-option>\r\n          </mat-select>\r\n        </mat-form-field>&nbsp;&nbsp;\r\n        <mat-form-field appearance=\"outline\" style=\"width: 200px;\">\r\n          <mat-label>검색</mat-label>\r\n          <input matInput (input)=\"onSearch(searchSelect.value, $event.target.value)\" #searchInput>\r\n          <mat-icon matSuffix>search</mat-icon>\r\n        </mat-form-field>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <button mat-icon-button [matMenuTriggerFor]=\"board\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #board>\r\n    <button mat-menu-item *ngIf=\"type != 'free' && type != 'notice'\" [routerLink]=\"['/game/' + sub?.gameid]\">\r\n      <span>게임으로 이동</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<!-- element for representing the location of the post to be scrolled -->\r\n<span style=\"display: hidden;\" #postLocation></span>\r\n\r\n<!-- section for a post -->\r\n<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">{{content?.title}}</h4>\r\n\r\n      <span style=\"float: right; text-align: right; font-size: 80%;\">\r\n        <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(content?.userid)\">{{content?.nickname}}</span><br/>{{content?.writedate}}\r\n      </span>\r\n      <hr/>\r\n      <div class=\"posting content\" [innerHtml]=\"content?.content | safe\"></div>\r\n      <br/><br/>\r\n      <div style=\"text-align: center;\">\r\n        <button mat-raised-button color=\"primary\" (click)=\"onRecommend()\">\r\n          추천 {{content?.recommend?.length}}\r\n        </button>\r\n      </div>\r\n      <br/><hr/>\r\n\r\n      <!-- ############### table for comments ############### -->\r\n      <table class=\"cmtTable\">\r\n        <tbody *ngFor=\"let comment of content?.comment\">\r\n          <tr>\r\n            <td style=\"width: 90px;\">\r\n              <img [attr.src]=\"'images/profile/' + comment.userid\" class=\"profileImage\" />\r\n            </td>\r\n            <td>\r\n              <span style=\"font-size: 80%;\">\r\n                <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(comment?.userid)\">\r\n                  {{comment?.nickname}}</span> &nbsp;|&nbsp; {{comment?.writedate}}\r\n                <span *ngIf=\"comment?.userid == user?.userid || user?.userid == 'admin'\"> &nbsp;|&nbsp; \r\n                  <span style=\"cursor: pointer;\" (click)=\"onRemoveComment(comment.num)\">삭제</span>\r\n                </span>\r\n              </span>\r\n              <pre class=\"content writerText\" *ngIf=\"comment?.userid == content?.userid\" [innerHTML]=\"comment?.comment\"></pre>\r\n              <pre class=\"content\" *ngIf=\"comment?.userid != content?.userid\" [innerHTML]=\"comment?.comment\"></pre>\r\n              <br/>\r\n            </td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n      <!-- ############### table for comments ############### -->\r\n\r\n      <!-- ############### writing area ############### -->\r\n      <form *ngIf=\"authService.loggedIn()\" (submit)=\"onWriteComment(field)\"><hr *ngIf=\"content?.comment?.length > 0\" />\r\n        <table style=\"width: 96%; margin: auto;\">\r\n          <tr style=\"text-align: center;\">\r\n\r\n            <td rowspan=\"2\" style=\"width: 85%;\">\r\n              <mat-form-field appearance=\"outline\" style=\"width: 100%; height: 100%;\">\r\n                <mat-label>댓글을 작성해주세요.</mat-label>\r\n                <textarea matInput rows=\"3\" name=\"cmtWrite\"\r\n                  [formControl]=\"cmtWrite\" #field\r\n                  (input)=\"onTypingComment(field, $event.target.value)\"></textarea>\r\n              </mat-form-field>\r\n            </td>\r\n\r\n            <td style=\"text-align: center; padding-bottom: 3%;\">\r\n              <button mat-raised-button type=\"submit\" style=\"width: 60%;\">작성</button>\r\n            </td>\r\n\r\n          </tr>\r\n        </table>\r\n      </form>\r\n      <!-- ############### writing area ############### -->\r\n\r\n    </div>\r\n  </div>\r\n  <button mat-icon-button [matMenuTriggerFor]=\"aboutPost\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #aboutPost>\r\n    <button mat-menu-item *ngIf=\"content?.userid == user?.userid || user?.userid == 'admin'\" (click)=\"onRemovePost()\">\r\n      <span>삭제</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<!-- section for a board -->\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 class=\"boardTitle\" *ngIf=\"type == 'free'\">자유게시판</h4>\r\n      <h4 class=\"boardTitle\" *ngIf=\"type == 'notice'\">공지게시판</h4>\r\n      <h4 class=\"boardTitle\" *ngIf=\"type != 'free' && type != 'notice'\">{{sub?.title}} 게시판</h4>&nbsp;\r\n      <h5 class=\"boardTitle\" *ngIf=\"authService.loggedIn() && !isMyBookmark\" style=\"cursor: pointer;\" (click)=\"bookmark()\">☆</h5>\r\n      <h5 class=\"boardTitle\" *ngIf=\"authService.loggedIn() && isMyBookmark\" style=\"cursor: pointer;\" (click)=\"unbookmark()\">★</h5>\r\n      <hr/>\r\n      \r\n      <!-- for large display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--large-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <thead>\r\n          <tr>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">날짜</th>\r\n            <th class=\"mdl-data-table__cell--non-numeric\">제목</th>\r\n            <th>글쓴이</th>\r\n            <th>조회수</th>\r\n            <th>추천</th>\r\n          </tr>\r\n        </thead>\r\n        <tbody>\r\n          <tr *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n            <td class=\"mdl-data-table__cell--non-numeric\">{{extractDate(val.writedate)}}</td>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">\r\n              <a [routerLink]=\"['/board/'+type+'/'+val?._id]\"\r\n                style=\"color: black; text-decoration: none; font-weight: 400;\"\r\n                (click)=\"scrollToPost(postLocation)\">{{val.title}}</a>&nbsp;\r\n              <span *ngIf=\"val.comment.length > 0\" style=\"font-size: 85%; color: grey;\">[{{val.comment.length}}]</span>\r\n            </td>\r\n            <td>\r\n              <span class=\"toProfile\" (click)=\"funcService.openInfoWindow(val?.userid)\">{{val.nickname}}</span>\r\n            </td>\r\n            <td>{{val.hit}}</td>\r\n            <td>{{val.recommend.length}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table>\r\n\r\n      <!-- for small display -->\r\n      <table class=\"mdl-data-table mdl-js-data-table mdl-layout--small-screen-only\" style=\"margin: auto; width: 98%;\">\r\n        <tbody>\r\n          <tr *ngFor=\"let val of contents | slice:pagingFrom:pagingTo; let i=index\">\r\n            <td class=\"mdl-data-table__cell--non-numeric\"\r\n              [routerLink]=\"['/board/'+type+'/'+val?._id]\" (click)=\"scrollToPost(postLocation)\">\r\n              <div>\r\n                {{val.title}}\r\n                <span *ngIf=\"val.comment.length > 0\" style=\"color: grey;\">[{{val.comment.length}}]</span>\r\n              </div>\r\n              <div style=\"font-size: 85%; margin-top: 1%;\">\r\n                <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>조회 {{val.hit}}</span>&nbsp;&nbsp;&nbsp;\r\n                <span>추천 {{val.recommend.length}}</span>\r\n              </div>\r\n            </td>\r\n            <td>{{extractDate(val.writedate)}}</td>\r\n          </tr>\r\n        </tbody>\r\n      </table><br/>\r\n\r\n      <mat-paginator [length]=\"contents?.length\" [pageSize]=\"pagingSize\" (page)=\"paging($event)\"></mat-paginator>\r\n\r\n      <div *ngIf=\"(type != 'notice' && authService.loggedIn()) || (type == 'notice' && user?.userid == 'admin')\" style=\"float: right;\">\r\n        <a mat-raised-button [routerLink]=\"['/write/' + type]\">글쓰기</a>\r\n      </div><br/>\r\n      <div style=\"text-align: center;\">\r\n        <mat-form-field style=\"width: 100px;\">\r\n          <mat-select value=\"title\" (selectionChange)=\"onSearch(searchSelect.value, searchInput.value)\" #searchSelect>\r\n            <mat-option value=\"title\">제목</mat-option>\r\n            <mat-option value=\"nickname\">닉네임</mat-option>\r\n          </mat-select>\r\n        </mat-form-field>&nbsp;&nbsp;\r\n        <mat-form-field appearance=\"outline\" style=\"width: 200px;\">\r\n          <mat-label>검색</mat-label>\r\n          <input matInput (input)=\"onSearch(searchSelect.value, $event.target.value)\" #searchInput>\r\n          <mat-icon matSuffix>search</mat-icon>\r\n        </mat-form-field>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <button mat-icon-button [matMenuTriggerFor]=\"board\">\r\n    <mat-icon>more_vert</mat-icon>\r\n  </button>\r\n  <mat-menu #board>\r\n    <button mat-menu-item *ngIf=\"type != 'free' && type != 'notice'\" [routerLink]=\"['/game/' + sub?.gameid]\">\r\n      <span>게임으로 이동</span>\r\n    </button>\r\n  </mat-menu>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -552,15 +566,16 @@ module.exports = "<!-- element for representing the location of the post to be s
 /*!*****************************************************!*\
   !*** ./src/app/components/board/board.component.ts ***!
   \*****************************************************/
-/*! exports provided: BoardComponent */
+/*! exports provided: BoardComponent, CommentDialog */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BoardComponent", function() { return BoardComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CommentDialog", function() { return CommentDialog; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
 /* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
 /* harmony import */ var _services_board_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../services/board.service */ "./src/app/services/board.service.ts");
@@ -576,6 +591,9 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (undefined && undefined.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 
 
 
@@ -586,7 +604,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var BoardComponent = /** @class */ (function () {
-    function BoardComponent(route, funcService, authService, boardService, router, flashMessage) {
+    function BoardComponent(route, funcService, authService, boardService, router, flashMessage, dialog) {
         var _this = this;
         this.route = route;
         this.funcService = funcService;
@@ -594,12 +612,12 @@ var BoardComponent = /** @class */ (function () {
         this.boardService = boardService;
         this.router = router;
         this.flashMessage = flashMessage;
+        this.dialog = dialog;
         this.cmtWrite = new _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormControl"]();
         this.bk = undefined;
         this.pagingSize = 25;
         this.pagingFrom = 0;
         this.pagingTo = this.pagingSize;
-        this.ct = null;
         this.navigationSubscription = this.router.events.subscribe(function (e) {
             if (e instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationEnd"]) {
                 _this.initialiseInvites();
@@ -636,7 +654,6 @@ var BoardComponent = /** @class */ (function () {
             if (result.exist) {
                 _this.boardService.getSub(_this.type).subscribe(function (data) {
                     _this.sub = data.sub;
-                    _this.setFilteredOptions();
                     _this.boardService.takeAllPosts(_this.type).subscribe(function (data) {
                         _this.contents = data.posts;
                         if (_this.num != 'list') {
@@ -646,6 +663,7 @@ var BoardComponent = /** @class */ (function () {
                                     return false;
                                 }
                                 _this.content = result.post;
+                                _this.setCommentsArray(_this.content.comment);
                                 if (_this.type == 'free') {
                                     _this.funcService.setTitle(_this.content.title + ' :: 자유게시판');
                                 }
@@ -703,26 +721,45 @@ var BoardComponent = /** @class */ (function () {
             this.navigationSubscription.unsubscribe();
         }
     };
-    BoardComponent.prototype.setFilteredOptions = function () {
-        var _this = this;
-        this.filteredOptions = this.cmtWrite.valueChanges.pipe(
-        // startWith('TO::'),
-        Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (value) { return _this._filter(value); }));
+    BoardComponent.prototype.setCommentsArray = function (comments) {
+        this.comments = [];
+        outerLoop: for (var _i = 0, comments_1 = comments; _i < comments_1.length; _i++) {
+            var comment = comments_1[_i];
+            for (var _a = 0, _b = this.comments; _a < _b.length; _a++) {
+                var exist = _b[_a];
+                if (comment.userid == exist.userid) {
+                    continue outerLoop;
+                }
+            }
+            this.comments.push({
+                userid: comment.userid,
+                nickname: comment.nickname
+            });
+        }
     };
-    BoardComponent.prototype._filter = function (value) {
-        var filterValue = value.toLowerCase();
-        // [https://material.angular.io/components/autocomplete/overview]
-        // return this.options.filter(option => option.toLowerCase().includes(filterValue));
-        // let f = [];
-        // for (let i=0; i<this.foods.length; i++) {
-        //   f[i] = 'TO::' + this.foods[i].viewValue + ' [' + this.foods[i].value + '] ';
-        // }
-        // return f.filter(option => option.toLowerCase().includes(filterValue));
-        // return this.foods;
-        return this.content.comment;
-    };
-    BoardComponent.prototype.setCmtTo = function (ct) {
-        this.ct = ct;
+    BoardComponent.prototype.onTypingComment = function (field, text) {
+        if (this.comments.length == 0)
+            return;
+        var len = text.length;
+        if (len < 4)
+            return;
+        if (text.substring(len - 4) == 'TO::') {
+            var dialogRef = this.dialog.open(CommentDialog, {
+                width: '300px',
+                data: {
+                    title: this.content.title,
+                    comment: this.comments,
+                    user: undefined
+                }
+            });
+            dialogRef.afterClosed().subscribe(function (data) {
+                if (!data)
+                    return;
+                else {
+                    console.log(data);
+                }
+            });
+        }
     };
     BoardComponent.prototype.onWriteComment = function (field) {
         var _this = this;
@@ -863,9 +900,29 @@ var BoardComponent = /** @class */ (function () {
             _services_auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"],
             _services_board_service__WEBPACK_IMPORTED_MODULE_5__["BoardService"],
             _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
-            ng_flash_messages__WEBPACK_IMPORTED_MODULE_6__["NgFlashMessageService"]])
+            ng_flash_messages__WEBPACK_IMPORTED_MODULE_6__["NgFlashMessageService"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialog"]])
     ], BoardComponent);
     return BoardComponent;
+}());
+
+var CommentDialog = /** @class */ (function () {
+    function CommentDialog(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+    }
+    CommentDialog.prototype.onClose = function () {
+        this.dialogRef.close();
+    };
+    CommentDialog = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-board-dialog',
+            template: __webpack_require__(/*! ./board.component.dialog.html */ "./src/app/components/board/board.component.dialog.html")
+        }),
+        __param(1, Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"])(_angular_material__WEBPACK_IMPORTED_MODULE_2__["MAT_DIALOG_DATA"])),
+        __metadata("design:paramtypes", [_angular_material__WEBPACK_IMPORTED_MODULE_2__["MatDialogRef"], Object])
+    ], CommentDialog);
+    return CommentDialog;
 }());
 
 
@@ -2159,7 +2216,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">404 ERROR</h4>\r\n\r\n      <hr/>\r\n      <div class=\"posting\">\r\n        <img src=\"images/404.jpg\" style=\"width: 100%;\"><br/><br/>\r\n        페이지가 존재하지 않습니다.<br/><br/>\r\n        <a mat-raised-button color=\"primary\" [routerLink]=\"[this.funcService.getPreviousUrl()]\">이전 페이지로 돌아가기</a><br/><br/>\r\n      </div>\r\n      <br/><br/>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\n    <div class=\"mdl-card__supporting-text\">\n      <h4 style=\"display: inline;\">404 ERROR</h4>\n\n      <hr/>\n      <div class=\"posting\">\n        <img src=\"images/404.jpg\" style=\"width: 100%;\"><br/><br/>\n        페이지가 존재하지 않습니다.<br/><br/>\n        <a mat-raised-button color=\"primary\" [routerLink]=\"[this.funcService.getPreviousUrl()]\">이전 페이지로 돌아가기</a><br/><br/>\n      </div>\n      <br/><br/>\n\n    </div>\n  </div>\n</section>\n\n<section></section>\n"
 
 /***/ }),
 
@@ -4331,6 +4388,7 @@ var PlayService = /** @class */ (function () {
     PlayService.prototype.gameSet = function (gameData) {
         this.count = 0;
         this.stageNum = 1;
+        this.previousStageNum = this.stageNum;
         this.phaseNum = 1;
         this.end = false;
         this.paramMap = new Map();
@@ -4373,18 +4431,32 @@ var PlayService = /** @class */ (function () {
     PlayService.prototype.getDone = function () {
         this.end = true;
         this.score = this.substituteParams(this.data.score);
+        if (this.score == Infinity || this.score == -Infinity) {
+            console.log('infinity');
+        }
     };
     PlayService.prototype.ending = function () {
         this.getDone();
         console.log('[[END]]');
-        console.log('[[SELECTED ENDING: ' + (this.stageNum - 1) + '-' + this.phaseNum + ']]');
+        if (this.previousStageNum < 0)
+            console.log('[[SELECTED ENDING: ' + this.previousStageNum + '-' + this.phaseNum + ']]');
+        else
+            console.log('[[SELECTED ENDING: ' + (this.stageNum - 1) + '-' + this.phaseNum + ']]');
     };
     PlayService.prototype.noCondition = function () {
         this.getDone();
         console.log('[[NO MATCHED CONDITION]]');
     };
+    PlayService.prototype.getRandomNumber = function (n1, n2) {
+        if (n1 < n2) {
+            return Math.floor(Math.random() * (n2 - n1 + 1)) + n1;
+        }
+        else {
+            return Math.floor(Math.random() * (n1 - n2 + 1)) + n2;
+        }
+    };
     PlayService.prototype.select = function (condition, stage_to) {
-        // this.stageNum++;
+        // this.previousStageNum = this.stageNum;
         if (stage_to == 0)
             this.stageNum++;
         else
@@ -4392,7 +4464,8 @@ var PlayService = /** @class */ (function () {
         for (var _i = 0, condition_2 = condition; _i < condition_2.length; _i++) {
             var val = condition_2[_i];
             var pv = this.paramMap.get(val.param);
-            pv.value += Math.floor(Math.random() * (this.substituteParams(val.below) - this.substituteParams(val.above) + 1)) + this.substituteParams(val.above);
+            // pv.value += Math.floor(Math.random() * (this.substituteParams(val.below) - this.substituteParams(val.above) + 1)) + this.substituteParams(val.above);
+            pv.value += this.getRandomNumber(this.substituteParams(val.above), this.substituteParams(val.below));
             this.paramMap.delete(val.param);
             this.paramMap.set(val.param, pv);
         }
@@ -4409,8 +4482,10 @@ var PlayService = /** @class */ (function () {
                     if (this.checkNextStageCondition(phase.condition)) {
                         this.phase = phase;
                         this.phaseNum = phase.phase_num;
-                        if (this.stageNum < 0)
+                        if (this.stageNum < 0) {
+                            this.previousStageNum = this.stageNum;
                             this.stageNum = this.count;
+                        }
                         return true;
                     }
                 }
@@ -4647,7 +4722,7 @@ var SafeHtml = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Hoon\PJH\others\web\rwrite\angular-src\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\PJH\1494054\RogueWrite\angular-src\src\main.ts */"./src/main.ts");
 
 
 /***/ })

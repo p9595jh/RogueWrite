@@ -1,0 +1,16 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+<div mat-dialog-content>
+  <p>댓글을 쓸 상대를 골라주세요.</p>
+  <mat-form-field appearance="outline" style="width: 100%;">
+    <mat-label>선택</mat-label>
+    <mat-select [(ngModel)]="data.user">
+      <mat-option *ngFor="let comment of data.comment" [value]="comment">
+        {{comment.nickname}} ({{comment.userid}})
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">닫기</button>
+  <button mat-button [mat-dialog-close]="data.user" cdkFocusInitial>확인</button>
+</div>

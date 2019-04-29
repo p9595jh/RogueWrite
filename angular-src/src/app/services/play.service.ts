@@ -9,6 +9,7 @@ import { FuncService } from './func.service';
 export class PlayService {
   data: any;
   count: number;  // entire number of the stage whose number is over 0
+  previousStageNum: number;
 
   paramMap: Map<string, any>;  // Map
   stageNum: number;
@@ -27,6 +28,7 @@ export class PlayService {
   gameSet(gameData) {
     this.count = 0;
     this.stageNum = 1;
+    this.previousStageNum = this.stageNum;
     this.phaseNum = 1;
     this.end = false;
     this.paramMap = new Map<string, any>();
@@ -76,7 +78,8 @@ export class PlayService {
   private ending() {
     this.getDone();
     console.log('[[END]]');
-    console.log('[[SELECTED ENDING: ' + this.stageNum + '-' + this.phaseNum + ']]');
+    if ( this.previousStageNum < 0 ) console.log('[[SELECTED ENDING: ' + this.previousStageNum + '-' + this.phaseNum + ']]');
+    else console.log('[[SELECTED ENDING: ' + (this.stageNum - 1) + '-' + this.phaseNum + ']]');
   }
 
   private noCondition() {
@@ -93,6 +96,7 @@ export class PlayService {
   }
 
   select(condition: any, stage_to: number) {
+    // this.previousStageNum = this.stageNum;
     if ( stage_to == 0 ) this.stageNum++;
     else this.stageNum = stage_to;
 
@@ -116,7 +120,10 @@ export class PlayService {
           if ( this.checkNextStageCondition(phase.condition) ) {
             this.phase = phase;
             this.phaseNum = phase.phase_num;
-            if ( this.stageNum < 0 ) this.stageNum = this.count;
+            if ( this.stageNum < 0 ) {
+              this.previousStageNum = this.stageNum;
+              this.stageNum = this.count;
+            }
             return true;
           }
         }

@@ -1,13 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs/operators';
 import { Router, NavigationEnd } from '@angular/router';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { FuncService } from '../../services/func.service';
 import { AuthService } from '../../services/auth.service';
 import { BoardService } from '../../services/board.service';
 import { NgFlashMessageService } from 'ng-flash-messages';
-import { Observable } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material';
 
@@ -18,12 +17,12 @@ import { PageEvent } from '@angular/material';
 })
 export class BoardComponent implements OnInit, OnDestroy {
   navigationSubscription;
-  filteredOptions: Observable<string[]>;  // not using for now; a function for commenting
 
   type: String;
   num: String;
   content: any;
-  contents: Object[];
+  contents: any[];
+  comments: any[];
   cmtWrite = new FormControl();
 
   user: any;
@@ -35,15 +34,14 @@ export class BoardComponent implements OnInit, OnDestroy {
   pagingFrom: Number = 0;
   pagingTo: Number = this.pagingSize;
 
-  ct: any = null;
-
   constructor(
     private route: ActivatedRoute,
     private funcService: FuncService,
     private authService: AuthService,
     private boardService: BoardService,
     private router: Router,
-    private flashMessage: NgFlashMessageService
+    private flashMessage: NgFlashMessageService,
+    private dialog: MatDialog
   ) {
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       if ( e instanceof NavigationEnd ) {
@@ -84,7 +82,6 @@ export class BoardComponent implements OnInit, OnDestroy {
       if ( result.exist ) {
         this.boardService.getSub(this.type).subscribe(data => {
           this.sub = data.sub;
-          this.setFilteredOptions();
           this.boardService.takeAllPosts(this.type).subscribe(data => {
             this.contents = data.posts;
             if ( this.num != 'list' ) {
@@ -94,6 +91,7 @@ export class BoardComponent implements OnInit, OnDestroy {
                   return false;
                 }
                 this.content = result.post;
+                this.setCommentsArray(this.content.comment);
 
                 if ( this.type == 'free' ) {
                   this.funcService.setTitle(this.content.title + ' :: 자유게시판');
@@ -149,28 +147,43 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
   }
 
-  private setFilteredOptions() {
-    this.filteredOptions = this.cmtWrite.valueChanges.pipe(
-      // startWith('TO::'),
-      map(value => this._filter(value))
-    );
+  private setCommentsArray(comments) {
+    this.comments = [];
+    outerLoop: for (let comment of comments) {
+      for (let exist of this.comments) {
+        if ( comment.userid == exist.userid ) {
+          continue outerLoop;
+        }
+      }
+      this.comments.push({
+        userid: comment.userid,
+        nickname: comment.nickname
+      });
+    }
   }
 
-  private _filter(value: string): any[] {
-    const filterValue = value.toLowerCase();
-    // [https://material.angular.io/components/autocomplete/overview]
-    // return this.options.filter(option => option.toLowerCase().includes(filterValue));
-    // let f = [];
-    // for (let i=0; i<this.foods.length; i++) {
-    //   f[i] = 'TO::' + this.foods[i].viewValue + ' [' + this.foods[i].value + '] ';
-    // }
-    // return f.filter(option => option.toLowerCase().includes(filterValue));
-    // return this.foods;
-    return this.content.comment;
-  }
+  onTypingComment(field: HTMLTextAreaElement, text: string) {
+    if ( this.comments.length == 0 ) return;
 
-  setCmtTo(ct: any) {
-    this.ct = ct;
+    const len: number = text.length;
+    if ( len < 4 ) return;
+    if ( text.substring(len - 4) == 'TO::' ) {
+      const dialogRef = this.dialog.open(CommentDialog, {
+        width: '300px',
+        data: {
+          title: this.content.title,
+          comment: this.comments,
+          user: undefined
+        }
+      });
+  
+      dialogRef.afterClosed().subscribe(data => {
+        if ( !data ) return;
+        else {
+          console.log(data);
+        }
+      });
+    }
   }
 
   onWriteComment(field: HTMLTextAreaElement) {
@@ -293,6 +306,29 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.pagingFrom = pageEvent.pageIndex * this.pagingSize;
     this.pagingTo = (pageEvent.pageIndex + 1) * this.pagingSize;
     this.router.navigate(['/board/' + this.type + '/' + this.num]);
+  }
+
+}
+
+export interface DialogData {
+  title: string,
+  comment: Array<any>,
+  user: any
+}
+
+@Component({
+  selector: 'app-board-dialog',
+  templateUrl: './board.component.dialog.html'
+})
+export class CommentDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<CommentDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
+  ) { }
+
+  onClose() {
+    this.dialogRef.close();
   }
 
 }
