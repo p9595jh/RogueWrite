@@ -27,6 +27,7 @@
             "styles": [
               "src/styles.css",
               "src/app-theme.scss",
+              "src/styles-app-loading.scss",
               "./node_modules/froala-editor/css/froala_editor.pkgd.min.css",
               "./node_modules/froala-editor/css/froala_style.min.css",
               "./node_modules/font-awesome/css/font-awesome.css"

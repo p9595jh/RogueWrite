@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth.service';
 import { GameService } from '../../services/game.service';
 import { PlayService } from '../../services/play.service';
 import { TempDialog } from '../temp/temp.component';
+import { CommentDialog, ReplyDialog } from '../board/board.component';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { FormControl } from '@angular/forms';
 import { PageEvent } from '@angular/material';
@@ -22,7 +23,8 @@ export class GameComponent implements OnInit, OnDestroy {
 
   num: String = '';
   content: any;
-  contents: Object[];
+  contents: any[];
+  comments: any[];
   cmtWrite = new FormControl();
   user: any;
 
@@ -60,6 +62,7 @@ export class GameComponent implements OnInit, OnDestroy {
             return false;
           }
           this.content = result.post;
+          this.setCommentsArray(this.content.comment);
           if ( b ) {
             this.funcService.setTitle(this.content.title + ' :: 게임게시판');
             this.playService.gameSet(this.content.game);
@@ -70,7 +73,14 @@ export class GameComponent implements OnInit, OnDestroy {
             });
           }
         });
-      } else this.funcService.setTitle('게임 게시판');
+      } else {
+        this.funcService.setTitle('게임 게시판');
+        if ( this.authService.loggedIn() ) {
+          this.authService.getProfile().subscribe(profile => {
+            this.user = profile.user;
+          });
+        }
+      }
     });
 
   }
@@ -85,10 +95,64 @@ export class GameComponent implements OnInit, OnDestroy {
     }
   }
 
+  countComments(comments): number {
+    let count = 0;
+    for (let comment of comments) {
+      if ( comment.reply ) count += comment.reply.length;
+      count++;
+    }
+    return count;
+  }
+
+  private setCommentsArray(comments) {
+    this.comments = [];
+    for (let comment of comments) {
+      if ( comment.reply ) {
+        for (let reply of comment.reply) {
+          this.pushToCommentsArray(reply);
+        }
+      }
+      this.pushToCommentsArray(comment);
+    }
+  }
+
+  private pushToCommentsArray(item) {
+    for (let exist of this.comments) {
+      if ( exist.userid == item.userid ) {
+        return;
+      }
+    }
+    this.comments.push({
+      userid: item.userid,
+      nickname: item.nickname
+    });
+  }
+
+  onTypingComment(field: HTMLTextAreaElement, text: string) {
+    if ( this.comments.length == 0 ) return;
+    const len: number = text.length;
+    if ( len < 2 ) return;
+    if ( text.substring(len - 2) == '[[' ) {
+      const dialogRef = this.dialog.open(CommentDialog, {
+        width: '300px',
+        data: {
+          title: this.content.title,
+          comment: this.comments,
+          user: undefined
+        }
+      });
+      dialogRef.afterClosed().subscribe(data => {
+        if ( !data ) return;
+        field.value += data.userid + ']]';
+      });
+    }
+  }
+
   onWriteComment(field: HTMLTextAreaElement) {
     const formData = {
       comment: this.cmtWrite.value,
-      _id: this.num
+      _id: this.num,
+      comments: this.comments
     };
     this.gameService.writeComment(formData).subscribe(data => {
       if ( data.success ) {
@@ -101,6 +165,39 @@ export class GameComponent implements OnInit, OnDestroy {
           timeout: 3000
         });
       }
+    });
+  }
+
+  onReplyComment(comment) {
+    if ( !this.authService.loggedIn() ) return;
+    const dialogRef = this.dialog.open(ReplyDialog, {
+      width: '300px',
+      data: {
+        title: this.content.title,
+        comments: this.comments,
+        comment: comment.comment,
+        reply: undefined
+      }
+    });
+    dialogRef.afterClosed().subscribe(data => {
+      if ( !data ) return;
+      const formData = {
+        postNum: this.num,
+        cmtNum: comment.num,
+        comments: this.comments,
+        comment: data
+      }
+      this.gameService.replyComment(formData).subscribe(result => {
+        if ( result.success ) {
+          this.router.navigate(['/game/' + this.num]);
+        } else {
+          this.flashMessage.showFlashMessage({
+            messages: ['답글 작성 오류'], 
+            type: 'danger', 
+            timeout: 3000
+          });
+        }
+      })
     });
   }
 
@@ -133,6 +230,22 @@ export class GameComponent implements OnInit, OnDestroy {
           });
         }
       })
+    }
+  }
+
+  onRemoveReply(cmtNum, reply) {
+    if ( confirm('삭제하시겠습니까?') ) {
+      this.gameService.removeReply(this.num, cmtNum, reply).subscribe(result => {
+        if ( result.success ) {
+          this.router.navigate(['/game/' + this.num]);
+        } else {
+          this.flashMessage.showFlashMessage({
+            messages: ['삭제 오류'], 
+            type: 'danger', 
+            timeout: 3000
+          });
+        }
+      });
     }
   }
 

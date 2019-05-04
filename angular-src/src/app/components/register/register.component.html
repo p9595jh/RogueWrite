@@ -3,75 +3,37 @@
     <div class="mdl-card__supporting-text">
       <h4>회원가입</h4><hr/><br/><br/>
 
-      <!-- registration form for large display -->
-      <form class="mdl-layout--large-screen-only" (submit)="onRegisterSubmit()">
+      <form (submit)="onRegisterSubmit()">
         <div style="width: 100%; text-align: center;">
-          <mat-form-field class="largeInputEle">
+          <mat-form-field class="input-element">
             <input matInput placeholder="아이디" type="text" name="userid" [(ngModel)]="userid">
           </mat-form-field>
           <br/><br/>
-          <mat-form-field class="largeInputEle">
+          <mat-form-field class="input-element">
             <input matInput placeholder="비밀번호" type="password" name="pw" [(ngModel)]="pw">
           </mat-form-field>
           <br/><br/>
-          <mat-form-field class="largeInputEle">
+          <mat-form-field class="input-element">
             <input matInput placeholder="비밀번호 확인" type="password" name="pwchk" [(ngModel)]="pwchk">
           </mat-form-field>
           <br/><br/>
-          <mat-form-field class="largeInputEle">
+          <mat-form-field class="input-element">
             <input matInput placeholder="닉네임" type="text" name="nickname" [(ngModel)]="nickname">
           </mat-form-field>
           <br/><br/>
-          <mat-form-field class="largeInputEle">
+          <mat-form-field class="input-element">
             <input matInput placeholder="이메일" type="text" name="email" [formControl]="emailFormControl" [errorStateMatcher]="matcher">
             <mat-error *ngIf="emailFormControl.hasError('email')">
               이메일을 입력해주세요.
             </mat-error>
           </mat-form-field>
           <br/><br/>
-          <mat-form-field class="largeInputEle">
+          <mat-form-field class="input-element">
             <input matInput placeholder="한 줄 소개" type="text" name="introduction" [(ngModel)]="introduction">
           </mat-form-field>
           <br/><br/>
           <br/>
-          <button mat-raised-button type="submit" class="largeInputEle" color="primary">회원가입</button>
-          <br/><br/><br/><hr/>
-          <!-- 여기에다가 뭔가 알려둘 사항 같은 걸 써두면 됨 -->
-        </div>
-      </form>
-
-      <!-- registration form for small display -->
-      <form class="mdl-layout--small-screen-only" (submit)="onRegisterSubmit()">
-        <div style="width: 100%; text-align: center;">
-          <mat-form-field class="smallInputEle">
-            <input matInput placeholder="아이디" type="text" name="userid" [(ngModel)]="userid">
-          </mat-form-field>
-          <br/><br/>
-          <mat-form-field class="smallInputEle">
-            <input matInput placeholder="비밀번호" type="password" name="pw" [(ngModel)]="pw">
-          </mat-form-field>
-          <br/><br/>
-          <mat-form-field class="smallInputEle">
-            <input matInput placeholder="비밀번호 확인" type="password" name="pwchk" [(ngModel)]="pwchk">
-          </mat-form-field>
-          <br/><br/>
-          <mat-form-field class="smallInputEle">
-            <input matInput placeholder="닉네임" type="text" name="nickname" [(ngModel)]="nickname">
-          </mat-form-field>
-          <br/><br/>
-          <mat-form-field class="smallInputEle">
-            <input matInput placeholder="이메일" type="text" name="email" [formControl]="emailFormControl" [errorStateMatcher]="matcher">
-            <mat-error *ngIf="emailFormControl.hasError('email')">
-              이메일을 입력해주세요.
-            </mat-error>
-          </mat-form-field>
-          <br/><br/>
-          <mat-form-field class="smallInputEle">
-            <input matInput placeholder="한 줄 소개" type="text" name="introduction" [(ngModel)]="introduction">
-          </mat-form-field>
-          <br/><br/>
-          <br/>
-          <button mat-raised-button type="submit" class="smallInputEle" color="primary">회원가입</button>
+          <button mat-raised-button type="submit" class="input-element" color="primary">회원가입</button>
           <br/><br/><br/><hr/>
           <!-- 여기에다가 뭔가 알려둘 사항 같은 걸 써두면 됨 -->
         </div>

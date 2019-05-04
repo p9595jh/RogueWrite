@@ -20,10 +20,6 @@ const BoardSchema = mongoose.Schema({
             userid: String,
             nickname: String,
             comment: String,
-            cmtTo: {
-                userid: String,
-                nickname: String
-            }
         }
     */
 });

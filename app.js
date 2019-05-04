@@ -31,7 +31,7 @@ var boardsRouter = require('./routes/boards');
 var modalsRouter = require('./routes/modals');
 var gamesRouter = require('./routes/games');
 var corveesRouter = require('./routes/corvees');
-var testsRouter = require('./routes/test');
+var testsRouter = require('./routes/tests');
 
 var app = express();
 

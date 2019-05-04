@@ -147,27 +147,44 @@ export class BoardComponent implements OnInit, OnDestroy {
     }
   }
 
+  countComments(comments): number {
+    let count = 0;
+    for (let comment of comments) {
+      if ( comment.reply ) count += comment.reply.length;
+      count++;
+    }
+    return count;
+  }
+
   private setCommentsArray(comments) {
     this.comments = [];
-    outerLoop: for (let comment of comments) {
-      for (let exist of this.comments) {
-        if ( comment.userid == exist.userid ) {
-          continue outerLoop;
+    for (let comment of comments) {
+      if ( comment.reply ) {
+        for (let reply of comment.reply) {
+          this.pushToCommentsArray(reply);
         }
       }
-      this.comments.push({
-        userid: comment.userid,
-        nickname: comment.nickname
-      });
+      this.pushToCommentsArray(comment);
     }
+  }
+
+  private pushToCommentsArray(item) {
+    for (let exist of this.comments) {
+      if ( exist.userid == item.userid ) {
+        return;
+      }
+    }
+    this.comments.push({
+      userid: item.userid,
+      nickname: item.nickname
+    });
   }
 
   onTypingComment(field: HTMLTextAreaElement, text: string) {
     if ( this.comments.length == 0 ) return;
-
     const len: number = text.length;
-    if ( len < 4 ) return;
-    if ( text.substring(len - 4) == 'TO::' ) {
+    if ( len < 2 ) return;
+    if ( text.substring(len - 2) == '[[' ) {
       const dialogRef = this.dialog.open(CommentDialog, {
         width: '300px',
         data: {
@@ -176,12 +193,9 @@ export class BoardComponent implements OnInit, OnDestroy {
           user: undefined
         }
       });
-  
       dialogRef.afterClosed().subscribe(data => {
         if ( !data ) return;
-        else {
-          console.log(data);
-        }
+        field.value += data.userid + ']]';
       });
     }
   }
@@ -189,7 +203,8 @@ export class BoardComponent implements OnInit, OnDestroy {
   onWriteComment(field: HTMLTextAreaElement) {
     const formData = {
       comment: this.cmtWrite.value,
-      _id: this.num
+      _id: this.num,
+      comments: this.comments
     };
     this.boardService.writeComment(formData).subscribe(data => {
       if ( data.success ) {
@@ -202,6 +217,39 @@ export class BoardComponent implements OnInit, OnDestroy {
           timeout: 3000
         });
       }
+    });
+  }
+
+  onReplyComment(comment) {
+    if ( !this.authService.loggedIn() ) return;
+    const dialogRef = this.dialog.open(ReplyDialog, {
+      width: '300px',
+      data: {
+        title: this.content.title,
+        comments: this.comments,
+        comment: comment.comment,
+        reply: undefined
+      }
+    });
+    dialogRef.afterClosed().subscribe(data => {
+      if ( !data ) return;
+      const formData = {
+        postNum: this.num,
+        cmtNum: comment.num,
+        comments: this.comments,
+        comment: data
+      }
+      this.boardService.replyComment(formData).subscribe(result => {
+        if ( result.success ) {
+          this.router.navigate(['/board/' + this.type + '/' + this.num]);
+        } else {
+          this.flashMessage.showFlashMessage({
+            messages: ['답글 작성 오류'], 
+            type: 'danger', 
+            timeout: 3000
+          });
+        }
+      });
     });
   }
 
@@ -234,6 +282,22 @@ export class BoardComponent implements OnInit, OnDestroy {
           });
         }
       })
+    }
+  }
+
+  onRemoveReply(cmtNum, reply) {
+    if ( confirm('삭제하시겠습니까?') ) {
+      this.boardService.removeReply(this.num, cmtNum, reply).subscribe(result => {
+        if ( result.success ) {
+          this.router.navigate(['/board/' + this.type + '/' + this.num]);
+        } else {
+          this.flashMessage.showFlashMessage({
+            messages: ['삭제 오류'], 
+            type: 'danger', 
+            timeout: 3000
+          });
+        }
+      });
     }
   }
 
@@ -326,6 +390,51 @@ export class CommentDialog {
     public dialogRef: MatDialogRef<CommentDialog>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) { }
+
+  onClose() {
+    this.dialogRef.close();
+  }
+
+}
+
+export interface ReplyData {
+  title: string,
+  comments: Array<any>,
+  comment: string,
+  reply: string
+}
+
+@Component({
+  selector: 'app-board-reply',
+  templateUrl: './board.component.reply.html'
+})
+export class ReplyDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<ReplyDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: ReplyData,
+    private dialog: MatDialog
+  ) { }
+
+  onTypingComment(field: HTMLTextAreaElement, text: string) {
+    if ( this.data.comments.length == 0 ) return;
+    const len: number = text.length;
+    if ( len < 2 ) return;
+    if ( text.substring(len - 2) == '[[' ) {
+      const dialogRef = this.dialog.open(CommentDialog, {
+        width: '300px',
+        data: {
+          title: this.data.title,
+          comment: this.data.comments,
+          user: undefined
+        }
+      });
+      dialogRef.afterClosed().subscribe(data => {
+        if ( !data ) return;
+        field.value += data.userid + ']]';
+      });
+    }
+  }
 
   onClose() {
     this.dialogRef.close();

@@ -40,108 +40,62 @@
     </header>
 
     <!-- header for mobile -->
-    <!-- <mat-sidenav-container class="mdl-layout__content" *ngIf="!router.url.startsWith('/play')">
-      <mat-sidenav #sidenav mode="push" style="width: 49%; padding-top: 30px; background-color: rgb(233, 233, 233);">
-        <h4 style="font-family: 'Ubuntu', sans-serif; margin: 20px;" [routerLink]="['/']" (click)="sidenav.toggle()">
-          {{siteName}}
-        </h4><hr/><br/>
-        <a class="nav-link" (click)="sidenav.toggle()" *ngFor="let link of navLinks"
-          [routerLink]="[link.path]">{{link.label}}</a>
-      </mat-sidenav>
-      <mat-sidenav-content> -->
+    <header class="mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary">
+      <nav class="navbar navbar-dark fixed-top bg-dark">
+        <div>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <img src="/images/title.png" style="height: 55px; width: auto;" [routerLink]="['/']" />
+        </div>
+        <table id="header-sm-table">
+          <tr>
+            <td *ngIf="!authService.loggedIn()">
+              <a [routerLink]="['/login']" class="header-sm-link" id="header-sm-login">LOGIN</a>
+            </td>
+            <td *ngIf="authService.loggedIn()">
+              <a [routerLink]="['/profile']" class="header-sm-link">PROFILE</a>
+            </td>
+            <td *ngIf="authService.loggedIn()">
+              <a (click)="onLogoutClick()" href="#" class="header-sm-link">LOGOUT</a>
+            </td>
+          </tr>
+        </table>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active" *ngFor="let link of navLinks"
+              data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+              aria-expanded="false" aria-label="Toggle navigation">
+              <a class="nav-link header-sm-link" [routerLink]="[link.path]">{{link.label}}</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <br/><br/>
+    </header>
 
-        <header class="mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary">
-          <nav class="navbar navbar-dark fixed-top bg-dark">
-            <div>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <img src="/images/title.png" style="height: 55px; width: auto;" [routerLink]="['/']" />
-            </div>
-            <table id="header-sm-table">
-              <tr>
-                <td *ngIf="!authService.loggedIn()">
-                  <a [routerLink]="['/login']" class="header-sm-link" id="header-sm-login">LOGIN</a>
-                </td>
-                <td *ngIf="authService.loggedIn()">
-                  <a [routerLink]="['/profile']" class="header-sm-link">PROFILE</a>
-                </td>
-                <td *ngIf="authService.loggedIn()">
-                  <a (click)="onLogoutClick()" href="#" class="header-sm-link">LOGOUT</a>
-                </td>
-              </tr>
-            </table>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active" *ngFor="let link of navLinks">
-                  <a class="nav-link header-sm-link" [routerLink]="[link.path]">{{link.label}}</a>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        </header>
+    <main class="mdl-layout__content">
+      <div class="mdl-layout__tab-panel is-active" id="overview">
+        <router-outlet></router-outlet>
+        <br/><br/>
+      </div>
 
-        <!-- <header class="mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary">
-          <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-secondary">
-            <button mat-icon-button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-              <mat-icon>view_headline</mat-icon>
-            </button>
-            <img src="/images/title.png" style="height: 50px; width: auto;" [routerLink]="['/']" />
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active" *ngFor="let link of navLinks">
-                  <a class="nav-link" [routerLink]="[link.path]">{{link.label}}</a>
-                </li>
-              </ul>
-            </div>
-            
-            <div class="mdl-layout-spacer"></div>
-            <nav class="mdl-navigation">
-              <a *ngIf="!authService.loggedIn()" class="mdl-navigation__link" [routerLink]="['/login']">LOGIN</a>
-              <a *ngIf="authService.loggedIn()" class="mdl-navigation__link" [routerLink]="['/profile']">PROFILE</a>
-              <a *ngIf="authService.loggedIn()" class="mdl-navigation__link" (click)="onLogoutClick()" href="#">LOGOUT</a>
-            </nav>
-          </nav>
-        </header> -->
-
-        <!-- <header class="mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary">
-          <div style="padding-left: 20px;" class="mdl-layout__header-row">
-            <mat-icon (click)="sidenav.toggle()">view_headline</mat-icon>
-            <img src="/images/title.png" style="height: 100%; width: auto;" [routerLink]="['/']" />
-            <div class="mdl-layout-spacer"></div>
-            <nav class="mdl-navigation">
-              <a *ngIf="!authService.loggedIn()" class="mdl-navigation__link" [routerLink]="['/login']">LOGIN</a>
-              <a *ngIf="authService.loggedIn()" class="mdl-navigation__link" [routerLink]="['/profile']">PROFILE</a>
-              <a *ngIf="authService.loggedIn()" class="mdl-navigation__link" (click)="onLogoutClick()" href="#">LOGOUT</a>
-            </nav>
+      <!-- footer -->
+      <footer class="mdl-mega-footer">
+        <div class="mdl-mega-footer--bottom-section">
+          <div class="mdl-logo">
+            powered by Project RogueWrite
           </div>
-        </header> -->
+          <ul class="mdl-mega-footer--link-list">
+            <li><a target="_blank" href="https://getmdl.io/index.html">MDL</a></li>
+            <li><a target="_blank" href="https://material.angular.io/">Angular Material</a></li>
+            <li><a target="_blank" href="https://github.com/p9595jh/RogueWrite">Github</a></li>
+          </ul>
+        </div>
+      </footer>
+      <!-- footer -->
 
-        <main class="mdl-layout__content">
-          <div class="mdl-layout__tab-panel is-active" id="overview">
-            <br/><br/>
-            <router-outlet></router-outlet>
-            <br/><br/>
-          </div>
-
-          <!-- footer -->
-          <footer class="mdl-mega-footer">
-            <div class="mdl-mega-footer--bottom-section">
-              <div class="mdl-logo">
-                powered by Project RogueWrite
-              </div>
-              <ul class="mdl-mega-footer--link-list">
-                <li><a target="_blank" href="https://getmdl.io/index.html">MDL</a></li>
-                <li><a target="_blank" href="https://material.angular.io/">Angular Material</a></li>
-                <li><a target="_blank" href="https://github.com/p9595jh/RogueWrite">Github</a></li>
-              </ul>
-            </div>
-          </footer>
-          <!-- footer -->
-
-        </main>
-      <!-- </mat-sidenav-content>
-    </mat-sidenav-container> -->
+    </main>
     <div *ngIf="router.url.startsWith('/play')" style="background-color: white;">
       <router-outlet></router-outlet>
     </div>

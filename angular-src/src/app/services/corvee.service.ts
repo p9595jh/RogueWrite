@@ -80,6 +80,15 @@ export class CorveeService {
       .pipe(map(res => res.json()));
   }
 
+  replyComment(cmt) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/corvees/reply-comment', cmt, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
   removePost(num) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
@@ -91,6 +100,13 @@ export class CorveeService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post(this.funcService.ServerAddress + '/corvees/removeComment', {postNum: postNum, cmtNum: cmtNum}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
+  removeReply(postNum, cmtNum, reply) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/corvees/remove-reply', {postNum: postNum, cmtNum: cmtNum, reply: reply}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 

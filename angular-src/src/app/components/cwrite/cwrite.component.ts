@@ -63,6 +63,10 @@ export class CwriteComponent implements OnInit {
       } else {
         this.temps = data.temps;
         this.user = data.user;
+        if ( !this.user.clean ) {
+          this.router.navigate(['/no-page']);
+          return false;
+        }
         this.coworkerMap = new Map<string, any>();
         this.coworkerMap.set(this.user._id, {_id: this.user._id, userid: this.user.userid, nickname: this.user.nickname});
         for(let temp of this.temps) {

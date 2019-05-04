@@ -35,8 +35,8 @@
             <div class="row" *ngFor="let arr of sub?.value">
               <div class="col-sm md-auto grid-cell" *ngFor="let val of arr">
                 <a [routerLink]="['/board/' + val?.url + '/list']">{{val.title}}</a>
-                <span *ngIf="authService.loggedIn() && isInMyBookmark(val?.url)" style="float: right; cursor: pointer;" (click)="remove(val)">X</span>
-                <span *ngIf="authService.loggedIn() && !isInMyBookmark(val?.url)" style="float: right; cursor: pointer;" (click)="add(val?.url)">+</span>
+                <span *ngIf="isInMyBookmark(val?.url)" style="float: right; cursor: pointer;" (click)="remove(val)">X</span>
+                <span *ngIf="!isInMyBookmark(val?.url)" style="float: right; cursor: pointer;" (click)="add(val?.url)">+</span>
               </div>
             </div>
           </div>

@@ -8,7 +8,7 @@ const User = require('../models/user');
 const fs = require('fs-extra');
 const formidable = require('formidable');
 
-const regex = /^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?/;
+const urlReg = /^(((http(s?))\:\/\/)?)([0-9a-zA-Z\-]+\.)+[a-zA-Z]{2,6}(\:[0-9]+)?(\/\S*)?/gi;
 
 function set2LetterFormat(num) {
     num = num >= 10 ? num : '0' + num;
@@ -26,7 +26,7 @@ function getNowDate() {
 }
 
 function taggingUrl(url) {
-    if ( regex.test(url) ) {
+    if ( urlReg.test(url) ) {
         url = "<a target='_blank' href='" + (url.toLowerCase().startsWith('http') ? url : 'https://' + url) + "'>" + url + "</a>";
     }
     return url;
@@ -177,10 +177,14 @@ router.post('/writeComment', passport.authenticate('jwt', {session: false}), fun
 
     let split = comment.split(' ');
     comment = '';
-    for (let i=0; i<split.length-1; i++) {
+    for (let i=0; i<split.length-1; i++)
         comment += taggingUrl(split[i]) + ' ';
-    }
     comment += taggingUrl(split[split.length-1]);
+
+    for (let each of req.body.comments) {
+        let regex = new RegExp('\\[\\[' + each.userid + '\\]\\]', 'g');
+        comment = comment.replace(regex, '<a href="javascript:;" onclick="oiw(\'' + each.userid + '\')">@' + each.nickname + '</a>');
+    }
     
     const cmtData = {
         num: new Date().getTime(),
@@ -190,18 +194,54 @@ router.post('/writeComment', passport.authenticate('jwt', {session: false}), fun
         comment: comment
     };
     Corvee.findOneAndUpdate({_id: req.body._id}, {$push: {comment: cmtData}}, function(err, output) {
-        if ( err ) {
-            res.json({
-                success: false
-            });
-        } else {
-            res.json({
-                success: true,
-                // post: output
+        if ( err ) res.json({success: false});
+        else res.json({success: true});
+    });
+    
+});
+
+router.post('/reply-comment', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+    let comment = req.body.comment.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
+        return '&#' + i.charCodeAt(0) + ';';
+    });
+
+    let split = comment.split(' ');
+    comment = '';
+    for (let i=0; i<split.length-1; i++)
+        comment += taggingUrl(split[i]) + ' ';
+    comment += taggingUrl(split[split.length-1]);
+
+    for (let each of req.body.comments) {
+        let regex = new RegExp('\\[\\[' + each.userid + '\\]\\]', 'g');
+        comment = comment.replace(regex, '<a href="javascript:void(0);" onclick="oiw(\'' + each.userid + '\')">@' + each.nickname + '</a>');
+    }
+
+    const postNum = req.body.postNum;
+    const cmtNum = req.body.cmtNum;
+    Corvee.findOne({_id: postNum}, {comment: 1}, (err, post) => {
+        if ( err || !post ) res.json({success: false});
+        else {
+            let idx = undefined;
+            for (let i=0; i<post.comment.length; i++) {
+                if ( post.comment[i].num == cmtNum ) {
+                    idx = i;
+                    break;
+                }
+            }
+            const cmtData = {
+                num: new Date().getTime(),
+                writedate: getNowDate(),
+                userid: req.user.userid,
+                nickname: req.user.nickname,
+                comment: comment
+            };
+            const push = {[`comment.${idx}.reply`]: cmtData};
+            Corvee.findOneAndUpdate({_id: postNum}, {$push: push}, (err, output) => {
+                if ( err ) res.json({success: false});
+                else res.json({success: true});
             });
         }
     });
-    
 });
 
 // remove ==============================================
@@ -224,7 +264,7 @@ router.post('/removePost', function(req, res, next) {
 router.post('/removeComment', function(req, res, next) {
     const postNum = req.body.postNum;
     const cmtNum = req.body.cmtNum;
-    Corvee.findOne({_id: postNum}, (err, post) => {
+    Corvee.findOne({_id: postNum}, {comment : 1}, (err, post) => {
         if ( err || !post ) res.json({success: false});
         else {
             let c;
@@ -242,6 +282,31 @@ router.post('/removeComment', function(req, res, next) {
                     post: output
                 });
             });
+        }
+    });
+});
+
+router.post('/remove-reply', function(req, res, next) {
+    const postNum = req.body.postNum;
+    const cmtNum = req.body.cmtNum;
+    Corvee.findOne({_id: postNum}, {comment: 1}, (err, post) => {
+        if ( err || !post ) res.json({success: false});
+        else {
+            let idx = undefined;
+            for (let i=0; i<post.comment.length; i++) {
+                if ( post.comment[i].num == cmtNum ) {
+                    idx = i;
+                    break;
+                }
+            }
+            if ( !idx ) res.json({success: false});
+            else {
+                const pull = {[`comment.${idx}.reply`]: [req.body.reply]};
+                Corvee.findOneAndUpdate({_id: postNum}, {$pullAll: pull}, (err, output) => {
+                    if ( err ) res.json({success: false});
+                    else res.json({success: true});
+                });
+            }
         }
     });
 });

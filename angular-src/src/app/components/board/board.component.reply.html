@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>답글 입력</h1>
+<div mat-dialog-content>
+  <pre class="content" [innerHTML]="data.comment | safe"></pre><br/>
+  <mat-form-field appearance="outline" style="width: 100%;">
+    <mat-label>댓글을 작성해주세요.</mat-label>
+    <textarea matInput rows="3" [(ngModel)]="data.reply" #field
+      (input)="onTypingComment(field, $event.target.value)"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onClose()">닫기</button>
+  <button mat-button [mat-dialog-close]="data.reply" cdkFocusInitial>확인</button>
+</div>

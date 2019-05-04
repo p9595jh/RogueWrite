@@ -138,7 +138,7 @@
         <tbody *ngFor="let comment of content?.comment">
           <tr>
             <td style="width: 90px;">
-              <img [attr.src]="'images/profile/' + comment.userid" class="profileImage" />
+              <img [attr.src]="'images/profile/' + comment.userid" class="profileImage" (click)="onReplyComment(comment)" />
             </td>
             <td>
               <span style="font-size: 80%;">
@@ -148,9 +148,33 @@
                   <span style="cursor: pointer;" (click)="onRemoveComment(comment.num)">삭제</span>
                 </span>
               </span>
-              <pre class="content writerText" *ngIf="comment?.userid == content?.userid" [innerHTML]="comment?.comment"></pre>
-              <pre class="content" *ngIf="comment?.userid != content?.userid" [innerHTML]="comment?.comment"></pre>
+              <pre class="content writerText" *ngIf="comment?.userid == content?.userid" [innerHTML]="comment?.comment | safe"></pre>
+              <pre class="content" *ngIf="comment?.userid != content?.userid" [innerHTML]="comment?.comment | safe"></pre>
               <br/>
+            </td>
+          </tr>
+          <tr *ngIf="comment?.reply?.length > 0">
+            <td colspan="2">
+              <table class="rplyTable">
+                <tr *ngFor="let reply of comment?.reply">
+                  <td class="rply-blank"></td>
+                  <td style="width: 90px;">
+                    <img [attr.src]="'images/profile/' + comment.userid" class="profileImage" />
+                  </td>
+                  <td>
+                    <span style="font-size: 80%;">
+                      <span class="toProfile" (click)="funcService.openInfoWindow(reply?.userid)">
+                        {{reply?.nickname}}</span> &nbsp;|&nbsp; {{reply?.writedate}}
+                      <span *ngIf="reply?.userid == user?.userid || user?.userid == 'admin'"> &nbsp;|&nbsp; 
+                        <span style="cursor: pointer;" (click)="onRemoveReply(comment?.num, reply)">삭제</span>
+                      </span>
+                    </span>
+                    <pre class="content writerText" *ngIf="reply?.userid == content?.userid" [innerHTML]="reply?.comment | safe"></pre>
+                    <pre class="content" *ngIf="reply?.userid != content?.userid" [innerHTML]="reply?.comment | safe"></pre>
+                    <br/>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
         </tbody>
@@ -158,20 +182,16 @@
       <!-- ############### table for comments ############### -->
 
       <!-- ############### writing area ############### -->
-      <form *ngIf="authService.loggedIn()" (submit)="onWriteComment(field)"><hr *ngIf="content?.comment?.length > 0" />
+      <form *ngIf="authService.loggedIn() && user?.clean" (submit)="onWriteComment(field)"><hr *ngIf="content?.comment?.length > 0" />
         <table style="width: 96%; margin: auto;">
           <tr style="text-align: center;">
 
             <td rowspan="2" style="width: 85%;">
               <mat-form-field appearance="outline" style="width: 100%; height: 100%;">
                 <mat-label>댓글을 작성해주세요.</mat-label>
-                <textarea matInput placeholder="" rows="3" name="cmtWrite"
-                  [formControl]="cmtWrite" [matAutocomplete]="auto" #field></textarea>
-                <mat-autocomplete #auto>
-                  <!-- <mat-option *ngFor="let ct of filteredOptions | async" [value]="'TO::' + ct?.nickname" (onclick)="setCmtTo(ct)">
-                    {{ct.nickname}} [{{ct.userid}}]
-                  </mat-option> -->
-                </mat-autocomplete>
+                <textarea matInput rows="3" name="cmtWrite"
+                  [formControl]="cmtWrite" #field
+                  (input)="onTypingComment(field, $event.target.value)"></textarea>
               </mat-form-field>
             </td>
 
@@ -233,7 +253,7 @@
               <a [routerLink]="['/game/' + val?._id]"
                 style="color: black; text-decoration: none; font-weight: 400;"
                 (click)="scrollToPost(postLocation)">{{val.title}}</a>&nbsp;
-              <span *ngIf="val.comment.length > 0" style="font-size: 85%; color: grey;">[{{val.comment.length}}]</span>
+              <span *ngIf="val.comment.length > 0" style="font-size: 85%; color: grey;">[{{countComments(val.comment)}}]</span>
             </td>
             <td>
               <span class="toProfile" (click)="funcService.openInfoWindow(val?.userid)">{{val.nickname}}</span>
@@ -252,7 +272,7 @@
               [routerLink]="['/game/' + val?._id]" (click)="scrollToPost(postLocation)">
               <div>
                 {{val.title}}
-                <span *ngIf="val.comment.length > 0" style="color: grey;">[{{val.comment.length}}]</span>
+                <span *ngIf="val.comment.length > 0" style="color: grey;">[{{countComments(val.comment)}}]</span>
               </div>
               <div style="font-size: 85%; margin-top: 1%;">
                 <span>{{val.nickname}}</span>&nbsp;&nbsp;&nbsp;
@@ -267,7 +287,7 @@
 
       <mat-paginator [length]="contents?.length" [pageSize]="pagingSize" (page)="paging($event)"></mat-paginator>
 
-      <div *ngIf="authService.loggedIn()" style="float: right;">
+      <div *ngIf="authService.loggedIn() && user?.clean" style="float: right;">
         <a mat-raised-button [routerLink]="['/tool']">작성</a>
       </div><br/>
       <div style="text-align: center;">

@@ -13,7 +13,7 @@
         [matTooltipShowDelay]="showDelay">
         <mat-icon>play_circle_outline</mat-icon>
       </button>
-      <button mat-button class="previewButton" *ngIf="set"
+      <button mat-button class="previewButton"
         (click)="playService.replay()"
         matTooltip="리플레이"
         [matTooltipPosition]="tooltipPosition"
@@ -23,7 +23,7 @@
       <hr/>
 
       <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ENGINE (GAME) ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->
-      <div class="engine-layout">
+      <div class="engine-layout" *ngIf="set">
 
         <!-- PHASE-CONTENT -->
         <div class="stage-content" [innerHTML]="playService?.phase?.content | safe"></div>

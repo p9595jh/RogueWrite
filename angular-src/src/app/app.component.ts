@@ -1,5 +1,6 @@
 import { Component, Input, HostListener } from '@angular/core';
 import { AuthService } from './services/auth.service';
+import { FuncService } from './services/func.service';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { Router } from '@angular/router';
 
@@ -21,6 +22,7 @@ export class AppComponent {
 
   constructor(
     private authService: AuthService,
+    private funcService: FuncService,
     private router: Router,
     private flashMessage: NgFlashMessageService
   ) { }

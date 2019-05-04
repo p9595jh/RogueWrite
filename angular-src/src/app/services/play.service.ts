@@ -42,7 +42,7 @@ export class PlayService {
     for (let stage of this.data.stage) {
       if ( stage.stage_num > 0 ) {
         this.count++;
-        if ( stage.stage_num == 1 ) this.phase = stage.phase[0];
+        if ( stage.stage_num == 1 ) this.phase = this.encodePhase(stage.phase[0]);
       }
     }
   }
@@ -96,13 +96,11 @@ export class PlayService {
   }
 
   select(condition: any, stage_to: number) {
-    // this.previousStageNum = this.stageNum;
     if ( stage_to == 0 ) this.stageNum++;
     else this.stageNum = stage_to;
 
     for (let val of condition) {
       let pv: any = this.paramMap.get(val.param);
-      // pv.value += Math.floor(Math.random() * (this.substituteParams(val.below) - this.substituteParams(val.above) + 1)) + this.substituteParams(val.above);
       pv.value += this.getRandomNumber(this.substituteParams(val.above), this.substituteParams(val.below));
       this.paramMap.delete(val.param);
       this.paramMap.set(val.param, pv);
@@ -118,7 +116,7 @@ export class PlayService {
       if ( stage.stage_num == this.stageNum ) {
         for (let phase of stage.phase) {
           if ( this.checkNextStageCondition(phase.condition) ) {
-            this.phase = phase;
+            this.phase = this.encodePhase(phase);
             this.phaseNum = phase.phase_num;
             if ( this.stageNum < 0 ) {
               this.previousStageNum = this.stageNum;
@@ -132,6 +130,8 @@ export class PlayService {
         return false;
       }
     }
+    // ends with no matched any stage number
+    this.noCondition();
   }
 
   private formatAsDoubleDimension(): Array<any[]> {
@@ -149,10 +149,14 @@ export class PlayService {
     return arr;
   }
 
-  private showParams() {
+  private encodePhase(phase): any {
+    let text: string = phase.content;
     this.paramMap.forEach((value, key) => {
-      console.log(key + ' : ' + value.value);
+      let regex = new RegExp('\\{\\{' + key + '\\}\\}', 'g');
+      text = text.replace(regex, value);
     });
+    phase.content = text;
+    return phase;
   }
 
   takeOneGame(num) {

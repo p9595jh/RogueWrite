@@ -54,8 +54,13 @@ export class WriteComponent implements OnInit {
 
   ngOnInit() {
     this.authService.getProfile().subscribe(profile => {
+      if ( !profile.user.clean ) {
+        this.router.navigate(['/no-page']);
+        return false;
+      }
       if ( this.type == 'notice' && profile.user.userid != 'admin' ) {
         this.router.navigate(['/no-page']);
+        return false;
       }
     });
   }

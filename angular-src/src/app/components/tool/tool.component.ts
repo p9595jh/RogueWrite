@@ -30,6 +30,10 @@ export class ToolComponent implements OnInit {
 
   ngOnInit() {
     this.authService.getProfile().subscribe(profile => {
+      if ( !profile.user.clean ) {
+        this.router.navigate(['/no-page']);
+        return false;
+      }
       this.authService.getCode(profile.user.userid).subscribe(data => {
         this.iframe = '<iframe src="'
           + this.funcService.ServerAddress

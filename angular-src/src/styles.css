@@ -6,7 +6,7 @@ html, body {
 }
 
 pre {
-  font-family: gothic;
+  font-family: 'Ubuntu', gothic;
 }
 
 .content a {
@@ -28,12 +28,9 @@ pre {
   height: auto;
   max-width: 100%;
 }
-.largeInputEle {
-  width: 45%;
-}
 
-.smallInputEle {
-  width: 80%;
+.input-element {
+  width: 377px;
 }
 
 .toProfile {
@@ -56,6 +53,17 @@ a:hover {
 
 .cmtTable {
   width: 96%;
+}
+
+.rplyTable {
+  width: 100%;
+}
+
+.rply-blank {
+  width: 45px;
+}
+
+.cmtTable, .rplyTable {
   margin: auto;
   border-collapse: separate;
   border-spacing: 0 10px;

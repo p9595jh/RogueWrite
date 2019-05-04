@@ -3,71 +3,35 @@
     <div class="mdl-card__supporting-text">
       <h4>회원정보수정</h4><hr/><br/><br/>
 
-      <!-- registration form for large display -->
-      <form class="mdl-layout--large-screen-only" (submit)="onModifyUser()">
+      <form (submit)="onModifyUser()">
         <div style="width: 100%; text-align: center;">
-          <mat-form-field class="largeInputEle">
+          <mat-form-field class="input-element">
             <input matInput placeholder="아이디" type="text" [value]="user?.userid" disabled>
           </mat-form-field>
           <br/><br/>
-          <mat-form-field class="largeInputEle">
+          <mat-form-field class="input-element">
             <input matInput placeholder="기존 비밀번호 (필수)" type="password" name="pw" [(ngModel)]="pw">
           </mat-form-field>
           <br/><br/>
-          <mat-form-field class="largeInputEle">
+          <mat-form-field class="input-element">
             <input matInput placeholder="새 비밀번호" type="password" name="newpw" [(ngModel)]="newpw">
             <mat-hint><strong>비밀번호 미변경 시 공백 유지</strong></mat-hint>
           </mat-form-field>
           <br/><br/>
-          <mat-form-field class="largeInputEle">
+          <mat-form-field class="input-element">
             <input matInput placeholder="닉네임" type="text" name="nickname" [(ngModel)]="nickname">
           </mat-form-field>
           <br/><br/>
-          <mat-form-field class="largeInputEle">
+          <mat-form-field class="input-element">
             <input matInput placeholder="이메일" type="text" [value]="user?.email" disabled>
           </mat-form-field>
           <br/><br/>
-          <mat-form-field class="largeInputEle">
+          <mat-form-field class="input-element">
             <input matInput placeholder="한 줄 소개" type="text" name="introduction" [(ngModel)]="introduction">
           </mat-form-field>
           <br/><br/>
           <br/>
-          <button mat-raised-button type="submit" class="largeInputEle" color="primary">회원가입</button>
-          <br/><br/><br/><hr/>
-          회원코드 : [ {{user?._id}} ]
-        </div>
-      </form>
-
-      <!-- registration form for small display -->
-      <form class="mdl-layout--small-screen-only" (submit)="onModifyUser()">
-        <div style="width: 100%; text-align: center;">
-          <mat-form-field class="smallInputEle">
-            <input matInput placeholder="아이디" type="text" [value]="user?.userid" disabled>
-          </mat-form-field>
-          <br/><br/>
-          <mat-form-field class="smallInputEle">
-            <input matInput placeholder="기존 비밀번호" type="password" name="pw" [(ngModel)]="pw">
-          </mat-form-field>
-          <br/><br/>
-          <mat-form-field class="smallInputEle">
-            <input matInput placeholder="새 비밀번호" type="password" name="newpw" [(ngModel)]="newpw">
-            <mat-hint><strong>비밀번호 미변경 시 공백 유지</strong></mat-hint>
-          </mat-form-field>
-          <br/><br/>
-          <mat-form-field class="smallInputEle">
-            <input matInput placeholder="닉네임" type="text" name="nickname" [(ngModel)]="nickname">
-          </mat-form-field>
-          <br/><br/>
-          <mat-form-field class="smallInputEle">
-            <input matInput placeholder="이메일" type="text" name="email" [value]="user?.email" disabled>
-          </mat-form-field>
-          <br/><br/>
-          <mat-form-field class="smallInputEle">
-            <input matInput placeholder="한 줄 소개" type="text" name="introduction" [(ngModel)]="introduction">
-          </mat-form-field>
-          <br/><br/>
-          <br/>
-          <button mat-raised-button type="submit" class="smallInputEle" color="primary">회원가입</button>
+          <button mat-raised-button type="submit" class="input-element" color="primary">회원가입</button>
           <br/><br/><br/><hr/>
           회원코드 : [ {{user?._id}} ]
         </div>
