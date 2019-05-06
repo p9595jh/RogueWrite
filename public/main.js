@@ -41,7 +41,7 @@ module.exports = ".nav-link {\r\n    color: black;\r\n    display: block;\r\n   
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ng-flash-message></ng-flash-message>\r\n\r\n<div class=\"mdl-demo mdl-base\">\r\n  <div class=\"mdl-layout mdl-js-layout mdl-layout--fixed-tabs\">\r\n\r\n    <!-- header for large display -->\r\n    <header class=\"mdl-layout__header mdl-layout__header--scroll mdl-color--primary\"\r\n      style=\"background-color: rgb(143, 143, 226);\" *ngIf=\"!router.url.startsWith('/play')\">\r\n\r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n      \r\n      <!-- title -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\">\r\n        <!-- <h3 [routerLink]=\"['/']\" style=\"cursor: pointer; font-family: 'Ubuntu', sans-serif;\">{{siteName}}</h3> -->\r\n        <img src=\"/images/title.png\" [routerLink]=\"['/']\" style=\"cursor: pointer; width: 40%; height: auto;\" />\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" >\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"!authService.loggedIn()\" [routerLink]=\"['/login']\">LOGIN</a>\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"authService.loggedIn()\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"authService.loggedIn()\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n        </nav>\r\n      </div>\r\n      \r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n\r\n      <!-- nav bar -->\r\n      <nav mat-tab-nav-bar mat-stretch-tabs\r\n        mat-align-tabs=\"center\"\r\n        [color]=\"'primary'\"\r\n        [backgroundColor]=\"'accent'\"\r\n        style=\"border-bottom-color: black;\">\r\n        <a mat-tab-link *ngFor=\"let link of navLinks\"\r\n          (click)=\"activeLink = link.path\"\r\n          [routerLink]=\"[link.path]\"\r\n          [active]=\"activeLink == link.path\">{{link.label}}</a>\r\n      </nav>\r\n\r\n    </header>\r\n\r\n    <!-- header for mobile -->\r\n    <header class=\"mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary\">\r\n      <nav class=\"navbar navbar-dark fixed-top bg-dark\">\r\n        <div>\r\n          <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarCollapse\" aria-controls=\"navbarCollapse\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n            <span class=\"navbar-toggler-icon\"></span>\r\n          </button>\r\n          <img src=\"/images/title.png\" style=\"height: 55px; width: auto;\" [routerLink]=\"['/']\" />\r\n        </div>\r\n        <table id=\"header-sm-table\">\r\n          <tr>\r\n            <td *ngIf=\"!authService.loggedIn()\">\r\n              <a [routerLink]=\"['/login']\" class=\"header-sm-link\" id=\"header-sm-login\">LOGIN</a>\r\n            </td>\r\n            <td *ngIf=\"authService.loggedIn()\">\r\n              <a [routerLink]=\"['/profile']\" class=\"header-sm-link\">PROFILE</a>\r\n            </td>\r\n            <td *ngIf=\"authService.loggedIn()\">\r\n              <a (click)=\"onLogoutClick()\" href=\"#\" class=\"header-sm-link\">LOGOUT</a>\r\n            </td>\r\n          </tr>\r\n        </table>\r\n        <div class=\"collapse navbar-collapse\" id=\"navbarCollapse\">\r\n          <ul class=\"navbar-nav mr-auto\">\r\n            <li class=\"nav-item active\" *ngFor=\"let link of navLinks\"\r\n              data-toggle=\"collapse\" data-target=\"#navbarCollapse\" aria-controls=\"navbarCollapse\"\r\n              aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n              <a class=\"nav-link header-sm-link\" [routerLink]=\"[link.path]\">{{link.label}}</a>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n      </nav>\r\n      <br/><br/>\r\n    </header>\r\n\r\n    <main class=\"mdl-layout__content\">\r\n      <div class=\"mdl-layout__tab-panel is-active\" id=\"overview\">\r\n        <router-outlet></router-outlet>\r\n        <br/><br/>\r\n      </div>\r\n\r\n      <!-- footer -->\r\n      <footer class=\"mdl-mega-footer\">\r\n        <div class=\"mdl-mega-footer--bottom-section\">\r\n          <div class=\"mdl-logo\">\r\n            powered by Project RogueWrite\r\n          </div>\r\n          <ul class=\"mdl-mega-footer--link-list\">\r\n            <li><a target=\"_blank\" href=\"https://getmdl.io/index.html\">MDL</a></li>\r\n            <li><a target=\"_blank\" href=\"https://material.angular.io/\">Angular Material</a></li>\r\n            <li><a target=\"_blank\" href=\"https://github.com/p9595jh/RogueWrite\">Github</a></li>\r\n          </ul>\r\n        </div>\r\n      </footer>\r\n      <!-- footer -->\r\n\r\n    </main>\r\n    <div *ngIf=\"router.url.startsWith('/play')\" style=\"background-color: white;\">\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<ng-flash-message></ng-flash-message>\r\n\r\n<div class=\"mdl-demo mdl-base\">\r\n  <div class=\"mdl-layout mdl-js-layout mdl-layout--fixed-tabs\">\r\n\r\n    <!-- header for large display -->\r\n    <header class=\"mdl-layout__header mdl-layout__header--scroll mdl-color--primary\"\r\n      style=\"background-color: rgb(143, 143, 226);\" *ngIf=\"!router.url.startsWith('/play')\">\r\n\r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n      \r\n      <!-- title -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\">\r\n        <!-- <h3 [routerLink]=\"['/']\" style=\"cursor: pointer; font-family: 'Ubuntu', sans-serif;\">{{siteName}}</h3> -->\r\n        <img src=\"/images/title.png\" [routerLink]=\"['/']\" style=\"cursor: pointer; width: auto; height: 230%;\" />\r\n        <div class=\"mdl-layout-spacer\"></div>\r\n        <nav class=\"mdl-navigation\" [routerLinkActive]=\"['active']\" [routerLinkActiveOptions]=\"{exact:true}\" >\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"!authService.loggedIn()\" [routerLink]=\"['/login']\">LOGIN</a>\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"authService.loggedIn()\" [routerLink]=\"['/profile']\">PROFILE</a>\r\n          <a class=\"mdl-navigation__link\" *ngIf=\"authService.loggedIn()\" (click)=\"onLogoutClick()\" href=\"#\">LOGOUT</a>\r\n        </nav>\r\n      </div>\r\n      \r\n      <!-- spacing -->\r\n      <div class=\"mdl-layout--large-screen-only mdl-layout__header-row\"></div>\r\n\r\n      <!-- nav bar -->\r\n      <nav mat-tab-nav-bar mat-stretch-tabs\r\n        mat-align-tabs=\"center\"\r\n        [color]=\"'primary'\"\r\n        [backgroundColor]=\"'accent'\"\r\n        style=\"border-bottom-color: black;\">\r\n        <a mat-tab-link *ngFor=\"let link of navLinks\"\r\n          (click)=\"activeLink = link.path\"\r\n          [routerLink]=\"[link.path]\"\r\n          [active]=\"activeLink == link.path\">{{link.label}}</a>\r\n      </nav>\r\n\r\n    </header>\r\n\r\n    <!-- header for mobile -->\r\n    <header class=\"mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary\">\r\n      <nav class=\"navbar navbar-dark fixed-top bg-dark\">\r\n        <div>\r\n          <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarCollapse\" aria-controls=\"navbarCollapse\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n            <span class=\"navbar-toggler-icon\"></span>\r\n          </button>\r\n          <img src=\"/images/title.png\" style=\"height: 55px; width: auto;\" [routerLink]=\"['/']\" />\r\n        </div>\r\n        <table id=\"header-sm-table\">\r\n          <tr>\r\n            <td *ngIf=\"!authService.loggedIn()\">\r\n              <a [routerLink]=\"['/login']\" class=\"header-sm-link\" id=\"header-sm-login\">LOGIN</a>\r\n            </td>\r\n            <td *ngIf=\"authService.loggedIn()\">\r\n              <a [routerLink]=\"['/profile']\" class=\"header-sm-link\">PROFILE</a>\r\n            </td>\r\n            <td *ngIf=\"authService.loggedIn()\">\r\n              <a (click)=\"onLogoutClick()\" href=\"#\" class=\"header-sm-link\">LOGOUT</a>\r\n            </td>\r\n          </tr>\r\n        </table>\r\n        <div class=\"collapse navbar-collapse\" id=\"navbarCollapse\">\r\n          <ul class=\"navbar-nav mr-auto\">\r\n            <li class=\"nav-item active\" *ngFor=\"let link of navLinks\"\r\n              data-toggle=\"collapse\" data-target=\"#navbarCollapse\" aria-controls=\"navbarCollapse\"\r\n              aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n              <a class=\"nav-link header-sm-link\" [routerLink]=\"[link.path]\">{{link.label}}</a>\r\n            </li>\r\n          </ul>\r\n        </div>\r\n      </nav>\r\n      <br/><br/><br/>\r\n    </header>\r\n\r\n    <main class=\"mdl-layout__content\">\r\n      <!-- <div class=\"mdl-layout__tab-panel is-active\" id=\"overview\"> -->\r\n      <div class=\"is-active\" id=\"overview\">\r\n        <div *ngIf=\"router.url != '/'\"><br/><br/></div>\r\n        <router-outlet></router-outlet>\r\n        <br/><br/>\r\n      </div>\r\n\r\n      <!-- footer -->\r\n      <footer class=\"mdl-mega-footer\">\r\n        <div class=\"mdl-mega-footer--bottom-section\">\r\n          <div class=\"mdl-logo\">\r\n            powered by Project RogueWrite\r\n          </div>\r\n          <ul class=\"mdl-mega-footer--link-list\">\r\n            <li><a target=\"_blank\" href=\"https://getmdl.io/index.html\">MDL</a></li>\r\n            <li><a target=\"_blank\" href=\"https://material.angular.io/\">Angular Material</a></li>\r\n            <li><a target=\"_blank\" href=\"https://github.com/p9595jh/RogueWrite\">Github</a></li>\r\n          </ul>\r\n        </div>\r\n      </footer>\r\n      <!-- footer -->\r\n\r\n    </main>\r\n    <div *ngIf=\"router.url.startsWith('/play')\" style=\"background-color: white;\">\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -295,7 +295,8 @@ var AppModule = /** @class */ (function () {
                 _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatTooltipModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatTreeModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatExpansionModule"],
-                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatDialogModule"]
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatDialogModule"],
+                _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatCardModule"]
             ],
             exports: [
                 _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"],
@@ -2204,7 +2205,7 @@ module.exports = "/* .demo-card-wide .mdl-card {\r\n    width: 512px;\r\n} */\r\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"movingHead\" class=\"carousel slide\" data-ride=\"carousel\">\r\n  <ol class=\"carousel-indicators\">\r\n    <li data-target=\"#movingHead\" data-slide-to=\"0\" class=\"active\"></li>\r\n    <li data-target=\"#movingHead\" data-slide-to=\"1\"></li>\r\n    <li data-target=\"#movingHead\" data-slide-to=\"2\"></li>\r\n  </ol>\r\n  <div class=\"carousel-inner\">\r\n    <div class=\"carousel-item active\">\r\n      <svg class=\"bd-placeholder-img\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid slice\" focusable=\"false\" role=\"img\"><rect width=\"100%\" height=\"100%\" fill=\"#777\"/></svg>\r\n      <div class=\"container\">\r\n        <div class=\"carousel-caption text-left\">\r\n          <h3>{{carousel[0]?.title}}</h3>\r\n          <h4>최근 추가된 게임</h4>\r\n          <p>{{carousel[0]?.content}}</p>\r\n          <p><a class=\"btn btn-lg btn btn-dark\" [routerLink]=\"['/game/' + carousel[0]?._id]\" role=\"button\">게임으로</a></p>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"carousel-item\">\r\n      <svg class=\"bd-placeholder-img\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid slice\" focusable=\"false\" role=\"img\"><rect width=\"100%\" height=\"100%\" fill=\"#777\"/></svg>\r\n      <div class=\"container\">\r\n        <div class=\"carousel-caption\">\r\n          <h3>{{carousel[1]?.title}}</h3>\r\n          <h4>최고 인기 게임</h4>\r\n          <p>{{carousel[1]?.content}}</p>\r\n          <p><a class=\"btn btn-lg btn btn-dark\" [routerLink]=\"['/game/' + carousel[1]?._id]\" role=\"button\">게임으로</a></p>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"carousel-item\">\r\n      <svg class=\"bd-placeholder-img\" width=\"100%\" height=\"100%\" xmlns=\"http://www.w3.org/2000/svg\" preserveAspectRatio=\"xMidYMid slice\" focusable=\"false\" role=\"img\"><rect width=\"100%\" height=\"100%\" fill=\"#777\"/></svg>\r\n      <div class=\"container\">\r\n        <div class=\"carousel-caption text-right\">\r\n          <h3>{{carousel[2]?.title}}</h3>\r\n          <h4>최근 추가된 게시판</h4>\r\n          <p>생성된 날짜 : {{carousel[2]?.createdate}}</p>\r\n          <p><a class=\"btn btn-lg btn btn-dark\" [routerLink]=\"['/board/' + carousel[2]?.url + '/list']\" role=\"button\">게시판으로</a></p>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <a class=\"carousel-control-prev\" href=\"#movingHead\" role=\"button\" data-slide=\"prev\">\r\n    <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span>\r\n    <span class=\"sr-only\">Previous</span>\r\n  </a>\r\n  <a class=\"carousel-control-next\" href=\"#movingHead\" role=\"button\" data-slide=\"next\">\r\n    <span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span>\r\n    <span class=\"sr-only\">Next</span>\r\n  </a>\r\n</div>\r\n<section></section>\r\n\r\n<section *ngIf=\"user?.userid == 'admin'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"demo-card-wide mdl-card\" style=\"width: 100%;\">\r\n      <div class=\"mdl-card__title\">\r\n        <h2 class=\"mdl-card__title-text\">Welcome, Admin</h2>\r\n      </div>\r\n      <div class=\"mdl-card__supporting-text\">\r\n        반갑습니다, 어드민님\r\n      </div>\r\n      <div class=\"mdl-card__actions mdl-card--border\">\r\n        <a class=\"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect\" [routerLink]=\"['/admin']\">\r\n          어드민 페이지\r\n        </a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <a [routerLink]=\"['/board/notice/' + notice?._id]\" style=\"color: black; font-weight: bold;\">[공지] {{notice?.title}}</a>\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 [routerLink]=\"['/board/free/list']\">자유게시판</h4><hr/>\r\n      <ul>\r\n        <li *ngFor=\"let free of frees\">\r\n          <a [routerLink]=\"['/board/free/' + free?._id]\" style=\"color: black;\">{{free?.title}}</a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<div id=\"rwCarousel\" class=\"carousel slide\" data-ride=\"carousel\">\r\n\r\n  <ol class=\"carousel-indicators\">\r\n    <li data-target=\"#rwCarousel\" data-slide-to=\"0\" class=\"active\"></li>\r\n    <li data-target=\"#rwCarousel\" data-slide-to=\"1\"></li>\r\n    <li data-target=\"#rwCarousel\" data-slide-to=\"2\"></li>\r\n  </ol>\r\n\r\n  <div class=\"carousel-inner\">\r\n    <div class=\"carousel-item active\">\r\n      <img src=\"images/carousel/carousel1.jpg\" style=\"width: 100%;\">\r\n      <div class=\"container\">\r\n        <div class=\"carousel-caption text-left\">\r\n          <h3>{{carousel[0]?.title}}</h3>\r\n          <h4>최근 추가된 게임</h4>\r\n          <p>{{carousel[0]?.content}}</p>\r\n          <p><a mat-flat-button [routerLink]=\"['/game/' + carousel[0]?._id]\" role=\"button\">게임으로</a></p>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"carousel-item\">\r\n      <img src=\"images/carousel/carousel2.jpg\" style=\"width: 100%;\">\r\n      <div class=\"container\">\r\n        <div class=\"carousel-caption\">\r\n          <h3>{{carousel[1]?.title}}</h3>\r\n          <h4>최고 인기 게임</h4>\r\n          <p>{{carousel[1]?.content}}</p>\r\n          <p><a mat-flat-button [routerLink]=\"['/game/' + carousel[1]?._id]\" role=\"button\">게임으로</a></p>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"carousel-item\">\r\n      <img src=\"images/carousel/carousel3.jpg\" style=\"width: 100%;\">\r\n      <div class=\"container\">\r\n        <div class=\"carousel-caption text-right\">\r\n          <h3>{{carousel[2]?.title}}</h3>\r\n          <h4>최근 추가된 게시판</h4>\r\n          <p>생성된 날짜 : {{carousel[2]?.createdate}}</p>\r\n          <p><a mat-flat-button [routerLink]=\"['/board/' + carousel[2]?.url + '/list']\" role=\"button\">게시판으로</a></p>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <a class=\"carousel-control-prev\" href=\"#rwCarousel\" role=\"button\" data-slide=\"prev\">\r\n    <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span>\r\n    <span class=\"sr-only\">Previous</span>\r\n  </a>\r\n  <a class=\"carousel-control-next\" href=\"#rwCarousel\" role=\"button\" data-slide=\"next\">\r\n    <span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span>\r\n    <span class=\"sr-only\">Next</span>\r\n  </a>\r\n</div>\r\n<section></section>\r\n\r\n<section *ngIf=\"user?.userid == 'admin'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"demo-card-wide mdl-card\" style=\"width: 100%;\">\r\n      <div class=\"mdl-card__title\">\r\n        <h2 class=\"mdl-card__title-text\">Welcome, Admin</h2>\r\n      </div>\r\n      <div class=\"mdl-card__supporting-text\">\r\n        반갑습니다, 어드민님\r\n      </div>\r\n      <div class=\"mdl-card__actions mdl-card--border\">\r\n        <a class=\"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect\" [routerLink]=\"['/admin']\">\r\n          어드민 페이지\r\n        </a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <mat-card style=\"width: 100%; padding-left: 30px;\">\r\n    <a [routerLink]=\"['/board/notice/' + notice?._id]\" style=\"color: black; font-weight: bold;\">[공지] {{notice?.title}}</a>\r\n  </mat-card>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <mat-card style=\"width: 100%; padding-left: 30px;\">\r\n    디버깅용) <a [routerLink]=\"['/test']\" style=\"color: black; text-decoration: underline;\">TEST</a>\r\n  </mat-card>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4><a [routerLink]=\"['/board/free/list']\" style=\"color: black;\">자유게시판</a></h4><hr/>\r\n      <ul>\r\n        <li *ngFor=\"let free of frees\">\r\n          <a [routerLink]=\"['/board/free/' + free?._id]\" style=\"color: black;\">{{free?.title}}</a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4><a [routerLink]=\"['/board/' + sub?.url + '/list']\" style=\"color: black;\">{{sub?.title}} 게시판</a></h4><hr/>\r\n      <ul>\r\n        <li *ngFor=\"let other of others\">\r\n          <a [routerLink]=\"['/board/' + sub?.url + '/' + other?._id]\" style=\"color: black;\">{{other?.title}}</a>\r\n        </li>\r\n      </ul>\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -2219,9 +2220,10 @@ module.exports = "<div id=\"movingHead\" class=\"carousel slide\" data-ride=\"ca
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
-/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
-/* harmony import */ var _services_home_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/home.service */ "./src/app/services/home.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _services_home_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/home.service */ "./src/app/services/home.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2235,24 +2237,54 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(funcService, authService, homeService) {
+    function HomeComponent(router, funcService, authService, homeService) {
+        var _this = this;
+        this.router = router;
         this.funcService = funcService;
         this.authService = authService;
         this.homeService = homeService;
         this.user = undefined;
         this.carousel = [];
         this.funcService.setTitle('HOME');
+        this.navigationSubscription = this.router.events.subscribe(function (e) {
+            if (e instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["NavigationEnd"]) {
+                _this.initialiseInvites();
+            }
+        });
     }
+    // ngOnInit() { // debugging
+    //   const c = {
+    //     _id: 123,
+    //     title: 'asdf',
+    //     content: 'what',
+    //     url: 'hello',
+    //     createdate: 'yeah'
+    //   };
+    //   const b = {_id: 'B-ID', title: 'B-TITLE'};
+    //   this.carousel = [];
+    //   for(let i=0; i<3; i++) this.carousel.push(c);
+    //   this.notice = b;
+    //   this.sub = {title: 'SUB-TITLE', url: 'SUB-URL'};
+    //   this.frees = [];
+    //   this.others = [];
+    //   for (let i=0; i<5; i++) {
+    //     this.frees.push(b);
+    //     this.others.push(b);
+    //   }
+    // }
     HomeComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.homeService.takeBests().subscribe(function (bests) {
-            _this.carousel.push(bests.recent);
-            _this.carousel.push(bests.recommend);
+            _this.carousel[0] = bests.recent;
+            _this.carousel[1] = bests.recommend;
             _this.homeService.takeFromBoard().subscribe(function (data) {
-                _this.carousel.push(data.sub);
+                _this.carousel[2] = data.added;
                 _this.notice = data.notice;
                 _this.frees = data.frees;
+                _this.sub = data.sub;
+                _this.others = data.others;
                 if (_this.authService.loggedIn()) {
                     _this.authService.getProfile().subscribe(function (profile) {
                         _this.user = profile.user;
@@ -2261,15 +2293,24 @@ var HomeComponent = /** @class */ (function () {
             });
         });
     };
+    HomeComponent.prototype.initialiseInvites = function () {
+        this.ngOnInit();
+    };
+    HomeComponent.prototype.ngOnDestroy = function () {
+        if (this.navigationSubscription) {
+            this.navigationSubscription.unsubscribe();
+        }
+    };
     HomeComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-home',
             template: __webpack_require__(/*! ./home.component.html */ "./src/app/components/home/home.component.html"),
             styles: [__webpack_require__(/*! ./home.component.css */ "./src/app/components/home/home.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_1__["FuncService"],
-            _services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"],
-            _services_home_service__WEBPACK_IMPORTED_MODULE_3__["HomeService"]])
+        __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
+            _services_func_service__WEBPACK_IMPORTED_MODULE_2__["FuncService"],
+            _services_auth_service__WEBPACK_IMPORTED_MODULE_3__["AuthService"],
+            _services_home_service__WEBPACK_IMPORTED_MODULE_4__["HomeService"]])
     ], HomeComponent);
     return HomeComponent;
 }());
@@ -2554,7 +2595,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">PAGE NOT FOUND</h4>\r\n\r\n      <hr/>\r\n      <div class=\"posting\">\r\n        <img src=\"images/404.jpg\" style=\"width: 100%;\"><br/><br/>\r\n        페이지가 존재하지 않거나 접근이 거부되었습니다.<br/><br/>\r\n        <a mat-raised-button color=\"primary\" [routerLink]=\"[this.funcService.getPreviousUrl()]\">이전 페이지로 돌아가기</a><br/><br/>\r\n      </div>\r\n      <br/><br/>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\n    <div class=\"mdl-card__supporting-text\">\n      <h4 style=\"display: inline;\">PAGE NOT FOUND</h4>\n\n      <hr/>\n      <div class=\"posting\">\n        <img src=\"images/404.jpg\" style=\"width: 100%;\"><br/><br/>\n        페이지가 존재하지 않거나 접근이 거부되었습니다.<br/><br/>\n        <a mat-raised-button color=\"primary\" [routerLink]=\"[this.funcService.getPreviousUrl()]\">이전 페이지로 돌아가기</a><br/><br/>\n      </div>\n      <br/><br/>\n\n    </div>\n  </div>\n</section>\n\n<section></section>\n"
 
 /***/ }),
 
@@ -5226,7 +5267,7 @@ var SafeHtml = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Hoon\PJH\others\web\rwrite\angular-src\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\PJH\1494054\RogueWrite\angular-src\src\main.ts */"./src/main.ts");
 
 
 /***/ })

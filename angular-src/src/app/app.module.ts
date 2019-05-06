@@ -29,7 +29,8 @@ import {  // angular-material modules
   MatTooltipModule,
   MatTreeModule,
   MatExpansionModule,
-  MatDialogModule
+  MatDialogModule,
+  MatCardModule
 } from '@angular/material';
 
 import { ValidateService } from './services/validate.service';
@@ -145,7 +146,8 @@ const appRoutes: Routes = [
     MatTooltipModule,
     MatTreeModule,
     MatExpansionModule,
-    MatDialogModule
+    MatDialogModule,
+    MatCardModule
   ],
   exports: [
     RouterModule,
