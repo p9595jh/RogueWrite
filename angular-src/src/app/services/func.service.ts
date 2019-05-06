@@ -67,7 +67,7 @@ export class FuncService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    this.http.post(this.ServerAddress + '/modals/getCode', {userid: userid}, {headers: headers})
+    this.http.post(this.ServerAddress + '/modals/get-code', {userid: userid}, {headers: headers})
       .pipe(map(res => res.json())).subscribe(data => {
         const code = data.code;
         this.openWindow(url + '&c=' + code);

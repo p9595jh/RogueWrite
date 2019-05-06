@@ -36,7 +36,6 @@ import { ValidateService } from './services/validate.service';
 import { AuthService } from './services/auth.service';
 import { NgFlashMessagesModule } from 'ng-flash-messages';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
-import { FileSelectDirective } from 'ng2-file-upload';
 import { AuthGuard } from './guards/auth.guard';
 import { DeactivateGuard } from './guards/deactivate.guard';
 import { SafeHtml } from '../pipes/safeHtml';
@@ -86,7 +85,6 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     SafeHtml,
-    FileSelectDirective,
     AppComponent,
     LoginComponent,
     RegisterComponent,

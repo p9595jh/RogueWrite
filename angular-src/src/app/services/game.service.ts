@@ -34,7 +34,7 @@ export class GameService {
   getSessionGame() {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(this.funcService.ServerAddress + '/games/getSessionGame', {headers: headers})
+    return this.http.get(this.funcService.ServerAddress + '/games/session-game', {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -42,21 +42,21 @@ export class GameService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let loggedIn = this.authService.loggedIn() ? 'yes' : 'no';
-    return this.http.get(this.funcService.ServerAddress + '/games/takeOnePost?num=' + num + '&loggedIn=' + loggedIn, {headers: headers})
+    return this.http.get(this.funcService.ServerAddress + '/games/take-one-post?num=' + num + '&loggedIn=' + loggedIn, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
   takeAllPosts() {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(this.funcService.ServerAddress + '/games/takeAllPosts', {headers: headers})
+    return this.http.get(this.funcService.ServerAddress + '/games/take-all-posts', {headers: headers})
       .pipe(map(res => res.json()));
   }
 
   takeRequestedPosts() {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(this.funcService.ServerAddress + '/games/takeRequestedPosts', {headers: headers})
+    return this.http.get(this.funcService.ServerAddress + '/games/take-requested-posts', {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -65,7 +65,7 @@ export class GameService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/games/takeOneTemp', {num: num}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/games/take-one-temp', {num: num}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -74,14 +74,14 @@ export class GameService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/games/takeMyOneTemp', {num: num}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/games/take-my-one-temp', {num: num}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
   takeSearchedPosts(category, text) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(this.funcService.ServerAddress + '/games/takeSearchedPosts?category=' + category + '&text=' + text, {headers: headers})
+    return this.http.get(this.funcService.ServerAddress + '/games/take-searched-posts?category=' + category + '&text=' + text, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -90,7 +90,7 @@ export class GameService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/games/writeComment', cmt, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/games/write-comment', cmt, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -106,14 +106,14 @@ export class GameService {
   removePost(num) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/games/removePost', {num: num}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/games/remove-post', {num: num}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
   removeComment(postNum, cmtNum) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/games/removeComment', {postNum: postNum, cmtNum: cmtNum}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/games/remove-comment', {postNum: postNum, cmtNum: cmtNum}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -138,7 +138,7 @@ export class GameService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/games/requestBoard', {num: num}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/games/request-board', {num: num}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -153,7 +153,7 @@ export class GameService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/games/acceptBoard', formData, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/games/accept-board', formData, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -162,7 +162,7 @@ export class GameService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/games/acceptBoard', {num: num, accept: false}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/games/accept-board', {num: num, accept: false}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -171,7 +171,7 @@ export class GameService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/games/toMyTempList', {num: num, title: title}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/games/to-my-temp-list', {num: num, title: title}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -180,21 +180,21 @@ export class GameService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/games/takeMyTemps', {}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/games/take-my-temps', {}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
   removeTemp(_id) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/games/removeTemp', {_id: _id}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/games/remove-temp', {_id: _id}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
   versionRollBack(num, length) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/games/versionRollBack', {num: num, length: length}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/games/version-rollback', {num: num, length: length}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -203,14 +203,14 @@ export class GameService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/games/acceptCoWorkReq', {accept: accept, coworkRequest: coworkRequest}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/games/accept-co-work-req', {accept: accept, coworkRequest: coworkRequest}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
   modifyTitle(num, title) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/games/modifyTitle', {num: num, title: title}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/games/modify-title', {num: num, title: title}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 

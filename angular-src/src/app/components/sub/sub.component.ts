@@ -14,7 +14,7 @@ export class SubComponent implements OnInit, OnDestroy {
   navigationSubscription;
 
   subs: Map<string, any[][]>;
-  user: any;
+  user: any = undefined;
   bkMap: Map<string, any[][]> = undefined;
 
   constructor(

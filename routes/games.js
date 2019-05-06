@@ -113,7 +113,7 @@ function isNotValid(s) {
     return s == undefined || s == '';
 }
 
-router.post('/tempSave', (req, res, next) => {
+router.post('/temp-save', (req, res, next) => {
     if ( req.body._id ) {
         const blockData = {
             xml: req.body.block,
@@ -147,7 +147,7 @@ router.post('/tempSave', (req, res, next) => {
     }
 });
 
-router.post('/addBlock', (req, res, next) => {
+router.post('/add-block', (req, res, next) => {
     Temp.findOne({_id: req.body.addId}, {block: 1, from: 1}, (err, temp) => {
         if ( err || !temp ) res.json({fail: true});
         else {
@@ -182,7 +182,7 @@ router.post('/save', function(req, res, next) {
     }
 });
 
-router.get('/getSessionGame', function(req, res, next) {
+router.get('/session-game', function(req, res, next) {
     if ( !req.session.data ) {
         res.json({
             success: false,
@@ -287,7 +287,7 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
 
 // take =============================================================
 
-router.get('/takeOnePost', function(req, res, next) {
+router.get('/take-one-post', function(req, res, next) {
     var num = req.query.num;
     var loggedIn = req.query.loggedIn;
     Game.findOne({_id: num}, function(err, post) {
@@ -303,26 +303,26 @@ router.get('/takeOnePost', function(req, res, next) {
     });
 })
 
-router.get('/takeAllPosts', function(req, res, next) {
+router.get('/take-all-posts', function(req, res, next) {
     Game.find({}, {content: 0, game: 0, block: 0, recommendby: 0}).sort({_id: -1}).exec(function(err, posts) {
         res.json({posts: posts});
     });
 });
 
-router.get('/takeRequestedPosts', function(req, res, next) {
+router.get('/take-requested-posts', function(req, res, next) {
     Game.find({boardRequest: 1}, {content: 0, game: 0, block: 0, comment: 0, hit: 0, recommendby: 0}, function(err, posts) {
         res.json({posts: posts});
     });
 });
 
-router.post('/takeOneTemp', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+router.post('/take-one-temp', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     Temp.findOne({_id: req.body.num}, {block: 0}, (err, output) => {
         if ( err | !output | req.user._id != output.user ) res.json({success: false});
         else res.json({success: true, temp: output});
     });
 });
 
-router.post('/takeMyOneTemp', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+router.post('/take-my-one-temp', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     Temp.findOne({_id: req.body.num}, (err, temp) => {
         if ( temp.user == req.user._id || temp.coworker.includes(req.user._id.toString()) ) {
             User.find({_id: {$in: temp.coworker}}, {nickname: 1, userid: 1, _id: 1}, (err, users) => {
@@ -338,7 +338,7 @@ router.post('/takeMyOneTemp', passport.authenticate('jwt', {session: false}), fu
     })
 });
 
-router.post('/takeMyTemps', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+router.post('/take-my-temps', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     Temp.find({user: req.user._id}, {_id: 1, title: 1, savedate: 1}, (err, temps) => {
         Temp.find({coworker: {$in: [req.user._id.toString()]}}, {_id: 1, title: 1, savedate: 1}, (err, outputs) => {
             res.json({
@@ -349,7 +349,7 @@ router.post('/takeMyTemps', passport.authenticate('jwt', {session: false}), func
     });
 });
 
-router.get('/takeSearchedPosts', (req, res, next) => {
+router.get('/take-searched-posts', (req, res, next) => {
     const category = req.query.category;
     if ( category == 'title' ) {
         Game.find({title: {$regex: req.query.text, $options: 'i'}}, {content: 0}).exec((err, posts) => {
@@ -364,7 +364,7 @@ router.get('/takeSearchedPosts', (req, res, next) => {
     }
 });
 
-router.get('/takeOneGame', (req, res, next) => {
+router.get('/take-one-game', (req, res, next) => {
     Game.findOne({_id: req.query.num}, {game: 1}, (err, game) => {
         if ( err || !game ) res.json({game: undefined});
         else res.json({game: game.game});
@@ -373,7 +373,7 @@ router.get('/takeOneGame', (req, res, next) => {
 
 // handle temps =============================================================
 
-router.post('/toMyTempList', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+router.post('/to-my-temp-list', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     const num = req.body.num;
     const nowDate = getNowDate();
     Game.findOne({_id: num}, {title: 1, block: 1, userid: 1, nickname: 1}, (err, game) => {
@@ -404,7 +404,7 @@ router.post('/toMyTempList', passport.authenticate('jwt', {session: false}), fun
     });
 });
 
-router.post('/versionRollBack', function(req, res, next) {
+router.post('/version-rollback', function(req, res, next) {
     const num = req.body.num;
     Temp.findOne({_id: num}, {block: 1}, (err, temp) => {
         temp.block.length = req.body.length;
@@ -415,7 +415,7 @@ router.post('/versionRollBack', function(req, res, next) {
     });
 });
 
-router.post('/acceptCoWorkReq', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+router.post('/accept-co-work-req', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     const accept = req.body.accept;
     const coworkRequest = req.body.coworkRequest;
     User.findOneAndUpdate({_id: req.user._id}, {$pullAll: {coworkRequest: [coworkRequest]}}, (err, user) => {
@@ -435,7 +435,7 @@ router.post('/acceptCoWorkReq', passport.authenticate('jwt', {session: false}), 
 
 // about posting =============================================================
 
-router.post('/writeComment', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+router.post('/write-comment', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     let comment = req.body.comment.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
         return '&#' + i.charCodeAt(0) + ';';
     });
@@ -510,7 +510,7 @@ router.post('/reply-comment', passport.authenticate('jwt', {session: false}), fu
     });
 });
 
-router.post('/removePost', function(req, res, next) {
+router.post('/remove-post', function(req, res, next) {
     const num = req.body.num;
     Game.findOneAndDelete({_id: num}, function(err, output) {
         if ( err ) {
@@ -525,7 +525,7 @@ router.post('/removePost', function(req, res, next) {
     })
 })
 
-router.post('/removeComment', function(req, res, next) {
+router.post('/remove-comment', function(req, res, next) {
     const postNum = req.body.postNum;
     const cmtNum = req.body.cmtNum;
     Game.findOne({_id: postNum}, {comment: 1}, {comment: 1}, (err, post) => {
@@ -627,14 +627,14 @@ router.post('/recommend', passport.authenticate('jwt', {session: false}), functi
     
 });
 
-router.post('/removeTemp', (req, res, next) => {
+router.post('/remove-temp', (req, res, next) => {
     Temp.findOneAndDelete({_id: req.body._id}, (err, temp) => {
         if ( err ) res.json({success: false, msg: err});
         else res.json({success: true});
     });
 });
 
-router.post('/modifyTitle', (req, res, next) => {
+router.post('/modify-title', (req, res, next) => {
     Temp.findOneAndUpdate({_id: req.body.num}, {title: req.body.title}, (err, temp) => {
         if ( err || !temp ) res.json({success: false});
         else res.json({success: true});
@@ -643,7 +643,7 @@ router.post('/modifyTitle', (req, res, next) => {
 
 // requesting a board =============================================================
 
-router.post('/requestBoard', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+router.post('/request-board', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     const num = req.body.num;
     Game.findOne({_id: num}, {userid: 1}, function(err, post) {
         if ( err ) {
@@ -703,7 +703,7 @@ function makeRandomCode(lengthOfRandomCode) {
     return randomstring;
 }
 
-router.post('/acceptBoard', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+router.post('/accept-board', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     const num = req.body.num;
     const accept = req.body.accept;
     if ( req.user.userid != 'admin' ) {

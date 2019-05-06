@@ -144,31 +144,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ng-flash-messages */ "./node_modules/ng-flash-messages/ng-flash-messages.umd.js");
 /* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(ng_flash_messages__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var angular_froala_wysiwyg__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! angular-froala-wysiwyg */ "./node_modules/angular-froala-wysiwyg/index.js");
-/* harmony import */ var ng2_file_upload__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ng2-file-upload */ "./node_modules/ng2-file-upload/index.js");
-/* harmony import */ var ng2_file_upload__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(ng2_file_upload__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./guards/auth.guard */ "./src/app/guards/auth.guard.ts");
-/* harmony import */ var _guards_deactivate_guard__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./guards/deactivate.guard */ "./src/app/guards/deactivate.guard.ts");
-/* harmony import */ var _pipes_safeHtml__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../pipes/safeHtml */ "./src/pipes/safeHtml.ts");
-/* harmony import */ var ngx_editor__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ngx-editor */ "./node_modules/ngx-editor/fesm5/ngx-editor.js");
-/* harmony import */ var ngx_bootstrap__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ngx-bootstrap */ "./node_modules/ngx-bootstrap/esm5/ngx-bootstrap.js");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
-/* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/login/login.component */ "./src/app/components/login/login.component.ts");
-/* harmony import */ var _components_register_register_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/register/register.component */ "./src/app/components/register/register.component.ts");
-/* harmony import */ var _components_home_home_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/home/home.component */ "./src/app/components/home/home.component.ts");
-/* harmony import */ var _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/profile/profile.component */ "./src/app/components/profile/profile.component.ts");
-/* harmony import */ var _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/modify/modify.component */ "./src/app/components/modify/modify.component.ts");
-/* harmony import */ var _components_board_board_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/board/board.component */ "./src/app/components/board/board.component.ts");
-/* harmony import */ var _components_write_write_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/write/write.component */ "./src/app/components/write/write.component.ts");
-/* harmony import */ var _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/no-page/no-page.component */ "./src/app/components/no-page/no-page.component.ts");
-/* harmony import */ var _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/admin/admin.component */ "./src/app/components/admin/admin.component.ts");
-/* harmony import */ var _components_tool_tool_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/tool/tool.component */ "./src/app/components/tool/tool.component.ts");
-/* harmony import */ var _components_game_game_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/game/game.component */ "./src/app/components/game/game.component.ts");
-/* harmony import */ var _components_sub_sub_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./components/sub/sub.component */ "./src/app/components/sub/sub.component.ts");
-/* harmony import */ var _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./components/temp/temp.component */ "./src/app/components/temp/temp.component.ts");
-/* harmony import */ var _components_corvee_corvee_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./components/corvee/corvee.component */ "./src/app/components/corvee/corvee.component.ts");
-/* harmony import */ var _components_cwrite_cwrite_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./components/cwrite/cwrite.component */ "./src/app/components/cwrite/cwrite.component.ts");
-/* harmony import */ var _components_play_play_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./components/play/play.component */ "./src/app/components/play/play.component.ts");
-/* harmony import */ var _components_test_test_component__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./components/test/test.component */ "./src/app/components/test/test.component.ts");
+/* harmony import */ var _guards_auth_guard__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./guards/auth.guard */ "./src/app/guards/auth.guard.ts");
+/* harmony import */ var _guards_deactivate_guard__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./guards/deactivate.guard */ "./src/app/guards/deactivate.guard.ts");
+/* harmony import */ var _pipes_safeHtml__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../pipes/safeHtml */ "./src/pipes/safeHtml.ts");
+/* harmony import */ var ngx_editor__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ngx-editor */ "./node_modules/ngx-editor/fesm5/ngx-editor.js");
+/* harmony import */ var ngx_bootstrap__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ngx-bootstrap */ "./node_modules/ngx-bootstrap/esm5/ngx-bootstrap.js");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
+/* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/login/login.component */ "./src/app/components/login/login.component.ts");
+/* harmony import */ var _components_register_register_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/register/register.component */ "./src/app/components/register/register.component.ts");
+/* harmony import */ var _components_home_home_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./components/home/home.component */ "./src/app/components/home/home.component.ts");
+/* harmony import */ var _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./components/profile/profile.component */ "./src/app/components/profile/profile.component.ts");
+/* harmony import */ var _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./components/modify/modify.component */ "./src/app/components/modify/modify.component.ts");
+/* harmony import */ var _components_board_board_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./components/board/board.component */ "./src/app/components/board/board.component.ts");
+/* harmony import */ var _components_write_write_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./components/write/write.component */ "./src/app/components/write/write.component.ts");
+/* harmony import */ var _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./components/no-page/no-page.component */ "./src/app/components/no-page/no-page.component.ts");
+/* harmony import */ var _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./components/admin/admin.component */ "./src/app/components/admin/admin.component.ts");
+/* harmony import */ var _components_tool_tool_component__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./components/tool/tool.component */ "./src/app/components/tool/tool.component.ts");
+/* harmony import */ var _components_game_game_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./components/game/game.component */ "./src/app/components/game/game.component.ts");
+/* harmony import */ var _components_sub_sub_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./components/sub/sub.component */ "./src/app/components/sub/sub.component.ts");
+/* harmony import */ var _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./components/temp/temp.component */ "./src/app/components/temp/temp.component.ts");
+/* harmony import */ var _components_corvee_corvee_component__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./components/corvee/corvee.component */ "./src/app/components/corvee/corvee.component.ts");
+/* harmony import */ var _components_cwrite_cwrite_component__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./components/cwrite/cwrite.component */ "./src/app/components/cwrite/cwrite.component.ts");
+/* harmony import */ var _components_play_play_component__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./components/play/play.component */ "./src/app/components/play/play.component.ts");
+/* harmony import */ var _components_test_test_component__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./components/test/test.component */ "./src/app/components/test/test.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -211,26 +209,25 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-
 var appRoutes = [
-    { path: '', component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_22__["HomeComponent"] },
-    { path: 'register', component: _components_register_register_component__WEBPACK_IMPORTED_MODULE_21__["RegisterComponent"] },
-    { path: 'login', component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_20__["LoginComponent"] },
-    { path: 'profile', component: _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_23__["ProfileComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
-    { path: 'modify', component: _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_24__["ModifyComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
-    { path: 'board/:type/:num', component: _components_board_board_component__WEBPACK_IMPORTED_MODULE_25__["BoardComponent"] },
-    { path: 'write/:type', component: _components_write_write_component__WEBPACK_IMPORTED_MODULE_26__["WriteComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
-    { path: 'test', component: _components_test_test_component__WEBPACK_IMPORTED_MODULE_36__["TestComponent"] },
-    { path: 'admin', component: _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_28__["AdminComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
-    { path: 'game/:num', component: _components_game_game_component__WEBPACK_IMPORTED_MODULE_30__["GameComponent"] },
-    { path: 'tool', component: _components_tool_tool_component__WEBPACK_IMPORTED_MODULE_29__["ToolComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"] /*, DeactivateGuard*/] },
-    { path: 'sub', component: _components_sub_sub_component__WEBPACK_IMPORTED_MODULE_31__["SubComponent"] },
-    { path: 'temp/:num', component: _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_32__["TempComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
-    { path: 'corvee/:num', component: _components_corvee_corvee_component__WEBPACK_IMPORTED_MODULE_33__["CorveeComponent"] },
-    { path: 'cwrite', component: _components_cwrite_cwrite_component__WEBPACK_IMPORTED_MODULE_34__["CwriteComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"]] },
-    { path: 'play/:num', component: _components_play_play_component__WEBPACK_IMPORTED_MODULE_35__["PlayComponent"] },
-    { path: 'no-page', component: _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_27__["NoPageComponent"] },
-    { path: '**', component: _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_27__["NoPageComponent"] }
+    { path: '', component: _components_home_home_component__WEBPACK_IMPORTED_MODULE_21__["HomeComponent"] },
+    { path: 'register', component: _components_register_register_component__WEBPACK_IMPORTED_MODULE_20__["RegisterComponent"] },
+    { path: 'login', component: _components_login_login_component__WEBPACK_IMPORTED_MODULE_19__["LoginComponent"] },
+    { path: 'profile', component: _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_22__["ProfileComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"]] },
+    { path: 'modify', component: _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_23__["ModifyComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"]] },
+    { path: 'board/:type/:num', component: _components_board_board_component__WEBPACK_IMPORTED_MODULE_24__["BoardComponent"] },
+    { path: 'write/:type', component: _components_write_write_component__WEBPACK_IMPORTED_MODULE_25__["WriteComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"]] },
+    { path: 'test', component: _components_test_test_component__WEBPACK_IMPORTED_MODULE_35__["TestComponent"] },
+    { path: 'admin', component: _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_27__["AdminComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"]] },
+    { path: 'game/:num', component: _components_game_game_component__WEBPACK_IMPORTED_MODULE_29__["GameComponent"] },
+    { path: 'tool', component: _components_tool_tool_component__WEBPACK_IMPORTED_MODULE_28__["ToolComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"] /*, DeactivateGuard*/] },
+    { path: 'sub', component: _components_sub_sub_component__WEBPACK_IMPORTED_MODULE_30__["SubComponent"] },
+    { path: 'temp/:num', component: _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_31__["TempComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"]] },
+    { path: 'corvee/:num', component: _components_corvee_corvee_component__WEBPACK_IMPORTED_MODULE_32__["CorveeComponent"] },
+    { path: 'cwrite', component: _components_cwrite_cwrite_component__WEBPACK_IMPORTED_MODULE_33__["CwriteComponent"], canActivate: [_guards_auth_guard__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"]] },
+    { path: 'play/:num', component: _components_play_play_component__WEBPACK_IMPORTED_MODULE_34__["PlayComponent"] },
+    { path: 'no-page', component: _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_26__["NoPageComponent"] },
+    { path: '**', component: _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_26__["NoPageComponent"] }
 ];
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -238,30 +235,29 @@ var AppModule = /** @class */ (function () {
     AppModule = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
             declarations: [
-                _pipes_safeHtml__WEBPACK_IMPORTED_MODULE_16__["SafeHtml"],
-                ng2_file_upload__WEBPACK_IMPORTED_MODULE_13__["FileSelectDirective"],
-                _app_component__WEBPACK_IMPORTED_MODULE_19__["AppComponent"],
-                _components_login_login_component__WEBPACK_IMPORTED_MODULE_20__["LoginComponent"],
-                _components_register_register_component__WEBPACK_IMPORTED_MODULE_21__["RegisterComponent"],
-                _components_home_home_component__WEBPACK_IMPORTED_MODULE_22__["HomeComponent"],
-                _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_23__["ProfileComponent"],
-                _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_24__["ModifyComponent"],
-                _components_board_board_component__WEBPACK_IMPORTED_MODULE_25__["BoardComponent"],
-                _components_board_board_component__WEBPACK_IMPORTED_MODULE_25__["CommentDialog"],
-                _components_board_board_component__WEBPACK_IMPORTED_MODULE_25__["ReplyDialog"],
-                _components_write_write_component__WEBPACK_IMPORTED_MODULE_26__["WriteComponent"],
-                _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_27__["NoPageComponent"],
-                _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_28__["AdminComponent"],
-                _components_tool_tool_component__WEBPACK_IMPORTED_MODULE_29__["ToolComponent"],
-                _components_game_game_component__WEBPACK_IMPORTED_MODULE_30__["GameComponent"],
-                _components_game_game_component__WEBPACK_IMPORTED_MODULE_30__["ScrapDialog"],
-                _components_sub_sub_component__WEBPACK_IMPORTED_MODULE_31__["SubComponent"],
-                _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_32__["TempComponent"],
-                _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_32__["TempDialog"],
-                _components_corvee_corvee_component__WEBPACK_IMPORTED_MODULE_33__["CorveeComponent"],
-                _components_cwrite_cwrite_component__WEBPACK_IMPORTED_MODULE_34__["CwriteComponent"],
-                _components_play_play_component__WEBPACK_IMPORTED_MODULE_35__["PlayComponent"],
-                _components_test_test_component__WEBPACK_IMPORTED_MODULE_36__["TestComponent"]
+                _pipes_safeHtml__WEBPACK_IMPORTED_MODULE_15__["SafeHtml"],
+                _app_component__WEBPACK_IMPORTED_MODULE_18__["AppComponent"],
+                _components_login_login_component__WEBPACK_IMPORTED_MODULE_19__["LoginComponent"],
+                _components_register_register_component__WEBPACK_IMPORTED_MODULE_20__["RegisterComponent"],
+                _components_home_home_component__WEBPACK_IMPORTED_MODULE_21__["HomeComponent"],
+                _components_profile_profile_component__WEBPACK_IMPORTED_MODULE_22__["ProfileComponent"],
+                _components_modify_modify_component__WEBPACK_IMPORTED_MODULE_23__["ModifyComponent"],
+                _components_board_board_component__WEBPACK_IMPORTED_MODULE_24__["BoardComponent"],
+                _components_board_board_component__WEBPACK_IMPORTED_MODULE_24__["CommentDialog"],
+                _components_board_board_component__WEBPACK_IMPORTED_MODULE_24__["ReplyDialog"],
+                _components_write_write_component__WEBPACK_IMPORTED_MODULE_25__["WriteComponent"],
+                _components_no_page_no_page_component__WEBPACK_IMPORTED_MODULE_26__["NoPageComponent"],
+                _components_admin_admin_component__WEBPACK_IMPORTED_MODULE_27__["AdminComponent"],
+                _components_tool_tool_component__WEBPACK_IMPORTED_MODULE_28__["ToolComponent"],
+                _components_game_game_component__WEBPACK_IMPORTED_MODULE_29__["GameComponent"],
+                _components_game_game_component__WEBPACK_IMPORTED_MODULE_29__["ScrapDialog"],
+                _components_sub_sub_component__WEBPACK_IMPORTED_MODULE_30__["SubComponent"],
+                _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_31__["TempComponent"],
+                _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_31__["TempDialog"],
+                _components_corvee_corvee_component__WEBPACK_IMPORTED_MODULE_32__["CorveeComponent"],
+                _components_cwrite_cwrite_component__WEBPACK_IMPORTED_MODULE_33__["CwriteComponent"],
+                _components_play_play_component__WEBPACK_IMPORTED_MODULE_34__["PlayComponent"],
+                _components_test_test_component__WEBPACK_IMPORTED_MODULE_35__["TestComponent"]
             ],
             imports: [
                 _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"],
@@ -278,8 +274,8 @@ var AppModule = /** @class */ (function () {
                 _angular_common__WEBPACK_IMPORTED_MODULE_6__["CommonModule"],
                 angular_froala_wysiwyg__WEBPACK_IMPORTED_MODULE_12__["FroalaEditorModule"].forRoot(),
                 angular_froala_wysiwyg__WEBPACK_IMPORTED_MODULE_12__["FroalaViewModule"].forRoot(),
-                ngx_editor__WEBPACK_IMPORTED_MODULE_17__["NgxEditorModule"],
-                ngx_bootstrap__WEBPACK_IMPORTED_MODULE_18__["TooltipModule"].forRoot(),
+                ngx_editor__WEBPACK_IMPORTED_MODULE_16__["NgxEditorModule"],
+                ngx_bootstrap__WEBPACK_IMPORTED_MODULE_17__["TooltipModule"].forRoot(),
                 _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatTableModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatInputModule"],
                 _angular_material__WEBPACK_IMPORTED_MODULE_8__["MatFormFieldModule"],
@@ -303,26 +299,26 @@ var AppModule = /** @class */ (function () {
             ],
             exports: [
                 _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"],
-                _components_game_game_component__WEBPACK_IMPORTED_MODULE_30__["ScrapDialog"],
-                _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_32__["TempDialog"],
-                _components_board_board_component__WEBPACK_IMPORTED_MODULE_25__["CommentDialog"],
-                _components_board_board_component__WEBPACK_IMPORTED_MODULE_25__["ReplyDialog"]
+                _components_game_game_component__WEBPACK_IMPORTED_MODULE_29__["ScrapDialog"],
+                _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_31__["TempDialog"],
+                _components_board_board_component__WEBPACK_IMPORTED_MODULE_24__["CommentDialog"],
+                _components_board_board_component__WEBPACK_IMPORTED_MODULE_24__["ReplyDialog"]
             ],
             entryComponents: [
-                _components_game_game_component__WEBPACK_IMPORTED_MODULE_30__["ScrapDialog"],
-                _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_32__["TempDialog"],
-                _components_board_board_component__WEBPACK_IMPORTED_MODULE_25__["CommentDialog"],
-                _components_board_board_component__WEBPACK_IMPORTED_MODULE_25__["ReplyDialog"]
+                _components_game_game_component__WEBPACK_IMPORTED_MODULE_29__["ScrapDialog"],
+                _components_temp_temp_component__WEBPACK_IMPORTED_MODULE_31__["TempDialog"],
+                _components_board_board_component__WEBPACK_IMPORTED_MODULE_24__["CommentDialog"],
+                _components_board_board_component__WEBPACK_IMPORTED_MODULE_24__["ReplyDialog"]
             ],
             providers: [
                 _services_validate_service__WEBPACK_IMPORTED_MODULE_9__["ValidateService"],
                 _services_auth_service__WEBPACK_IMPORTED_MODULE_10__["AuthService"],
-                _guards_auth_guard__WEBPACK_IMPORTED_MODULE_14__["AuthGuard"],
-                _guards_deactivate_guard__WEBPACK_IMPORTED_MODULE_15__["DeactivateGuard"],
+                _guards_auth_guard__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"],
+                _guards_deactivate_guard__WEBPACK_IMPORTED_MODULE_14__["DeactivateGuard"],
                 { provide: _angular_material__WEBPACK_IMPORTED_MODULE_8__["ErrorStateMatcher"], useClass: _angular_material__WEBPACK_IMPORTED_MODULE_8__["ShowOnDirtyErrorStateMatcher"] }
             ],
             bootstrap: [
-                _app_component__WEBPACK_IMPORTED_MODULE_19__["AppComponent"]
+                _app_component__WEBPACK_IMPORTED_MODULE_18__["AppComponent"]
             ],
             schemas: [
                 _angular_core__WEBPACK_IMPORTED_MODULE_1__["NO_ERRORS_SCHEMA"],
@@ -1550,7 +1546,7 @@ var CwriteComponent = /** @class */ (function () {
             imageDefaultWidth: 0,
             charCounterCount: true,
             imageUploadParam: 'image',
-            imageUploadURL: '/boards/images',
+            imageUploadURL: '/corvees/images',
             imageUploadMethod: 'POST',
             imageMaxSize: 5 * 1024 * 1024,
             imageAllowTypes: ['jpeg', 'jpg', 'png', 'gif', 'webp'],
@@ -1610,7 +1606,7 @@ var CwriteComponent = /** @class */ (function () {
         });
     };
     CwriteComponent.prototype.viewBlock = function (num, i) {
-        this.funcService.popUp(this.funcService.ServerAddress + '/modals/viewTempBlock?game=' + num + '&recent=' + i, 1000, 600);
+        this.funcService.popUp(this.funcService.ServerAddress + '/modals/view-temp-block?game=' + num + '&recent=' + i, 1000, 600);
     };
     CwriteComponent.prototype.selectBlock = function (num, i) {
         this.selectedItem = {
@@ -2064,7 +2060,7 @@ var GameComponent = /** @class */ (function () {
         });
     };
     GameComponent.prototype.viewBlock = function () {
-        this.funcService.popUp(this.funcService.ServerAddress + '/modals/viewBlock?game=' + this.num, 1000, 600);
+        this.funcService.popUp(this.funcService.ServerAddress + '/modals/view-block?game=' + this.num, 1000, 600);
     };
     GameComponent.prototype.toMyTempList = function () {
         var _this = this;
@@ -2506,7 +2502,7 @@ var ModifyComponent = /** @class */ (function () {
         });
     };
     ModifyComponent.prototype.addProfileImage = function (userid) {
-        this.funcService.openWindowWithAuth(this.funcService.ServerAddress + '/modals/profileImage?userid=' + userid, userid);
+        this.funcService.openWindowWithAuth(this.funcService.ServerAddress + '/modals/profile-image?userid=' + userid, userid);
     };
     ModifyComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -2545,7 +2541,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">404 ERROR</h4>\r\n\r\n      <hr/>\r\n      <div class=\"posting\">\r\n        <img src=\"images/404.jpg\" style=\"width: 100%;\"><br/><br/>\r\n        페이지가 존재하지 않습니다.<br/><br/>\r\n        <a mat-raised-button color=\"primary\" [routerLink]=\"[this.funcService.getPreviousUrl()]\">이전 페이지로 돌아가기</a><br/><br/>\r\n      </div>\r\n      <br/><br/>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\n    <div class=\"mdl-card__supporting-text\">\n      <h4 style=\"display: inline;\">PAGE NOT FOUND</h4>\n\n      <hr/>\n      <div class=\"posting\">\n        <img src=\"images/404.jpg\" style=\"width: 100%;\"><br/><br/>\n        페이지가 존재하지 않거나 접근이 거부되었습니다.<br/><br/>\n        <a mat-raised-button color=\"primary\" [routerLink]=\"[this.funcService.getPreviousUrl()]\">이전 페이지로 돌아가기</a><br/><br/>\n      </div>\n      <br/><br/>\n\n    </div>\n  </div>\n</section>\n\n<section></section>\n"
 
 /***/ }),
 
@@ -2575,7 +2571,7 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var NoPageComponent = /** @class */ (function () {
     function NoPageComponent(funcService) {
         this.funcService = funcService;
-        this.funcService.setTitle('404');
+        this.funcService.setTitle('ERROR');
     }
     NoPageComponent.prototype.ngOnInit = function () {
     };
@@ -3032,7 +3028,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section *ngIf=\"authService.loggedIn()\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n\r\n      <h4>즐겨찾는 게시판</h4><hr/><br/>\r\n\r\n      <div *ngFor=\"let bookmark of bkMap | keyvalue\">\r\n        <h5 style=\"display: inline;\">{{bookmark?.key}}</h5><hr/>\r\n\r\n        <div style=\"padding-left: 3%; padding-right: 3%;\">\r\n          <div class=\"row\" *ngFor=\"let arr of bookmark?.value\">\r\n            <div class=\"col-sm md-auto grid-cell\" *ngFor=\"let val of arr\">\r\n              <a [routerLink]=\"['/board/' + val?.url + '/list']\">{{val.title}}</a>\r\n              <span style=\"float: right; cursor: pointer;\" (click)=\"remove(val)\">X</span>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <br/><br/><br/>\r\n      </div>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n\r\n      <div *ngIf=\"authService.loggedIn()\">\r\n        <div *ngFor=\"let sub of subs | keyvalue\">\r\n          <h5 style=\"display: inline;\">{{sub?.key}}</h5><hr/>\r\n\r\n          <div style=\"padding-left: 3%; padding-right: 3%;\">\r\n            <div class=\"row\" *ngFor=\"let arr of sub?.value\">\r\n              <div class=\"col-sm md-auto grid-cell\" *ngFor=\"let val of arr\">\r\n                <a [routerLink]=\"['/board/' + val?.url + '/list']\">{{val.title}}</a>\r\n                <span *ngIf=\"isInMyBookmark(val?.url)\" style=\"float: right; cursor: pointer;\" (click)=\"remove(val)\">X</span>\r\n                <span *ngIf=\"!isInMyBookmark(val?.url)\" style=\"float: right; cursor: pointer;\" (click)=\"add(val?.url)\">+</span>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <br/><br/><br/>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"!authService.loggedIn()\">\r\n        <div *ngFor=\"let sub of subs | keyvalue\">\r\n          <h5 style=\"display: inline;\">{{sub?.key}}</h5><hr/>\r\n\r\n          <div style=\"padding-left: 3%; padding-right: 3%;\">\r\n            <div class=\"row\" *ngFor=\"let arr of sub?.value\">\r\n              <div class=\"col-sm md-auto grid-cell\" *ngFor=\"let val of arr\">\r\n                <a [routerLink]=\"['/board/' + val?.url + '/list']\">{{val.title}}</a>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <br/><br/><br/>\r\n        </div>\r\n      </div>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<section *ngIf=\"authService.loggedIn()\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n\r\n      <h4>즐겨찾는 게시판</h4><hr/><br/>\r\n\r\n      <div *ngFor=\"let bookmark of bkMap | keyvalue\">\r\n        <h5 style=\"display: inline;\">{{bookmark?.key}}</h5><hr/>\r\n\r\n        <div style=\"padding-left: 3%; padding-right: 3%;\">\r\n          <div class=\"row\" *ngFor=\"let arr of bookmark?.value\">\r\n            <div class=\"col-sm md-auto grid-cell\" *ngFor=\"let val of arr\">\r\n              <a [routerLink]=\"['/board/' + val?.url + '/list']\">{{val.title}}</a>\r\n              <span style=\"float: right; cursor: pointer;\" (click)=\"remove(val)\">X</span>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n        <br/><br/><br/>\r\n      </div>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\" *ngIf=\"user\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n\r\n      <div *ngIf=\"authService.loggedIn()\">\r\n        <div *ngFor=\"let sub of subs | keyvalue\">\r\n          <h5 style=\"display: inline;\">{{sub?.key}}</h5><hr/>\r\n\r\n          <div style=\"padding-left: 3%; padding-right: 3%;\">\r\n            <div class=\"row\" *ngFor=\"let arr of sub?.value\">\r\n              <div class=\"col-sm md-auto grid-cell\" *ngFor=\"let val of arr\">\r\n                <a [routerLink]=\"['/board/' + val?.url + '/list']\">{{val.title}}</a>\r\n                <span *ngIf=\"isInMyBookmark(val?.url)\" style=\"float: right; cursor: pointer;\" (click)=\"remove(val)\">X</span>\r\n                <span *ngIf=\"!isInMyBookmark(val?.url)\" style=\"float: right; cursor: pointer;\" (click)=\"add(val?.url)\">+</span>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <br/><br/><br/>\r\n        </div>\r\n      </div>\r\n      <div *ngIf=\"!authService.loggedIn()\">\r\n        <div *ngFor=\"let sub of subs | keyvalue\">\r\n          <h5 style=\"display: inline;\">{{sub?.key}}</h5><hr/>\r\n\r\n          <div style=\"padding-left: 3%; padding-right: 3%;\">\r\n            <div class=\"row\" *ngFor=\"let arr of sub?.value\">\r\n              <div class=\"col-sm md-auto grid-cell\" *ngFor=\"let val of arr\">\r\n                <a [routerLink]=\"['/board/' + val?.url + '/list']\">{{val.title}}</a>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <br/><br/><br/>\r\n        </div>\r\n      </div>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -3076,6 +3072,7 @@ var SubComponent = /** @class */ (function () {
         this.authService = authService;
         this.router = router;
         this.flashMessage = flashMessage;
+        this.user = undefined;
         this.bkMap = undefined;
         this.funcService.setTitle('서브게시판 목록');
         this.navigationSubscription = this.router.events.subscribe(function (e) {
@@ -3347,7 +3344,7 @@ var TempComponent = /** @class */ (function () {
         });
     };
     TempComponent.prototype.viewBlock = function (i) {
-        this.funcService.popUp(this.funcService.ServerAddress + '/modals/viewTempBlock?game=' + this.num + '&recent=' + i, 1000, 600);
+        this.funcService.popUp(this.funcService.ServerAddress + '/modals/view-temp-block?game=' + this.num + '&recent=' + i, 1000, 600);
     };
     TempComponent.prototype.versionRollBack = function (i) {
         var _this = this;
@@ -3520,7 +3517,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>HELLO</h4>\r\n      <hr/>\r\n      \r\n      <app-ngx-editor [placeholder]=\"placeholder\" [(ngModel)]=\"content\"></app-ngx-editor>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      \r\n      <button mat-raised-button onclick=\"oiw('test1')\">click</button>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>HELLO</h4>\r\n      <hr/>\r\n      \r\n      <app-ngx-editor [config]=\"editorConfig\" [(ngModel)]=\"content\"></app-ngx-editor>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      \r\n      <button mat-button (click)=\"what()\">click</button>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
 
 /***/ }),
 
@@ -3536,10 +3533,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TestComponent", function() { return TestComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _services_play_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/play.service */ "./src/app/services/play.service.ts");
-/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ng-flash-messages */ "./node_modules/ng-flash-messages/ng-flash-messages.umd.js");
-/* harmony import */ var ng_flash_messages__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(ng_flash_messages__WEBPACK_IMPORTED_MODULE_4__);
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -3551,18 +3544,22 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-
-
-
 var TestComponent = /** @class */ (function () {
-    function TestComponent(funcService, playService, router, flashMessage) {
+    function TestComponent(funcService) {
         this.funcService = funcService;
-        this.playService = playService;
-        this.router = router;
-        this.flashMessage = flashMessage;
         this.funcService.setTitle('TEST!!!!');
     }
     TestComponent.prototype.ngOnInit = function () {
+        this.editorConfig = {
+            placeholder: '',
+            spellcheck: false,
+            height: '500',
+            minHeight: '500',
+            imageEndPoint: this.funcService.ServerAddress + '/tests/image'
+        };
+    };
+    TestComponent.prototype.what = function () {
+        alert(this.content);
     };
     TestComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -3570,10 +3567,7 @@ var TestComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./test.component.html */ "./src/app/components/test/test.component.html"),
             styles: [__webpack_require__(/*! ./test.component.css */ "./src/app/components/test/test.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_1__["FuncService"],
-            _services_play_service__WEBPACK_IMPORTED_MODULE_3__["PlayService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
-            ng_flash_messages__WEBPACK_IMPORTED_MODULE_4__["NgFlashMessageService"]])
+        __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_1__["FuncService"]])
     ], TestComponent);
     return TestComponent;
 }());
@@ -4061,7 +4055,7 @@ var AuthService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/users/getAllUsers', {}, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/users/get-all-users', {}, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     AuthService.prototype.sendRequest = function (_id, title, tempId) {
@@ -4074,7 +4068,7 @@ var AuthService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/users/sendRequest', formData, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/users/send-request', formData, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     AuthService.prototype.findUserByIdOrNickname = function (text, tempId) {
@@ -4082,7 +4076,7 @@ var AuthService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/users/findUserByIdOrNickname', { text: text, tempId: tempId }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/users/find-user-by-id-or-nickname', { text: text, tempId: tempId }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     AuthService.prototype.getIdFromUserid = function (userid) {
@@ -4090,7 +4084,7 @@ var AuthService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/users/getIdFromUserid', { userid: userid }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/users/get-id-from-userid', { userid: userid }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     AuthService.prototype.getCode = function (userid) {
@@ -4098,7 +4092,7 @@ var AuthService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/modals/getCode', { userid: userid }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/modals/get-code', { userid: userid }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     AuthService = __decorate([
@@ -4158,25 +4152,25 @@ var BoardService = /** @class */ (function () {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
         var loggedIn = this.authService.loggedIn() ? 'yes' : 'no';
-        return this.http.get(this.funcService.ServerAddress + '/boards/takeOnePost?num=' + num + '&loggedIn=' + loggedIn, { headers: headers })
+        return this.http.get(this.funcService.ServerAddress + '/boards/take-one-post?num=' + num + '&loggedIn=' + loggedIn, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     BoardService.prototype.takeAllPosts = function (type) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.get(this.funcService.ServerAddress + '/boards/takeAllPosts?type=' + type, { headers: headers })
+        return this.http.get(this.funcService.ServerAddress + '/boards/take-all-posts?type=' + type, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     BoardService.prototype.takeAllBoards = function () {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.get(this.funcService.ServerAddress + '/boards/takeAllBoards', { headers: headers })
+        return this.http.get(this.funcService.ServerAddress + '/boards/take-all-boards', { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     BoardService.prototype.takeSearchedPosts = function (category, type, text) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.get(this.funcService.ServerAddress + '/boards/takeSearchedPosts?category=' + category + '&type=' + type + '&text=' + text, { headers: headers })
+        return this.http.get(this.funcService.ServerAddress + '/boards/take-searched-posts?category=' + category + '&type=' + type + '&text=' + text, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     BoardService.prototype.writePost = function (post) {
@@ -4192,7 +4186,7 @@ var BoardService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/boards/writeComment', cmt, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/boards/write-comment', cmt, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     BoardService.prototype.replyComment = function (cmt) {
@@ -4206,13 +4200,13 @@ var BoardService = /** @class */ (function () {
     BoardService.prototype.removePost = function (num) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/boards/removePost', { num: num }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/boards/remove-post', { num: num }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     BoardService.prototype.removeComment = function (postNum, cmtNum) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/boards/removeComment', { postNum: postNum, cmtNum: cmtNum }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/boards/remove-comment', { postNum: postNum, cmtNum: cmtNum }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     BoardService.prototype.removeReply = function (postNum, cmtNum, reply) {
@@ -4232,7 +4226,7 @@ var BoardService = /** @class */ (function () {
     BoardService.prototype.checkBoardExists = function (type) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.get(this.funcService.ServerAddress + '/boards/checkBoardExists?type=' + type, { headers: headers })
+        return this.http.get(this.funcService.ServerAddress + '/boards/check-board-exists?type=' + type, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     BoardService.prototype.getSub = function (type) {
@@ -4254,7 +4248,7 @@ var BoardService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/boards/removeBookmark', { url: bookmark.url, title: bookmark.title }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/boards/remove-bookmark', { url: bookmark.url, title: bookmark.title }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     BoardService = __decorate([
@@ -4315,19 +4309,19 @@ var CorveeService = /** @class */ (function () {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
         var loggedIn = this.authService.loggedIn() ? 'yes' : 'no';
-        return this.http.get(this.funcService.ServerAddress + '/corvees/takeOnePost?num=' + num + '&loggedIn=' + loggedIn, { headers: headers })
+        return this.http.get(this.funcService.ServerAddress + '/corvees/take-one-post?num=' + num + '&loggedIn=' + loggedIn, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     CorveeService.prototype.takeAllPosts = function () {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.get(this.funcService.ServerAddress + '/corvees/takeAllPosts', { headers: headers })
+        return this.http.get(this.funcService.ServerAddress + '/corvees/take-all-posts', { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     CorveeService.prototype.takeSearchedPosts = function (category, text) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.get(this.funcService.ServerAddress + '/corvees/takeSearchedPosts?category=' + category + '&text=' + text, { headers: headers })
+        return this.http.get(this.funcService.ServerAddress + '/corvees/take-searched-posts?category=' + category + '&text=' + text, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     CorveeService.prototype.takeMyTemps = function () {
@@ -4335,7 +4329,7 @@ var CorveeService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/corvees/takeMyTemps', {}, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/corvees/take-my-temps', {}, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     CorveeService.prototype.takeTempUsers = function (coworkers) {
@@ -4343,7 +4337,7 @@ var CorveeService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/corvees/takeTempUsers', { coworkers: coworkers }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/corvees/take-temp-users', { coworkers: coworkers }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     CorveeService.prototype.writePost = function (post) {
@@ -4359,7 +4353,7 @@ var CorveeService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/corvees/writeComment', cmt, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/corvees/write-comment', cmt, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     CorveeService.prototype.replyComment = function (cmt) {
@@ -4373,13 +4367,13 @@ var CorveeService = /** @class */ (function () {
     CorveeService.prototype.removePost = function (num) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/corvees/removePost', { num: num }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/corvees/remove-post', { num: num }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     CorveeService.prototype.removeComment = function (postNum, cmtNum) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/corvees/removeComment', { postNum: postNum, cmtNum: cmtNum }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/corvees/remove-comment', { postNum: postNum, cmtNum: cmtNum }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     CorveeService.prototype.removeReply = function (postNum, cmtNum, reply) {
@@ -4489,7 +4483,7 @@ var FuncService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        this.http.post(this.ServerAddress + '/modals/getCode', { userid: userid }, { headers: headers })
+        this.http.post(this.ServerAddress + '/modals/get-code', { userid: userid }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (res) { return res.json(); })).subscribe(function (data) {
             var code = data.code;
             _this.openWindow(url + '&c=' + code);
@@ -4560,26 +4554,26 @@ var GameService = /** @class */ (function () {
     GameService.prototype.getSessionGame = function () {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.get(this.funcService.ServerAddress + '/games/getSessionGame', { headers: headers })
+        return this.http.get(this.funcService.ServerAddress + '/games/session-game', { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService.prototype.takeOnePost = function (num) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
         var loggedIn = this.authService.loggedIn() ? 'yes' : 'no';
-        return this.http.get(this.funcService.ServerAddress + '/games/takeOnePost?num=' + num + '&loggedIn=' + loggedIn, { headers: headers })
+        return this.http.get(this.funcService.ServerAddress + '/games/take-one-post?num=' + num + '&loggedIn=' + loggedIn, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService.prototype.takeAllPosts = function () {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.get(this.funcService.ServerAddress + '/games/takeAllPosts', { headers: headers })
+        return this.http.get(this.funcService.ServerAddress + '/games/take-all-posts', { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService.prototype.takeRequestedPosts = function () {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.get(this.funcService.ServerAddress + '/games/takeRequestedPosts', { headers: headers })
+        return this.http.get(this.funcService.ServerAddress + '/games/take-requested-posts', { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService.prototype.takeOneTemp = function (num) {
@@ -4587,7 +4581,7 @@ var GameService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/games/takeOneTemp', { num: num }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/games/take-one-temp', { num: num }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService.prototype.takeMyOneTemp = function (num) {
@@ -4595,13 +4589,13 @@ var GameService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/games/takeMyOneTemp', { num: num }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/games/take-my-one-temp', { num: num }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService.prototype.takeSearchedPosts = function (category, text) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.get(this.funcService.ServerAddress + '/games/takeSearchedPosts?category=' + category + '&text=' + text, { headers: headers })
+        return this.http.get(this.funcService.ServerAddress + '/games/take-searched-posts?category=' + category + '&text=' + text, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService.prototype.writeComment = function (cmt) {
@@ -4609,7 +4603,7 @@ var GameService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/games/writeComment', cmt, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/games/write-comment', cmt, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService.prototype.replyComment = function (cmt) {
@@ -4623,13 +4617,13 @@ var GameService = /** @class */ (function () {
     GameService.prototype.removePost = function (num) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/games/removePost', { num: num }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/games/remove-post', { num: num }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService.prototype.removeComment = function (postNum, cmtNum) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/games/removeComment', { postNum: postNum, cmtNum: cmtNum }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/games/remove-comment', { postNum: postNum, cmtNum: cmtNum }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService.prototype.removeReply = function (postNum, cmtNum, reply) {
@@ -4651,7 +4645,7 @@ var GameService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/games/requestBoard', { num: num }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/games/request-board', { num: num }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService.prototype.acceptBoard = function (num, title, userid) {
@@ -4665,7 +4659,7 @@ var GameService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/games/acceptBoard', formData, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/games/accept-board', formData, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService.prototype.rejectBoard = function (num) {
@@ -4673,7 +4667,7 @@ var GameService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/games/acceptBoard', { num: num, accept: false }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/games/accept-board', { num: num, accept: false }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService.prototype.toMyTempList = function (num, title) {
@@ -4681,7 +4675,7 @@ var GameService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/games/toMyTempList', { num: num, title: title }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/games/to-my-temp-list', { num: num, title: title }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService.prototype.takeMyTemps = function () {
@@ -4689,19 +4683,19 @@ var GameService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/games/takeMyTemps', {}, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/games/take-my-temps', {}, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService.prototype.removeTemp = function (_id) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/games/removeTemp', { _id: _id }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/games/remove-temp', { _id: _id }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService.prototype.versionRollBack = function (num, length) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/games/versionRollBack', { num: num, length: length }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/games/version-rollback', { num: num, length: length }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService.prototype.acceptCoWorkReq = function (coworkRequest, accept) {
@@ -4709,13 +4703,13 @@ var GameService = /** @class */ (function () {
         this.loadToken();
         headers.append('Authorization', this.authToken);
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/games/acceptCoWorkReq', { accept: accept, coworkRequest: coworkRequest }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/games/accept-co-work-req', { accept: accept, coworkRequest: coworkRequest }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService.prototype.modifyTitle = function (num, title) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.post(this.funcService.ServerAddress + '/games/modifyTitle', { num: num, title: title }, { headers: headers })
+        return this.http.post(this.funcService.ServerAddress + '/games/modify-title', { num: num, title: title }, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     GameService = __decorate([
@@ -4902,7 +4896,7 @@ var PlayService = /** @class */ (function () {
     PlayService.prototype.takeOneGame = function (num) {
         var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
         headers.append('Content-Type', 'application/json');
-        return this.http.get(this.funcService.ServerAddress + '/games/takeOneGame?num=' + num, { headers: headers })
+        return this.http.get(this.funcService.ServerAddress + '/games/take-one-game?num=' + num, { headers: headers })
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
     };
     PlayService = __decorate([
@@ -5106,7 +5100,7 @@ var SafeHtml = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Hoon\PJH\others\web\rwrite\angular-src\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\PJH\1494054\RogueWrite\angular-src\src\main.ts */"./src/main.ts");
 
 
 /***/ })

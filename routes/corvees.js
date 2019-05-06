@@ -38,7 +38,7 @@ router.get('/', function(req, res) {
 
 // take ==============================================
 
-router.get('/takeOnePost', function(req, res, next) {
+router.get('/take-one-post', function(req, res, next) {
     var num = req.query.num;
     var loggedIn = req.query.loggedIn;
     Corvee.findOne({_id: num}, function(err, post) {
@@ -78,13 +78,13 @@ router.get('/takeOnePost', function(req, res, next) {
     });
 });
 
-router.get('/takeAllPosts', function(req, res, next) {
+router.get('/take-all-posts', function(req, res, next) {
     Corvee.find({}, {content: 0}).sort({_id: -1}).exec(function(err, posts) {
         res.json({posts: posts});
     });
 });
 
-router.get('/takeSearchedPosts', (req, res, next) => {
+router.get('/take-searched-posts', (req, res, next) => {
     const category = req.query.category;
     if ( category == 'title' ) {
         Corvee.find({title: {$regex: req.query.text, $options: 'i'}}, {content: 0}).exec((err, posts) => {
@@ -99,13 +99,13 @@ router.get('/takeSearchedPosts', (req, res, next) => {
     }
 });
 
-router.post('/takeMyTemps', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+router.post('/take-my-temps', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     Temp.find({user: req.user._id.toString()}, {requested: 0}, (err, temps) => {
         res.json({temps: temps, user: req.user});
     });
 });
 
-router.post('/takeTempUsers', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+router.post('/take-temp-users', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     User.find({_id: {$in: req.body.coworkers}}, {nickname: 1, userid: 1, _id: 1}, (err, users) => {
         res.json({users: users});
     });
@@ -170,7 +170,7 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
     });
 });
 
-router.post('/writeComment', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+router.post('/write-comment', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     let comment = req.body.comment.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {
         return '&#' + i.charCodeAt(0) + ';';
     });
@@ -246,7 +246,7 @@ router.post('/reply-comment', passport.authenticate('jwt', {session: false}), fu
 
 // remove ==============================================
 
-router.post('/removePost', function(req, res, next) {
+router.post('/remove-post', function(req, res, next) {
     const num = req.body.num;
     Corvee.findOneAndDelete({_id: num}, function(err, output) {
         if ( err ) {
@@ -261,7 +261,7 @@ router.post('/removePost', function(req, res, next) {
     });
 });
 
-router.post('/removeComment', function(req, res, next) {
+router.post('/remove-comment', function(req, res, next) {
     const postNum = req.body.postNum;
     const cmtNum = req.body.cmtNum;
     Corvee.findOne({_id: postNum}, {comment : 1}, (err, post) => {
@@ -274,7 +274,6 @@ router.post('/removeComment', function(req, res, next) {
                     break;
                 }
             }
-            console.log(c);
             Corvee.findOneAndUpdate({_id: postNum}, {$pullAll: {comment: [c]}}, (err, output) => {
                 if ( err ) res.json({success: false});
                 else res.json({

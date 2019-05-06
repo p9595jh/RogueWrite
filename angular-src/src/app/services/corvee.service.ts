@@ -26,21 +26,21 @@ export class CorveeService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let loggedIn = this.authService.loggedIn() ? 'yes' : 'no';
-    return this.http.get(this.funcService.ServerAddress + '/corvees/takeOnePost?num=' + num + '&loggedIn=' + loggedIn, {headers: headers})
+    return this.http.get(this.funcService.ServerAddress + '/corvees/take-one-post?num=' + num + '&loggedIn=' + loggedIn, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
   takeAllPosts() {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(this.funcService.ServerAddress + '/corvees/takeAllPosts', {headers: headers})
+    return this.http.get(this.funcService.ServerAddress + '/corvees/take-all-posts', {headers: headers})
       .pipe(map(res => res.json()));
   }
 
   takeSearchedPosts(category, text) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(this.funcService.ServerAddress + '/corvees/takeSearchedPosts?category=' + category + '&text=' + text, {headers: headers})
+    return this.http.get(this.funcService.ServerAddress + '/corvees/take-searched-posts?category=' + category + '&text=' + text, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -49,7 +49,7 @@ export class CorveeService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/corvees/takeMyTemps', {}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/corvees/take-my-temps', {}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -58,7 +58,7 @@ export class CorveeService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/corvees/takeTempUsers', {coworkers: coworkers}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/corvees/take-temp-users', {coworkers: coworkers}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -76,7 +76,7 @@ export class CorveeService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/corvees/writeComment', cmt, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/corvees/write-comment', cmt, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -92,14 +92,14 @@ export class CorveeService {
   removePost(num) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/corvees/removePost', {num: num}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/corvees/remove-post', {num: num}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
   removeComment(postNum, cmtNum) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/corvees/removeComment', {postNum: postNum, cmtNum: cmtNum}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/corvees/remove-comment', {postNum: postNum, cmtNum: cmtNum}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 

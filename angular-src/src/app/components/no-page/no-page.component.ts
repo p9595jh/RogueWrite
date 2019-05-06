@@ -10,7 +10,7 @@ export class NoPageComponent implements OnInit {
   constructor(
     private funcService: FuncService
   ) {
-    this.funcService.setTitle('404');
+    this.funcService.setTitle('ERROR');
   }
 
   ngOnInit() {

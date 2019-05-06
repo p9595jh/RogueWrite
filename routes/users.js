@@ -172,7 +172,7 @@ router.post('/admin', passport.authenticate('jwt', {session: false}), function(r
   }
 });
 
-router.post('/getAllUsers', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+router.post('/get-all-users', passport.authenticate('jwt', {session: false}), function(req, res, next) {
   if ( req.user.userid != 'admin' ) {
     res.json({
       users: []
@@ -192,13 +192,13 @@ router.get('/profile', passport.authenticate('jwt', {session: false}), (req, res
 
 //==================================================>
 
-router.post('/getIdFromUserid', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+router.post('/get-id-from-userid', passport.authenticate('jwt', {session: false}), function(req, res, next) {
   User.findOne({userid: req.body.userid}, {_id: 1}, (err, user) => {
     res.json({_id: user._id});
   });
 });
 
-router.post('/sendRequest', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+router.post('/send-request', passport.authenticate('jwt', {session: false}), function(req, res, next) {
   const request = {
     from: {
       userid: req.user.userid,
@@ -217,7 +217,7 @@ router.post('/sendRequest', passport.authenticate('jwt', {session: false}), func
   });
 });
 
-router.post('/findUserByIdOrNickname', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+router.post('/find-user-by-id-or-nickname', passport.authenticate('jwt', {session: false}), function(req, res, next) {
   const text = req.body.text;
   const tempId = req.body.tempId;
   User.find(

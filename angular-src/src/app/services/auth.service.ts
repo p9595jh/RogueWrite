@@ -84,7 +84,7 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/users/getAllUsers', {}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/users/get-all-users', {}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -98,7 +98,7 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/users/sendRequest', formData, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/users/send-request', formData, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -107,7 +107,7 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/users/findUserByIdOrNickname', {text: text, tempId: tempId}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/users/find-user-by-id-or-nickname', {text: text, tempId: tempId}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -116,7 +116,7 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/users/getIdFromUserid', {userid: userid}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/users/get-id-from-userid', {userid: userid}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -125,7 +125,7 @@ export class AuthService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/modals/getCode', {userid: userid}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/modals/get-code', {userid: userid}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 

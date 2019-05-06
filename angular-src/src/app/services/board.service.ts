@@ -26,28 +26,28 @@ export class BoardService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
     let loggedIn = this.authService.loggedIn() ? 'yes' : 'no';
-    return this.http.get(this.funcService.ServerAddress + '/boards/takeOnePost?num=' + num + '&loggedIn=' + loggedIn, {headers: headers})
+    return this.http.get(this.funcService.ServerAddress + '/boards/take-one-post?num=' + num + '&loggedIn=' + loggedIn, {headers: headers})
       .pipe(map(res => res.json()))
   }
 
   takeAllPosts(type) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(this.funcService.ServerAddress + '/boards/takeAllPosts?type=' + type, {headers: headers})
+    return this.http.get(this.funcService.ServerAddress + '/boards/take-all-posts?type=' + type, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
   takeAllBoards() {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(this.funcService.ServerAddress + '/boards/takeAllBoards', {headers: headers})
+    return this.http.get(this.funcService.ServerAddress + '/boards/take-all-boards', {headers: headers})
       .pipe(map(res => res.json()));
   }
 
   takeSearchedPosts(category, type, text) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(this.funcService.ServerAddress + '/boards/takeSearchedPosts?category=' + category + '&type=' + type + '&text=' + text, {headers: headers})
+    return this.http.get(this.funcService.ServerAddress + '/boards/take-searched-posts?category=' + category + '&type=' + type + '&text=' + text, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -65,7 +65,7 @@ export class BoardService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/boards/writeComment', cmt, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/boards/write-comment', cmt, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -81,14 +81,14 @@ export class BoardService {
   removePost(num) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/boards/removePost', {num: num}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/boards/remove-post', {num: num}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
   removeComment(postNum, cmtNum) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/boards/removeComment', {postNum: postNum, cmtNum: cmtNum}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/boards/remove-comment', {postNum: postNum, cmtNum: cmtNum}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -111,7 +111,7 @@ export class BoardService {
   checkBoardExists(type) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(this.funcService.ServerAddress + '/boards/checkBoardExists?type=' + type, {headers: headers})
+    return this.http.get(this.funcService.ServerAddress + '/boards/check-board-exists?type=' + type, {headers: headers})
       .pipe(map(res => res.json()));
   }
 
@@ -136,7 +136,7 @@ export class BoardService {
     this.loadToken();
     headers.append('Authorization', this.authToken);
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.funcService.ServerAddress + '/boards/removeBookmark', {url: bookmark.url, title: bookmark.title}, {headers: headers})
+    return this.http.post(this.funcService.ServerAddress + '/boards/remove-bookmark', {url: bookmark.url, title: bookmark.title}, {headers: headers})
       .pipe(map(res => res.json()));
   }
 

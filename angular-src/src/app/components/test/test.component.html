@@ -4,7 +4,7 @@
       <h4>HELLO</h4>
       <hr/>
       
-      <app-ngx-editor [placeholder]="placeholder" [(ngModel)]="content"></app-ngx-editor>
+      <app-ngx-editor [config]="editorConfig" [(ngModel)]="content"></app-ngx-editor>
 
     </div>
   </div>
@@ -14,7 +14,7 @@
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
       
-      <button mat-raised-button onclick="oiw('test1')">click</button>
+      <button mat-button (click)="what()">click</button>
 
     </div>
   </div>

@@ -24,7 +24,7 @@
           </mat-expansion-panel-header>
 
           <p>
-            <b style="cursor: pointer;" (click)="funcService.openInfoWindow(coworkerMap?.get(block?.saveby)?.userid)">{{coworkerMap?.get(block?.saveby)?.nickname}}</b> 님에 의해 수정됨.
+            <b class="toProfile" (click)="funcService.openInfoWindow(coworkerMap?.get(block?.saveby)?.userid)">{{coworkerMap?.get(block?.saveby)?.nickname}}</b> 님에 의해 수정됨.
           </p>
           <button mat-button (click)="viewBlock(block?.num)">블록 보기</button>
           <button mat-button color="primary" (click)="versionRollBack(block?.num)">되돌리기</button>
@@ -34,7 +34,7 @@
       <br/><br/>
       <div *ngIf="temp?.from || temp?.added?.length > 0" class="original-section">
         <p *ngIf="temp?.from">
-          이 게임은 <span class="original-from-user" (click)="funcService.openInfoWindow(temp?.from?.userid)">{{temp?.from?.nickname}}</span> 님의 <a class="original-added-title" [routerLink]="['/game/' + temp?.from?.game]">{{temp?.from?.title}}</a> 으로부터 참조되었습니다.
+          이 게임은 <span class="toProfile" (click)="funcService.openInfoWindow(temp?.from?.userid)">{{temp?.from?.nickname}}</span> 님의 <a class="original-added-title" [routerLink]="['/game/' + temp?.from?.game]">{{temp?.from?.title}}</a> 으로부터 참조되었습니다.
         </p>
         <p *ngIf="temp?.added?.length > 0">
           덧붙여진 게임 :<span *ngFor="let added of temp?.added"><a class="original-added-title" [routerLink]="['/game/' + added?.game]"> {{added?.title}}</a> (<span class="toProfile" (click)="funcService.openInfoWindow(added?.userid)">{{added?.nickname}}</span>)</span>

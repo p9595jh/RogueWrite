@@ -162,7 +162,7 @@ export class PlayService {
   takeOneGame(num) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.get(this.funcService.ServerAddress + '/games/takeOneGame?num=' + num, {headers: headers})
+    return this.http.get(this.funcService.ServerAddress + '/games/take-one-game?num=' + num, {headers: headers})
       .pipe(map(res => res.json()));
   }
 

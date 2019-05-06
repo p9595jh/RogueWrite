@@ -21,7 +21,7 @@
       <div class="original-section">
         <p>{{writerIntro}}</p>
         <p *ngIf="content?.block?.from">
-          이 게임은 <span class="original-from-user" (click)="funcService.openInfoWindow(content?.block?.from?.userid)">{{content?.block?.from?.nickname}}</span> 님의 <a class="original-from-title" [routerLink]="['/game/' + content?.block?.from?.game]">{{content?.block?.from?.title}}</a> 으로부터 참조되었습니다.
+          이 게임은 <span class="toProfile" (click)="funcService.openInfoWindow(content?.block?.from?.userid)">{{content?.block?.from?.nickname}}</span> 님의 <a class="original-from-title" [routerLink]="['/game/' + content?.block?.from?.game]">{{content?.block?.from?.title}}</a> 으로부터 참조되었습니다.
         </p>
         <p *ngIf="content?.block?.added?.length > 0">
           덧붙여진 게임 :<span *ngFor="let added of content?.block?.added"><a class="original-added-title" [routerLink]="['/game/' + added?.game]"> {{added?.title}}</a> (<span class="toProfile" (click)="funcService.openInfoWindow(added?.userid)">{{added?.nickname}}</span>)</span>

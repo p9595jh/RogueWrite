@@ -21,7 +21,7 @@
               </mat-expansion-panel-header>
     
               <p>
-                <b style="cursor: pointer;" (click)="funcService.openInfoWindow(coworkerMap?.get(block?.saveby)?.userid)">{{coworkerMap?.get(block?.saveby)?.nickname}}</b> 님에 의해 수정됨.
+                <b class="toProfile" (click)="funcService.openInfoWindow(coworkerMap?.get(block?.saveby)?.userid)">{{coworkerMap?.get(block?.saveby)?.nickname}}</b> 님에 의해 수정됨.
               </p>
               <button mat-button (click)="viewBlock(temp?._id, block?.num)">블록 보기</button>
               <button mat-button color="primary" (click)="selectBlock(temp?._id, block?.num)">선택</button>

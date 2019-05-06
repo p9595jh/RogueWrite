@@ -24,7 +24,7 @@ export class CwriteComponent implements OnInit {
 
     charCounterCount: true,
     imageUploadParam: 'image',
-    imageUploadURL: '/boards/images',
+    imageUploadURL: '/corvees/images',
     imageUploadMethod: 'POST',
     imageMaxSize: 5 * 1024 * 1024,  // maximun size : 5MB
     imageAllowTypes: [ 'jpeg', 'jpg', 'png', 'gif', 'webp' ],
@@ -97,7 +97,7 @@ export class CwriteComponent implements OnInit {
   }
 
   viewBlock(num, i) {
-    this.funcService.popUp(this.funcService.ServerAddress + '/modals/viewTempBlock?game=' + num + '&recent=' + i, 1000, 600);
+    this.funcService.popUp(this.funcService.ServerAddress + '/modals/view-temp-block?game=' + num + '&recent=' + i, 1000, 600);
   }
 
   selectBlock(num, i) {

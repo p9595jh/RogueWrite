@@ -104,7 +104,7 @@ block content
         //- @ function for adding another block
         function adds(addId) {
             let xhr = new XMLHttpRequest();
-            xhr.open('POST', './addBlock');
+            xhr.open('POST', './add-block');
             xhr.setRequestHeader('Content-type', 'application/json');
             xhr.send(JSON.stringify({addId: addId}));
 
@@ -134,7 +134,7 @@ block content
                 let xml_text = Blockly.Xml.domToText(xml);
 
                 let xhr = new XMLHttpRequest();
-                xhr.open('POST', './tempSave');
+                xhr.open('POST', './temp-save');
                 xhr.setRequestHeader('Content-type', 'application/json');
                 xhr.send(JSON.stringify({
                     block: xml_text,
@@ -160,7 +160,7 @@ block content
                 let xml_text = Blockly.Xml.domToText(xml);
 
                 let xhr = new XMLHttpRequest();
-                xhr.open('POST', './tempSave');
+                xhr.open('POST', './temp-save');
                 xhr.setRequestHeader('Content-type', 'application/json');
                 xhr.send(JSON.stringify({
                     block: xml_text,

@@ -89,7 +89,7 @@ export class ModifyComponent implements OnInit {
   }
 
   addProfileImage(userid) {
-    this.funcService.openWindowWithAuth(this.funcService.ServerAddress + '/modals/profileImage?userid=' + userid, userid);
+    this.funcService.openWindowWithAuth(this.funcService.ServerAddress + '/modals/profile-image?userid=' + userid, userid);
   }
 
 }

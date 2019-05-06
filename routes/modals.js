@@ -14,7 +14,7 @@ router.get('/', function(req, res) {
 
 // ==============================================
 
-router.post('/getCode', passport.authenticate('jwt', {session: false}), function(req, res) {
+router.post('/get-code', passport.authenticate('jwt', {session: false}), function(req, res) {
     if ( req.body.userid == req.user.userid ) {
         const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         const string_length = 15;
@@ -32,7 +32,7 @@ router.post('/getCode', passport.authenticate('jwt', {session: false}), function
 
 // ==============================================
 
-router.get('/profileImage', function(req, res) {
+router.get('/profile-image', function(req, res) {
     const userid = req.query.userid;
     if ( req.session.code == req.query.c && req.session.userid == userid ) {
         res.render('./profileImage', {
@@ -43,7 +43,7 @@ router.get('/profileImage', function(req, res) {
     } else res.redirect("https://www.youtube.com/");
 });
 
-router.post('/setProfileImage', function(req, res) {
+router.post('/set-profile-image', function(req, res) {
     var form = formidable.IncomingForm();
     form.parse(req, function(err, fields, files) {
         const userid = req.query.userid;
@@ -106,7 +106,7 @@ router.get('/info', function(req, res) {
 
 // ==============================================
 
-router.get('/viewBlock', (req, res) => {
+router.get('/view-block', (req, res) => {
     Game.findOne({_id: req.query.game}, {block: 1, title: 1}, (err, game) => {
         if ( err || !game ) res.send('error');
         else {
@@ -119,7 +119,7 @@ router.get('/viewBlock', (req, res) => {
     });
 });
 
-router.get('/viewTempBlock', (req, res) => {
+router.get('/view-temp-block', (req, res) => {
     Temp.findOne({_id: req.query.game}, {block: 1, title: 1}, (err, game) => {
         if ( err || !game ) res.send('error');
         else {

@@ -1,37 +1,26 @@
 const express = require('express');
 const router = express.Router();
+// ===============================================
+const fs = require('fs-extra');
+const formidable = require('formidable');
 const Test = require('../models/test');
 
-router.get('/input', (req, res, next) => {
-    
-});
-
-router.get('/a', (req, res, next) => {
-    // const data = {
-    //     id: new Date().getTime(),
-    //     arr: []
-    // };
-    // Test.findOneAndUpdate({a: 0}, {$push: {b: data}}, (err, test) => {
-    //     res.send(test);
-    // })
-});
-
-router.get('/b', (req, res, next) => {
-    let idx = 1;
-    const push = {[`b.${idx}.arr2`]: 'hello'};
-    Test.findOneAndUpdate({a: 0}, {$push: push}, (err, test) => {
-        if ( err ) console.log(err);
-        res.send(test);
+router.post('/image', (req, res, next) => {
+    var form = formidable.IncomingForm();
+    form.parse(req, function(err, fields, files) {
+        const filePath = files.file.path;
+        const ext = files.file.name.substring(files.file.name.lastIndexOf('.')).toLowerCase();
+        const name = new Date().getTime() + ext;
+        fs.copy(filePath, 'public/images/' + name, function(err) {
+            if ( err ) {
+                console.log(err);
+                res.json({});
+            } else {
+                res.json({url: 'images/' + name});
+            }
+        });
     });
-});
-
-router.get('/c', (req, res, next) => {
-    let idx = 1;
-    const pull = {[`b.${idx}.arr2`]: ['hello']};
-    Test.findOneAndUpdate({a: 0}, {$pullAll: pull}, (err, test) => {
-        if ( err ) console.log(err);
-        res.send(test);
-    });
+    // res.json({url: 'https://cdfront.tower.jp/~/media/Images/Tol/pc/article/feature_item/J-Pop-Indies/2019/02/01/0702_01.jpg'});
 });
 
 module.exports = router;

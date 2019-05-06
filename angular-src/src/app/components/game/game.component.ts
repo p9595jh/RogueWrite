@@ -312,7 +312,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   viewBlock() {
-    this.funcService.popUp(this.funcService.ServerAddress + '/modals/viewBlock?game=' + this.num, 1000, 600);
+    this.funcService.popUp(this.funcService.ServerAddress + '/modals/view-block?game=' + this.num, 1000, 600);
   }
 
   toMyTempList() {
