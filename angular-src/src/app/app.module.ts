@@ -72,7 +72,7 @@ const appRoutes: Routes = [
   { path: 'test', component: TestComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: 'game/:num', component: GameComponent },
-  { path: 'tool', component: ToolComponent, canActivate: [AuthGuard/*, DeactivateGuard*/] },
+  { path: 'tool', component: ToolComponent, canActivate: [AuthGuard] },
   { path: 'sub', component: SubComponent },
   { path: 'temp/:num', component: TempComponent, canActivate: [AuthGuard] },
   { path: 'corvee/:num', component: CorveeComponent },

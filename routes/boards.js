@@ -369,9 +369,25 @@ router.post('/remove-bookmark', passport.authenticate('jwt', {session: false}), 
 
 //==================================================
 
+router.get('/home', (req, res, next) => {
+    Board.find({type: 'notice'}, {_id: 1, title: 1}).sort({_id: -1}).limit(1).exec((err, notices) => {
+        Sub.find({}, {title: 1, url: 1, createdate: 1}).sort({_id: -1}).limit(1).exec((err, subs) => {
+            Board.find({type: 'free'}, {_id: 1, title: 1}).sort({_id: -1}).limit(5).exec((err, frees) => {
+                res.json({
+                    notice: notices[0],
+                    sub: subs[0],
+                    frees: frees
+                });
+            });
+        });
+    });
+});
+
+//==================================================
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+    res.send('respond with a resource');
 });
 
 //==================================================

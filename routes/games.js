@@ -758,6 +758,20 @@ router.post('/accept-board', passport.authenticate('jwt', {session: false}), fun
     
 });
 
+// home =============================================================
+
+router.get('/best', (req, res, next) => {
+    const projection = {title: 1, content: 1, _id: 1};
+    Game.find({}, projection).sort({_id: -1}).limit(1).exec((err, recents) => {
+        Game.find({}, projection).sort({recommend: -1}).limit(1).exec((err, recommends) => {
+            res.json({
+                recent: recents[0],
+                recommend: recommends[0]
+            });
+        });
+    });
+});
+
 //=============================================================
 
 module.exports = router;

@@ -1,3 +1,55 @@
+<div id="movingHead" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#movingHead" data-slide-to="0" class="active"></li>
+    <li data-target="#movingHead" data-slide-to="1"></li>
+    <li data-target="#movingHead" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
+      <div class="container">
+        <div class="carousel-caption text-left">
+          <h3>{{carousel[0]?.title}}</h3>
+          <h4>최근 추가된 게임</h4>
+          <p>{{carousel[0]?.content}}</p>
+          <p><a class="btn btn-lg btn btn-dark" [routerLink]="['/game/' + carousel[0]?._id]" role="button">게임으로</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
+      <div class="container">
+        <div class="carousel-caption">
+          <h3>{{carousel[1]?.title}}</h3>
+          <h4>최고 인기 게임</h4>
+          <p>{{carousel[1]?.content}}</p>
+          <p><a class="btn btn-lg btn btn-dark" [routerLink]="['/game/' + carousel[1]?._id]" role="button">게임으로</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"/></svg>
+      <div class="container">
+        <div class="carousel-caption text-right">
+          <h3>{{carousel[2]?.title}}</h3>
+          <h4>최근 추가된 게시판</h4>
+          <p>생성된 날짜 : {{carousel[2]?.createdate}}</p>
+          <p><a class="btn btn-lg btn btn-dark" [routerLink]="['/board/' + carousel[2]?.url + '/list']" role="button">게시판으로</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#movingHead" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#movingHead" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+<section></section>
+
 <section *ngIf="user?.userid == 'admin'" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="demo-card-wide mdl-card" style="width: 100%;">
@@ -8,7 +60,6 @@
         반갑습니다, 어드민님
       </div>
       <div class="mdl-card__actions mdl-card--border">
-        <!-- <a mat-button color="primary" [routerLink]="['/admin']"> -->
         <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" [routerLink]="['/admin']">
           어드민 페이지
         </a>
@@ -20,12 +71,7 @@
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
-      <h4>사이트 개요</h4><hr/>
-      간략한 설명 <br/>
-      이 사이트는 이러이러한 것을 하는 것이다 라던가 <br/>
-      아님 뭐 이미지를 넣던가 그런거 <br/>
-      <a [routerLink]="['/test']">testing</a><br/>
-      <div>{{testSentence}}</div>
+      <a [routerLink]="['/board/notice/' + notice?._id]" style="color: black; font-weight: bold;">[공지] {{notice?.title}}</a>
     </div>
   </div>
 </section>
@@ -33,66 +79,14 @@
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
     <div class="mdl-card__supporting-text">
-      <h4>자유게시판</h4><hr/>
+      <h4 [routerLink]="['/board/free/list']">자유게시판</h4><hr/>
       <ul>
-        <li>게시글1</li>
-        <li>게시글2</li>
-        <li>게시글3</li>
-        <li>게시글4</li>
-        <li>게시글5</li>
+        <li *ngFor="let free of frees">
+          <a [routerLink]="['/board/free/' + free?._id]" style="color: black;">{{free?.title}}</a>
+        </li>
       </ul>
     </div>
   </div>
-  <button mat-icon-button [matMenuTriggerFor]="freeBoard">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #freeBoard>
-    <button mat-menu-item>
-      <span>Redial</span>
-    </button>
-    <button mat-menu-item disabled>
-      <span>Check voicemail</span>
-    </button>
-    <button mat-menu-item>
-      <span>Disable alerts</span>
-    </button>
-  </mat-menu>
-</section>
-
-<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-  <div class="mdl-card mdl-cell mdl-cell--12-col">
-    <div class="mdl-card__supporting-text">
-      <h4>다른게시판</h4><hr/>
-      <ul>
-        <li>게시글1</li>
-        <li>게시글2</li>
-        <li>게시글3</li>
-        <li>게시글4</li>
-        <li>게시글5</li>
-      </ul>
-    </div>
-  </div>
-  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn2">
-    <i class="material-icons">more_vert</i>
-  </button>
-  <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn2">
-    <li class="mdl-menu__item" disabled>자주 가는 게시판으로 설정</li>
-  </ul>
-</section>
-
-<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-  <div class="mdl-card mdl-cell mdl-cell--12-col">
-    <div class="mdl-card__supporting-text">
-      <h4>글쓰기 폼 테스트</h4><hr/>
-      <div [froalaEditor]></div>
-    </div>
-  </div>
-  <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="btn2">
-    <i class="material-icons">more_vert</i>
-  </button>
-  <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right" for="btn2">
-    <li class="mdl-menu__item" disabled>자주 가는 게시판으로 설정</li>
-  </ul>
 </section>
 
 <section></section>

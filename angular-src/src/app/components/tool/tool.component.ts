@@ -4,13 +4,14 @@ import { GameService } from '../../services/game.service';
 import { PlayService } from '../../services/play.service';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { ComponentCanDeactivate } from '../../guards/component-can-deactivate';
 
 @Component({
   selector: 'app-tool',
   templateUrl: './tool.component.html',
   styleUrls: ['./tool.component.css']
 })
-export class ToolComponent implements OnInit {
+export class ToolComponent extends ComponentCanDeactivate implements OnInit {
   iframe: string;
   temps: Array<any>;
 
@@ -25,6 +26,7 @@ export class ToolComponent implements OnInit {
     private authService: AuthService,
     private router: Router
   ) {
+    super();
     this.funcService.setTitle('게임 만들기');
   }
 

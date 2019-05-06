@@ -1,13 +1,15 @@
-import {HostListener} from "@angular/core";
+import { HostListener } from "@angular/core";
 
-export abstract class ComponentCanDeactivate {
+export class ComponentCanDeactivate {
  
-  abstract  canDeactivate(): boolean;
+    canDeactivate(): boolean {
+        return false;
+    }
 
-    @HostListener('window:beforeunload', ['$event'])
+    @HostListener('window: beforeunload', ['$event'])
     unloadNotification($event: any) {
-        if (!this.canDeactivate()) {
-            $event.returnValue =true;
+        if ( !this.canDeactivate() ) {
+            $event.returnValue = true;
         }
     }
 }
