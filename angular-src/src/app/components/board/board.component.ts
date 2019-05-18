@@ -17,6 +17,7 @@ import { PageEvent } from '@angular/material';
 })
 export class BoardComponent implements OnInit, OnDestroy {
   navigationSubscription;
+  svg: number = 0;
 
   type: String;
   num: String;
@@ -76,6 +77,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.svg = this.funcService.getRandomSVGBackground();
     this.type = this.route.snapshot.paramMap.get('type');
     this.num = this.route.snapshot.paramMap.get('num');
     this.boardService.checkBoardExists(this.type).subscribe(result => {

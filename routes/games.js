@@ -292,19 +292,28 @@ router.get('/take-one-post', function(req, res, next) {
     var loggedIn = req.query.loggedIn;
     Game.findOne({_id: num}, function(err, post) {
         if ( !post ) {
-            res.json({
-                fail: true
-            });
+            res.json({fail: true});
         } else if ( loggedIn == 'yes' ) {
             Game.findOneAndUpdate({_id: num}, {hit: post.hit + 1}, function(err, output) {
                 res.json({post: output});
             });
         } else res.json({post: post});
     });
-})
+});
 
 router.get('/take-all-posts', function(req, res, next) {
-    Game.find({}, {content: 0, game: 0, block: 0, recommendby: 0}).sort({_id: -1}).exec(function(err, posts) {
+    const projection = {
+        _id: 1,
+        comment: 1,
+        userid: 1,
+        nickname: 1,
+        title: 1,
+        hit: 1,
+        recommend: 1,
+        unrecommend: 1,
+        writedate: 1
+    };
+    Game.find({}, projection).sort({_id: -1}).exec(function(err, posts) {
         res.json({posts: posts});
     });
 });
@@ -638,6 +647,35 @@ router.post('/modify-title', (req, res, next) => {
     Temp.findOneAndUpdate({_id: req.body.num}, {title: req.body.title}, (err, temp) => {
         if ( err || !temp ) res.json({success: false});
         else res.json({success: true});
+    });
+});
+
+router.post('/done', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+    const score = req.body.score;
+    const num = req.body.num;
+    Game.findOne({_id: num}, {highest: 1}, (err, game) => {
+        console.log(game);
+        console.log(game._id);
+        console.log(game.highest);
+        if ( !game.highest ) {
+            console.log('[[01]]');
+            const highest = {userid: req.user.userid, nickname: req.user.nickname, score: score};
+            console.log(highest);
+            Game.findOneAndUpdate({_id: num}, {highest: highest}, (err, output) => {
+                res.status(204).json({});
+            });
+        } else {
+            if ( game.highest.score < score ) {
+                console.log('[[02]]');
+                const highest = {userid: req.user.userid, nickname: req.user.nickname, score: score};
+                Game.findOneAndUpdate({_id: num}, {highest: highest}, (err, output) => {
+                    res.status(204).json({});
+                });
+            } else {
+                console.log('[[03]]');
+                res.status(204).json({});
+            }
+        }
     });
 });
 

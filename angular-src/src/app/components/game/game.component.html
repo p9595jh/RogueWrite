@@ -20,7 +20,7 @@
         <!-- CHOICES -->
         <table style="width: 100%;" *ngIf="!playService.end">
           <tbody>
-            <tr *ngFor="let choice of playService?.phase?.choice" (click)="playService.select(choice?.set_param, choice?.stage_to)" style="height: 50px;">
+            <tr *ngFor="let choice of playService?.phase?.choice" (click)="playService.select(choice?.change_set, choice?.stage_to)" style="height: 50px;">
               <td class="stage-choice btn--stripe">{{choice?.content}}</td>
             </tr>
           </tbody>
@@ -41,7 +41,7 @@
         <hr/>
         <div class="row align-items-center" *ngFor="let arr of playService?.paramArr">
           <div class="col-sm grid-cell" *ngFor="let val of arr">
-            <span *ngIf="val?.value?.visible">
+            <span *ngIf="playService.visible(val?.value?.visible)">
               {{val?.key}}<span>: </span>{{val?.value?.value}}
             </span>
           </div>
@@ -57,6 +57,9 @@
       <div class="original-section">
         <p>
           version. {{content?.version}}
+        </p>
+        <p *ngIf="content?.highest">
+          최고 득점자 : <span class="toProfile" (click)="funcService.openInfoWindow(content?.highest?.userid)">{{content?.highest?.nickname}}</span> ({{content?.highest?.score}}점)
         </p>
         <p *ngIf="content?.from">
           이 게임은 <span class="toProfile" (click)="funcService.openInfoWindow(content?.from?.userid)">{{content.from.nickname}}</span> 님의 <a class="original-from-title" [routerLink]="['/game/' + content?.from?.game]">{{content.from.title}}</a> 으로부터 참조되었습니다.
@@ -231,9 +234,11 @@
 <!-- section for a board -->
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
+
+    <div [class]="'mdl-card__title bg-svg-' + svg" style="width: 100%; height: 10rem;">
+      <h2 class="mdl-card__title-text" style="color: white;">게임게시판</h2>
+    </div>
     <div class="mdl-card__supporting-text">
-      <h4>게임게시판</h4>
-      <hr/>
       
       <!-- for large display -->
       <table class="mdl-data-table mdl-js-data-table mdl-layout--large-screen-only" style="margin: auto; width: 98%;">

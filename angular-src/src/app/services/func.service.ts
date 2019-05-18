@@ -15,6 +15,8 @@ export class FuncService {
   // public ServerAddress: String = "http://13.125.172.123:3000";
   public ServerAddress: String = "http://localhost:3000";
 
+  public bgCounts = 10;
+
   private previousUrl: string = undefined;
   private currentUrl: string = undefined;
 
@@ -53,8 +55,6 @@ export class FuncService {
   }
 
   openWindow(url: string) {
-    // const option = 'width=500, height=600, left=300, top=100, scrollbars=yes, toolbars=no, location=no';
-    // _window().open(url, '', option);
     this.popUp(url, 500, 600);
   }
 
@@ -72,6 +72,10 @@ export class FuncService {
         const code = data.code;
         this.openWindow(url + '&c=' + code);
       });
+  }
+
+  getRandomSVGBackground() {
+    return Math.floor(Math.random() * this.bgCounts);
   }
 
 }

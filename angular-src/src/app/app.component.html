@@ -1,63 +1,54 @@
-<ng-flash-message></ng-flash-message>
+<ng-flash-message class="mdl-layout--large-screen-only"></ng-flash-message>
 
 <div class="mdl-demo mdl-base">
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-tabs">
 
     <!-- header for large display -->
-    <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--primary"
-      style="background-color: rgb(143, 143, 226);" *ngIf="!router.url.startsWith('/play')">
-
-      <!-- spacing -->
-      <div class="mdl-layout--large-screen-only mdl-layout__header-row"></div>
-      
-      <!-- title -->
-      <div class="mdl-layout--large-screen-only mdl-layout__header-row">
-        <!-- <h3 [routerLink]="['/']" style="cursor: pointer; font-family: 'Ubuntu', sans-serif;">{{siteName}}</h3> -->
-        <img src="/images/title.png" [routerLink]="['/']" style="cursor: pointer; width: auto; height: 230%;" />
-        <div class="mdl-layout-spacer"></div>
-        <nav class="mdl-navigation" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" >
-          <a class="mdl-navigation__link" *ngIf="!authService.loggedIn()" [routerLink]="['/login']">LOGIN</a>
-          <a class="mdl-navigation__link" *ngIf="authService.loggedIn()" [routerLink]="['/profile']">PROFILE</a>
-          <a class="mdl-navigation__link" *ngIf="authService.loggedIn()" (click)="onLogoutClick()" href="#">LOGOUT</a>
-        </nav>
-      </div>
-      
-      <!-- spacing -->
-      <div class="mdl-layout--large-screen-only mdl-layout__header-row"></div>
-
-      <!-- nav bar -->
-      <nav mat-tab-nav-bar mat-stretch-tabs
-        mat-align-tabs="center"
-        [color]="'primary'"
-        [backgroundColor]="'accent'"
-        style="border-bottom-color: black;">
-        <a mat-tab-link *ngFor="let link of navLinks"
-          (click)="activeLink = link.path"
-          [routerLink]="[link.path]"
-          [active]="activeLink == link.path">{{link.label}}</a>
-      </nav>
-
-    </header>
+    <mat-toolbar class="mdl-layout--large-screen-only mdl-shadow--2dp mdl-layout__header" style="background-color: white;">
+      <mat-toolbar-row>
+        <img src="/images/title.png" [routerLink]="['/']" style="cursor: pointer; width: 210px; height: auto; padding-left: 10px;" />
+        <span style="flex: 1 1 auto;"></span>
+        <a mat-button *ngFor="let link of navLinks" color="primary"
+          [routerLink]="[link.path]">{{link.label}}</a>
+        <a mat-button *ngFor="let link of moreLinks"
+          [routerLink]="[link.path]">{{link.label}}</a>
+        <a mat-icon-button *ngIf="!authService.loggedIn()" [routerLink]="['/login']">
+          <mat-icon>lock</mat-icon>
+        </a>
+        <a mat-icon-button *ngIf="authService.loggedIn()" [routerLink]="['/profile']">
+          <mat-icon>account_circle</mat-icon>
+        </a>
+        <a mat-icon-button *ngIf="authService.loggedIn()" (click)="onLogoutClick()" href="#">
+          <mat-icon>lock_open</mat-icon>
+        </a>
+      </mat-toolbar-row>
+    </mat-toolbar>
 
     <!-- header for mobile -->
-    <header class="mdl-layout__header--scroll mdl-layout--small-screen-only mdl-color--primary">
-      <nav class="navbar navbar-dark fixed-top bg-dark">
+    <header class="mdl-layout__header--scroll mdl-layout--small-screen-only">
+      <nav class="navbar navbar-white fixed-top bg-white mdl-shadow--2dp">
         <div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+          <button mat-icon-button type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <mat-icon class="header-sm-icon">reorder</mat-icon>
           </button>
-          <img src="/images/title.png" style="height: 55px; width: auto;" [routerLink]="['/']" />
+          <img src="/images/title.png" style="height: 20px; width: auto;" [routerLink]="['/']" />
         </div>
         <table id="header-sm-table">
           <tr>
             <td *ngIf="!authService.loggedIn()">
-              <a [routerLink]="['/login']" class="header-sm-link" id="header-sm-login">LOGIN</a>
+              <a mat-icon-button [routerLink]="['/login']">
+                <mat-icon class="header-sm-icon">lock</mat-icon>
+              </a>
             </td>
             <td *ngIf="authService.loggedIn()">
-              <a [routerLink]="['/profile']" class="header-sm-link">PROFILE</a>
+              <a mat-icon-button [routerLink]="['/profile']">
+                <mat-icon class="header-sm-icon">account_circle</mat-icon>
+              </a>
             </td>
             <td *ngIf="authService.loggedIn()">
-              <a (click)="onLogoutClick()" href="#" class="header-sm-link">LOGOUT</a>
+              <a mat-icon-button (click)="onLogoutClick()" href="#">
+                <mat-icon class="header-sm-icon">lock_open</mat-icon>
+              </a>
             </td>
           </tr>
         </table>
@@ -68,10 +59,16 @@
               aria-expanded="false" aria-label="Toggle navigation">
               <a class="nav-link header-sm-link" [routerLink]="[link.path]">{{link.label}}</a>
             </li>
+            <li class="nav-item active" *ngFor="let link of moreLinks"
+              data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+              aria-expanded="false" aria-label="Toggle navigation">
+              <a class="nav-link header-sm-link" [routerLink]="[link.path]">{{link.label}}</a>
+            </li>
           </ul>
         </div>
       </nav>
-      <br/><br/><br/>
+      <ng-flash-message class="mdl-layout--small-screen-only"></ng-flash-message>
+      <br/><br/>
     </header>
 
     <main class="mdl-layout__content">

@@ -1,26 +1,20 @@
 const express = require('express');
 const router = express.Router();
 // ===============================================
-const fs = require('fs-extra');
-const formidable = require('formidable');
-const Test = require('../models/test');
 
-router.post('/image', (req, res, next) => {
-    var form = formidable.IncomingForm();
-    form.parse(req, function(err, fields, files) {
-        const filePath = files.file.path;
-        const ext = files.file.name.substring(files.file.name.lastIndexOf('.')).toLowerCase();
-        const name = new Date().getTime() + ext;
-        fs.copy(filePath, 'public/images/' + name, function(err) {
-            if ( err ) {
-                console.log(err);
-                res.json({});
-            } else {
-                res.json({url: 'images/' + name});
-            }
-        });
-    });
-    // res.json({url: 'https://cdfront.tower.jp/~/media/Images/Tol/pc/article/feature_item/J-Pop-Indies/2019/02/01/0702_01.jpg'});
+function randArr() {
+    let arr = [];
+    for (let i=0; i<10; i++) arr.push(new Date().getTime());
+}
+
+const resources = randArr();
+
+router.get('/', (req, res, next) => {
+    res.send(resources);
+});
+
+router.get('/:id', (req, res) => {
+    res.json({item: resources[req.params.id]});
 });
 
 module.exports = router;

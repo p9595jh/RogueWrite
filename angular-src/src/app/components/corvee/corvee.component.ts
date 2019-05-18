@@ -18,6 +18,7 @@ import { PageEvent } from '@angular/material';
 })
 export class CorveeComponent implements OnInit, OnDestroy {
   navigationSubscription;
+  svg: number = 0;
 
   num: String;
   content: any;
@@ -46,6 +47,7 @@ export class CorveeComponent implements OnInit, OnDestroy {
     private flashMessage: NgFlashMessageService,
     private dialog: MatDialog
   ) {
+    this.svg = this.funcService.getRandomSVGBackground();
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       if ( e instanceof NavigationEnd ) {
         this.initialiseInvites();

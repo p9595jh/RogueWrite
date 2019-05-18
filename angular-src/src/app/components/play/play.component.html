@@ -11,7 +11,7 @@
   <!-- CHOICES -->
   <table style="width: 100%;" *ngIf="!playService.end">
     <tbody>
-      <tr *ngFor="let choice of playService?.phase?.choice" (click)="playService.select(choice?.set_param, choice?.stage_to)" style="height: 50px;">
+      <tr *ngFor="let choice of playService?.phase?.choice" (click)="playService.select(choice?.change_set, choice?.stage_to)" style="height: 50px;">
         <td class="stage-choice btn--stripe">{{choice?.content}}</td>
       </tr>
     </tbody>
@@ -32,7 +32,7 @@
   <hr/>
   <div class="row align-items-center" *ngFor="let arr of playService?.paramArr">
     <div class="col-sm grid-cell" *ngFor="let val of arr">
-      <span *ngIf="val?.value?.visible">
+      <span *ngIf="playService.visible(val?.value?.visible)">
         {{val?.key}}<span>: </span>{{val?.value?.value}}
       </span>
     </div>

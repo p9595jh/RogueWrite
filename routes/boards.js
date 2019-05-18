@@ -116,7 +116,7 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
                 success: false
             });
         } else {
-            res.json({
+            res.status(201).json({
                 success: true,
                 num: post._id
             });
@@ -370,21 +370,8 @@ router.post('/remove-bookmark', passport.authenticate('jwt', {session: false}), 
 //==================================================
 
 router.get('/home', (req, res, next) => {
-    Board.find({type: 'notice'}, {_id: 1, title: 1}).sort({_id: -1}).limit(1).exec((err, notices) => {
-        Sub.find({}, {title: 1, url: 1, createdate: 1}).sort({_id: -1}).exec((err, subs) => {
-            Board.find({type: 'free'}, {_id: 1, title: 1}).sort({_id: -1}).limit(5).exec((err, frees) => {
-                const sub = subs[ Math.floor(Math.random() * subs.length) ];
-                Board.find({type: sub.url}, {_id: 1, title: 1}).sort({_id: -1}).limit(5).exec((err, others) => {
-                    res.json({
-                        notice: notices[0],
-                        added: subs[0],
-                        frees: frees,
-                        sub: sub,
-                        others: others
-                    });
-                });
-            });
-        });
+    Sub.find({}, {title: 1, url: 1, createdate: 1}).sort({_id: -1}).exec((err, subs) => {
+        res.status(200).json({added: subs[0]});
     });
 });
 

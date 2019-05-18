@@ -41,10 +41,10 @@ Blockly.Blocks.lists_split={init:function(){var a=this,b=new Blockly.FieldDropdo
 this.getFieldValue("MODE"));return a},domToMutation:function(a){this.updateType_(a.getAttribute("mode"))}};Blockly.Blocks.logic={};Blockly.Constants.Logic={};Blockly.Constants.Logic.HUE=210;
 Blockly.defineBlocksWithJsonArray([{type:"logic_boolean",message0:"%1",args0:[{type:"field_dropdown",name:"BOOL",options:[["%{BKY_LOGIC_BOOLEAN_TRUE}","TRUE"],["%{BKY_LOGIC_BOOLEAN_FALSE}","FALSE"]]}],output:"Boolean",style:"logic_blocks",tooltip:"%{BKY_LOGIC_BOOLEAN_TOOLTIP}",helpUrl:"%{BKY_LOGIC_BOOLEAN_HELPURL}"},{type:"controls_if",message0:"%{BKY_CONTROLS_IF_MSG_IF} %1",args0:[{type:"input_value",name:"IF0",check:"Boolean"}],message1:"%{BKY_CONTROLS_IF_MSG_THEN} %1",args1:[{type:"input_statement",
 name:"DO0"}],previousStatement:null,nextStatement:null,style:"logic_blocks",helpUrl:"%{BKY_CONTROLS_IF_HELPURL}",mutator:"controls_if_mutator",extensions:["controls_if_tooltip"]},{type:"controls_ifelse",message0:"%{BKY_CONTROLS_IF_MSG_IF} %1",args0:[{type:"input_value",name:"IF0",check:"Boolean"}],message1:"%{BKY_CONTROLS_IF_MSG_THEN} %1",args1:[{type:"input_statement",name:"DO0"}],message2:"%{BKY_CONTROLS_IF_MSG_ELSE} %1",args2:[{type:"input_statement",name:"ELSE"}],previousStatement:null,nextStatement:null,
-style:"logic_blocks",tooltip:"%{BKYCONTROLS_IF_TOOLTIP_2}",helpUrl:"%{BKY_CONTROLS_IF_HELPURL}",extensions:["controls_if_tooltip"]},{type:"logic_compare",message0:"%1 %2 %3",args0:[{type:"input_value",name:"A"},{type:"field_dropdown",name:"OP",options:[["=","EQ"],["\u2260","NEQ"],["\u200f<","LT"],["\u200f\u2264","LTE"],["\u200f>","GT"],["\u200f\u2265","GTE"]]},{type:"input_value",name:"B"}],inputsInline:!0,output:"Boolean",style:"logic_blocks",helpUrl:"%{BKY_LOGIC_COMPARE_HELPURL}",extensions:["logic_compare",
-"logic_op_tooltip"]},{type:"logic_operation",message0:"%1 %2 %3",args0:[{type:"input_value",name:"A",check:"Boolean"},{type:"field_dropdown",name:"OP",options:[["%{BKY_LOGIC_OPERATION_AND}","AND"],["%{BKY_LOGIC_OPERATION_OR}","OR"]]},{type:"input_value",name:"B",check:"Boolean"}],inputsInline:!0,output:"Boolean",style:"logic_blocks",helpUrl:"%{BKY_LOGIC_OPERATION_HELPURL}",extensions:["logic_op_tooltip"]},{type:"logic_negate",message0:"%{BKY_LOGIC_NEGATE_TITLE}",args0:[{type:"input_value",name:"BOOL",
-check:"Boolean"}],output:"Boolean",style:"logic_blocks",tooltip:"%{BKY_LOGIC_NEGATE_TOOLTIP}",helpUrl:"%{BKY_LOGIC_NEGATE_HELPURL}"},{type:"logic_null",message0:"%{BKY_LOGIC_NULL}",output:null,style:"logic_blocks",tooltip:"%{BKY_LOGIC_NULL_TOOLTIP}",helpUrl:"%{BKY_LOGIC_NULL_HELPURL}"},{type:"logic_ternary",message0:"%{BKY_LOGIC_TERNARY_CONDITION} %1",args0:[{type:"input_value",name:"IF",check:"Boolean"}],message1:"%{BKY_LOGIC_TERNARY_IF_TRUE} %1",args1:[{type:"input_value",name:"THEN"}],message2:"%{BKY_LOGIC_TERNARY_IF_FALSE} %1",
-args2:[{type:"input_value",name:"ELSE"}],output:null,style:"logic_blocks",tooltip:"%{BKY_LOGIC_TERNARY_TOOLTIP}",helpUrl:"%{BKY_LOGIC_TERNARY_HELPURL}",extensions:["logic_ternary"]}]);
+style:"logic_blocks",tooltip:"%{BKYCONTROLS_IF_TOOLTIP_2}",helpUrl:"%{BKY_CONTROLS_IF_HELPURL}",extensions:["controls_if_tooltip"]},{type:"logic_compare",message0:"%1 %2 %3",args0:[{type:"input_value",name:"A"},{type:"field_dropdown",name:"OP",options:[["=","EQ"],["\u2260","NEQ"],["\u200f<","LT"],["\u200f\u2264","LTE"],["\u200f>","GT"],["\u200f\u2265","GTE"]]},{type:"input_value",name:"B"}],inputsInline:!0,output:"Boolean",style:"logic_blocks",helpUrl:"%{BKY_LOGIC_COMPARE_HELPURL}"},{type:"logic_operation",
+message0:"%1 %2 %3",args0:[{type:"input_value",name:"A",check:"Boolean"},{type:"field_dropdown",name:"OP",options:[["%{BKY_LOGIC_OPERATION_AND}","AND"],["%{BKY_LOGIC_OPERATION_OR}","OR"]]},{type:"input_value",name:"B",check:"Boolean"}],inputsInline:!0,output:"Boolean",style:"logic_blocks",helpUrl:"%{BKY_LOGIC_OPERATION_HELPURL}",extensions:["logic_op_tooltip"]},{type:"logic_negate",message0:"%{BKY_LOGIC_NEGATE_TITLE}",args0:[{type:"input_value",name:"BOOL",check:"Boolean"}],output:"Boolean",style:"logic_blocks",
+tooltip:"%{BKY_LOGIC_NEGATE_TOOLTIP}",helpUrl:"%{BKY_LOGIC_NEGATE_HELPURL}"},{type:"logic_null",message0:"%{BKY_LOGIC_NULL}",output:null,style:"logic_blocks",tooltip:"%{BKY_LOGIC_NULL_TOOLTIP}",helpUrl:"%{BKY_LOGIC_NULL_HELPURL}"},{type:"logic_ternary",message0:"%{BKY_LOGIC_TERNARY_CONDITION} %1",args0:[{type:"input_value",name:"IF",check:"Boolean"}],message1:"%{BKY_LOGIC_TERNARY_IF_TRUE} %1",args1:[{type:"input_value",name:"THEN"}],message2:"%{BKY_LOGIC_TERNARY_IF_FALSE} %1",args2:[{type:"input_value",
+name:"ELSE"}],output:null,style:"logic_blocks",tooltip:"%{BKY_LOGIC_TERNARY_TOOLTIP}",helpUrl:"%{BKY_LOGIC_TERNARY_HELPURL}",extensions:["logic_ternary"]}]);
 Blockly.defineBlocksWithJsonArray([{type:"controls_if_if",message0:"%{BKY_CONTROLS_IF_IF_TITLE_IF}",nextStatement:null,enableContextMenu:!1,style:"logic_blocks",tooltip:"%{BKY_CONTROLS_IF_IF_TOOLTIP}"},{type:"controls_if_elseif",message0:"%{BKY_CONTROLS_IF_ELSEIF_TITLE_ELSEIF}",previousStatement:null,nextStatement:null,enableContextMenu:!1,style:"logic_blocks",tooltip:"%{BKY_CONTROLS_IF_ELSEIF_TOOLTIP}"},{type:"controls_if_else",message0:"%{BKY_CONTROLS_IF_ELSE_TITLE_ELSE}",previousStatement:null,
 enableContextMenu:!1,style:"logic_blocks",tooltip:"%{BKY_CONTROLS_IF_ELSE_TOOLTIP}"}]);Blockly.Constants.Logic.TOOLTIPS_BY_OP={EQ:"%{BKY_LOGIC_COMPARE_TOOLTIP_EQ}",NEQ:"%{BKY_LOGIC_COMPARE_TOOLTIP_NEQ}",LT:"%{BKY_LOGIC_COMPARE_TOOLTIP_LT}",LTE:"%{BKY_LOGIC_COMPARE_TOOLTIP_LTE}",GT:"%{BKY_LOGIC_COMPARE_TOOLTIP_GT}",GTE:"%{BKY_LOGIC_COMPARE_TOOLTIP_GTE}",AND:"%{BKY_LOGIC_OPERATION_TOOLTIP_AND}",OR:"%{BKY_LOGIC_OPERATION_TOOLTIP_OR}"};
 Blockly.Extensions.register("logic_op_tooltip",Blockly.Extensions.buildTooltipForDropdown("OP",Blockly.Constants.Logic.TOOLTIPS_BY_OP));
@@ -70,10 +70,10 @@ Blockly.Constants.Loops.CUSTOM_CONTEXT_MENU_CREATE_VARIABLES_GET_MIXIN={customCo
 Blockly.Extensions.registerMixin("contextMenu_newGetVariableBlock",Blockly.Constants.Loops.CUSTOM_CONTEXT_MENU_CREATE_VARIABLES_GET_MIXIN);Blockly.Extensions.register("controls_for_tooltip",Blockly.Extensions.buildTooltipWithFieldText("%{BKY_CONTROLS_FOR_TOOLTIP}","VAR"));Blockly.Extensions.register("controls_forEach_tooltip",Blockly.Extensions.buildTooltipWithFieldText("%{BKY_CONTROLS_FOREACH_TOOLTIP}","VAR"));
 Blockly.Constants.Loops.CONTROL_FLOW_IN_LOOP_CHECK_MIXIN={LOOP_TYPES:["controls_repeat","controls_repeat_ext","controls_forEach","controls_for","controls_whileUntil"],onchange:function(){if(this.workspace.isDragging&&!this.workspace.isDragging()){var a=!1,b=this;do{if(-1!=this.LOOP_TYPES.indexOf(b.type)){a=!0;break}b=b.getSurroundParent()}while(b);a?(this.setWarningText(null),this.isInFlyout||this.setDisabled(!1)):(this.setWarningText(Blockly.Msg.CONTROLS_FLOW_STATEMENTS_WARNING),this.isInFlyout||
 this.getInheritedDisabled()||this.setDisabled(!0))}}};Blockly.Extensions.registerMixin("controls_flow_in_loop_check",Blockly.Constants.Loops.CONTROL_FLOW_IN_LOOP_CHECK_MIXIN);Blockly.Blocks.math={};Blockly.Constants.Math={};Blockly.Constants.Math.HUE=230;
-Blockly.defineBlocksWithJsonArray([{type:"math_number",message0:"%1",args0:[{type:"field_number",name:"NUM",value:0}],output:"Number",helpUrl:"%{BKY_MATH_NUMBER_HELPURL}",style:"math_blocks",tooltip:"%{BKY_MATH_NUMBER_TOOLTIP}",extensions:["parent_tooltip_when_inline"]},{type:"math_arithmetic",message0:"%1 %2 %3",args0:[{type:"input_value",name:"A",check:["myparam","Number","mystring"]},{type:"field_dropdown",name:"OP",options:[["%{BKY_MATH_ADDITION_SYMBOL}","ADD"],["%{BKY_MATH_SUBTRACTION_SYMBOL}",
-"MINUS"],["%{BKY_MATH_MULTIPLICATION_SYMBOL}","MULTIPLY"],["%{BKY_MATH_DIVISION_SYMBOL}","DIVIDE"]]},{type:"input_value",name:"B",check:["myparam","Number","mystring"]}],inputsInline:!0,output:"mystring",style:"math_blocks",helpUrl:"%{BKY_MATH_ARITHMETIC_HELPURL}",extensions:["math_op_tooltip"]},{type:"math_single",message0:"%1 %2",args0:[{type:"field_dropdown",name:"OP",options:[["%{BKY_MATH_SINGLE_OP_ROOT}","ROOT"],["%{BKY_MATH_SINGLE_OP_ABSOLUTE}","ABS"],["-","NEG"],["ln","LN"],["log10","LOG10"],
-["e^","EXP"],["10^","POW10"]]},{type:"input_value",name:"NUM",check:"Number"}],output:"Number",style:"math_blocks",helpUrl:"%{BKY_MATH_SINGLE_HELPURL}",extensions:["math_op_tooltip"]},{type:"math_trig",message0:"%1 %2",args0:[{type:"field_dropdown",name:"OP",options:[["%{BKY_MATH_TRIG_SIN}","SIN"],["%{BKY_MATH_TRIG_COS}","COS"],["%{BKY_MATH_TRIG_TAN}","TAN"],["%{BKY_MATH_TRIG_ASIN}","ASIN"],["%{BKY_MATH_TRIG_ACOS}","ACOS"],["%{BKY_MATH_TRIG_ATAN}","ATAN"]]},{type:"input_value",name:"NUM",check:"Number"}],
-output:"Number",style:"math_blocks",helpUrl:"%{BKY_MATH_TRIG_HELPURL}",extensions:["math_op_tooltip"]},{type:"math_constant",message0:"%1",args0:[{type:"field_dropdown",name:"CONSTANT",options:[["\u03c0","PI"],["e","E"],["\u03c6","GOLDEN_RATIO"],["sqrt(2)","SQRT2"],["sqrt(\u00bd)","SQRT1_2"],["\u221e","INFINITY"]]}],output:"Number",style:"math_blocks",tooltip:"%{BKY_MATH_CONSTANT_TOOLTIP}",helpUrl:"%{BKY_MATH_CONSTANT_HELPURL}"},{type:"math_number_property",message0:"%1 %2",args0:[{type:"input_value",
+Blockly.defineBlocksWithJsonArray([{type:"math_number",message0:"%1",args0:[{type:"field_number",name:"NUM",value:0}],output:"Number",helpUrl:"%{BKY_MATH_NUMBER_HELPURL}",style:"math_blocks",tooltip:"%{BKY_MATH_NUMBER_TOOLTIP}",extensions:["parent_tooltip_when_inline"]},{type:"math_arithmetic",message0:"%1 %2 %3",args0:[{type:"input_value",name:"A",check:["myparam","Number","mystring","randNumber"]},{type:"field_dropdown",name:"OP",options:[["%{BKY_MATH_ADDITION_SYMBOL}","ADD"],["%{BKY_MATH_SUBTRACTION_SYMBOL}",
+"MINUS"],["%{BKY_MATH_MULTIPLICATION_SYMBOL}","MULTIPLY"],["%{BKY_MATH_DIVISION_SYMBOL}","DIVIDE"]]},{type:"input_value",name:"B",check:["myparam","Number","mystring","randNumber"]}],inputsInline:!0,output:"mystring",style:"math_blocks",helpUrl:"%{BKY_MATH_ARITHMETIC_HELPURL}",extensions:["math_op_tooltip"]},{type:"math_single",message0:"%1 %2",args0:[{type:"field_dropdown",name:"OP",options:[["%{BKY_MATH_SINGLE_OP_ROOT}","ROOT"],["%{BKY_MATH_SINGLE_OP_ABSOLUTE}","ABS"],["-","NEG"],["ln","LN"],["log10",
+"LOG10"],["e^","EXP"],["10^","POW10"]]},{type:"input_value",name:"NUM",check:"Number"}],output:"Number",style:"math_blocks",helpUrl:"%{BKY_MATH_SINGLE_HELPURL}",extensions:["math_op_tooltip"]},{type:"math_trig",message0:"%1 %2",args0:[{type:"field_dropdown",name:"OP",options:[["%{BKY_MATH_TRIG_SIN}","SIN"],["%{BKY_MATH_TRIG_COS}","COS"],["%{BKY_MATH_TRIG_TAN}","TAN"],["%{BKY_MATH_TRIG_ASIN}","ASIN"],["%{BKY_MATH_TRIG_ACOS}","ACOS"],["%{BKY_MATH_TRIG_ATAN}","ATAN"]]},{type:"input_value",name:"NUM",
+check:"Number"}],output:"Number",style:"math_blocks",helpUrl:"%{BKY_MATH_TRIG_HELPURL}",extensions:["math_op_tooltip"]},{type:"math_constant",message0:"%1",args0:[{type:"field_dropdown",name:"CONSTANT",options:[["\u03c0","PI"],["e","E"],["\u03c6","GOLDEN_RATIO"],["sqrt(2)","SQRT2"],["sqrt(\u00bd)","SQRT1_2"],["\u221e","INFINITY"]]}],output:"Number",style:"math_blocks",tooltip:"%{BKY_MATH_CONSTANT_TOOLTIP}",helpUrl:"%{BKY_MATH_CONSTANT_HELPURL}"},{type:"math_number_property",message0:"%1 %2",args0:[{type:"input_value",
 name:"NUMBER_TO_CHECK",check:"Number"},{type:"field_dropdown",name:"PROPERTY",options:[["%{BKY_MATH_IS_EVEN}","EVEN"],["%{BKY_MATH_IS_ODD}","ODD"],["%{BKY_MATH_IS_PRIME}","PRIME"],["%{BKY_MATH_IS_WHOLE}","WHOLE"],["%{BKY_MATH_IS_POSITIVE}","POSITIVE"],["%{BKY_MATH_IS_NEGATIVE}","NEGATIVE"],["%{BKY_MATH_IS_DIVISIBLE_BY}","DIVISIBLE_BY"]]}],inputsInline:!0,output:"Boolean",style:"math_blocks",tooltip:"%{BKY_MATH_IS_TOOLTIP}",mutator:"math_is_divisibleby_mutator"},{type:"math_round",message0:"%1 %2",
 args0:[{type:"field_dropdown",name:"OP",options:[["%{BKY_MATH_ROUND_OPERATOR_ROUND}","ROUND"],["%{BKY_MATH_ROUND_OPERATOR_ROUNDUP}","ROUNDUP"],["%{BKY_MATH_ROUND_OPERATOR_ROUNDDOWN}","ROUNDDOWN"]]},{type:"input_value",name:"NUM",check:"Number"}],output:"Number",style:"math_blocks",helpUrl:"%{BKY_MATH_ROUND_HELPURL}",tooltip:"%{BKY_MATH_ROUND_TOOLTIP}"},{type:"math_on_list",message0:"%1 %2",args0:[{type:"field_dropdown",name:"OP",options:[["%{BKY_MATH_ONLIST_OPERATOR_SUM}","SUM"],["%{BKY_MATH_ONLIST_OPERATOR_MIN}",
 "MIN"],["%{BKY_MATH_ONLIST_OPERATOR_MAX}","MAX"],["%{BKY_MATH_ONLIST_OPERATOR_AVERAGE}","AVERAGE"],["%{BKY_MATH_ONLIST_OPERATOR_MEDIAN}","MEDIAN"],["%{BKY_MATH_ONLIST_OPERATOR_MODE}","MODE"],["%{BKY_MATH_ONLIST_OPERATOR_STD_DEV}","STD_DEV"],["%{BKY_MATH_ONLIST_OPERATOR_RANDOM}","RANDOM"]]},{type:"input_value",name:"LIST",check:"Array"}],output:"Number",style:"math_blocks",helpUrl:"%{BKY_MATH_ONLIST_HELPURL}",mutator:"math_modes_of_list_mutator",extensions:["math_op_tooltip"]},{type:"math_modulo",
@@ -188,7 +188,10 @@ Blockly.defineBlocksWithJsonArray([
             {
                 "type": "input_value",
                 "name": "score",
-                "check": "mystring"
+                "check": [
+                    "myparam",
+                    "mystring"
+                ]
             }
         ],
         "inputsInline": false,
@@ -229,9 +232,9 @@ Blockly.defineBlocksWithJsonArray([
                 "check": "String"
             },
             {
-                "type": "input_statement",
+                "type": "input_value",
                 "name": "condition",
-                "check": "condition"
+                "check": "Boolean"
             },
             {
                 "type": "input_statement",
@@ -246,27 +249,25 @@ Blockly.defineBlocksWithJsonArray([
     },
     {
         "type": "choice",
-        "message0": "조건 번호 %1 이동 단계 %2 내용 %3 변수 변화 %4",
+        "message0": "내용 %1 이동 단계 %2 변수 변화 %3",
         "args0": [
-            {
-                "type": "input_value",
-                "name": "choice_num",
-                "check": "Number"
-            },
-            {
-                "type": "input_value",
-                "name": "stage_to",
-                "check": "Number"
-            },
             {
                 "type": "input_value",
                 "name": "content",
                 "check": "String"
             },
             {
+                "type": "input_value",
+                "name": "stage_to",
+                "check": [
+                    "Number",
+                    "randNumber"
+                ]
+            },
+            {
                 "type": "input_statement",
-                "name": "set_param",
-                "check": "condition"
+                "name": "change_set",
+                "check": "if_block"
             }
         ],
         "inputsInline": false,
@@ -275,41 +276,8 @@ Blockly.defineBlocksWithJsonArray([
         "colour": 120
     },
     {
-        "type": "condition",
-        "message0": "변수 %1 이상 : %2 이하 : %3",
-        "args0": [
-            {
-                "type": "input_value",
-                "name": "param",
-                "check": "myparam"
-            },
-            {
-                "type": "input_value",
-                "name": "above",
-                "check": [
-                    "myparam",
-                    "Number",
-                    "mystring"
-                ]
-            },
-            {
-                "type": "input_value",
-                "name": "below",
-                "check": [
-                    "myparam",
-                    "Number",
-                    "mystring"
-                ]
-            }
-        ],
-        "inputsInline": true,
-        "previousStatement": "condition",
-        "nextStatement": "condition",
-        "colour": 210
-    },
-    {
         "type": "parameter",
-        "message0": "변수 이름 %1 기본값 %2 가시성 %3",
+        "message0": "변수 이름 %1 기본값 %2 가시성 %3 타입 %4",
         "args0": [
             {
                 "type": "input_value",
@@ -319,19 +287,28 @@ Blockly.defineBlocksWithJsonArray([
             {
                 "type": "input_value",
                 "name": "default",
-                "check": "Number"
+                "check": [
+                    "String",
+                    "Number",
+                    "randNumber"
+                ]
+            },
+            {
+                "type": "input_value",
+                "name": "visible",
+                "check": "Boolean"
             },
             {
                 "type": "field_dropdown",
-                "name": "visible",
+                "name": "type",
                 "options": [
                     [
-                        "true",
-                        "true"
+                        "Number",
+                        "number"
                     ],
                     [
-                        "false",
-                        "false"
+                        "String",
+                        "string"
                     ]
                 ]
             }
@@ -340,5 +317,93 @@ Blockly.defineBlocksWithJsonArray([
         "previousStatement": "parameter",
         "nextStatement": "parameter",
         "colour": 290
+    },
+    {
+        "type": "is_block",
+        "message0": "%1 = %2",
+        "args0": [
+            {
+                "type": "input_value",
+                "name": "a",
+                "check": "myparam"
+            },
+            {
+                "type": "input_value",
+                "name": "b",
+                "check": [
+                    "myparam",
+                    "Number",
+                    "mystring",
+                    "randNumber"
+                ]
+            }
+        ],
+        "inputsInline": true,
+        "output": "isblock",
+        "colour": 230
+    },
+    {
+        "type": "rand_block",
+        "message0": "%1 ~ %2",
+        "args0": [
+            {
+                "type": "input_value",
+                "name": "a",
+                "check": "Number"
+            },
+            {
+                "type": "input_value",
+                "name": "b",
+                "check": "Number"
+            }
+        ],
+        "inputsInline": true,
+        "output": "randNumber",
+        "colour": 230
+    },
+    {
+        "type": "if_block",
+        "message0": "if %1 do %2",
+        "args0": [
+            {
+                "type": "input_value",
+                "name": "if_slot",
+                "check": "Boolean"
+            },
+            {
+                "type": "input_value",
+                "name": "do_slot",
+                "check": [
+                    "mystring",
+                    "isblock",
+                    "myparam"
+                ]
+            }
+        ],
+        "inputsInline": true,
+        "previousStatement": "if_block",
+        "nextStatement": [
+            "if_block",
+            "else_block"
+        ],
+        "colour": 260
+    },
+    {
+        "type": "else_block",
+        "message0": "else do %1",
+        "args0": [
+            {
+                "type": "input_value",
+                "name": "do_slot",
+                "check": [
+                    "mystring",
+                    "isblock",
+                    "myparam"
+                ]
+            }
+        ],
+        "inputsInline": true,
+        "previousStatement": "if_block",
+        "colour": 260
     }
 ]); 

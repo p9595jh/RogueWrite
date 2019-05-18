@@ -1,4 +1,4 @@
-<div id="rwCarousel" class="carousel slide" data-ride="carousel">
+<div id="rwCarousel" class="carousel slide mdl-shadow--2dp" data-ride="carousel">
 
   <ol class="carousel-indicators">
     <li data-target="#rwCarousel" data-slide-to="0" class="active"></li>
@@ -7,8 +7,7 @@
   </ol>
 
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="images/carousel/carousel1.jpg" style="width: 100%;">
+    <div [class]="'carousel-item active bg-svg-' + backgrounds[0]">
       <div class="container">
         <div class="carousel-caption text-left">
           <h3>{{carousel[0]?.title}}</h3>
@@ -19,8 +18,7 @@
       </div>
     </div>
 
-    <div class="carousel-item">
-      <img src="images/carousel/carousel2.jpg" style="width: 100%;">
+    <div [class]="'carousel-item bg-svg-' + backgrounds[1]">
       <div class="container">
         <div class="carousel-caption">
           <h3>{{carousel[1]?.title}}</h3>
@@ -31,8 +29,7 @@
       </div>
     </div>
 
-    <div class="carousel-item">
-      <img src="images/carousel/carousel3.jpg" style="width: 100%;">
+    <div [class]="'carousel-item bg-svg-' + backgrounds[2]">
       <div class="container">
         <div class="carousel-caption text-right">
           <h3>{{carousel[2]?.title}}</h3>
@@ -53,62 +50,46 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+
 <section></section>
+<br/><br/>
 
-<section *ngIf="user?.userid == 'admin'" class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-  <div class="mdl-card mdl-cell mdl-cell--12-col">
-    <div class="demo-card-wide mdl-card" style="width: 100%;">
-      <div class="mdl-card__title">
-        <h2 class="mdl-card__title-text">Welcome, Admin</h2>
-      </div>
-      <div class="mdl-card__supporting-text">
-        반갑습니다, 어드민님
-      </div>
-      <div class="mdl-card__actions mdl-card--border">
-        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" [routerLink]="['/admin']">
-          어드민 페이지
-        </a>
-      </div>
+<div class="container undercity">
+
+  <!-- ADMIN SECTION -->
+  <div class="row featurette" *ngIf="user?.userid == 'admin'">
+    <div class="col-md-5 order-md-1 undercity-including-img">
+      <img src="images/home/admin.jpg" class="img-fluid undercity-img">
+    </div>
+    <div class="col-md-7 order-md-2 mdl-layout--large-screen-only">
+      <h3 class="featurette-heading">반갑습니다, 어드민님</h3>
+      <a mat-button [routerLink]="['/admin']">어드민 페이지</a>
+    </div>
+    <div class="col-md-7 order-md-2 mdl-layout--small-screen-only" style="text-align: center;">
+      <br/><h3 class="featurette-heading">반갑습니다, 어드민님</h3>
+      <a mat-button [routerLink]="['/admin']">어드민 페이지</a>
     </div>
   </div>
-</section>
 
-<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-  <mat-card style="width: 100%; padding-left: 30px;">
-    <a [routerLink]="['/board/notice/' + notice?._id]" style="color: black; font-weight: bold;">[공지] {{notice?.title}}</a>
-  </mat-card>
-</section>
+  <hr class="featurette-divider" *ngIf="user?.userid == 'admin'">
 
-<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-  <mat-card style="width: 100%; padding-left: 30px;">
-    디버깅용) <a [routerLink]="['/test']" style="color: black; text-decoration: underline;">TEST</a>
-  </mat-card>
-</section>
-
-<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-  <div class="mdl-card mdl-cell mdl-cell--12-col">
-    <div class="mdl-card__supporting-text">
-      <h4><a [routerLink]="['/board/free/list']" style="color: black;">자유게시판</a></h4><hr/>
-      <ul>
-        <li *ngFor="let free of frees">
-          <a [routerLink]="['/board/free/' + free?._id]" style="color: black;">{{free?.title}}</a>
-        </li>
-      </ul>
+  <ng-container *ngFor="let val of homeService.rows; index as i">
+    <div class="row featurette">
+      <div [class]="'col-md-5 undercity-including-img order-md-' + ((i + 1) % 2 + 1)">
+        <img [src]="'images/home/home' + (i+1) + '.jpg'" class="img-fluid undercity-img">
+      </div>
+      <div [class]="'col-md-7 mdl-layout--large-screen-only ' + homeService.lrControl(i)">
+        <h3 class="featurette-heading">{{val.title}}</h3>
+        <p *ngFor="let content of val.contents" class="posts">{{content}}</p>
+      </div>
+      <div [class]="'col-md-7 mdl-layout--small-screen-only ' + homeService.lrControlSmall(i)" style="text-align: center;">
+        <br/><h3 class="featurette-heading">{{val.title}}</h3>
+        <p *ngFor="let content of val.contents" class="posts-small">{{content}}</p>
+      </div>
     </div>
-  </div>
-</section>
+    <hr class="featurette-divider">
+  </ng-container>
 
-<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
-  <div class="mdl-card mdl-cell mdl-cell--12-col">
-    <div class="mdl-card__supporting-text">
-      <h4><a [routerLink]="['/board/' + sub?.url + '/list']" style="color: black;">{{sub?.title}} 게시판</a></h4><hr/>
-      <ul>
-        <li *ngFor="let other of others">
-          <a [routerLink]="['/board/' + sub?.url + '/' + other?._id]" style="color: black;">{{other?.title}}</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
+</div>
 
 <section></section>

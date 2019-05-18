@@ -9,3 +9,7 @@
 .nav-link:hover {
     background-color: rgb(202, 202, 202);
 }
+
+.header-sm-icon {
+    color: black;
+}

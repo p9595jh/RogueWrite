@@ -20,8 +20,9 @@ import { PageEvent } from '@angular/material';
 })
 export class GameComponent implements OnInit, OnDestroy {
   navigationSubscription;
+  svg: number = 0;
 
-  num: String = '';
+  num: string = '';
   content: any;
   contents: any[];
   comments: any[];
@@ -42,6 +43,7 @@ export class GameComponent implements OnInit, OnDestroy {
     private flashMessage: NgFlashMessageService,
     private dialog: MatDialog
   ) {
+    this.svg = this.funcService.getRandomSVGBackground();
     this.navigationSubscription = this.router.events.subscribe((e: any) => {
       if ( e instanceof NavigationEnd ) {
         this.initialiseInvites();
@@ -66,6 +68,7 @@ export class GameComponent implements OnInit, OnDestroy {
           if ( b ) {
             this.funcService.setTitle(this.content.title + ' :: 게임게시판');
             this.playService.gameSet(this.content.game);
+            this.playService.numSet(this.num);
           }
           if ( this.authService.loggedIn() ) {
             this.authService.getProfile().subscribe(profile => {

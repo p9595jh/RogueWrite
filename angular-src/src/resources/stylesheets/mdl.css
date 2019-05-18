@@ -13,7 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
+ 
+*:focus, *:active, *:visited {
+  outline: 0;
+}
 html, body {
   font-family: 'Ubuntu', 'Roboto', 'Helvetica', sans-serif;
   height: 100%;

@@ -14,10 +14,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   user: any = undefined;
   carousel: Array<any> = [];
-  notice: any;
-  frees: Array<any>;
-  sub: any;
-  others: Array<any>;
+  backgrounds: Array<number>;
 
   constructor(
     private router: Router,
@@ -33,37 +30,33 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  // ngOnInit() { // debugging
-  //   const c = {
-  //     _id: 123,
-  //     title: 'asdf',
-  //     content: 'what',
-  //     url: 'hello',
-  //     createdate: 'yeah'
-  //   };
-  //   const b = {_id: 'B-ID', title: 'B-TITLE'};
-  //   this.carousel = [];
-  //   for(let i=0; i<3; i++) this.carousel.push(c);
-  //   this.notice = b;
-  //   this.sub = {title: 'SUB-TITLE', url: 'SUB-URL'};
-  //   this.frees = [];
-  //   this.others = [];
-  //   for (let i=0; i<5; i++) {
-  //     this.frees.push(b);
-  //     this.others.push(b);
-  //   }
-  // }
-
   ngOnInit() {
+    this.backgrounds = [];
+    for (let i=0; i<3; i++) {
+      let idx: number = Math.floor(Math.random() * this.funcService.bgCounts);
+      let flag: boolean = i != 0;
+      while ( flag ) {
+        for (let j=0; j<this.backgrounds.length; j++) {
+          if ( idx == this.backgrounds[j] ) {
+            flag = true;
+            idx = Math.floor(Math.random() * this.funcService.bgCounts);
+            break;
+          } else {
+            flag = false;
+          }
+        }
+      }
+      this.backgrounds[i] = idx;
+    }
+
+    // this.user = {userid: 'admin'}; const s = ['what the hack', 'i don\'t know', 'jesus', 'asdf', '?', 'hell yeah']; this.carousel = [];
+    // for(let i=0; i<3; i++) {this.carousel.push({_id: 123, title: s[Math.floor(Math.random() * s.length)], content: 'what', url: 'hello', createdate: 'yeah'});}
+
     this.homeService.takeBests().subscribe(bests => {
       this.carousel[0] = bests.recent;
       this.carousel[1] = bests.recommend;
-      this.homeService.takeFromBoard().subscribe(data => {
+      this.homeService.takeAddedSub().subscribe(data => {
         this.carousel[2] = data.added;
-        this.notice = data.notice;
-        this.frees = data.frees;
-        this.sub = data.sub;
-        this.others = data.others;
         if ( this.authService.loggedIn() ) {
           this.authService.getProfile().subscribe(profile => {
             this.user = profile.user;

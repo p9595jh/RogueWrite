@@ -1,11 +1,69 @@
-/* .demo-card-wide .mdl-card {
-    width: 512px;
-} */
-.demo-card-wide > .mdl-card__title {
-    color: #fff;
-    height: 176px;
-    background: url('./welcome_card.jpg') center / cover;
+.undercity .col-lg-4 {
+    margin-bottom: 1.5rem;
+    text-align: center;
 }
-.demo-card-wide > .mdl-card__menu {
-    color: #fff;
+
+.undercity h3 {
+    font-weight: 400;
+}
+
+.undercity .col-lg-4 p {
+    margin-right: .75rem;
+    margin-left: .75rem;
+}
+
+.undercity-img {
+    width: 350px;
+    height: 350px;
+}
+
+.undercity-including-img {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.posts {
+    padding-right: 20px;
+    padding-left: 20px;
+}
+
+.posts-small {
+    text-align: left;
+    padding-left: 15%;
+    padding-right: 15%;
+}
+
+.carousel-item {
+    height: 42rem;
+}
+
+li {
+    margin: .75rem;
+}
+  
+.featurette-divider {
+    margin: 5rem 0;
+}
+
+.featurette-heading {
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -.05rem;
+}
+
+@media (min-width: 40em) {
+    .carousel-caption p {
+        margin-bottom: 1.25rem;
+        font-size: 1.25rem;
+        line-height: 1.4;
+    }
+}
+
+@media (min-width: 62em) {
+    .featurette-heading {
+        margin-top: 7rem;
+    }
 }

@@ -128,9 +128,11 @@
 <!-- section for a board -->
 <section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
   <div class="mdl-card mdl-cell mdl-cell--12-col">
+
+    <div [class]="'mdl-card__title bg-svg-' + svg" style="width: 100%; height: 10rem;">
+      <h2 class="mdl-card__title-text" style="color: white;">블록게시판</h2>
+    </div>
     <div class="mdl-card__supporting-text">
-      <h4>블록게시판</h4>
-      <hr/>
       
       <!-- for large display -->
       <table class="mdl-data-table mdl-js-data-table mdl-layout--large-screen-only" style="margin: auto; width: 98%;">

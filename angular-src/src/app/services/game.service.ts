@@ -214,4 +214,13 @@ export class GameService {
       .pipe(map(res => res.json()));
   }
 
+  setTopPlayer(num: string, score: number) {
+    let headers = new Headers();
+    this.loadToken();
+    headers.append('Authorization', this.authToken);
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.funcService.ServerAddress + '/games/done', {score: score, num: num}, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
 }
