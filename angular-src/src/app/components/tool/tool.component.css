@@ -1,3 +1,32 @@
 .previewButton {
     float: right;
 }
+
+#debug {
+    width: 100%;
+    height: 300px;
+    padding: 1rem;
+    border: 1px solid grey;
+    overflow: scroll;
+    white-space: nowrap;
+}
+
+.debug-log {
+    padding-bottom: 9px;
+}
+
+.debug-normal {
+    color: black;
+}
+
+.debug-warn {
+    color: red;
+}
+
+.debug-success {
+    color: green;
+}
+
+.debug-highlight {
+    color: blue;
+}

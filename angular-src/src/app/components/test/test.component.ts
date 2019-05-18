@@ -7,10 +7,6 @@ import { FuncService } from '../../services/func.service';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit {
-  editorConfig: any;
-  content: string;
-
-  text: string;
 
   constructor(
     private funcService: FuncService
@@ -19,17 +15,13 @@ export class TestComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.editorConfig = {
-      placeholder: '',
-      spellcheck: false,
-      height: '500',
-      minHeight: '500',
-      imageEndPoint: this.funcService.ServerAddress + '/tests/image'
-    };
+    
   }
 
-  what() {
-    alert(this.content);
+  check() {
+    let element = document.getElementById('demo');
+    console.log(element);
+    element.style.color = 'red';
   }
 
 }

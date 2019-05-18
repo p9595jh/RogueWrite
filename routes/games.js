@@ -157,6 +157,15 @@ router.post('/add-block', (req, res, next) => {
     });
 });
 
+const banned = [
+    'true', 'false', 'random'
+    // 'true' and 'false' are substituted to 'true2' and 'false2'
+];
+const cannot_include = [
+    // '{', '}', '\'', '"'
+    // everything above is substituted to none-affective character (_) or string (e.g. 7B)
+];
+
 router.post('/save', function(req, res, next) {
     // title(string), stage(array), param(array), score(string)
     const data = {
@@ -175,6 +184,19 @@ router.post('/save', function(req, res, next) {
     } else if ( isNotValid(data.score) ) {
         return res.json({success: false, msg: '점수계산이 비어있습니다.'});
     } else {
+        for (let param of data.param) {
+            for (let each of banned) {
+                if ( param.param_name == each ) {
+                    return res.json({success: false, msg: '사용할 수 없는 변수명입니다: ' + each});
+                }
+            }
+            for (let each of cannot_include) {
+                if ( param.param_name.indexOf(each) != -1 ) {
+                    return res.json({success: false, msg: '변수명에 사용할 수 없는 문자가 포함되어 있습니다: ' + each});
+                }
+            }
+        }
+
         req.session.data = data;
         if ( req.body._id && req.body._id != '' ) req.session.temp = req.body._id;
         req.session.block = req.body.block;

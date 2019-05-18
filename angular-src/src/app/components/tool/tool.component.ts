@@ -31,6 +31,7 @@ export class ToolComponent extends ComponentCanDeactivate implements OnInit {
   }
 
   ngOnInit() {
+    this.playService.logs = [];
     this.authService.getProfile().subscribe(profile => {
       if ( !profile.user.clean ) {
         this.router.navigate(['/no-page']);

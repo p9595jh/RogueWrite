@@ -2599,7 +2599,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4 style=\"display: inline;\">PAGE NOT FOUND</h4>\r\n\r\n      <hr/>\r\n      <div class=\"posting\">\r\n        <img src=\"images/404.jpg\" style=\"width: 100%;\"><br/><br/>\r\n        페이지가 존재하지 않거나 접근이 거부되었습니다.<br/><br/>\r\n        <a mat-raised-button color=\"primary\" [routerLink]=\"[this.funcService.getPreviousUrl()]\">이전 페이지로 돌아가기</a><br/><br/>\r\n      </div>\r\n      <br/><br/>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<section *ngIf=\"num != 'list'\" class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\n    <div class=\"mdl-card__supporting-text\">\n      <h4 style=\"display: inline;\">PAGE NOT FOUND</h4>\n\n      <hr/>\n      <div class=\"posting\">\n        <img src=\"images/404.jpg\" style=\"width: 100%;\"><br/><br/>\n        페이지가 존재하지 않거나 접근이 거부되었습니다.<br/><br/>\n        <a mat-raised-button color=\"primary\" [routerLink]=\"[this.funcService.getPreviousUrl()]\">이전 페이지로 돌아가기</a><br/><br/>\n      </div>\n      <br/><br/>\n\n    </div>\n  </div>\n</section>\n\n<section></section>\n"
 
 /***/ }),
 
@@ -2681,9 +2681,11 @@ module.exports = "<div class=\"engine-layout\">\r\n\r\n  <a mat-button [href]=\"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PlayComponent", function() { return PlayComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
-/* harmony import */ var _services_play_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/play.service */ "./src/app/services/play.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _services_func_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../services/func.service */ "./src/app/services/func.service.ts");
+/* harmony import */ var _services_play_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../services/play.service */ "./src/app/services/play.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2697,18 +2699,24 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
 var PlayComponent = /** @class */ (function () {
-    function PlayComponent(funcService, playService, route, router) {
+    function PlayComponent(funcService, playService, route, router, http) {
         this.funcService = funcService;
         this.playService = playService;
         this.route = route;
         this.router = router;
+        this.http = http;
         this.funcService.setTitle('PLAY');
         this.num = this.route.snapshot.paramMap.get('num');
     }
     PlayComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.playService.takeOneGame(this.num).subscribe(function (data) {
+        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
+        headers.append('Content-Type', 'application/json');
+        this.http.get(this.funcService.ServerAddress + '/games/take-one-game?num=' + this.num, { headers: headers })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); })).subscribe(function (data) {
             if (!data.game)
                 _this.router.navigate(['/no-page']);
             else
@@ -2721,10 +2729,11 @@ var PlayComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./play.component.html */ "./src/app/components/play/play.component.html"),
             styles: [__webpack_require__(/*! ./play.component.css */ "./src/app/components/play/play.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_1__["FuncService"],
-            _services_play_service__WEBPACK_IMPORTED_MODULE_2__["PlayService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+        __metadata("design:paramtypes", [_services_func_service__WEBPACK_IMPORTED_MODULE_3__["FuncService"],
+            _services_play_service__WEBPACK_IMPORTED_MODULE_4__["PlayService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"],
+            _angular_http__WEBPACK_IMPORTED_MODULE_1__["Http"]])
     ], PlayComponent);
     return PlayComponent;
 }());
@@ -3575,7 +3584,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>HELLO</h4>\r\n      <hr/>\r\n      \r\n      <app-ngx-editor [config]=\"editorConfig\" [(ngModel)]=\"content\"></app-ngx-editor>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      \r\n      <button mat-button (click)=\"what()\">click</button>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section></section>\r\n"
+module.exports = "<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      <h4>HELLO</h4>\r\n      <hr/>\r\n      \r\n      <p id=\"demo\">what</p>\r\n      <button mat-button (click)=\"check()\">click</button>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n"
 
 /***/ }),
 
@@ -3608,16 +3617,11 @@ var TestComponent = /** @class */ (function () {
         this.funcService.setTitle('TEST!!!!');
     }
     TestComponent.prototype.ngOnInit = function () {
-        this.editorConfig = {
-            placeholder: '',
-            spellcheck: false,
-            height: '500',
-            minHeight: '500',
-            imageEndPoint: this.funcService.ServerAddress + '/tests/image'
-        };
     };
-    TestComponent.prototype.what = function () {
-        alert(this.content);
+    TestComponent.prototype.check = function () {
+        var element = document.getElementById('demo');
+        console.log(element);
+        element.style.color = 'red';
     };
     TestComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -3641,7 +3645,7 @@ var TestComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".previewButton {\r\n    float: right;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy90b29sL3Rvb2wuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFlBQVk7QUFDaEIiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3Rvb2wvdG9vbC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnByZXZpZXdCdXR0b24ge1xyXG4gICAgZmxvYXQ6IHJpZ2h0O1xyXG59Il19 */"
+module.exports = ".previewButton {\r\n    float: right;\r\n}\r\n\r\n#debug {\r\n    width: 100%;\r\n    height: 300px;\r\n    padding: 1rem;\r\n    border: 1px solid grey;\r\n    overflow: scroll;\r\n    white-space: nowrap;\r\n}\r\n\r\n.debug-log {\r\n    padding-bottom: 9px;\r\n}\r\n\r\n.debug-normal {\r\n    color: black;\r\n}\r\n\r\n.debug-warn {\r\n    color: red;\r\n}\r\n\r\n.debug-success {\r\n    color: green;\r\n}\r\n\r\n.debug-highlight {\r\n    color: blue;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy90b29sL3Rvb2wuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFlBQVk7QUFDaEI7O0FBRUE7SUFDSSxXQUFXO0lBQ1gsYUFBYTtJQUNiLGFBQWE7SUFDYixzQkFBc0I7SUFDdEIsZ0JBQWdCO0lBQ2hCLG1CQUFtQjtBQUN2Qjs7QUFFQTtJQUNJLG1CQUFtQjtBQUN2Qjs7QUFFQTtJQUNJLFlBQVk7QUFDaEI7O0FBRUE7SUFDSSxVQUFVO0FBQ2Q7O0FBRUE7SUFDSSxZQUFZO0FBQ2hCOztBQUVBO0lBQ0ksV0FBVztBQUNmIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy90b29sL3Rvb2wuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5wcmV2aWV3QnV0dG9uIHtcclxuICAgIGZsb2F0OiByaWdodDtcclxufVxyXG5cclxuI2RlYnVnIHtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgaGVpZ2h0OiAzMDBweDtcclxuICAgIHBhZGRpbmc6IDFyZW07XHJcbiAgICBib3JkZXI6IDFweCBzb2xpZCBncmV5O1xyXG4gICAgb3ZlcmZsb3c6IHNjcm9sbDtcclxuICAgIHdoaXRlLXNwYWNlOiBub3dyYXA7XHJcbn1cclxuXHJcbi5kZWJ1Zy1sb2cge1xyXG4gICAgcGFkZGluZy1ib3R0b206IDlweDtcclxufVxyXG5cclxuLmRlYnVnLW5vcm1hbCB7XHJcbiAgICBjb2xvcjogYmxhY2s7XHJcbn1cclxuXHJcbi5kZWJ1Zy13YXJuIHtcclxuICAgIGNvbG9yOiByZWQ7XHJcbn1cclxuXHJcbi5kZWJ1Zy1zdWNjZXNzIHtcclxuICAgIGNvbG9yOiBncmVlbjtcclxufVxyXG5cclxuLmRlYnVnLWhpZ2hsaWdodCB7XHJcbiAgICBjb2xvcjogYmx1ZTtcclxufVxyXG4iXX0= */"
 
 /***/ }),
 
@@ -3652,7 +3656,7 @@ module.exports = ".previewButton {\r\n    float: right;\r\n}\r\n/*# sourceMappin
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [innerHTML]=\"iframe | safe\"></div>\r\n\r\n<!-- game preview section -->\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n\r\n      <h4 style=\"display: inline;\">미리보기</h4>\r\n      <button mat-button class=\"previewButton\"\r\n        (click)=\"gameOn()\"\r\n        matTooltip=\"게임 적용\"\r\n        [matTooltipPosition]=\"tooltipPosition\"\r\n        [matTooltipShowDelay]=\"showDelay\">\r\n        <mat-icon>play_circle_outline</mat-icon>\r\n      </button>\r\n      <button mat-button class=\"previewButton\"\r\n        (click)=\"playService.replay()\"\r\n        matTooltip=\"리플레이\"\r\n        [matTooltipPosition]=\"tooltipPosition\"\r\n        [matTooltipShowDelay]=\"showDelay\">\r\n        <mat-icon>autorenew</mat-icon>\r\n      </button>\r\n      <hr/>\r\n\r\n      <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ENGINE (GAME) ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->\r\n      <div class=\"engine-layout\" *ngIf=\"set\">\r\n\r\n        <!-- PHASE-CONTENT -->\r\n        <div class=\"stage-content\" [innerHTML]=\"playService?.phase?.content | safe\"></div>\r\n\r\n        <!-- CHOICES -->\r\n        <table style=\"width: 100%;\" *ngIf=\"!playService.end\">\r\n          <tbody>\r\n            <tr *ngFor=\"let choice of playService?.phase?.choice\" (click)=\"playService.select(choice?.change_set, choice?.stage_to)\" style=\"height: 50px;\">\r\n              <td class=\"stage-choice btn--stripe\">{{choice?.content}}</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n\r\n        <!-- END -->\r\n        <table *ngIf=\"playService.end\" class=\"mdl-data-table mdl-js-data-table\" style=\"width: 100%;\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">THE END.</td>\r\n            <td>최종점수 : {{playService?.score}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td colspan=\"2\"><button mat-button (click)=\"playService.replay()\" style=\"float: right;\">다시하기</button></td>\r\n          </tr>\r\n        </table>\r\n\r\n        <!-- SHOW PARAMETERS -->\r\n        <hr/>\r\n        <div class=\"row align-items-center\" *ngFor=\"let arr of playService?.paramArr\">\r\n          <div class=\"col-sm grid-cell\" *ngFor=\"let val of arr\">\r\n            <span *ngIf=\"playService.visible(val?.value?.visible)\">\r\n              {{val?.key}}<span>: </span>{{val?.value?.value}}\r\n            </span>\r\n          </div>\r\n        </div>\r\n\r\n      </div>\r\n      <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ENGINE (GAME) ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      \r\n      <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\r\n        <mat-label>주석</mat-label>\r\n        <textarea matInput placeholder=\"\" rows=\"3\" #content></textarea>\r\n      </mat-form-field>\r\n      <table style=\"width: 100%;\">\r\n        <tr>\r\n          <td style=\"width: 30%;\">\r\n            <mat-form-field style=\"width: 80%;\" appearance=\"legacy\">\r\n              <mat-label>버전</mat-label>\r\n              <input matInput #version>\r\n              <mat-hint>형식: 1.0, 2.3, 0.1-beta 등</mat-hint>\r\n            </mat-form-field>\r\n          </td>\r\n          <td style=\"width: 70%;\">\r\n            <button mat-raised-button color=\"primary\" style=\"width: 100%;\" (click)=\"onWriteGame(content, version)\">작성</button>\r\n          </td>\r\n        </tr>\r\n      </table>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n"
+module.exports = "<div [innerHTML]=\"iframe | safe\"></div>\r\n\r\n<!-- game preview section -->\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n\r\n      <h4 style=\"display: inline;\">미리보기</h4>\r\n      <button mat-button class=\"previewButton\"\r\n        (click)=\"gameOn()\"\r\n        matTooltip=\"게임 적용\"\r\n        [matTooltipPosition]=\"tooltipPosition\"\r\n        [matTooltipShowDelay]=\"showDelay\">\r\n        <mat-icon>play_circle_outline</mat-icon>\r\n      </button>\r\n      <button mat-button class=\"previewButton\"\r\n        (click)=\"playService.replay()\"\r\n        matTooltip=\"리플레이\"\r\n        [matTooltipPosition]=\"tooltipPosition\"\r\n        [matTooltipShowDelay]=\"showDelay\">\r\n        <mat-icon>autorenew</mat-icon>\r\n      </button>\r\n      <hr/>\r\n\r\n      <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ ENGINE (GAME) ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->\r\n      <div class=\"engine-layout\" *ngIf=\"set\">\r\n\r\n        <!-- PHASE-CONTENT -->\r\n        <div class=\"stage-content\" [innerHTML]=\"playService?.phase?.content | safe\"></div>\r\n\r\n        <!-- CHOICES -->\r\n        <table style=\"width: 100%;\" *ngIf=\"!playService.end\">\r\n          <tbody>\r\n            <tr *ngFor=\"let choice of playService?.phase?.choice\" (click)=\"playService.select(choice?.change_set, choice?.stage_to)\" style=\"height: 50px;\">\r\n              <td class=\"stage-choice btn--stripe\">{{choice?.content}}</td>\r\n            </tr>\r\n          </tbody>\r\n        </table>\r\n\r\n        <!-- END -->\r\n        <table *ngIf=\"playService.end\" class=\"mdl-data-table mdl-js-data-table\" style=\"width: 100%;\">\r\n          <tr>\r\n            <td class=\"mdl-data-table__cell--non-numeric\">THE END.</td>\r\n            <td>최종점수 : {{playService?.score}}</td>\r\n          </tr>\r\n          <tr>\r\n            <td colspan=\"2\"><button mat-button (click)=\"playService.replay()\" style=\"float: right;\">다시하기</button></td>\r\n          </tr>\r\n        </table>\r\n\r\n        <!-- SHOW PARAMETERS -->\r\n        <hr/>\r\n        <div class=\"row align-items-center\" *ngFor=\"let arr of playService?.paramArr\">\r\n          <div class=\"col-sm grid-cell\" *ngFor=\"let val of arr\">\r\n            <span *ngIf=\"playService.visible(val?.value?.visible)\">\r\n              {{val?.key}}<span>: </span>{{val?.value?.value}}\r\n            </span>\r\n          </div>\r\n        </div>\r\n\r\n      </div>\r\n      <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ ENGINE (GAME) ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->\r\n\r\n      <br/><hr/><br/>\r\n\r\n      <!-- ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ DEBUGGING ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓ -->\r\n      <div id=\"debug\">\r\n        <div class=\"debug-log\" *ngFor=\"let log of playService?.logs\">\r\n          <b>{{log.time}}&nbsp;&nbsp;</b>\r\n          <b>{{log.location}}&nbsp;&nbsp;</b>\r\n          <span [class]=\"log.color\" [innerHTML]=\"log.log | safe\"></span>\r\n        </div>\r\n      </div>\r\n      <button mat-raised-button *ngIf=\"set\" style=\"float: right;\" (click)=\"playService.printAllVariablesToLog()\">변수 전체 출력</button>\r\n      <!-- ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ DEBUGGING ↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑ -->\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n\r\n<section class=\"section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp\">\r\n  <div class=\"mdl-card mdl-cell mdl-cell--12-col\">\r\n    <div class=\"mdl-card__supporting-text\">\r\n      \r\n      <mat-form-field appearance=\"outline\" style=\"width: 100%;\">\r\n        <mat-label>주석</mat-label>\r\n        <textarea matInput placeholder=\"\" rows=\"3\" #content></textarea>\r\n      </mat-form-field>\r\n      <table style=\"width: 100%;\">\r\n        <tr>\r\n          <td style=\"width: 30%;\">\r\n            <mat-form-field style=\"width: 80%;\" appearance=\"legacy\">\r\n              <mat-label>버전</mat-label>\r\n              <input matInput #version>\r\n              <mat-hint>형식: 1.0, 2.3, 0.1-beta 등</mat-hint>\r\n            </mat-form-field>\r\n          </td>\r\n          <td style=\"width: 70%;\">\r\n            <button mat-raised-button color=\"primary\" style=\"width: 100%;\" (click)=\"onWriteGame(content, version)\">작성</button>\r\n          </td>\r\n        </tr>\r\n      </table>\r\n\r\n    </div>\r\n  </div>\r\n</section>\r\n"
 
 /***/ }),
 
@@ -3719,6 +3723,7 @@ var ToolComponent = /** @class */ (function (_super) {
     }
     ToolComponent.prototype.ngOnInit = function () {
         var _this = this;
+        this.playService.logs = [];
         this.authService.getProfile().subscribe(function (profile) {
             if (!profile.user.clean) {
                 _this.router.navigate(['/no-page']);
@@ -4946,11 +4951,8 @@ var HomeService = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PlayService", function() { return PlayService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/http */ "./node_modules/@angular/http/fesm5/http.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
-/* harmony import */ var _func_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./func.service */ "./src/app/services/func.service.ts");
-/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./auth.service */ "./src/app/services/auth.service.ts");
-/* harmony import */ var _game_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./game.service */ "./src/app/services/game.service.ts");
+/* harmony import */ var _auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _game_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./game.service */ "./src/app/services/game.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -4963,15 +4965,16 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
-
-
 var PlayService = /** @class */ (function () {
-    function PlayService(http, funcService, authService, gameService) {
-        this.http = http;
-        this.funcService = funcService;
+    function PlayService(authService, gameService) {
         this.authService = authService;
         this.gameService = gameService;
+        this.Colors = {
+            WARN: 'debug-warn',
+            HIGHLIGHT: 'debug-highlight',
+            SUCCESS: 'debug-success',
+            NORMAL: 'debug-normal'
+        };
     }
     PlayService.prototype.gameSet = function (gameData) {
         this.num = undefined;
@@ -4981,12 +4984,15 @@ var PlayService = /** @class */ (function () {
         this.phaseNum = 1;
         this.end = false;
         this.paramMap = new Map();
+        this.logs = [];
+        this.addLog('game has been started', this.Colors.HIGHLIGHT);
         this.data = gameData;
         for (var _i = 0, _a = this.data.param; _i < _a.length; _i++) {
             var obj = _a[_i];
             // [{param1: {value: 0, visible: true}}, {param2: {value: 100, visible: false}}, ...]
             this.paramMap.set(obj.param_name, { value: obj.default, visible: obj.visible, type: obj.type });
         }
+        this.printAllVariablesToLog();
         this.paramArr = this.formatAsDoubleDimension();
         for (var _b = 0, _c = this.data.stage; _b < _c.length; _b++) {
             var stage = _c[_b];
@@ -5001,6 +5007,7 @@ var PlayService = /** @class */ (function () {
         this.num = num;
     };
     PlayService.prototype.replay = function () {
+        this.addLog('(restart)', this.Colors.HIGHLIGHT);
         var temp = undefined;
         if (this.num)
             temp = this.num;
@@ -5008,21 +5015,43 @@ var PlayService = /** @class */ (function () {
         if (temp)
             this.num = temp;
     };
-    PlayService.prototype.substituteParams = function (text) {
-        if (typeof text == 'number')
-            return text;
-        this.paramMap.forEach(function (value, key) {
-            text = text.split(key).join('this.paramMap.get("' + key + '").value');
-        });
-        return eval(text);
+    /**
+     * text 내의 'key'를 'map.get(key)' 형식으로 바꿈
+     * @param {string} key 변수명
+     * @param {string} text 변수명이 들어있는 문자열
+     * @returns {string} key -> map.get(key) 형식으로 바뀐 문자열
+    */
+    PlayService.prototype.formatWithMap = function (key, text) {
+        return text.split(key).join('this.paramMap.get("' + key + '").value');
     };
-    PlayService.prototype.checkNextStageCondition = function (condition) {
+    /**
+     * 입력받은 문자열들을 key에 맞춰서 치환해줌
+     * @param {string[]} texts 치환할 문자열들의 배열
+     * @returns {string} 치환된 문자열들의 배열
+    */
+    PlayService.prototype.substituteParams = function (texts) {
+        var _this = this;
         this.paramMap.forEach(function (value, key) {
-            condition = condition.split(key).join('this.paramMap.get("' + key + '").value');
+            for (var i = 0; i < texts.length; i++) {
+                texts[i] = _this.formatWithMap(key, texts[i]);
+            }
         });
+        return texts;
+    };
+    /**
+     * 스테이지 이동 시 페이즈의 조건이 맞는지 확인하는 함수
+     * @param {string} condition 해당 페이즈의 조건
+     * @returns {boolean} 조건에 부합하면 true, 아니면 false
+    */
+    PlayService.prototype.checkNextStageCondition = function (condition) {
+        condition = this.substituteParams([condition])[0];
         var b = eval(condition);
         return b;
     };
+    /**
+     * 변수 재설정을 위한 팝업을 띄우는 함수
+     * @param {string} key 변수명 (여기서는 paramMap의 키값)
+    */
     PlayService.prototype.changeParmaValueWithPrompt = function (key) {
         var changeValue = undefined;
         var type = this.paramMap.get(key).type == 'number' ? ' (숫자)' : '';
@@ -5037,33 +5066,63 @@ var PlayService = /** @class */ (function () {
                     changeValue = undefined;
             }
         } while (typeof changeValue != this.paramMap.get(key).type);
-        var pv = this.paramMap.get(key);
-        pv.value = changeValue;
-        this.paramMap.delete(key);
-        this.paramMap.set(key, pv);
+        this.addLog('variable \'' + key + '\' value changed (' + this.paramMap.get(key).value + ' → ' + changeValue + ')');
+        this.paramMap.get(key).value = changeValue;
     };
+    /**
+     * choice 선택 시 실행되는 if-else문에 대한 확인,
+     * do 영역이 변수명으로 되어 있으면 changeParamValueWithPrompt 함수 실행
+     * @param {IfElseState} state if_slot, do_slot으로 이루어진 if-else문 객체
+     * @returns {boolean} if문이 해당이 되는지에 대한 여부
+    */
     PlayService.prototype.choiceIfState = function (state) {
+        var _this = this;
         var change = false;
+        var if_slot, do_slot = state.do_slot;
         this.paramMap.forEach(function (value, key) {
-            state.if_slot = state.if_slot.split(key).join('this.paramMap.get("' + key + '").value');
-            if (key == state.do_slot)
+            if_slot = _this.formatWithMap(key, state.if_slot);
+            if (key == do_slot)
                 change = true;
             else
-                state.do_slot = state.do_slot.split(key).join('this.paramMap.get("' + key + '").value');
+                do_slot = _this.formatWithMap(key, do_slot);
         });
-        var b = eval(state.if_slot);
+        var b = eval(if_slot);
         if (b) {
-            console.log(state.do_slot);
             if (change)
-                this.changeParmaValueWithPrompt(state.do_slot);
-            else
-                eval(state.do_slot);
+                this.changeParmaValueWithPrompt(do_slot);
+            else {
+                var map_1 = new Map();
+                this.paramMap.forEach(function (value, key) { map_1.set(key, { value: value.value, visible: _this.visible(value.visible) }); });
+                eval(do_slot);
+                this.paramMap.forEach(function (value, key) {
+                    if (value.value != map_1.get(key).value) {
+                        _this.addLog('variable ' + _this.surroundText(key) + ' value changed (' + map_1.get(key).value + ' → ' + value.value + ')');
+                        if (isNaN(value.value) || (value.type != typeof value.value)) {
+                            _this.paramMap.get(key).value = map_1.get(key).value;
+                            _this.addLog('you did wrong operation to ' + _this.surroundText(key) + ', so its value has been restored (→ ' + map_1.get(key).value + ')', _this.Colors.WARN);
+                        }
+                    }
+                    var nowV = _this.visible(value.visible);
+                    if (map_1.get(key).visible != nowV) {
+                        _this.addLog('variable ' + _this.surroundText(key) + ' visibility changed (' + map_1.get(key).visible + ' → ' + nowV + ')');
+                    }
+                });
+            }
         }
         return b;
     };
+    /**
+     * 종료 시 발생 이벤트,
+     * end 변수 활성화 및 점수 계산
+    */
     PlayService.prototype.getDone = function () {
         this.end = true;
-        this.score = this.substituteParams(this.data.score);
+        this.score = eval(this.substituteParams([this.data.score])[0]);
+        this.addLog('game ended', this.Colors.SUCCESS);
+        if (isNaN(this.score))
+            this.addLog('you\'ve got the wrong score', this.Colors.WARN);
+        else
+            this.addLog('score: ' + this.score, this.Colors.SUCCESS);
         if (this.score == Infinity || this.score == -Infinity) {
             console.log('infinity');
         }
@@ -5071,32 +5130,39 @@ var PlayService = /** @class */ (function () {
             this.gameService.setTopPlayer(this.num, this.score).subscribe(function (result) { console.log(result); });
         }
     };
+    /**
+     * 정상적인 종료 시 실행
+    */
     PlayService.prototype.ending = function () {
         this.getDone();
         console.log('[[END]]');
-        if (this.previousStageNum < 0)
+        if (this.previousStageNum < 0) {
             console.log('[[SELECTED ENDING: ' + this.previousStageNum + '-' + this.phaseNum + ']]');
-        else
+            this.addLog('selected ending: stage ' + this.previousStageNum + ' - phase ' + this.phaseNum, this.Colors.SUCCESS);
+        }
+        else {
             console.log('[[SELECTED ENDING: ' + (this.stageNum - 1) + '-' + this.phaseNum + ']]');
+            this.addLog('selected ending: stage ' + (this.stageNum - 1) + ' - phase ' + this.phaseNum, this.Colors.SUCCESS);
+        }
     };
+    /**
+     * 맞는 조건이 없거나 맞는 스테이지가 없을 경우 실행
+    */
     PlayService.prototype.noCondition = function () {
         this.getDone();
         console.log('[[NO MATCHED CONDITION]]');
+        this.addLog('game ended with no matched stage or phase', this.Colors.WARN);
     };
-    PlayService.prototype.getRandomNumber = function (n1, n2) {
-        if (n1 < n2) {
-            return Math.floor(Math.random() * (n2 - n1 + 1)) + n1;
-        }
-        else {
-            return Math.floor(Math.random() * (n1 - n2 + 1)) + n2;
-        }
-    };
+    /**
+     * (html에서 사용) 선택지 선택 이벤트
+    */
     PlayService.prototype.select = function (changeSet, stage_to) {
         // stage_num에 맞춰서 다음 스테이지 지정
         if (stage_to == 0)
             this.stageNum++;
         else
             this.stageNum = stage_to;
+        this.addLog('move to stage ' + this.stageNum);
         // 선택지에 맞춰서 변수들 값 변화
         var flag = false;
         var elseState = undefined;
@@ -5126,6 +5192,7 @@ var PlayService = /** @class */ (function () {
                     if (this.checkNextStageCondition(phase.condition)) {
                         this.phase = this.encodePhase(phase);
                         this.phaseNum = phase.phase_num;
+                        this.addLog('selected phase: ' + this.phaseNum);
                         if (this.stageNum < 0) {
                             this.previousStageNum = this.stageNum;
                             this.stageNum = this.count;
@@ -5141,17 +5208,20 @@ var PlayService = /** @class */ (function () {
         // ends with no matched stage number
         this.noCondition();
     };
+    /**
+     * 변수 가시성 변화 확인
+    */
     PlayService.prototype.visible = function (text) {
-        this.paramMap.forEach(function (value, key) {
-            text = text.split(key).join('this.paramMap.get("' + key + '").value');
-        });
-        return eval(text);
+        return eval(this.substituteParams([text])[0]);
     };
+    /**
+     * 변수출력용 배열 설정
+    */
     PlayService.prototype.formatAsDoubleDimension = function () {
         var arr = new Array();
         arr.push([]);
         this.paramMap.forEach(function (value, key) {
-            if (value.visible) {
+            if (value.visible != 'false') {
                 if (arr[arr.length - 1].length < 3) {
                     arr[arr.length - 1].push({ key: key, value: value });
                 }
@@ -5162,29 +5232,74 @@ var PlayService = /** @class */ (function () {
         });
         return arr;
     };
+    /**
+     * phase의 content의 '{{변수명}}' 형식으로 설정된 구문을 '변수값'으로 바꿈
+     * @param {Phase} phase 변경할 phase 객체
+     * @returns {Phase} 변경된 phase 객체 (파라미터로 받은 phase가 아닌, 새로 생성한 객체)
+    */
     PlayService.prototype.encodePhase = function (phase) {
-        var text = phase.content;
+        var clone = {
+            phase_num: phase.phase_num,
+            content: phase.content,
+            condition: phase.condition,
+            choice: phase.choice
+        };
         this.paramMap.forEach(function (value, key) {
             var regex = new RegExp('\\{\\{' + key + '\\}\\}', 'g');
-            text = text.replace(regex, value);
+            clone.content = clone.content.replace(regex, value.value);
         });
-        phase.content = text;
-        return phase;
+        return clone;
     };
-    PlayService.prototype.takeOneGame = function (num) {
-        var headers = new _angular_http__WEBPACK_IMPORTED_MODULE_1__["Headers"]();
-        headers.append('Content-Type', 'application/json');
-        return this.http.get(this.funcService.ServerAddress + '/games/take-one-game?num=' + num, { headers: headers })
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (res) { return res.json(); }));
+    PlayService.prototype.surroundText = function (text) {
+        return '[<u>' + text + '</u>]';
+    };
+    /**
+     * X → 0X
+    */
+    PlayService.prototype.set2LetterFormat = function (num) {
+        num = num >= 10 ? num : '0' + num;
+        return num;
+    };
+    /**
+     * get now time
+     * @returns {string} [HH:mm:ss]
+    */
+    PlayService.prototype.getNowTime = function () {
+        var date = new Date();
+        return '['
+            + this.set2LetterFormat(date.getHours()) + ":"
+            + this.set2LetterFormat(date.getMinutes()) + ":"
+            + this.set2LetterFormat(date.getSeconds()) + ']';
+    };
+    /**
+     * get now stage, phase
+     * @returns {string} [ stage - phase ]
+    */
+    PlayService.prototype.location = function () {
+        return '[ ' + this.stageNum + ' - ' + this.phaseNum + ' ]';
+    };
+    /**
+     * add log
+    */
+    PlayService.prototype.addLog = function (log, color) {
+        if (color)
+            this.logs.push({ time: this.getNowTime(), location: this.location(), log: log, color: color });
+        else
+            this.logs.push({ time: this.getNowTime(), location: this.location(), log: log, color: this.Colors.NORMAL });
+        eval('$("#debug").scrollTop($("#debug")[0].scrollHeight)'); // move scroll to bottom; not working well
+    };
+    PlayService.prototype.printAllVariablesToLog = function () {
+        var _this = this;
+        this.paramMap.forEach(function (value, key) {
+            _this.addLog('variable) ' + _this.surroundText(key) + ': ' + value.value + ', type: ' + value.type + ', visibility: ' + _this.visible(value.visible), _this.Colors.HIGHLIGHT);
+        });
     };
     PlayService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_1__["Http"],
-            _func_service__WEBPACK_IMPORTED_MODULE_3__["FuncService"],
-            _auth_service__WEBPACK_IMPORTED_MODULE_4__["AuthService"],
-            _game_service__WEBPACK_IMPORTED_MODULE_5__["GameService"]])
+        __metadata("design:paramtypes", [_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"],
+            _game_service__WEBPACK_IMPORTED_MODULE_2__["GameService"]])
     ], PlayService);
     return PlayService;
 }());
@@ -5380,7 +5495,7 @@ var SafeHtml = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Hoon\PJH\others\web\rwrite\angular-src\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\PJH\1494054\RogueWrite\angular-src\src\main.ts */"./src/main.ts");
 
 
 /***/ })
