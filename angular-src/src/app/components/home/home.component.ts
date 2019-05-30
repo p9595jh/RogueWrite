@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.backgrounds = [];
-    for (let i=0; i<3; i++) {
+    for (let i=0; i<4; i++) {
       let idx: number = Math.floor(Math.random() * this.funcService.bgCounts);
       let flag: boolean = i != 0;
       while ( flag ) {

@@ -10,22 +10,25 @@ import { FuncService } from './func.service';
 export class HomeService {
   rows = [
     {
-      title: 'THE FIRST TITLE',
+      title: 'Blockly',
+      image: 'home1.jpg',
       contents: [
-        '이렇게 내용을',
-        '써내려가면 되는 형식'
+        'Google Blockly를 통해 게임을 제작해보세요.',
+        '직관적인 인터페이스를 통해 쉬운 제작이 가능합니다.'
       ]
     }, {
-      title: 'THE SECOND TITLE',
+      title: '제작 게임 관리',
+      image: 'home2.png',
       contents: [
-        '이렇게 내용을',
-        '써내려가면 되는 형식'
+        '시스템을 통해 제작 중인 게임을 관리하세요.',
+        '파트너를 구해서 협업을 진행하세요.'
       ]
     }, {
-      title: 'THE THIRD TITLE',
+      title: 'Material Design',
+      image: 'home3.jpg',
       contents: [
-        '이렇게 내용을',
-        '써내려가면 되는 형식 ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ'
+        'Google Material Design으로 이루어진 미려한 UI를 감상하세요.',
+        'PC, 모바일 환경을 가리지 않는 유연한 접속이 가능합니다.'
       ]
     }
   ];

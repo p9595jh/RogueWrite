@@ -60,17 +60,20 @@ import { TempComponent, TempDialog } from './components/temp/temp.component';
 import { CorveeComponent } from './components/corvee/corvee.component';
 import { CwriteComponent } from './components/cwrite/cwrite.component';
 import { PlayComponent } from './components/play/play.component';
+import { FindComponent } from './components/find/find.component';
+import { FixComponent } from './components/fix/fix.component';
+import { TutorialComponent } from './components/tutorial/tutorial.component';
 import { TestComponent } from './components/test/test.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'test', component: TestComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'login', component: LoginComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'modify', component: ModifyComponent, canActivate: [AuthGuard] },
   { path: 'board/:type/:num', component: BoardComponent },
   { path: 'write/:type', component: WriteComponent, canActivate: [AuthGuard] },
-  { path: 'test', component: TestComponent },
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
   { path: 'game/:num', component: GameComponent },
   { path: 'tool', component: ToolComponent, canActivate: [AuthGuard] },
@@ -78,6 +81,9 @@ const appRoutes: Routes = [
   { path: 'temp/:num', component: TempComponent, canActivate: [AuthGuard] },
   { path: 'corvee/:num', component: CorveeComponent },
   { path: 'cwrite', component: CwriteComponent, canActivate: [AuthGuard] },
+  { path: 'fix/:num', component: FixComponent, canActivate: [AuthGuard] },
+  { path: 'find', component: FindComponent },
+  { path: 'tutorial', component: TutorialComponent },
   { path: 'play/:num', component: PlayComponent },
   { path: 'no-page', component: NoPageComponent },
   { path: '**', component: NoPageComponent }
@@ -107,7 +113,10 @@ const appRoutes: Routes = [
     CorveeComponent,
     CwriteComponent,
     PlayComponent,
-    TestComponent
+    TestComponent,
+    FindComponent,
+    FixComponent,
+    TutorialComponent
   ],
   imports: [
     ReactiveFormsModule,

@@ -12,8 +12,8 @@ function _window() {
   providedIn: 'root'
 })
 export class FuncService {
-  // public ServerAddress: String = "http://13.125.172.123:3000";
   public ServerAddress: String = "http://localhost:3000";
+  // public ServerAddress: String = "http://13.125.172.123:3000";
 
   public bgCounts = 10;
 
@@ -76,6 +76,21 @@ export class FuncService {
 
   getRandomSVGBackground() {
     return Math.floor(Math.random() * this.bgCounts);
+  }
+
+  cutString(text: string, by?: number): string {
+    const len = by ? by : 20;
+    const byte: number = ((s,b,i,c) => {
+			for (b=i=0; c=s.charCodeAt(i++); b+=c>>11?3:c>>7?2:1);
+			return b;
+    })(text);
+    if ( text.length > len && byte > 60 ) {
+      return text.substring(0, len) + '...';
+    } else if ( text.length > len + 4 ) {
+      return text.substring(0, len) + '...';
+    } else {
+      return text;
+    }
   }
 
 }

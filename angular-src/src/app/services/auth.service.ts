@@ -129,4 +129,11 @@ export class AuthService {
       .pipe(map(res => res.json()));
   }
 
+  findUserByEmail(email) {
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.get(this.funcService.ServerAddress + '/users/find-userid/' + email, {headers: headers})
+      .pipe(map(res => res.json()));
+  }
+
 }

@@ -113,7 +113,10 @@ router.get('/view-block', (req, res) => {
             res.render('block', {
                 title: game.title,
                 block: game.block.xml,
-                readOnly: true
+                readOnly: true,
+                scrollbars: true,
+                none: true,
+                height: req.query.height
             });
         }
     });
@@ -130,17 +133,57 @@ router.get('/view-temp-block', (req, res) => {
                     res.render('block', {
                         title: game.title,
                         block: game.block[req.query.recent-1].xml,
-                        readOnly: true
+                        readOnly: true,
+                        scrollbars: true,
+                        none: true,
+                        height: req.query.height
                     });
                 }
             } else {
                 res.render('block', {
                     title: game.title,
                     block: game.block[game.block.length-1].xml,
-                    readOnly: true
+                    readOnly: true,
+                    scrollbars: true,
+                    none: true,
+                    height: req.query.height
                 });
             }
         }
+    });
+});
+
+// ==============================================
+
+const blocks = {
+    alpha: "<xml xmlns=\"http://www.w3.org/1999/xhtml\"><block type=\"game\" id=\"Z.mE(9XL8eTgCX7]He;.\" x=\"200\" y=\"50\"></block></xml>",
+    bravo: "<xml xmlns=\"http://www.w3.org/1999/xhtml\"><block type=\"game\" id=\"Z.mE(9XL8eTgCX7]He;.\" x=\"100\" y=\"50\"></block><block type=\"stage\" id=\"sC^|EbQf=pe+_l{@{]Yb\" x=\"232\" y=\"50\"></block><block type=\"phase\" id=\"[|NYD:!d)TMxNtQdX)cc\" x=\"377\" y=\"50\"></block><block type=\"choice\" id=\"Sez;*0t+W=fPtg]S5{70\" x=\"507\" y=\"50\"></block></xml>",
+    charlie: "<xml xmlns=\"http://www.w3.org/1999/xhtml\"></xml>",
+    delta: "<xml xmlns=\"http://www.w3.org/1999/xhtml\"><block type=\"choice\" id=\"bMC%[gw]w6hUEXl3=)B6\" x=\"200\" y=\"50\"></block></xml>",
+    echo: "<xml xmlns=\"http://www.w3.org/1999/xhtml\"><block type=\"parameter\" id=\"@Hq@?7z5c?}Qt*9;o#,A\" x=\"200\" y=\"50\"><field name=\"type\">number</field></block></xml>",
+    foxtrot: "<xml xmlns=\"http://www.w3.org/1999/xhtml\"></xml>",
+    golf: "<xml xmlns=\"http://www.w3.org/1999/xhtml\"></xml>",
+    hotel: "<xml xmlns=\"http://www.w3.org/1999/xhtml\"><block type=\"game\" id=\"$1!D$).0|`78+pOez`XP\" x=\"200\" y=\"50\"></block></xml>"
+};
+
+router.get('/tutorial/:categories/:block/:height', (req, res, next) => {
+    let categories = req.params.categories.split('-');
+    let variable = false;
+    let idx = -1;
+    if ( (idx = categories.indexOf('variable')) != -1 ) {
+        variable = true;
+        categories.splice(idx, 1);
+    }
+    let xml = undefined;
+    eval(`xml=blocks.${req.params.block};`);
+    res.render('block', {
+        title: 'TUTORIAL',
+        block: xml,
+        readOnly: false,
+        scrollbars: false,
+        height: req.params.height,
+        category: categories,
+        variable: variable
     });
 });
 

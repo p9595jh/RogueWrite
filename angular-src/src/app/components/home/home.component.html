@@ -4,6 +4,7 @@
     <li data-target="#rwCarousel" data-slide-to="0" class="active"></li>
     <li data-target="#rwCarousel" data-slide-to="1"></li>
     <li data-target="#rwCarousel" data-slide-to="2"></li>
+    <li data-target="#rwCarousel" data-slide-to="3"></li>
   </ol>
 
   <div class="carousel-inner">
@@ -39,6 +40,16 @@
         </div>
       </div>
     </div>
+
+    <div [class]="'carousel-item bg-svg-' + backgrounds[3]">
+      <div class="container">
+        <div class="carousel-caption">
+          <h3>RogueWrite</h3>
+          <h4>Blockly를 이용한 툴 사용법을 익혀보세요.</h4>
+          <p><a mat-flat-button [routerLink]="['/tutorial']" role="button">튜토리얼 보기</a></p>
+        </div>
+      </div>
+    </div>
   </div>
 
   <a class="carousel-control-prev" href="#rwCarousel" role="button" data-slide="prev">
@@ -59,7 +70,7 @@
   <!-- ADMIN SECTION -->
   <div class="row featurette" *ngIf="user?.userid == 'admin'">
     <div class="col-md-5 order-md-1 undercity-including-img">
-      <img src="images/home/admin.jpg" class="img-fluid undercity-img">
+      <img src="images/home/admin.jpg" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="350" height="350">
     </div>
     <div class="col-md-7 order-md-2 mdl-layout--large-screen-only">
       <h3 class="featurette-heading">반갑습니다, 어드민님</h3>
@@ -76,15 +87,15 @@
   <ng-container *ngFor="let val of homeService.rows; index as i">
     <div class="row featurette">
       <div [class]="'col-md-5 undercity-including-img order-md-' + ((i + 1) % 2 + 1)">
-        <img [src]="'images/home/home' + (i+1) + '.jpg'" class="img-fluid undercity-img">
+        <img [src]="'images/home/' + val.image" class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="350" height="350">
       </div>
       <div [class]="'col-md-7 mdl-layout--large-screen-only ' + homeService.lrControl(i)">
         <h3 class="featurette-heading">{{val.title}}</h3>
-        <p *ngFor="let content of val.contents" class="posts">{{content}}</p>
+        <p *ngFor="let content of val.contents" class="posts" [innerHTML]="content"></p>
       </div>
       <div [class]="'col-md-7 mdl-layout--small-screen-only ' + homeService.lrControlSmall(i)" style="text-align: center;">
         <br/><h3 class="featurette-heading">{{val.title}}</h3>
-        <p *ngFor="let content of val.contents" class="posts-small">{{content}}</p>
+        <p *ngFor="let content of val.contents" class="posts-small" [innerHTML]="content"></p>
       </div>
     </div>
     <hr class="featurette-divider">

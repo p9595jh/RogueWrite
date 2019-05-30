@@ -58,4 +58,20 @@ export class LoginComponent implements OnInit {
 
   }
 
+  testaccount(i: number) {
+    this.authService.authenticateUser({userid: 'tttt' + i, pw: '123123'}).subscribe(data => {
+      if( data.success ) {
+        this.authService.storeUserData(data.token, data.user);
+        if ( this.funcService.getPreviousUrl().toLowerCase().includes('login') ) this.router.navigate(['/']);
+        else this.router.navigate([this.funcService.getPreviousUrl()]);
+      } else {
+        this.flashMessage.showFlashMessage({
+          messages: [data.msg], 
+          type: 'danger', 
+          timeout: 3000
+        });
+      }
+    });
+  }
+
 }

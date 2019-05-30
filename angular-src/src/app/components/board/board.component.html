@@ -100,6 +100,9 @@
     <button mat-menu-item *ngIf="content?.userid == user?.userid || user?.userid == 'admin'" (click)="onRemovePost()">
       <span>삭제</span>
     </button>
+    <button mat-menu-item *ngIf="content?.userid == user?.userid" [routerLink]="['/fix/' + num]">
+      <span>수정</span>
+    </button>
   </mat-menu>
 </section>
 
@@ -171,19 +174,25 @@
       <div *ngIf="(type != 'notice' && authService.loggedIn() && user?.clean) || (type == 'notice' && user?.userid == 'admin')" style="float: right;">
         <a mat-raised-button [routerLink]="['/write/' + type]">글쓰기</a>
       </div><br/>
-      <div style="text-align: center;">
-        <mat-form-field style="width: 100px;">
-          <mat-select value="title" (selectionChange)="onSearch(searchSelect.value, searchInput.value)" #searchSelect>
-            <mat-option value="title">제목</mat-option>
-            <mat-option value="nickname">닉네임</mat-option>
-          </mat-select>
-        </mat-form-field>&nbsp;&nbsp;
-        <mat-form-field appearance="outline" style="width: 200px;">
-          <mat-label>검색</mat-label>
-          <input matInput (input)="onSearch(searchSelect.value, $event.target.value)" #searchInput>
-          <mat-icon matSuffix>search</mat-icon>
-        </mat-form-field>
-      </div>
+      <table style="text-align: center; margin: auto; max-width: 100%;" class="search-table">
+        <tr>
+          <td style="width: 35%;">
+            <mat-form-field style="width: 75px;">
+              <mat-select value="title" (selectionChange)="onSearch(searchSelect.value, searchInput.value)" #searchSelect>
+                <mat-option value="title">제목</mat-option>
+                <mat-option value="nickname">닉네임</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field appearance="outline" style="width: 190px;">
+              <mat-label>검색</mat-label>
+              <input matInput (input)="onSearch(searchSelect.value, $event.target.value)" #searchInput>
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 

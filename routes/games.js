@@ -163,7 +163,7 @@ const banned = [
 ];
 const cannot_include = [
     // '{', '}', '\'', '"'
-    // everything above is substituted to none-affective character (_) or string (e.g. 7B)
+    // everything above is substituted to a none-affective character (e.g. '_') or string (e.g. 7A)
 ];
 
 router.post('/save', function(req, res, next) {
@@ -675,26 +675,24 @@ router.post('/modify-title', (req, res, next) => {
 router.post('/done', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     const score = req.body.score;
     const num = req.body.num;
-    Game.findOne({_id: num}, {highest: 1}, (err, game) => {
-        console.log(game);
-        console.log(game._id);
-        console.log(game.highest);
-        if ( !game.highest ) {
-            console.log('[[01]]');
-            const highest = {userid: req.user.userid, nickname: req.user.nickname, score: score};
-            console.log(highest);
-            Game.findOneAndUpdate({_id: num}, {highest: highest}, (err, output) => {
+    Game.findOne({_id: num}, {top: 1}, (err, game) => {
+        if ( !game.top ) {
+            const top = {userid: req.user.userid, nickname: req.user.nickname, score: score};
+            Game.findOneAndUpdate({_id: num}, {top: {highest: top, lowest: top}}, (err, output) => {
                 res.status(204).json({});
             });
         } else {
-            if ( game.highest.score < score ) {
-                console.log('[[02]]');
+            if ( game.top.highest.score < score ) {
                 const highest = {userid: req.user.userid, nickname: req.user.nickname, score: score};
-                Game.findOneAndUpdate({_id: num}, {highest: highest}, (err, output) => {
+                Game.findOneAndUpdate({_id: num}, {'top.highest': highest}, (err, output) => {
+                    res.status(204).json({});
+                });
+            } else if ( game.top.lowest.score > score ) {
+                const lowest = {userid: req.user.userid, nickname: req.user.nickname, score: score};
+                Game.findOneAndUpdate({_id: num}, {'top.lowest': lowest}, (err, output) => {
                     res.status(204).json({});
                 });
             } else {
-                console.log('[[03]]');
                 res.status(204).json({});
             }
         }

@@ -68,7 +68,7 @@
         <div class="debug-log" *ngFor="let log of playService?.logs">
           <b>{{log.time}}&nbsp;&nbsp;</b>
           <b>{{log.location}}&nbsp;&nbsp;</b>
-          <span [class]="log.color" [innerHTML]="log.log | safe"></span>
+          <span [class]="log.color">{{log.log}}</span>
         </div>
       </div>
       <button mat-raised-button *ngIf="set" style="float: right;" (click)="playService.printAllVariablesToLog()">변수 전체 출력</button>

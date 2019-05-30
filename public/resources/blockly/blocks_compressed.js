@@ -334,7 +334,8 @@ Blockly.defineBlocksWithJsonArray([
                     "myparam",
                     "Number",
                     "mystring",
-                    "randNumber"
+                    "randNumber",
+                    "String"
                 ]
             }
         ],
@@ -374,7 +375,6 @@ Blockly.defineBlocksWithJsonArray([
                 "type": "input_value",
                 "name": "do_slot",
                 "check": [
-                    "mystring",
                     "isblock",
                     "myparam"
                 ]
@@ -396,7 +396,6 @@ Blockly.defineBlocksWithJsonArray([
                 "type": "input_value",
                 "name": "do_slot",
                 "check": [
-                    "mystring",
                     "isblock",
                     "myparam"
                 ]

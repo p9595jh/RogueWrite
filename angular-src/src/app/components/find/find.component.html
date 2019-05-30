@@ -1,0 +1,25 @@
+<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+    <div class="mdl-card__supporting-text">
+      <h4>아이디 찾기</h4><hr/>
+      
+      <div style="margin: auto;">
+        <mat-form-field appearance="outline">
+          <mat-label>이메일을 입력해주세요.</mat-label>
+          <input matInput type="text" name="email" [formControl]="emailFormControl" [errorStateMatcher]="matcher">
+          <mat-error *ngIf="emailFormControl.hasError('email')">
+            이메일 형식에 맞지 않습니다.
+          </mat-error>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="check(place)">확인</button>
+      </div>
+      <br/><br/>
+      <div style="margin: auto;">
+        <span #place></span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section></section>

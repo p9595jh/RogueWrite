@@ -1,0 +1,17 @@
+<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+    <div class="mdl-card__supporting-text">
+      <h4>글 수정</h4><hr/>
+      <div style="width: 98%; margin: auto;">
+        <form (submit)="onFixPost()">
+          <mat-form-field style="width: 100%;">
+            <input matInput placeholder="제목" type="text" name="title" [value]="title" disabled>
+          </mat-form-field>
+          <textarea [froalaEditor]="options" [(ngModel)]="content" name="content"></textarea>
+          <br/>
+          <button mat-raised-button type="submit" style="float: right;">작성</button>
+        </form><br/>
+      </div>
+    </div>
+  </div>
+</section>

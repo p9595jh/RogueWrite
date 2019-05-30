@@ -19,6 +19,7 @@ const GameSchema = mongoose.Schema({
     unrecommend: Number,
     recommendby: Array, // person who recommended or unrecommended
     comment: Array,
+    top: Object,
     from: Object,
     /*
         from: {

@@ -18,9 +18,20 @@
           <br/><br/><br/><br/><br/><hr/>
           <a [routerLink]="['/register']" style="color: black; text-decoration: none;">회원가입</a>
           &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-          <a [routerLink]="['/']" style="color: black; text-decoration: none;">아이디 찾기</a>
+          <a [routerLink]="['/find']" style="color: black; text-decoration: none;">아이디 찾기</a>
         </div>
       </form>
+
+      <br/><br/>
+      <div style="text-align: center;">
+        <button mat-button (click)="testaccount(1)" style="color: black; text-decoration: none;">테스트계정1</button>
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+        <button mat-button (click)="testaccount(2)" style="color: black; text-decoration: none;">테스트계정2</button>
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+        <button mat-button (click)="testaccount(3)" style="color: black; text-decoration: none;">테스트계정3</button>
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+        <button mat-button (click)="testaccount(4)" style="color: black; text-decoration: none;">테스트계정4</button>
+      </div>
 
     </div>
   </div>

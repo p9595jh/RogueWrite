@@ -123,7 +123,14 @@ router.post('/write', passport.authenticate('jwt', {session: false}), function(r
         }
     });
 
-})
+});
+
+router.post('/fix', passport.authenticate('jwt', {session: false}), function(req, res, next) {
+    Board.findOneAndUpdate({_id: req.body.num}, {content: req.body.content, writedate: '*' + getNowDate()}, (err, post) => {
+        if ( !post || err ) res.json({success: false});
+        else res.json({success: true});
+    });
+});
 
 router.post('/write-comment', passport.authenticate('jwt', {session: false}), function(req, res, next) {
     let comment = req.body.comment.replace(/[\u00A0-\u9999<>\&]/gim, function(i) {

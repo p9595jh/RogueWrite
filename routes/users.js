@@ -237,6 +237,14 @@ router.post('/find-user-by-id-or-nickname', passport.authenticate('jwt', {sessio
   });
 });
 
+router.get('/find-userid/:email', (req, res, next) => {
+  const email = req.params.email;
+  User.findOne({email: email}, {userid: 1}, (err, user) => {
+    if ( err || !user ) res.json({success: false});
+    else res.json({success: true, userid: user.userid.substring(0, user.userid.length - 3) + '***'});
+  });
+});
+
 //==================================================>
 
 module.exports = router;

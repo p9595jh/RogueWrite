@@ -1,14 +1,30 @@
 extends layout2
 
 block content
-    div#workspaceFantasy(style='height: 500px; width: 100%;')
+    - if ( height )
+        div#workspaceFantasy(style='height: ' + height + 'px; width: 100%;')
+    - if ( !height )
+        div#workspaceFantasy(style='height: 500px; width: 100%;')
 
     xml#toolbox(style='display: none')
-        category(name='')
+        - if ( variable )
+            category(name='블록')
+                each val in category
+                    block(type= val)
+            category(name='변수 블록', custom='VARIABLE')
+        - if ( none )
+            category(name='')
+        - if ( !variable && !none )
+            each val in category
+                block(type= val)
+    
+    xml#startBlocks(style="display: none;")
+        block(type="game", inline="false", x="200", y="50")
 
     script.
         let workspaceFantasy = Blockly.inject('workspaceFantasy', {
-            scrollbars: true,
+            comments : false,
+            scrollbars: !{scrollbars},
             readOnly: !{readOnly},
             toolbox: document.getElementById('toolbox')
         });

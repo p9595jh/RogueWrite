@@ -1,0 +1,150 @@
+<section class="section--center mdl-grid mdl-grid--no-spacing mdl-shadow--2dp">
+  <div class="mdl-card mdl-cell mdl-cell--12-col">
+
+    <div [class]="'mdl-card__title bg-svg-' + svg" style="width: 100%; height: 10rem;">
+      <h2 class="mdl-card__title-text" style="color: white;">튜토리얼</h2>
+    </div>
+    <div class="mdl-card__supporting-text"><br/><br/>
+
+      <h4>game Block</h4><hr/>
+      <div class="posting content">
+        게임을 만들기에 앞서 가장 큰 틀이 되는 블록입니다.<br/>
+        툴로 게임을 만들때 1개 생성되고 추가로 만들 수 없습니다.<br/>
+        stage Block 여러 개를 배열로 묶어서 Game Block에 넣으면 게임이 완성됩니다.<br/>
+        게임의 제목, 게임 내에서 사용되는 변수의 정의, 게임을 만든 후 최종 점수의 계산 방식을 정하는 기능이 가능합니다.<br/>
+        <br/>
+        스테이지 input : stage Block => 페이즈 input : phase Block => 선택 input : choice Block<br/>
+        변수 input : parameter Block
+        <br/><div class="tutorial-workspace" [innerHTML]="one | safe"></div>
+      </div><br/><br/>
+
+      <br/><br/><br/>
+      <br/><br/><br/>
+
+      <h4>text Block, number Block</h4><hr/>
+      <div class="posting content">
+        text Block은 game Block에서 게임의 제목, phase Block에서 지문, choice Block에서 선택지를 의미합니다.<br/>
+        또한 number Block은 stage Block, phase Block의 순서를 부여하거나 숫자를 입력해야 할 때 쓰입니다.<br/>
+        <br/>
+        ~ 번호 input : number Block<br/>
+        제목, 내용 input : text Block<br/>
+        <br/><div class="tutorial-workspace" [innerHTML]="two | safe"></div>
+      </div><br/><br/>
+
+      <br/><br/><br/>
+      <br/><br/><br/>
+
+      <h4>logic Block</h4><hr/>
+      <div class="posting content">
+        logic Block은 논리를 만드는 블록입니다. 이 블록들은 하늘색으로 구성되어 있습니다.<br/>
+        사용되는 블록은 참/거짓 블록(boolean Block), 부정 블록(negate Block), 비교 블록(compare Block), 연산 블록(operation Block)으로 구성되어 있습니다.<br/>
+        logic Block간에는 자유롭게 끼우는게 가능합니다.<br/>
+        <br/>
+        compare Block은 내가 만든 변수와 다른 값의 비교가 가능합니다. (반드시 같은 type의 값들로 비교를 해야합니다.)<br/>
+        예를 들어, x라는 변수를 만든 후 93이라는 숫자값을 주었다면 [ ( x ) > ( 92 ) ] 블록으로 끼워야 합니다.<br/>
+        마찬가지로 x라는 변수에 "RougeWrite"라는 문자값을 주었다면 [ ( x ) = ( "RougeWrite" ) ] 이러한 형식으로 블록을 끼워야 합니다. (단 문자열간의 비교는 '=' 비교만 합니다.)<br/>
+        <br/><div class="tutorial-workspace" [innerHTML]="three | safe"></div>
+      </div><br/><br/>
+
+      <br/><br/><br/>
+      <br/><br/><br/>
+
+      <h4>stage Block</h4><hr/>
+      <div class="posting content">
+        stage Block은 게임의 분기를 나누는 커다란 스테이지를 만드는 블록입니다.<br/>
+        스테이지는 여러개의 phase Block들로 이루어져 있습니다.<br/>
+        스테이지는 반드시 1부터 순서대로 지정을 해 주어야 하며, 그 외의 숫자는 비정상적인 엔딩을 처리할 때 쓰입니다.<br/>
+        후에 choice Block에서 따로 스테이지 이동을 지정해 주지 않았다면 스테이지 번호 순서대로 진행이 되며, 가장 높은 스테이지 번호의 스테이지가 종료되면 게임이 끝나게 됩니다.<br/>
+      </div><br/><br/>
+
+      <br/><br/><br/>
+      <br/><br/><br/>
+
+      <h4>phase Block</h4><hr/>
+      <div class="posting content">
+        phase Block은 해당 스테이지내에서 변수나 여러 조건에 따라 어느 지문과 선택지를 출력할지 나누는 해당 스테이지의 씬같은 블록입니다.<br/>
+        페이즈는 반드시 1부터 순서대로 지정을 해 주어야 하며, 페이즈 숫자가 낮을수록 조건이 참일때 출력하는 지문의 우선을 갖게됩니다.<br/>
+        만약 마지막 순서까지 페이즈의 조건을 수행해서 참인 페이즈가 없다면 게임은 종료됩니다.<br/>
+      </div><br/><br/>
+
+      <br/><br/><br/>
+      <br/><br/><br/>
+
+      <h4>choice Block</h4><hr/>
+      <div class="posting content">
+        choice Block은 phase에서 지문이 출력된 후에 그 상황에 대한 선택지들을 출력하는 블록입니다.<br/>
+        이동 단계는 기본적으로 0이 입력되어있고, 0일 경우에는 다음 stage Block으로 이동해 진행하고 그 외의 숫자에는 해당 스테이지로 이동합니다. 해당하는 stage가 없으면 게임이 종료됩니다.<br/>
+        또한 이동 단계에 random Block을 넣으면 랜덤으로 정해진 숫자의 스테이지로 이동하게 됩니다.<br/>
+        또한 변수 변화는 해당 선택지를 선택했을 때, parameter에서 정했던 변수들의 값을 변화시킬 수 있습니다.<br/>
+       <br/><div class="tutorial-workspace" [innerHTML]="four | safe"></div>
+      </div><br/><br/>
+
+      <br/><br/><br/>
+      <br/><br/><br/>
+
+      <h4>parameter Block</h4><hr/>
+      <div class="posting content">
+        parameter Block은 내가 변수 만들기로 만든 변수 블록을 정의하는 블록입니다.<br/>
+        변수 이름에 내가 만든 변수 블록을 넣고 기본값에 해당하는 블록을 넣어줍니다.<br/>
+        이때 반드시 기본값을 text Block으로 넣으면 타입에서 String으로 체크를 하고, number Block으로 넣으면 타입에서 number로 체크를 해주어야 합니다.<br/>
+        가시성은 logic블록을 자유롭게 넣을 수 있는데, 변수의 상황에 따라 게임에서 변수의 출력상황이 달라집니다.<br/>
+        만약 가시성을 true로 하면 게임에서 항상 보이고, false로 하면 게임에서 완전히 가시적이게 되지 않습니다. 다른 logic Block을 섞었다면 변수가 출력되는 공간은 차지하나 참/거짓에 따라 가시성이 달라집니다.<br/> 
+        <br/>
+        변수 블록을 생성하는 방법은 변수 생성 카테고리에서 변수 만들기 버튼을 클릭 후 만들면 됩니다.<br/>
+        현재 변수 이름은 영어로만 지정이 가능하고, 일부 생성이 되지 않는 변수 명이 있습니다.<br/>
+        목록 : Math, Random, Alert, 이미 만들어진 변수명이 포함된 변수 이름 등...<br/>
+        <br/><div class="tutorial-workspace" [innerHTML]="five | safe"></div>
+      </div><br/><br/>
+
+      <br/><br/><br/>
+      <br/><br/><br/>
+
+      <h4>if Block, else Block</h4><hr/>
+      <div class="posting content">
+        if Block과 else Block은 해당 choice Block을 선택했을때 변수의 변화를 지정해주는 블록입니다.<br/>
+        if에 logic Block을 실행해 참이면 do에 있는 블록을 실행하고 false면 다음 if Block 혹은 else Block을 실행합니다.<br/>
+        if Block 뒤에 if Block이 또 연결 된다면 뒤에 붙은 블록은 else if의 역할을 수행합니다.<br/>
+        else Block은 위의 if블록을 전부 배반할때 실행되는 블록입니다.<br/>
+        <br/>
+        do에는 is Block이나 myparameter Block이 옵니다.<br/>
+        is Block은 해당 변수를 식에 맞춰 값을 변경시킵니다.<br/> 
+        do에 myparameter Block이 온다면, 값을 입력받는 창을 띄워서 해당 값의 변화를 플레이어에게 직접 입력받습니다.<br/>
+        (반드시 해당 변수의 type에 맞게 입력을 해 주어야 합니다.)<br/> 
+        <div class="tutorial-workspace" [innerHTML]="six | safe"></div>
+      </div><br/><br/>
+
+      <br/><br/><br/>
+      <br/><br/><br/>
+
+      <h4>그 외의 다리 블록</h4><hr/>
+      <div class="posting content">
+        연산 블록들은 전부 파란색으로 구성되었습니다.<br/>
+        calculate Block은 계산을 수행하는 블록입니다.<br/>
+        input은 변수(숫자), 숫자, random Block, calculate Block이 가능합니다.<br/>
+        계산은 사칙연산의 연산순서에 맞춰 수행하나, 블록안에 블록은 ()처리한것으로 계산됩니다.<br/>
+        예를 들어, ( ( [ 2 ] + [ 3 ] ) x ( [ 3 ] - [ 2 ] ) ) 이렇게 블록이 끼웠다면 계산 결과는 5가 됩니다.<br/>
+        <br/>
+        random Block은 두개의 number Block사이의 랜덤한 숫자를 만듭니다.<br/>
+        number Block과는 다르게 취급되나, 연산이나 논리 블록에서는 number Block처럼 자유롭게 사용가능합니다.<br/>
+        <br/>
+        is Block은 왼쪽 input에서는 myparameter Block만 가능합니다.<br/>
+        오른쪽 input에는 연산, 문자, 숫자, 랜덤 블록등 자유롭게 가능하지만, 반드시 왼쪽 변수 블록의 type과 맞는 블록을 넣어야 합니다.<br/>
+        <br/><div class="tutorial-workspace" [innerHTML]="seven | safe"></div>
+      </div><br/><br/>
+
+      <br/><br/><br/>
+      <br/><br/><br/>
+
+      <h4>Score</h4><hr/>
+      <div class="posting content">
+        점수는 game Block에서 점수 부분에서 정합니다.<br/>
+        점수의 input은 변수 블록(숫자), calculate Block이 올 수 있습니다.<br/>
+        제작자가 만들고 싶은 점수결과를 변수와 조합해 만들고, 플레이어들의 점수를 결산해 게임 최고, 최저득점자를 게임과 함꼐 표시합니다.<br/>
+        <br/><div class="tutorial-workspace" [innerHTML]="eight | safe"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section></section>

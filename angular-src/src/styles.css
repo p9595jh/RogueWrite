@@ -70,8 +70,22 @@ a:hover {
   border-spacing: 0 10px;
 }
 
+button:focus, button:active, button:visited, mat-icon:focus, mat-icon:active, mat-icon:visited {
+  outline: 0;
+}
+
+.search-table, .search-table td {
+  border-spacing: 5px;
+}
+
 .more-icon {
   color: white;
+}
+
+table td {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 /* FROM & ADDED ========================================================================== */
@@ -93,10 +107,6 @@ a:hover {
   font-weight: bold;
 }
 
-button:focus, button:active, button:visited, mat-icon:focus, mat-icon:active, mat-icon:visited {
-  outline: 0;
-}
-
 /* ENGINE ========================================================================== */
 
 .engine-layout {
@@ -112,8 +122,6 @@ button:focus, button:active, button:visited, mat-icon:focus, mat-icon:active, ma
 }
 
 .stage-content {
-  padding: 10px;
-
   border-style: solid;
   border-width: 40px 40px 40px 40px;
   -moz-border-image: url('./images/engine/content_bg.png') 40 40 40 40 round round;
@@ -219,6 +227,9 @@ button:focus, button:active, button:visited, mat-icon:focus, mat-icon:active, ma
   border-bottom: 1px solid rgb(163, 163, 163);
   border-right: 1px solid rgb(163, 163, 163);
   padding: 10px 40px 10px 40px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .grid-cell:hover {

@@ -42,7 +42,7 @@
         <div class="row align-items-center" *ngFor="let arr of playService?.paramArr">
           <div class="col-sm grid-cell" *ngFor="let val of arr">
             <span *ngIf="playService.visible(val?.value?.visible)">
-              {{val?.key}}<span>: </span>{{val?.value?.value}}
+              {{val?.key}}: {{val?.value?.value}}
             </span>
           </div>
         </div>
@@ -58,8 +58,9 @@
         <p>
           version. {{content?.version}}
         </p>
-        <p *ngIf="content?.highest">
-          최고 득점자 : <span class="toProfile" (click)="funcService.openInfoWindow(content?.highest?.userid)">{{content?.highest?.nickname}}</span> ({{content?.highest?.score}}점)
+        <p *ngIf="content?.top">
+          최고 득점자 : <span class="toProfile" (click)="funcService.openInfoWindow(content?.top?.highest?.userid)">{{content?.top?.highest?.nickname}}</span> ({{content?.top?.highest?.score}}점)<br/>
+          최저 득점자 : <span class="toProfile" (click)="funcService.openInfoWindow(content?.top?.lowest?.userid)">{{content?.top?.lowest?.nickname}}</span> ({{content?.top?.lowest?.score}}점)
         </p>
         <p *ngIf="content?.from">
           이 게임은 <span class="toProfile" (click)="funcService.openInfoWindow(content?.from?.userid)">{{content.from.nickname}}</span> 님의 <a class="original-from-title" [routerLink]="['/game/' + content?.from?.game]">{{content.from.title}}</a> 으로부터 참조되었습니다.
@@ -295,19 +296,25 @@
       <div *ngIf="authService.loggedIn() && user?.clean" style="float: right;">
         <a mat-raised-button [routerLink]="['/tool']">작성</a>
       </div><br/>
-      <div style="text-align: center;">
-        <mat-form-field style="width: 100px;">
-          <mat-select value="title" (selectionChange)="onSearch(searchSelect.value, searchInput.value)" #searchSelect>
-            <mat-option value="title">제목</mat-option>
-            <mat-option value="nickname">닉네임</mat-option>
-          </mat-select>
-        </mat-form-field>&nbsp;&nbsp;
-        <mat-form-field appearance="outline" style="width: 200px;">
-          <mat-label>검색</mat-label>
-          <input matInput (input)="onSearch(searchSelect.value, $event.target.value)" #searchInput>
-          <mat-icon matSuffix>search</mat-icon>
-        </mat-form-field>
-      </div>
+      <table style="text-align: center; margin: auto; max-width: 100%;" class="search-table">
+        <tr>
+          <td style="width: 35%;">
+            <mat-form-field style="width: 75px;">
+              <mat-select value="title" (selectionChange)="onSearch(searchSelect.value, searchInput.value)" #searchSelect>
+                <mat-option value="title">제목</mat-option>
+                <mat-option value="nickname">닉네임</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field appearance="outline" style="width: 190px;">
+              <mat-label>검색</mat-label>
+              <input matInput (input)="onSearch(searchSelect.value, $event.target.value)" #searchInput>
+              <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
     </div>
   </div>
 </section>

@@ -12,11 +12,6 @@
     margin-left: .75rem;
 }
 
-.undercity-img {
-    width: 350px;
-    height: 350px;
-}
-
 .undercity-including-img {
     text-align: center;
 }
@@ -31,7 +26,7 @@
 }
 
 .posts-small {
-    text-align: left;
+    /* text-align: left; */
     padding-left: 15%;
     padding-right: 15%;
 }
@@ -66,4 +61,8 @@ li {
     .featurette-heading {
         margin-top: 7rem;
     }
+}
+
+.link {
+    color: black;
 }
