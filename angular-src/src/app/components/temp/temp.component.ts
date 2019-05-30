@@ -72,7 +72,7 @@ export class TempComponent implements OnInit {
   }
 
   viewBlock(i) {
-    this.funcService.popUp(`${this.funcService.ServerAddress}/modals/view-temp-block?game=${this.num}&recent=${i}&height=600`, 1000, 600);
+    this.funcService.popUp(`${this.funcService.ServerAddress}/modals/view-temp-block?game=${this.num}&recent=${i}&heightV=100`, 1000, 600);
   }
 
   versionRollBack(i) {

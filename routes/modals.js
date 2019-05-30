@@ -116,7 +116,8 @@ router.get('/view-block', (req, res) => {
                 readOnly: true,
                 scrollbars: true,
                 none: true,
-                height: req.query.height
+                height: req.query.height,
+                heightV: req.query.heightV
             });
         }
     });
@@ -136,7 +137,8 @@ router.get('/view-temp-block', (req, res) => {
                         readOnly: true,
                         scrollbars: true,
                         none: true,
-                        height: req.query.height
+                        height: req.query.height,
+                        heightV: req.query.heightV
                     });
                 }
             } else {
@@ -146,7 +148,8 @@ router.get('/view-temp-block', (req, res) => {
                     readOnly: true,
                     scrollbars: true,
                     none: true,
-                    height: req.query.height
+                    height: req.query.height,
+                    heightV: req.query.heightV
                 });
             }
         }

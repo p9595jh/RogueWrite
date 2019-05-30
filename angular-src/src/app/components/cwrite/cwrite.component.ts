@@ -97,7 +97,7 @@ export class CwriteComponent implements OnInit {
   }
 
   viewBlock(num, i) {
-    this.funcService.popUp(`${this.funcService.ServerAddress}/modals/view-temp-block?game=${num}&recent=${i}&height=${600}`, 1000, 600);
+    this.funcService.popUp(`${this.funcService.ServerAddress}/modals/view-temp-block?game=${num}&recent=${i}&heightV=100`, 1000, 600);
   }
 
   selectBlock(num, i) {

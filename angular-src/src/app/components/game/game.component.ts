@@ -315,7 +315,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   viewBlock() {
-    this.funcService.popUp(`${this.funcService.ServerAddress}/modals/view-block?game=${this.num}&height=600`, 1000, 600);
+    this.funcService.popUp(`${this.funcService.ServerAddress}/modals/view-block?game=${this.num}&heightV=100`, 1000, 600);
   }
 
   toMyTempList() {

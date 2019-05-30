@@ -3,7 +3,9 @@ extends layout2
 block content
     - if ( height )
         div#workspaceFantasy(style='height: ' + height + 'px; width: 100%;')
-    - if ( !height )
+    - if ( heightV )
+        div#workspaceFantasy(style='height: ' + heightV + 'vh; width: 100%;')
+    - if ( !height && !heightV )
         div#workspaceFantasy(style='height: 500px; width: 100%;')
 
     xml#toolbox(style='display: none')

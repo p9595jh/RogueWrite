@@ -1624,7 +1624,7 @@ var CwriteComponent = /** @class */ (function () {
         });
     };
     CwriteComponent.prototype.viewBlock = function (num, i) {
-        this.funcService.popUp(this.funcService.ServerAddress + "/modals/view-temp-block?game=" + num + "&recent=" + i + "&height=" + 600, 1000, 600);
+        this.funcService.popUp(this.funcService.ServerAddress + "/modals/view-temp-block?game=" + num + "&recent=" + i + "&heightV=100", 1000, 600);
     };
     CwriteComponent.prototype.selectBlock = function (num, i) {
         this.selectedItem = {
@@ -2314,7 +2314,7 @@ var GameComponent = /** @class */ (function () {
         });
     };
     GameComponent.prototype.viewBlock = function () {
-        this.funcService.popUp(this.funcService.ServerAddress + "/modals/view-block?game=" + this.num + "&height=600", 1000, 600);
+        this.funcService.popUp(this.funcService.ServerAddress + "/modals/view-block?game=" + this.num + "&heightV=100", 1000, 600);
     };
     GameComponent.prototype.toMyTempList = function () {
         var _this = this;
@@ -3675,7 +3675,7 @@ var TempComponent = /** @class */ (function () {
         });
     };
     TempComponent.prototype.viewBlock = function (i) {
-        this.funcService.popUp(this.funcService.ServerAddress + "/modals/view-temp-block?game=" + this.num + "&recent=" + i + "&height=600", 1000, 600);
+        this.funcService.popUp(this.funcService.ServerAddress + "/modals/view-temp-block?game=" + this.num + "&recent=" + i + "&heightV=100", 1000, 600);
     };
     TempComponent.prototype.versionRollBack = function (i) {
         var _this = this;
