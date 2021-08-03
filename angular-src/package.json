@@ -37,7 +37,7 @@
     "node-sass": "^4.12.0",
     "rxjs": "~6.5.1",
     "rxjs-compat": "^6.5.1",
-    "tar": "^4.4.8",
+    "tar": "^4.4.15",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
