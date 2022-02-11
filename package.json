@@ -14,7 +14,7 @@
     "express": "~4.16.4",
     "express-session": "^1.16.1",
     "formidable": "^1.2.1",
-    "froala-editor": "^2.9.5",
+    "froala-editor": "^4.0.7",
     "fs-extra": "^7.0.1",
     "http-errors": "~1.7.2",
     "jsonwebtoken": "*",
