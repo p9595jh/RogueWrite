@@ -22,7 +22,7 @@
     "morgan": "~1.9.1",
     "passport": "*",
     "passport-jwt": "*",
-    "pug": "^2.0.3",
+    "pug": "^3.0.1",
     "rxjs": "^6.5.1"
   }
 }
